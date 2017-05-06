@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin-left:20px;
+    color: #777;
+    background-color: #222;
+    width:95%;
+}
+.p-title {
+    color:tomato;
+}
+.row-qnn {
+    margin-bottom: 20px;
+}

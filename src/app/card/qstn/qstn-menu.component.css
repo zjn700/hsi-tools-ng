@@ -1,0 +1,24 @@
+ul, ol {
+    opacity:1;
+    width:92.5%;
+    margin-top:50px;
+    margin-left:5%;
+    margin-right:2.5%;
+    background-color: #222;
+    position: relative;
+    padding:30px;
+    padding-top:10px;
+    z-index: 2;
+}
+li {
+    color:#eee;
+}
+
+lix:hover{
+  color: tomato;
+  cursor: pointer;
+}
+
+.selected {
+    color:tomato;
+}

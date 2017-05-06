@@ -1,0 +1,6 @@
+<div *ngIf="!projects.length == 0" class="row col-md-8 col-md-offset-2">
+    <h2>Select a project:</h2>
+    <app-proj-detail class="list-group" *ngFor="let project of projects" 
+                        [project]='project' >
+    </app-proj-detail>
+</div>  

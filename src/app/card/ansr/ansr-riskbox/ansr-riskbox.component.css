@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/**** div table for risk probability and severity/impact ratings */
+#table_box {   /* contains all the table elements */
+  float:left;
+  width:400%; /*100.5%; */
+  height:40%;
+  background:white;
+  font-size: 1.1em;
+  padding-left:0px;
+  visibility: hidden;
+  /* visible | hidden  */
+}
+.row {
+  float:left;
+  width:115%;
+  font-size:1em;
+  text-align:center;
+  /*word-wrap: break-word; */
+  /*word-wrap: break-word; */
+}
+.rh { /* row header attributes - to the left of the row */
+  float: left;
+  width: 15%;
+  height: 30px;
+  color:#C8C8C8;
+  font-size: 1.12em;
+  padding: 2px 2px;
+  padding-top:20px;
+  padding-right:5px;
+  text-align: right;
+  
+}
+.rh1 {   /* row header attributes - to the left of the row */
+  float:left;
+  width:20%;
+  height: 30px;
+  color:white;
+  font-size: 1.0em;
+  padding: 2px 2px;
+}
+.th , .td, .th1 {   /* table/column header and table cell shared attributes */
+  float:left;
+  width:14.6%;
+  padding: 2px 4px;
+  color:white;
+}
+.th {  /* table/column header unique attributes */
+  height:30px;
+  display: table-cell;
+  vertical-align: bottom;
+  color:#C8C8C8;
+  font-size:1.12em;
+}
+.th1 {  /* table/column header unique attributes */
+  background-color:#D4E4CD;
+}
+
+.td {   /* table cell unique attributes  */
+  height:59px;
+  border-style: solid;
+  border-color:black;
+  border-width:1px;
+  font-size:20px;  /* don't show the x */
+}
+/*.th1:hover {
+  cursor:cell;
+  background:yellow; /*#69aa31 previous ; /* selected #;
+}*/
+
+.green{
+  backround-color:#D4E4CD;
+}
+
+.green:hover{
+  background:green;
+  cursor:pointer;
+}
+
+.yellow{
+  background-color:#FCF8E3;
+}
+.yellow:hover{
+  background:yellow;
+  cursor:pointer;
+}
+
+.red{
+  background: #F2DEDE;
+}
+
+.red:hover{
+  background:red;
+  cursor:pointer;
+}
+html, body, .container {
+  height: 100%;
+}
+
+.th111{
+  opacity: 0%;
+  border:none
+}
+
+.disable-text-selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#first_td_impactx {
+    border-left: white 1px solid;
+
+}
+#row_impacr{
+  height: 40px;
+}
+
+#row_probability >.th {
+  padding-top: 10px;
+}
+
+
+#probability, #impact{
+  background-color: #333;
+  padding-top: 10px;
+  padding-bottom:30px;
+  text-align: center;
+}
+
+/**** Rationale input elements */
+/* mobile css  */
+@media (max-device-width: 1280px) and (orientation: landscape) {
+  #main_cardx {
+    height:410px;
+    font-size:1.1em;
+    width:80%;
+  }
+}
+@media (max-device-width: 1280px) and (orientation: portrait) {
+  #main_cardx {
+    height:1000px;
+    font-size:1.6em;
+    width:60%;
+  }
+}
+@media (max-device-width: 1366px) and (orietation: landscape) {
+  #main_cardx {
+    height:430px;
+    font-size:1.1em;
+    /*min-width:55em; */
+  }
+}
+

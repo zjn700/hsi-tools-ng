@@ -1,3 +1,23 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navx nav-tabsx" appTopMenu>
+        <div><a [ngClass]="{'blocked' : isLoggedIn(), 'unblocked': !isLoggedIn(), topMenuItem: true}"  [routerLink]="['/signin']">Sign in</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/logout']">Log out</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(),topMenuItem: true}" [routerLink]="['/project']">Projects</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"[routerLink]="['/tools']">Tools</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}" [routerLink]="['/crt-qnns']">CART</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"  [routerLink]="['/at-qnns']">PRAT</a></div>
+        <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/questions']">Questions</a></div>
+    </div>
+</nav><!-- routerLinkActive='active' -->
+<hr>
+<div id='main' class="row spacing">
+    <h1 class="row col-md-8 col-md-offset-2" *ngIf="!isLoggedIn()">HSI Tools</h1>
+    <router-outlet></router-outlet>
+</div>
+
+<!--app-domn></app-domn-->
+<!--app-card></app-card-->
+<!--app-intgrn></app-intgrn-->
+<!--app-intgrn-assmit></app-intgrn-assmit-->
+<!--app-footer></app-footer-->
+<!--hsi-auth></hsi-auth-->

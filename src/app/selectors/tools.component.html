@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Human Systems Integration Tool Selection</h1>
+    <h3 class='p-title'>{{projectTitle}}</h3>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Human System Integration – Capabilities and Requirements Tool (HSI-CART)</h2>
+                <h4>
+                    This HSI-CRT focuses on risk management with respect to the following documents:
+                    <br>
+                    <ul>
+                        <li>Analysis of Alternatives</li>
+                        <li>Capabilities-Based Assessment</li>
+                        <li>Concept Development</li>
+                    </ul>
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br><br>
+            <button [routerLink]="['/crt-qnns']" class='btn btn-info' (click)="onClick(cart)" #cart><h2>HSI-CART</h2></button>
+        </div>  
+    </div>    
+    <br><br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Human System Integration – Programmatic Assesment Tool (HSI-PRAT)</h2>
+                <h4>
+                    This HSI-AT focuses on risk management with respect to the following phases:
+                    <ul>
+                        <li>Material Solution Analysis (MSA)</li>
+                        <li>Technology & Risk Reduction (TMRR)</li>
+                        <li>Engineering & Manufacturing DevelopmentL Integrated System Design (EMD)</li>
+                        <li>Production & Development (PD)</li>
+                        <li>Operations & Support (OS)</li>
+                    </ul>
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br><br>
+            <button routerLinkActive="active" [routerLink]="['/at-qnns']" class='btn btn-info' (click)="onClick(prat)" #prat><h2>HSI-PRAT</h2></button>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,57 @@
+.navbar-header{
+  height:0px;
+}
+
+.nav{
+  height:0px;
+}
+
+.nav-tabs{
+  height: 0px;
+  font-size:1.4em; /*larger;  /*1.1em; */
+}
+
+h2{
+  color:white;
+}
+
+.disable-text-selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#projectx {
+  color:tomato;
+}
+
+.glyphicon{
+  font-size:50px;
+  margin:30px;
+}
+
+.glyphicon:hover{
+  color:#eee;
+  cursor:pointer;
+}
+
+app-qstn-menu {
+  color:tomato;
+}
+
+.glyphicon-menu-down, .glyphicon-menu-up {
+  font-size: 10px;
+  margin:0px;
+}
+
+.glyphicon-menu-down:hover, .glyphicon-menu-up:hover {
+  color:tomato;
+}
+
+
+.glyphicon-circle-arrow-leftx, .glyphicon-circle-arrow-rightx {
+  font-size: 1em;
+}

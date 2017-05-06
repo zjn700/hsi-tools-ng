@@ -1,0 +1,23 @@
+<div class="row col-md-8 col-md-offset-2">
+    <div class="page-header">
+    <h1>Human Systems Integration (HSI) Risk Management Tool</h1>
+    <h3>
+        The HSI Risk Management Tools is used to assess, mitigate, and manage risk across all levels of the acquisition process.
+
+        Each questionnaire produces a report with risk matrices and comments for each question item.
+    </h3>
+    </div>
+    <h2>Add a Project:</h2>
+    <form (ngSubmit)='onSave(f, title)' #f="ngForm">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id='project-title' type="text" id="title" class="form-control" [ngModel]='project?.title' name="title" #title required>
+            <label for="title">Description</label>
+            <textarea id="description" class="form-control" [ngModel]='project?.description' name="desc"></textarea>
+        </div>
+        <button class="btn btn-info" type='submit'>Save</button>
+        <button class="btn btn-default" type=button (click)='onClear(f, title)'>Clear</button>
+        
+    </form>
+</div>
+<app-proj-list></app-proj-list>

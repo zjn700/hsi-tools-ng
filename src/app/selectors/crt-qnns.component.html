@@ -1,0 +1,60 @@
+<div class="container">
+    <h1>HSI-CRT Questionnaires</h1>
+    <h3 class='p-title'>{{projectTitle}}</h3>
+
+    <div *ngFor="let qnn of qnns" class="row row-qnn">
+        <div class="col-md-10">
+            <h2>{{qnn.title}} ({{qnn.abbreviation}})</h2>
+                <h4>
+                    {{qnn.description}}
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button (click)="goToQnn(qnn)" class='btn btn-info' (click)="onClick(button)" ng-reflect-router-link='/questions' #button><h2>{{qnn.abbreviation}} </h2></button>
+        </div>
+    </div>  
+    
+</div>
+<!-- =======================
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Analysis of Alternatives (AoA)</h2>
+                <h4>
+                    The Analysis of Alternatives (AoA) questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>AoA</h2></button>
+        </div>  
+    </div>    
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Capabilities-Based Assessment (CBA)</h2>
+                <h4>
+                    The Capabilities-Based Assessment questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>CBA</h2></button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Concept Development (CD)</h2>
+                <h4>
+                    The Concept Development questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>CD </h2></button>
+        </div>
+    </div>    
+</div -->
+
+

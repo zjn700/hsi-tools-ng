@@ -1,0 +1,95 @@
+import { Injectable, EventEmitter } from '@angular/core';
+import { Http, Response,Headers } from '@angular/http';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs'
+
+import { Project } from './proj.model';
+
+@Injectable()
+export class ProjectService {
+    private projects: Project[] = [];
+    projectIsInEditMode = new EventEmitter<Project>();
+    projectIsUpdated = new EventEmitter<boolean>();
+    
+    constructor(private http: Http) { }
+    
+    addProject(project: Project){
+        const headers = new Headers({'content-Type': 'application/json'})
+        const body = JSON.stringify(project)
+        return this.http.post('/projects', body, {headers: headers})
+                .map((response: Response) => {
+                    const result = response.json();
+                    const project = new Project(
+                            result.obj.title, 
+                            result.obj.description,
+                            result.obj._id,
+                            result.obj.dateCreated,
+                            result.obj.users);
+                    this.projects.push(project);
+                    this.projects = this.sortProjectList();
+                    this.projectIsUpdated.emit(true)
+
+                    return project;
+                })
+                .catch((error: Response) => Observable.throw(error));
+    }
+    
+    getProjects(){
+        return this.http.get('/projects')    //.publishLast().refCount()
+            .map((response: Response) => {
+                if (response.json().obj.length == 0) {
+                    return this.projects = response.json().obj;
+                } 
+                const projects = response.json().obj;
+                let transformedProjects: Project[] = [];
+                for (let project of projects) {
+                    transformedProjects.push(new Project(
+                        project.title,
+                        project.description,
+                        project._id,
+                        project.dateCreated,
+                        project.users))
+                }
+                this.projects = transformedProjects;
+                return transformedProjects;
+            })
+            .catch((error: Response) => Observable.throw(error));
+    }
+    
+    deleteProject(project: Project){
+        this.projects.splice(this.projects.indexOf(project), 1);
+        return this.http.delete('/projects/' + project.id)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error)); 
+    }
+    
+    editProject(project: Project){
+        this.projectIsInEditMode.emit(project)
+    }
+    
+    updateProject(project: Project) {
+        const headers = new Headers({'content-Type': 'application/json'})
+        const body = JSON.stringify(project)
+        return this.http.patch('/projects/' + project.id, body, {headers: headers})
+                .map((response: Response) => {
+                    response.json();
+                    this.projectIsUpdated.emit(true)
+                })
+                .catch((error: Response) => Observable.throw(error)); 
+    }
+    
+    sortProjectList() {  // reverse alpabetical order
+       return  this.projects.sort(function(a, b){
+                if ( a.title > b.title ) {
+                    return -1;}
+                if ( a.title < b.title ) {
+                    return 1;}
+                return 0;
+              })
+    }
+    
+    projectIsSelected(){
+        return localStorage.getItem('pid') !== null;
+    }
+
+}

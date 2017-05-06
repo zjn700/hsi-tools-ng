@@ -1,0 +1,86 @@
+<div class="container">
+    <h1>HSI-AT Questionnaires</h1>
+    <h3 class='p-title'>{{projectTitle}}</h3>
+
+    <div *ngFor="let qnn of qnns" class="row row-qnn">
+        <div class="col-md-10">
+            <h2>{{qnn.title}} ({{qnn.abbreviation}})</h2>
+                <h4>
+                    {{qnn.description}}
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button (click)="goToQnn(qnn)" class='btn btn-info'><h2>{{qnn.abbreviation}}</h2></button>
+        </div>
+    </div>  
+    
+</div>
+
+    <!--div class="row">
+        <div class="col-md-10">
+            <h2>Material Solution Analysis (MSA)</h2>
+                <h4>
+                    The MSA phase questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>MSA</h2></button>
+        </div>  
+    </div>    
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Technology Maturation & Risk Reduction (TMRR)</h2>
+                <h4>
+                    The TMRR questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>TMRR</h2></button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Engineering & Manufacturing Development Integrated System Design (EMD)</h2>
+                <h4>
+                    The EMD questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>EMD</h2></button>
+        </div>
+    </div>    
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Production & Deployment (PD)</h2>
+                <h4>
+                    The PD questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>PD</h2></button>
+        </div>
+    </div>    
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Operations & Support (OS)</h2>
+                <h4>
+                    The OS questionnaire is used to...
+                </h4>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class='btn btn-info'><h2>OS</h2></button>
+        </div>
+    </div>    
+</div-->
+
+

@@ -1,0 +1,9 @@
+.glyphicon{
+  font-size:50px;
+  margin:30px;
+}
+
+.glyphicon:hover{
+  color:white;
+  cursor:pointer;
+}

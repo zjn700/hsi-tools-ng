@@ -1,0 +1,16 @@
+<header class="row">
+    <nav class="col-md-8 col-md-offset-2">
+        <ul class="nav nav-pills">
+            <!--li><a routerLinkActive='active' [routerLink]="['/questionnaire']">Questionnaires</a></li>
+            <li><a routerLinkActive='active' [routerLink]="['/domains']">Domains</a></li>
+            <li><a routerLinkActive='active' [routerLink]="['/questions']">Questions</a></li>
+            <!--li><a routerLinkActive='active' [routerLink]="['/auth']">Authentication</a></li-->
+            <li *ngIf="!isLoggedIn()"><a routerLinkActive='active' [routerLink]="['/signin']">Sign in</a></li>
+            <!--li *ngIf="!isLoggedIn()"><a routerLinkActive='active' [routerLink]="['/signup']">Signup</a></li-->
+            <li *ngIf="isLoggedIn()"  ><a routerLinkActive='active' [routerLink]="['/logout']">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+    <!--div class="row spacing">
+        <router-outlet></router-outlet>
+    </div-->

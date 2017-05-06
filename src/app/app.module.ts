@@ -1,20 +1,96 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { DomnComponent } from './domn/domn.component';
+import { QstnComponent } from './card/qstn/qstn.component';
+import { QnnComponent } from './card/qnn/qnn.component';
+import { AnsrComponent } from './card/ansr/ansr.component';
+import { ProjectComponent } from './proj/proj.component';
+import { StateComponent } from './state/state.component';
+import { OutputComponent } from './output/output.component';
+import { CardComponent } from './card/card.component';
+import { IntgrnComponent } from './intgrn/intgrn.component';
+import { AnsrButtonsComponent } from './card/ansr/ansr-buttons/ansr-buttons.component';
+import { AnsrRiskboxComponent } from './card/ansr/ansr-riskbox/ansr-riskbox.component';
+import { AnsrRationaleComponent } from './card/ansr/ansr-rationale/ansr-rationale.component';
+import { FooterComponent } from './card/footer/footer.component';
+import { QstnNumberComponent } from './card/qstn/qstn-number/qstn-number.component';
+import { IntgrnAssmitComponent } from './intgrn/intgrn-assmit/intgrn-assmit.component';
+import { AuthComponent } from './users/auth.component';
+import { LogoutComponent } from './users/logout.component';
+import { SigninComponent } from './users/signin.component';
+import { SignupComponent } from './users/signup.component';
+
+import { AuthService } from './users/auth.service';
+import { ProjectService } from './proj/proj.service';
+import { SelectorService } from './selectors/selector.service';
+import { DomainService } from './domn/domn.service';
+//import { QstnService } from './card/qstn/qstn.service';
+import { CardService } from './card/card.service';
+import { TopMenuService } from './shared/top-menu.service';
+
+import { routing } from './app-routing.module';
+import { CardHolderComponent } from './card/card-holder.component';
+import { ProjListComponent } from './proj/proj-list.component';
+import { ProjDetailComponent } from './proj/proj-detail.component';
+import { ProjectHolderComponent } from './proj/project-holder.component';
+import { ToolsComponent } from './selectors/tools.component';
+import { AtQnnsComponent } from './selectors/at-qnns.component';
+import { CrtQnnsComponent } from './selectors/crt-qnns.component';
+import { QstnMenuComponent } from './card/qstn/qstn-menu.component';
+import { QstnMenuItemComponent } from './card/qstn/qstn-menu-item.component';
+
+import { QstnMenuDirective } from './card/qstn/qstn-menu.directive';
+import { TopMenuDirective } from './top-menu.directive';
+import { TopMenuMouseDirective } from './top-menu-mouse.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DomnComponent,
+    QstnComponent,
+    QnnComponent,
+    AnsrComponent,
+    ProjectComponent,
+    StateComponent,
+    OutputComponent,
+    CardComponent,
+    IntgrnComponent,
+    AnsrButtonsComponent,
+    AnsrRiskboxComponent,
+    AnsrRationaleComponent,
+    FooterComponent,
+    QstnNumberComponent,
+    IntgrnAssmitComponent,
+    AuthComponent,
+    LogoutComponent,
+    SigninComponent,
+    SignupComponent,
+    CardHolderComponent,
+    ProjListComponent,
+    ProjDetailComponent,
+    ProjectHolderComponent,
+    ToolsComponent,
+    AtQnnsComponent,
+    CrtQnnsComponent,
+    QstnMenuComponent,
+    QstnMenuItemComponent,
+    QstnMenuDirective,
+    TopMenuDirective,
+    TopMenuMouseDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule,
+    routing
   ],
-  providers: [],
+  providers: [AuthService, ProjectService, SelectorService, DomainService, CardService, TopMenuService],          
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

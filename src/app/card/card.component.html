@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+        <h2>{{childMessage}}</h2>
+
+    <div class="col-md-1">
+      <app-qstn-number (passToParent)="onMessageFromChild($event)" [q_number]='q_number'></app-qstn-number>
+    </div>
+    <div class="col-md-10">
+      <app-qstn [q_content]='q_content'></app-qstn>
+    </div>
+    <div class="col-md-1">
+      <app-ansr-buttons></app-ansr-buttons>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <app-ansr-riskbox></app-ansr-riskbox>
+    </div>
+    <div class="col-md-4">
+      <app-ansr-rationale></app-ansr-rationale>
+    </div>
+  </div>
+</div>
