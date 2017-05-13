@@ -5,17 +5,5 @@ import { Question } from './qstn.model';
 export class QstnService {
   questionSelected = new EventEmitter<Question>();
   textInputSelected = new EventEmitter<boolean>();
-  //menuItemSelectd = new EventEmitter<boolean>();
-    
-  // getQuestion(question: Question) {
-  //     this.questionSelected.emit(question)
-  // }
-  
-  // emitMenuItemSelected() {
-  //   this.menuItemSelectd.emit(true)
-  // }
 
-//   rationaleSelected(question: Question) {
-//       this.textInputSelected.emit(true)
-//   }
 }

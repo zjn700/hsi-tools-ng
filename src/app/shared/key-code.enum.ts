@@ -1,4 +1,5 @@
 export enum KEY_CODE {
+  ESCAPE_KEY = 27,
   RIGHT_ARROW = 39,
   LEFT_ARROW = 37,
   UP_ARROW = 38,

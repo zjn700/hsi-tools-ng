@@ -3,3 +3,16 @@
     padding-right:60px;
     
 }
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#blank {
+    color:#222;
+    height: 390px;
+    width:inherit;
+    z-index: -10;
+    
+}

@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-        <h2>{{childMessage}}</h2>
-
+    
+    <h2>{{childMessage}}</h2>
+    <!--h2>{{a_domain}}</h2-->
+    
     <div class="col-md-1">
       <app-qstn-number (passToParent)="onMessageFromChild($event)" [q_number]='q_number'></app-qstn-number>
     </div>
@@ -9,16 +11,28 @@
       <app-qstn [q_content]='q_content'></app-qstn>
     </div>
     <div class="col-md-1">
-      <app-ansr-buttons></app-ansr-buttons>
+      <app-ansr-buttons [a_value]='a_value'></app-ansr-buttons>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-7">
-      <app-ansr-riskbox></app-ansr-riskbox>
-    </div>
-    <div class="col-md-4">
-      <app-ansr-rationale></app-ansr-rationale>
+    <div class="form-group">
+
+      <div class="col-md-7">
+        <!--app-ansr-riskbox [ngClass]="{'hidden': hideRiskBox}"></app-ansr-riskbox-->
+        <app-ansr-riskbox [a_value]='a_value' [ngClass]="{'hidden': a_value==true || a_value==null}"></app-ansr-riskbox>
+      </div>
+      
+      <div class="col-md-4">
+        <!--app-ansr-rationale [ngClass]="{'hidden': hideRationale}"></app-ansr-rationale-->
+        <app-ansr-rationale [a_details]='a_details' [a_value]='a_value' [ngClass]="{'hidden': a_value==null}"  ></app-ansr-rationale>
+      </div> 
+      
+      <!--div [ngClass]="{'hidden': !hideRationale || !hideRiskBox}" class="col-md-11" id='blank'-->
+      <!--div [ngClass]="{'hidden': a_value==true || a_value==false}" class="col-md-11" id='blank'-->
+      <div class="col-md-11" id='blank'>
+      </div>
     </div>
   </div>
+
 </div>

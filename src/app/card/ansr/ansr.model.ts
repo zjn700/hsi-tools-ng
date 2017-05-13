@@ -1,10 +1,11 @@
 export class Answer {
 
     constructor(
+        public projectId: string,
         public domainId: string, 
-        public sequence: Number, 
+        public sequence: number, 
         public value: boolean,
-        public riskQuadrant?: Number,
+        public riskValue?: Number,
         public rationale?: String,
         public dateCreated?: Date,
         public dateModified?: Date,

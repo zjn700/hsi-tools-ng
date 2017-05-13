@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ansr-riskbox',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ansr-riskbox.component.css']
 })
 export class AnsrRiskboxComponent implements OnInit {
+  @Input() a_value:boolean = null;
 
   constructor() { }
 

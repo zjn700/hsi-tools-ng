@@ -21,7 +21,15 @@
   </ul>
 </nav>
 
-<app-card (middleChildMessage)="onMessageFromChild2($event)" *ngIf="!showMenu" [ptitle]='projectTitle' [q_content]='q_content' [q_number]='q_number'></app-card>
+<app-card (middleChildMessage)="onMessageFromChild2($event)" 
+  *ngIf="!showMenu" 
+  [ptitle]='projectTitle' 
+  [q_content]='q_content' 
+  [q_number]='q_number' 
+  [a_details]='a_details'
+  [a_value]='a_value'
+  [a_rationale]>
+</app-card>
 
 <div *ngIf="!atFirstQuestion && !showMenu" (click)="getPrevQuestion()" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>
 <div *ngIf="!atLastQuestion && !showMenu" (click)="getNextQuestion()" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>

@@ -1,10 +1,13 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+'use strict'
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { DomainService } from './domn.service';
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
+import { Answer } from '../card/ansr/ansr.model';
 import { QstnService } from '../card/qstn/qstn.service';
 import { CardService } from '../card/card.service';
 import { KEY_CODE } from '../shared/key-code.enum';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-domn',
@@ -17,17 +20,22 @@ export class DomnComponent implements OnInit {
   domain: Domain;
   private domains: Domain[] = [];
   private questions: Question[] = [];
+  private answers: Answer[] = [];
+  a_details: Answer;
   q_content: string;
   q_number: string;
+  a_domain: string;
+  a_value = null;
+  a_rationale: String;
   activeQuestionNumber = 1;
   activeDomainNumber = 1;
   isInitialized = false;
   atFirstQuestion=true;
   atLastQuestion=false;
   showMenu=false;
-  inRationale = false;
+  inTextInput = false;
   menuItemSelected = false;
-  
+  answerSelected = null;
   childMessage:string;
 
   onMessageFromChild2(message){
@@ -35,22 +43,21 @@ export class DomnComponent implements OnInit {
     console.log(this.childMessage)
   }
   
+  @ViewChild(CardComponent) card: CardComponent
+
   
   //@HostListener('click', ['$event.target']) onClick(ev:Event) {
-  @HostListener('click', ['$event']) onClick(ev:Event) {
-    if (ev.srcElement.id == 'comment'){
-      this.inRationale = true;
-    } else {
-      this.inRationale = false;
-    }
+  @HostListener('click', ['$event']) onClick(event:Event) {
+    
+      this.inTextInput = this.cardService.isInTextInput(event);
   }
   
   // @HostListener('document:keypress', ['$event'])
   // && event.ctrlKey or altKey or shiftKey) 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (!this.inRationale && this.isInitialized) {
-      
+    if (!this.inTextInput && this.isInitialized) {
+      //console.log(event.keyCode)
       if ((event.keyCode === KEY_CODE.RIGHT_ARROW  && event.ctrlKey) || event.keyCode === KEY_CODE.GREATER_THAN) {
         this.getNextDomain()
         return;
@@ -72,15 +79,21 @@ export class DomnComponent implements OnInit {
       }
       
       if (event.keyCode === KEY_CODE.ENTER_KEY) {
-        if (this.menuItemSelected) {
-          this.menuItemSelected=false
-        } else {
-          this.toggleMenu()
-        }
+          this.menuItemSelected=false;
+      }
+
+      
+      if (event.keyCode === KEY_CODE.ESCAPE_KEY) {  //KEY_CODE.ENTER_KEY) {
+        if (this.showMenu) {   ///(this.menuItemSelected) {
+          this.showMenu=false;
+          this.menuItemSelected=false;
+        } //else {
+        //  this.toggleMenu()
+        //}
       }
       
       if (event.keyCode === KEY_CODE.SPACE_BAR) {
-        if (!this.menuItemSelected) {
+         if (!this.menuItemSelected) {
           this.showMenu=true;
         }
       }
@@ -91,6 +104,7 @@ export class DomnComponent implements OnInit {
       
       if (event.keyCode === KEY_CODE.UP_ARROW) {
       }      
+      
     }
   }
 
@@ -98,22 +112,37 @@ export class DomnComponent implements OnInit {
               private cardService: CardService) { }
 
   ngOnInit() {
+    
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle');
+    
     this.domainService.getDomains()
       .subscribe((domains: Domain[])=>{
         this.domains = domains;
-        this.domain = domains[0];
-        this.questions = this.domain.questions;
-        this.activeDomainNumber = this.domain.sequence
-        this.q_content = this.domain.questions[0].content;
-        this.cleanUpFormat();
-        this.isInitialized=true
+        this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
+          .subscribe(answers => {
+            this.domain = domains[0];
+            this.questions = this.domain.questions;
+            this.activeDomainNumber = this.domain.sequence;
+            console.log(this.domain.answers[0].domainId);
+            // this.a_domain = this.domain.answers[0].domainId;
+            // this.a_domain = '';
+            // this.q_content = this.domain.questions[0].content;
+            // this.a_value = this.domain.answers[0].value;
+            // this.a_rationale = this.domain.answers[0].rationale;
+            this.updateContent(0);
+            this.cleanUpFormat();
+            this.isInitialized=true
+        })
+
+
     })
-      
-    this.cardService.questionSelected.subscribe(
-      (question: Question) => {
-        this.getThisQuestion(question);
+    
+
+    this.cardService.questionSelected
+      .subscribe(
+        (question: Question) => {
+          this.getThisQuestion(question);
     })       
     
     this.cardService.menuItemSelected
@@ -123,18 +152,45 @@ export class DomnComponent implements OnInit {
       
     this.cardService.textInputSelected
       .subscribe((selected: boolean) => {
-        this.inRationale = selected;
+        this.inTextInput = selected;
     })
+    
+    this.cardService.updateThisAnswer
+      .subscribe((answer: Answer) => {
+      console.log('dom update')
+        console.log(this.domain.answers[answer.sequence-1].sequence)
+        console.log(this.domain.answers[answer.sequence-1].rationale)
+        this.domain.answers[answer.sequence-1].rationale = answer.rationale;
+        this.domain.answers[answer.sequence-1].value = answer.value;
+        console.log(this.domain.answers[answer.sequence-1].rationale)
+
+      })
+
+    this.cardService.answerSelected
+      .subscribe((selected: boolean) => {
+        console.log("888888888888888888")
+        this.answerSelected = selected;
+        this.domain.answers[this.activeQuestionNumber-1].value = selected;
+        this.a_value = selected;
+        
+    })
+    
     
   }
 
-  getDomainQuestions(domain){
-    this.domain = domain;
-    this.questions = this.domain.questions;
-    this.activeQuestionNumber = this.domain.questions[0].sequence;
-    this.activeDomainNumber = domain.sequence;
-    this.q_content = this.domain.questions[0].content;
-    this.cleanUpFormat();
+  getDomainQuestions(domain){   // question menu
+    if (!(this.domain == domain)) {
+      this.domain = domain;
+      this.questions = this.domain.questions;
+      this.activeQuestionNumber = this.domain.questions[0].sequence;
+      this.activeDomainNumber = domain.sequence;
+      console.log(this.domain.answers[0])
+      // this.q_content = this.domain.questions[0].content;
+      // this.a_value = this.domain.answers[0].value;
+      this.updateContent(0);
+
+      this.cleanUpFormat();
+    }
   }
   
   toggleMenu(){
@@ -142,12 +198,24 @@ export class DomnComponent implements OnInit {
   }
   
   getNextDomain() {
+    //console.log('getNextDomain')
     if (this.domain.sequence < this.domains.length) {
         this.domain = this.domains[this.domain.sequence]
+        //this.card.getAnswers(this.domain, 1)
+        console.log('getNextDomain')
+        //this.cardService.emitGetAnswers(this.domain, 1)
+
         this.questions = this.domain.questions;
         this.activeDomainNumber = this.domain.sequence
         this.activeQuestionNumber = 1; 
-        this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+        // console.log(this.domain.answers[this.activeQuestionNumber-1])
+
+        // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+        // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+        // this.a_rationale = this.domain.answers[this.activeQuestionNumber-1].rationale
+        this.updateContent(this.activeQuestionNumber-1);
+
+
     }
     this.cleanUpFormat();
   }
@@ -155,24 +223,59 @@ export class DomnComponent implements OnInit {
   getPrevDomain() {
     if (this.domain.sequence > 1 ) { 
         this.domain = this.domains[this.domain.sequence -2 ]
+        //this.card.getAnswers(this.domain, this.domain.questions.length);
+        console.log('getPrevDomain')
+        //this.cardService.emitGetAnswers(this.domain, this.domain.questions.length)
         this.questions = this.domain.questions;
         this.activeDomainNumber = this.domain.sequence;
         this.activeQuestionNumber = this.domain.questions.length;
-        this.q_content = this.domain.questions[this.activeQuestionNumber-1].content
+        this.updateContent(this.activeQuestionNumber-1);
+
+        // console.log(this.domain.answers[this.activeQuestionNumber-1])
+        // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content
+        // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+        
+        
     }
+    //this.card.setCurrentAnswer(this.activeQuestionNumber)
+
     this.cleanUpFormat();
   }
   
   getNextQuestion() {
+       // var 
+       //this.card.saveAnswer(this.activeDomainNumber, this.activeQuestionNumber)
        if (this.activeQuestionNumber < this.domain.questions.length) {
          this.activeQuestionNumber += 1;
-         this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+         //this.cardService.broadcastAnswer()
+         //this.card.setCurrentAnswer(this.activeQuestionNumber)
+         //this.cardService.emitSetActiveAnswer(this.activeQuestionNumber)
+        // console.log(this.domain.answers[this.activeQuestionNumber-1])
+        // console.log(this.domain.answers)
+         this.updateContent(this.activeQuestionNumber-1);
+
+        // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+        // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+        // this.a_rationale = this.domain.answers[this.activeQuestionNumber-1].rationale
+         
        } else {
          if (this.domain.sequence < this.domains.length) {
-           this.domain = this.domains[this.domain.sequence]
+           this.domain = this.domains[this.domain.sequence];
+           //this.card.getAnswers(this.domain, 1)
+          // console.log('getNextQuestion')
+           //this.cardService.emitGetAnswers(this.domain, 1)
+
            this.activeDomainNumber = this.domain.sequence
            this.activeQuestionNumber = 1; 
-           this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+           this.updateContent(this.activeQuestionNumber-1);
+
+          // console.log(this.domain.answers[this.activeQuestionNumber-1])
+
+          // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+          // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+          // this.a_rationale = this.domain.answers[this.activeQuestionNumber-1].rationale
+
+
          }
        }
        this.cleanUpFormat();
@@ -181,23 +284,90 @@ export class DomnComponent implements OnInit {
   getPrevQuestion() {
        if (this.activeQuestionNumber > 1)  {
          this.activeQuestionNumber -= 1;
-         this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+         this.updateContent(this.activeQuestionNumber-1);
+
+         //this.card.setCurrentAnswer(this.activeQuestionNumber)
+         //this.cardService.emitSetActiveAnswer(this.activeQuestionNumber)
+        // console.log(this.domain.answers[this.activeQuestionNumber-1])
+
+        // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+        // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+        // this.a_rationale = this.domain.answers[this.activeQuestionNumber-1].rationale
+ 
        } else {
          if (this.domain.sequence > 1 ) { 
            this.domain = this.domains[this.domain.sequence -2 ]
+           //this.card.getAnswers(this.domain, this.domain.questions.length);
+          // console.log("getPrevQuestion")
+           //this.cardService.emitGetAnswers(this.domain, this.domain.questions.length)
+           
            this.activeDomainNumber = this.domain.sequence;
            this.activeQuestionNumber = this.domain.questions.length;
-           this.q_content = this.domain.questions[this.activeQuestionNumber-1].content
+           this.updateContent(this.activeQuestionNumber-1);
+
+          // console.log(this.domain.answers[this.activeQuestionNumber-1])
+
+          // this.q_content = this.domain.questions[this.activeQuestionNumber-1].content;
+          // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+          // this.a_rationale = this.domain.answers[this.activeQuestionNumber-1].rationale
+          
+          // this.a_domain = this.domain.answers[this.activeQuestionNumber-1].domainId;
+
          }
        }
+       //this.card.setCurrentAnswer(this.activeQuestionNumber)
+
        this.cleanUpFormat();
   }
   
   getThisQuestion(question: Question){
+    //console.log('getThisQuestion')
+    console.log('hre in get this question')
+    console.log(this.activeQuestionNumber)
+    console.log(this.a_value)
+    console.log(this.a_rationale)
+    console.log(this.domain.answers[this.activeQuestionNumber-1].rationale    )
+    console.log(this.domain.answers)
+    
     this.activeQuestionNumber = question.sequence;
-    this.q_content = question.content;
+    this.updateContent(this.activeQuestionNumber-1);
+    console.log('hre after activeQuestionNumber assigned')
+    console.log(this.activeQuestionNumber)
+    console.log(this.a_value)
+    console.log(this.a_rationale)
+    console.log(this.domain.answers[this.activeQuestionNumber-1].rationale    )
+    console.log(this.domain.answers)
+
+    // console.log(this.domain.answers[this.activeQuestionNumber-1])
+
+    //this.q_content = question.content;
+    // this.a_value = this.domain.answers[this.activeQuestionNumber-1].value;
+
     this.cleanUpFormat();
     this.toggleMenu();
+    //this.cardService.emitSetActiveAnswer(this.activeQuestionNumber)
+   // setTimeout(this.card.setCurrentAnswer(this.activeQuestionNumber), 2000);
+
+    //this.card.setCurrentAnswer(this.activeQuestionNumber)
+    
+  }
+  
+  updateContent(index) {
+      //console.log(this.q_content)
+      console.log(this.a_value)
+      console.log(this.a_rationale)
+      console.log(this.a_details)
+
+      console.log('=============')
+      this.q_content = this.domain.questions[index].content;
+      this.a_value = this.domain.answers[index].value;
+      this.a_rationale = this.domain.answers[index].rationale  
+      this.a_details = this.domain.answers[index];
+      //console.log(this.q_content)
+      console.log(this.a_value)
+      console.log(this.a_rationale)
+      console.log(this.a_details)
+       
   }
   
   cleanUpFormat(){

@@ -1,4 +1,5 @@
 import { Question } from '../card/qstn/qstn.model';
+import { Answer } from '../card/ansr/ansr.model';
 
 export class Domain {
 
@@ -7,6 +8,7 @@ export class Domain {
         public title: String,
         public sequence: number,
         public id?: string,
-        public questions?: Question[]) { 
+        public questions?: Question[],
+        public answers?: Answer[]) { 
         }
 }

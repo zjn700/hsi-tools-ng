@@ -1,6 +1,7 @@
-import { Directive, HostListener, ElementRef } from '@angular/core';
+import { Directive, HostListener, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TopMenuService } from './shared/top-menu.service';
+import { CardService } from './card/card.service';
 import { KEY_CODE } from './shared/key-code.enum'
 
 export enum TOP_MENU{
@@ -15,10 +16,12 @@ export enum TOP_MENU{
 @Directive({
   selector: '[appTopMenu]'
 })
-export class TopMenuDirective {
-  private menuItem
+export class TopMenuDirective implements OnInit {
+  private menuItem;
+  private inTextInput = false;
+
   
-  constructor(private router: Router, private topMenuService: TopMenuService, private el: ElementRef) { }
+  constructor(private router: Router, private cardService: CardService, private topMenuService: TopMenuService, private el: ElementRef) { }
   
   private menuItemSelected(menuItem){
     var route:string ='';
@@ -51,37 +54,60 @@ export class TopMenuDirective {
 
   }
   
+  ngOnInit() {
+    this.cardService.textInputSelected
+      .subscribe((textInputSelected: boolean) => {
+        this.inTextInput = textInputSelected;
+    })
+  }
+  
   @HostListener('body:keydown', ['$event'])
-      keyEvent(event: KeyboardEvent) {
-        let menuItems = document.getElementsByClassName("unblocked"); 
+  keyEvent(event: KeyboardEvent) {
+    
+    // console.log(event.srcElement)
+    //   console.log(event.srcElement.tagName)
+    //   if (event.srcElement.tagName == 'TEXTAREA'){
+    //     this.inTextInput = true;
+    //   } else {
+    //     this.inTextInput = false;
+    //   }
+      
+    //   console.log('this.cardService.isInTextInput()')
+    //   console.log(this.cardService.isInTextInput(event))
+    
+    this.inTextInput = this.cardService.isInTextInput(event)
+    
+    if (!this.inTextInput) {
+      let menuItems = document.getElementsByClassName("unblocked"); 
 
-        if ((event.keyCode === KEY_CODE.RIGHT_ARROW  && event.shiftKey) || event.keyCode === KEY_CODE.RIGHT_BRACKET) {   //&& event.ctrlKe
-          for (let i=0; i < menuItems.length; i++) {
-            if (menuItems[i].classList.contains('active')){
-              if (i != menuItems.length-1) {
-                menuItems[i].classList.remove('active')
-                let selectedMenuItem = menuItems[i+1]
-                selectedMenuItem.classList.add('active');
-                this.menuItemSelected(i+1) 
-                break;
-              }
+      if ((event.keyCode === KEY_CODE.RIGHT_ARROW  && event.shiftKey) || event.keyCode === KEY_CODE.RIGHT_BRACKET) {   //&& event.ctrlKe
+        for (let i=0; i < menuItems.length; i++) {
+          if (menuItems[i].classList.contains('active')){
+            if (i != menuItems.length-1) {
+              menuItems[i].classList.remove('active')
+              let selectedMenuItem = menuItems[i+1]
+              selectedMenuItem.classList.add('active');
+              this.menuItemSelected(i+1) 
+              break;
             }
           }
         }
-        
-        if ((event.keyCode === KEY_CODE.LEFT_ARROW && event.shiftKey) || event.keyCode === KEY_CODE.LEFT_BRACKET) {
-          for (let i=0; i < menuItems.length; i++) {
-            if (menuItems[i].classList.contains('active')) {
-              if (i != 0) {
-                menuItems[i].classList.remove('active')
-                let selectedMenuItem = menuItems[i-1]
-                selectedMenuItem.classList.add('active');
-                this.menuItemSelected(i-1) 
-                break;
-              }
+      }
+      
+      if ((event.keyCode === KEY_CODE.LEFT_ARROW && event.shiftKey) || event.keyCode === KEY_CODE.LEFT_BRACKET) {
+        for (let i=0; i < menuItems.length; i++) {
+          if (menuItems[i].classList.contains('active')) {
+            if (i != 0) {
+              menuItems[i].classList.remove('active')
+              let selectedMenuItem = menuItems[i-1]
+              selectedMenuItem.classList.add('active');
+              this.menuItemSelected(i-1) 
+              break;
             }
           }
         }
-        
+      }
     }
+    
+  } 
 }

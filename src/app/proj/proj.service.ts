@@ -16,7 +16,10 @@ export class ProjectService {
     addProject(project: Project){
         const headers = new Headers({'content-Type': 'application/json'})
         const body = JSON.stringify(project)
-        return this.http.post('/projects', body, {headers: headers})
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.post('/projects' + token, body, {headers: headers})
                 .map((response: Response) => {
                     const result = response.json();
                     const project = new Project(
@@ -58,7 +61,10 @@ export class ProjectService {
     
     deleteProject(project: Project){
         this.projects.splice(this.projects.indexOf(project), 1);
-        return this.http.delete('/projects/' + project.id)
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.delete('/projects/' + project.id + token)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error)); 
     }
@@ -69,14 +75,19 @@ export class ProjectService {
     
     updateProject(project: Project) {
         const headers = new Headers({'content-Type': 'application/json'})
-        const body = JSON.stringify(project)
-        return this.http.patch('/projects/' + project.id, body, {headers: headers})
+        const body = JSON.stringify(project);
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.patch('/projects/' + project.id + token, body, {headers: headers})
                 .map((response: Response) => {
                     response.json();
                     this.projectIsUpdated.emit(true)
                 })
                 .catch((error: Response) => Observable.throw(error)); 
     }
+    
+    
     
     sortProjectList() {  // reverse alpabetical order
        return  this.projects.sort(function(a, b){
