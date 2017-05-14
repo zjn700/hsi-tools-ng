@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from './user.model';
 import { AuthService } from './auth.service';
 import { TopMenuService } from '../shared/top-menu.service';
+import "rxjs/add/operator/takeWhile";
 
 @Component({
     selector: 'hsi-signin',
     templateUrl: './signin.component.html'
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
     myForm: FormGroup
+    private alive:boolean = true;
     
     constructor(private authService: AuthService, private topMenuService: TopMenuService, private router: Router) { }
     
@@ -25,6 +27,10 @@ export class SigninComponent implements OnInit {
         }) 
     }
     
+    ngOnDestroy(){
+        this.alive = false
+    }
+    
     onSubmit(button) {
         console.log(this.myForm)
         const user = new User(
@@ -32,6 +38,7 @@ export class SigninComponent implements OnInit {
                 this.myForm.value.password
             )
         this.authService.signin(user)
+            .takeWhile(() => this.alive)
             .subscribe(
                 data => {
                     localStorage.setItem('token', data.token);

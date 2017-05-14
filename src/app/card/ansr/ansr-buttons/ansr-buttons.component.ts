@@ -1,29 +1,23 @@
-import { Component, OnInit, HostListener, ElementRef, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardService} from '../../../card/card.service';
+//import { Answer } from
 
 @Component({
   selector: 'app-ansr-buttons',
   templateUrl: './ansr-buttons.component.html',
   styleUrls: ['./ansr-buttons.component.css']
 })
-export class AnsrButtonsComponent implements OnInit {
+export class AnsrButtonsComponent {
   @Input() a_value:boolean = null;
+  @Input() a_details;
 
-  constructor(private el: ElementRef, private cardService: CardService) { }
+  constructor(private cardService: CardService) { }
   
-  // @HostListener('mousedown') onMouseDown() {
-  //       this.el.nativeElement.classList.add('buttonDown')
-  // }
-  
-  // @HostListener('mouseup') onMouseUp() {
-  //       this.el.nativeElement.classList.remove('buttonDown')
-  // }
-  
-  ngOnInit() { }
-  
-  emitAnswerSelected(answer, button){
-    if (this.a_value != answer) {
-      this.cardService.emitAnswerSelected(answer)
+  emitAnswerSelected(value){
+    if (this.a_value != value) {
+      this.cardService.emitAnswerSelected(value)
+      this.a_details.value = value; 
+      this.cardService.emitUpdateThisAnswer(this.a_details);
     }
   }
 

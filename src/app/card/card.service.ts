@@ -14,8 +14,8 @@ export class CardService {
   textInputSelected = new EventEmitter<boolean>();
   menuItemSelected = new EventEmitter<boolean>();
   answerSelected = new EventEmitter<boolean>();
-  setActiveAnswer = new EventEmitter<number>();
-  getNewAnswers = new EventEmitter<any>();
+  //setActiveAnswer = new EventEmitter<number>();
+  //getNewAnswers = new EventEmitter<any>();
   updateThisAnswer = new EventEmitter<Answer>();
   
   private domain: Domain = null;
@@ -24,11 +24,11 @@ export class CardService {
   
   constructor(private http: Http) { }
   
-  getQuestion(question: Question) {
+  getQuestion(question: Question) {    // for question menu
       this.questionSelected.emit(question)
   }
   
-  isInTextInput(event) {
+  isInTextInput(event) {   // used by TopMenuDirective & DomnComponent
     if (event.srcElement.tagName == 'TEXTAREA' || event.target.getAttribute("type") == 'text'){ 
         this.textInputSelected.emit(true)
         return true
@@ -38,8 +38,8 @@ export class CardService {
     }
   }
   
-  emitTextInputSelected() {
-      this.textInputSelected.emit(true)
+  emitTextInputSelected(selected) {   // used by AnsrRationlaComponent
+      this.textInputSelected.emit(selected)
   }
   
   emitMenuItemSelected() {
@@ -50,23 +50,38 @@ export class CardService {
         this.updateThisAnswer.emit(answer)
   }
   
-  emitSetActiveAnswer(number){
-    this.setActiveAnswer.emit(number)
-  }
-  
-  emitGetAnswers(domain, sequence) {
-    if (!(this.domain === domain && this.sequence === sequence)) {
-          this.domain = domain;
-          this.sequence = sequence;
-          this.getNewAnswers.emit({domain: domain, sequence: sequence})
-    }
-  }
-  
-  emitAnswerSelected(answer) {
-     //console.log('emitAnswerSelected = ' + answer)
+  emitAnswerSelected(answer) {   // yes/no buttons
      this.answerSelected.emit(answer);
   }
   
+  addAnswerToDb(answer: Answer){
+    answer.dateCreated  = answer.dateModified
+    const headers = new Headers({'content-Type': 'application/json'})
+    const body = JSON.stringify(answer)
+    const token = localStorage.getItem('token') 
+        ? '?token=' + localStorage.getItem('token')
+        : '';
+    return this.http.post('/answers' + token, body, {headers: headers})
+            .map((response: Response) => {
+                const result = response.json();
+                return result
+            })
+            .catch((error: Response) => Observable.throw(error));
+  }
+
+  updateAnswerInDb(answer: Answer) {
+        const headers = new Headers({'content-Type': 'application/json'})
+        const body = JSON.stringify(answer);
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.patch('/answers/' + answer.id + token, body, {headers: headers})
+                .map((response: Response) => {
+                    const result = response.json();
+                    return result
+                })
+                .catch((error: Response) => Observable.throw(error)); 
+  }
 
   getAnswers(domain: Domain){
     // use pid
@@ -139,9 +154,9 @@ export class CardService {
               //.catch((error: Response) => Observable.throw(error));
   }
   
-  getAnswer(domainId, sequence){
-    // use pid
-  }
+  // getAnswer(domainId, sequence){
+  //   // use pid
+  // }
   
   updateAnswer(answer: Answer){
     

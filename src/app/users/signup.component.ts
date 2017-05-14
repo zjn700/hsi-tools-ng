@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import "rxjs/add/operator/takeWhile";
 
 import { AuthService } from './auth.service';
 import { User } from './user.model';
@@ -9,8 +10,9 @@ import { User } from './user.model';
     selector: 'hsi-signup',
     templateUrl: './signup.component.html'
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
     myForm: FormGroup
+    private alive:boolean = true;
     
     constructor(private authService: AuthService, private router: Router) { }
     
@@ -28,6 +30,10 @@ export class SignupComponent implements OnInit {
         })
     }
     
+    ngOnDestroy(){
+        this.alive = false;
+    }
+    
     onSubmit() {
         console.log(this.myForm)
         const user = new User(
@@ -38,6 +44,7 @@ export class SignupComponent implements OnInit {
             this.myForm.value.office
             )
         this.authService.signup(user)
+            .takeWhile(() => this.alive)
             .subscribe(
                 data => {
                     console.log(data);

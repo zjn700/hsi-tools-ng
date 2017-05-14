@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Project } from "./proj.model";
 import { ProjectService } from './proj.service';
 import { Router } from '@angular/router';
+import "rxjs/add/operator/takeWhile";
 
 @Component({
     selector: 'app-proj-list',
@@ -10,11 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ProjListComponent implements OnInit {
     projects: Project[] = [];
+    private alive:boolean = true;
     
       constructor(private projectService: ProjectService, private router: Router) {}
       
       ngOnInit(){
         this.projectService.getProjects()
+          .takeWhile(() => this.alive)
           .subscribe(
             (projects: Project[]) => {
               this.projects = projects; 
@@ -22,6 +25,7 @@ export class ProjListComponent implements OnInit {
           );
           
         this.projectService.projectIsUpdated
+          .takeWhile(() => this.alive)
           .subscribe(
             (isUpdated: boolean) => {
               if (isUpdated) {
@@ -29,6 +33,10 @@ export class ProjListComponent implements OnInit {
                }
           });
           
+      }
+      
+      ngOnDestroy(){
+        this.alive = false;
       }
 
 }

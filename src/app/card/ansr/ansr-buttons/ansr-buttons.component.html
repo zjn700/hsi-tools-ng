@@ -1,7 +1,19 @@
 <div class="col-md-1 disable-text-selection">
     <div class="btn-group-vertical">
-      <button [ngClass]="{'selected': a_value && a_value!=null}" type="button" class="btn btn-primary btn-xl" value=true (click)='emitAnswerSelected(true, yes)' #yes>YES</button>
+      <button [ngClass]="{'selected-pos': a_value && a_value!=null}" 
+              type="button" 
+              class="btn btn-primary btn-xl" 
+              value=true 
+              (click)='emitAnswerSelected(true)'>
+          YES
+      </button>
       <br>
-      <button [ngClass]="{'selected': !a_value && a_value!=null}" type="button" class="btn btn-primary btn-xl" value=false (click)='emitAnswerSelected(false, no)' #no>NO</button>
+      <button [ngClass]="{'selected-neg': !a_value && a_value!=null}" 
+              type="button" 
+              class="btn btn-primary btn-xl" 
+              value=false 
+              (click)='emitAnswerSelected(false)'>
+          NO
+      </button>
     </div>
 </div>

@@ -13,9 +13,7 @@ import { TopMenuService } from '../shared/top-menu.service';
 export class ProjDetailComponent {
     
     @Input() project: Project;
-    //@Output() editClicked = new EventEmitter<string>();
-   // @Output() editClicked = new EventEmitter();
-    
+
     constructor(private projectService: ProjectService, private topMenuService: TopMenuService, private router: Router) { }
     
     onEdit() {
@@ -35,7 +33,6 @@ export class ProjDetailComponent {
       localStorage.setItem('pid', this.project.id);
       localStorage.setItem('ptitle', this.project.title.valueOf());
       this.router.navigate([button.getAttribute('ng-reflect-router-link')])   //(['/tools']) 
-      //this.topMenuService.activateThisItem(button.getAttribute('ng-reflect-router-link'))
       this.topMenuService.updateTopMenu(button)
 
     }

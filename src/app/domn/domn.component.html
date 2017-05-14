@@ -1,38 +1,68 @@
 <nav class="navbar navbar-inverse disable-text-selection">
+  
+  <!-- Title -->
   <div class="container-fluid">
-    <h2>{{qnnTitle}}: <span class='p-title' id='project'>{{projectTitle}}</span></h2>
-    <h2>{{childMessage}}</h2>
+    <h2>{{qnnTitle}}: 
+      <span class='p-title' 
+            id='project'>
+        {{projectTitle}}
+      </span>
+    </h2>
+    <h2>
+        {{childMessage}}
+    </h2>
+  </div>
 
-    <div class="navbar-header"></div>
-  </div><!-- /.container-fluid -->
+  <!-- Domain Tabs -->
   <ul class="nav nav-tabs">
-     <!--li *ngFor="let domain of domains" [ngClass]="{'active': domain==activeDomain}" class="nav-item" ><a class="nav-link" (click)="getDomainQuestions(domain)">{{domain.title}}</a></li-->
-
-    <li *ngFor="let domain of domains" class="nav-item" [ngClass]="{'active': domain.sequence==activeDomainNumber}"  >
-      <a class="nav-link" (click)="getDomainQuestions(domain)">{{domain.title}}
-        <span (click)=toggleMenu() *ngIf="!showMenu && domain.sequence==activeDomainNumber" class='glyphicon glyphicon-menu-down'></span>
-        <span (click)=toggleMenu() *ngIf="showMenu && domain.sequence==activeDomainNumber" class='glyphicon glyphicon-menu-up'></span>
+    <li *ngFor="let domain of domains" 
+        class="nav-item" 
+        [ngClass]="{'active': domain.sequence==activeDomainNumber}">
+      <a 
+        class="nav-link" 
+        (click)="getDomainQuestions(domain)">
+        {{domain.title}}
+        <span 
+            (click)=toggleMenu() 
+            *ngIf="!showMenu && domain.sequence==activeDomainNumber" 
+            class='glyphicon glyphicon-menu-down'>
+        </span>
+        <span 
+            (click)=toggleMenu() 
+            *ngIf="showMenu && domain.sequence==activeDomainNumber" 
+            class='glyphicon glyphicon-menu-up'>
+        </span>
       </a>
     </li>
-    <app-qstn-menu *ngIf="showMenu && domain.sequence==activeDomainNumber" [questions]="questions"></app-qstn-menu>
-     <!--li><a href="#">Integration</a></li-->
-     
     
+    <app-qstn-menu 
+          *ngIf="showMenu && domain.sequence==activeDomainNumber" 
+          [questions]="questions"
+          [answers]='domain.answers'>
+    </app-qstn-menu>
   </ul>
 </nav>
 
-<app-card (middleChildMessage)="onMessageFromChild2($event)" 
-  *ngIf="!showMenu" 
-  [ptitle]='projectTitle' 
-  [q_content]='q_content' 
-  [q_number]='q_number' 
-  [a_details]='a_details'
-  [a_value]='a_value'
-  [a_rationale]>
+<!-- Questions/Answers Card -->
+<app-card 
+      (middleChildMessage)="onMessageFromChild2($event)" 
+      *ngIf="!showMenu" 
+      [ptitle]='projectTitle' 
+      [q_content]='q_content' 
+      [q_number]='q_number' 
+      [a_details]='a_details'
+      [a_value]='a_value'>
 </app-card>
 
-<div *ngIf="!atFirstQuestion && !showMenu" (click)="getPrevQuestion()" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>
-<div *ngIf="!atLastQuestion && !showMenu" (click)="getNextQuestion()" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>
+<!-- Prev/Next Buttons -->
+<div 
+    *ngIf="!atFirstQuestion && !showMenu" 
+    (click)="getPrevQuestion()" 
+    class="glyphicon glyphicon-circle-arrow-left pull-left">
+</div>
 
-<!--li *ngFor="let question of questions">{{question.content}}</li>
-<app-qstn-menu [questions]="questions"></app-qstn-menu-->
+<div 
+    *ngIf="!atLastQuestion && !showMenu" 
+    (click)="getNextQuestion()" 
+    class="glyphicon glyphicon-circle-arrow-right pull-right">
+</div>

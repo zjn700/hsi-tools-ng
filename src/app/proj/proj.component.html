@@ -11,9 +11,27 @@
     <form (ngSubmit)='onSave(f, title)' #f="ngForm">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id='project-title' type="text" id="title" class="form-control" [ngModel]='project?.title' name="title" #title required>
+            <input id='project-title' 
+                   type="text" 
+                   class="form-control" 
+                   [ngModel]='project?.title' 
+                   name="title" 
+                   #title 
+                   required>
+                   <!--input id='project-title' 
+                   type="text" 
+                   id="title"
+                   class="form-control" 
+                   [ngModel]='project?.title' 
+                   name="title" 
+                   #title 
+                   required-->
             <label for="title">Description</label>
-            <textarea id="description" class="form-control" [ngModel]='project?.description' name="desc"></textarea>
+            <textarea id="description" 
+                      class="form-control" 
+                      [ngModel]='project?.description' 
+                      name="desc">
+            </textarea>
         </div>
         <button class="btn btn-info" type='submit'>Save</button>
         <button class="btn btn-default" type=button (click)='onClear(f, title)'>Clear</button>

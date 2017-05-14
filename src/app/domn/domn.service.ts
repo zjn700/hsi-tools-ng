@@ -11,7 +11,7 @@ import { Answer } from '../card/ansr/ansr.model';
 export class DomainService {
     private questions: Question[] = [];
     private domains: Domain[] = [];
-    
+
     constructor(private http: Http) { }
 
     getOneAnswer(domain, sequence){
@@ -22,54 +22,6 @@ export class DomainService {
             })
     }
 
-    getDomainsx(){
-        console.log('in getDomain')
-        return this.http.get('/domain/' + localStorage.getItem('qnnId'))
-            .map((response: Response) => {
-                if (response.json().obj.length == 0) {
-                    console.log("response is empty");
-                    return this.questions = response.json().obj;
-                } 
-                const domains = response.json().obj;
-                let t_domains: Domain[] = [];
-                for (let domain of domains) {
-                    let t_Answers: Answer[] = []
-                    t_domains.push(new Domain(
-                        domain.qnn,
-                        domain.title,
-                        domain.sequence,
-                        domain._id,
-                        domain.questions,
-                        t_Answers))
-                }
-                ////new
-                for (let domain of t_domains) {
-                    const queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
-                     this.http.get('/answers' + queryString)
-                        .map((response: Response) => {
-                            let answers = response.json().obj;
-                            let t_Answers: Answer[] = [];
-                            for (let i=0; i < domain.questions.length; i++) {
-                              t_Answers.push(new Answer(
-                                  localStorage.getItem('pid'), 
-                                  domain.id,
-                                  i+1,
-                                  null));
-                            }     
-                            ///need to add in actual answers returned from query
-                            return t_Answers
-                        })
-                        .subscribe(answers => {
-                            domain.answers = answers;
-                            this.domains = t_domains
-                        })
-                }   /// end new
-                this.domains = t_domains
-                return this.domains //t_domains
-            })
-            .catch((error: Response) => Observable.throw(error));
-    }
-    
     getDomains(){
         console.log('in getDomain')
         return this.http.get('/domain/' + localStorage.getItem('qnnId'))
@@ -99,7 +51,7 @@ export class DomainService {
                 }
                         
                 this.domains = t_domains
-                return this.domains //t_domains
+                return this.domains
             })
             .catch((error: Response) => Observable.throw(error));
     }    
@@ -119,8 +71,20 @@ export class DomainService {
                           i+1,
                           null));
                     }     
+                    if (t_Answers.length > 0 ) {  //response.json().obj.length != 0) {
+                      for (let answer of answers) {
+                         let i = answer.sequence-1;
+                         t_Answers[i].value = answer.value;
+                         t_Answers[i].riskValue = answer.riskValue;
+                         t_Answers[i].rationale = answer.rationale;
+                         t_Answers[i].dateCreated = answer.dateCreated;
+                         t_Answers[i].dateModified = answer.dateModified;
+                         t_Answers[i].id = answer._id;
+                      }
+                    }                   
                     //need to add in actual answers returned from query
                     //domain.answers = t_Answers
+                    
                     return t_Answers    //t_domains
                 })
     }

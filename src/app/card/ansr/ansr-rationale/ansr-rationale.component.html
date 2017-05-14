@@ -1,9 +1,16 @@
- <form>
-    <form [formGroup]='myForm'>
-      <!--label class="disable-text-selection" style="margin-top:12px;" for="comment">Rationale:</label-->
-      <div id="rationale" class="disable-text-selection" style="margin-top:0px;" for="comment">RATIONALE:</div>
-      <!--textarea [ngModel]='a_details?.rationale' (click)="onClick(f)" class="form-control" rows="5" id="comment" formControlName='comment'></textarea-->
-      <textarea [ngModel]='a_details?.rationale' (click)="onClick(f)" (focus)='setStart($event)' (focusout)="updateAnswer($event)" class="form-control" rows="5" id="comment" formControlName='comment'></textarea>
-    </form>
-  </form>
-
+<form [formGroup]='myForm'>
+    <div id="rationale" 
+         class="disable-text-selection" 
+         style="margin-top:0px;" 
+         for="comment">
+      RATIONALE:
+    </div>
+    <textarea [ngModel]='a_details?.rationale' 
+              (focus)='setStart($event)' 
+              (focusout)="updateAnswer($event)" 
+              class="form-control" 
+              rows="5" 
+              id="comment" 
+              formControlName='comment'>
+   </textarea>
+</form>

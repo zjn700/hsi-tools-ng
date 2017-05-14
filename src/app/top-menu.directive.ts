@@ -64,22 +64,10 @@ export class TopMenuDirective implements OnInit {
   @HostListener('body:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     
-    // console.log(event.srcElement)
-    //   console.log(event.srcElement.tagName)
-    //   if (event.srcElement.tagName == 'TEXTAREA'){
-    //     this.inTextInput = true;
-    //   } else {
-    //     this.inTextInput = false;
-    //   }
-      
-    //   console.log('this.cardService.isInTextInput()')
-    //   console.log(this.cardService.isInTextInput(event))
-    
     this.inTextInput = this.cardService.isInTextInput(event)
-    
+
     if (!this.inTextInput) {
       let menuItems = document.getElementsByClassName("unblocked"); 
-
       if ((event.keyCode === KEY_CODE.RIGHT_ARROW  && event.shiftKey) || event.keyCode === KEY_CODE.RIGHT_BRACKET) {   //&& event.ctrlKe
         for (let i=0; i < menuItems.length; i++) {
           if (menuItems[i].classList.contains('active')){

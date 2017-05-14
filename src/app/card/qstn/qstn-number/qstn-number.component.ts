@@ -7,10 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class QstnNumberComponent implements OnInit {
   @Input() q_number:string;
-  
   @Output() passToParent:EventEmitter<string> = new EventEmitter<string>();
 
-  
   constructor() { }
 
   ngOnInit() { }

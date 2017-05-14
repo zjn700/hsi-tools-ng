@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ProjectService } from './proj.service';
-import { Project } from "./proj.model";
-import { TopMenuService } from '../shared/top-menu.service';
+import { Component, OnInit,  OnDestroy  } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import "rxjs/add/operator/takeWhile";
+
+import { Project } from "./proj.model";
+import { ProjectService } from './proj.service';
+import { CardService } from '../card/card.service';
+//import { TopMenuService } from '../shared/top-menu.service';
 
 @Component({
   selector: 'app-proj',
@@ -10,10 +13,12 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./proj.component.css']
 
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, OnDestroy {
     project: Project;
-    
-    constructor(private projectService: ProjectService, private topMenuService:TopMenuService) { }
+    private alive: boolean = true;
+
+    //constructor(private projectService: ProjectService, private topMenuService:TopMenuService) { }
+    constructor(private projectService: ProjectService, private cardService:CardService) { }
     
     onSave(form: NgForm, titleInput){
         if (this.project) {
@@ -22,6 +27,7 @@ export class ProjectComponent implements OnInit {
             this.project.description = form.value.desc;
 
             this.projectService.updateProject(this.project)
+                .takeWhile(() => this.alive)
                 .subscribe(result => {
                     console.log('result');
                     console.log(result);
@@ -38,7 +44,8 @@ export class ProjectComponent implements OnInit {
                 new Date(),                         // dateCreated 
                 [localStorage.getItem('userId')] )  // users
                 
-            this.projectService.addProject(project)
+            this.projectService.addProject(project)      
+                .takeWhile(() => this.alive)
                 .subscribe(
                     data => console.log(data),
                     error => console.log(error)
@@ -59,11 +66,20 @@ export class ProjectComponent implements OnInit {
     }
     
     ngOnInit(){
-        this.projectService.projectIsInEditMode
+      this.projectService.projectIsInEditMode
+        .takeWhile(() => this.alive)
         .subscribe(
             (project: Project) => {
+              //this.project = null;    
               this.project = project
         })
+    }
+    
+    ngOnDestroy(){
+        //this.projectService.projectIsInEditMode.unsubscribe();
+        //this.project = null;
+        this.alive = false;
+
     }
     
 }

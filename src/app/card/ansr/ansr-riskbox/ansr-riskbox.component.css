@@ -62,7 +62,7 @@
   border-style: solid;
   border-color:black;
   border-width:1px;
-  font-size:20px;  /* don't show the x */
+  font-size:0px;  /* don't show the x */
 }
 /*.th1:hover {
   cursor:cell;
@@ -70,12 +70,15 @@
 }*/
 
 .green{
-  backround-color:#D4E4CD;
+  background-color:#D4E4CD;
 }
 
 .green:hover{
   background:green;
   cursor:pointer;
+}
+.g-on{
+  background:green;
 }
 
 .yellow{
@@ -84,6 +87,9 @@
 .yellow:hover{
   background:yellow;
   cursor:pointer;
+}
+.y-on {
+   background:yellow;
 }
 
 .red{
@@ -94,6 +100,10 @@
   background:red;
   cursor:pointer;
 }
+.r-on{
+  background:red;
+}
+
 html, body, .container {
   height: 100%;
 }

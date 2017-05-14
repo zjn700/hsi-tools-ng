@@ -27,6 +27,7 @@ button:focus {
   color:#777;
 
 }
+
 .btn-primary:hover{
   background-color:#eee;
   border-color:#eee;
@@ -34,8 +35,15 @@ button:focus {
 
 }
 
-.selected {
+.selected-neg {
   background-color: tomato;
   border-color: tomato;
   color:#fff;
 }
+
+.selected-pos {
+  background-color: green;
+  border-color: green;
+  color:#fff;
+}
+

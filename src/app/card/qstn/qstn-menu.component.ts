@@ -1,7 +1,8 @@
-import { Component, OnInit, Input ,EventEmitter,HostListener } from '@angular/core';
-import { CardService } from '../card.service';
+import { Component, OnInit, Input, EventEmitter,HostListener } from '@angular/core';
 import { Question } from './qstn.model';
+import { Answer } from '../ansr/ansr.model';
 import { QstnMenuDirective } from './qstn-menu.directive';
+import { CardService } from '../card.service';
 import { KEY_CODE } from '../../shared/key-code.enum';
 
 @Component({
@@ -11,6 +12,7 @@ import { KEY_CODE } from '../../shared/key-code.enum';
 })
 export class QstnMenuComponent implements OnInit {
   @Input() questions:Question[];
+  @Input() answers:Answer[];
   
   @HostListener('body:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {

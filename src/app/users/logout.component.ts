@@ -12,6 +12,7 @@ export class LogoutComponent {
     
     onLogout(){
         this.authService.logout();
+        localStorage.clear();
         this.router.navigate(['/signin'])   //(['/auth', 'signin'])
     }
 }

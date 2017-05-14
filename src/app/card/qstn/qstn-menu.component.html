@@ -1,5 +1,16 @@
 <ol class='ol' >
-    <li myHighlight (click)="getThisQuestion(question)"  class='menuItem' id={{question.sequence}} *ngFor="let question of questions">{{question.content}}</li>
+    <li myHighlight (click)="getThisQuestion(question)"  
+        class='menuItem' 
+        id={{question.sequence}} 
+        *ngFor="let question of questions">
+        <span
+            class='glyphicon glyphicon-ok'
+            *ngIf="answers[question.sequence - 1].id != null"
+            [ngClass]="{'neg': answers[question.sequence - 1].value==false, 'pos':answers[question.sequence - 1].value==true}"> 
+        </span>
+        <span class='q_menu_item'> {{question.content}} </span>
+        
+    </li>
 </ol>
 
 

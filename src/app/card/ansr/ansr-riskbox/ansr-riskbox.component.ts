@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CardService} from '../../../card/card.service';
 
 @Component({
   selector: 'app-ansr-riskbox',
@@ -7,10 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AnsrRiskboxComponent implements OnInit {
   @Input() a_value:boolean = null;
+  @Input() a_details;
 
-  constructor() { }
+  constructor(private cardService: CardService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+  
+  onClick(riskValue){
+    if (this.a_details.riskValue != riskValue) {
+      this.a_details.riskValue = riskValue; 
+      this.cardService.emitUpdateThisAnswer(this.a_details);
+    }
   }
 
 }

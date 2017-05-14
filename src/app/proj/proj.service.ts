@@ -87,8 +87,6 @@ export class ProjectService {
                 .catch((error: Response) => Observable.throw(error)); 
     }
     
-    
-    
     sortProjectList() {  // reverse alpabetical order
        return  this.projects.sort(function(a, b){
                 if ( a.title > b.title ) {
