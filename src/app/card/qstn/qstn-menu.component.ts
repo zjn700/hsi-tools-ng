@@ -14,6 +14,8 @@ export class QstnMenuComponent implements OnInit {
   @Input() questions:Question[];
   @Input() answers:Answer[];
   
+  
+  
   @HostListener('body:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
       if (event.keyCode === KEY_CODE.ENTER_KEY) {

@@ -4,10 +4,31 @@
         id={{question.sequence}} 
         *ngFor="let question of questions">
         <span
-            class='glyphicon glyphicon-ok'
-            *ngIf="answers[question.sequence - 1].id != null"
-            [ngClass]="{'neg': answers[question.sequence - 1].value==false, 'pos':answers[question.sequence - 1].value==true}"> 
+            class='glyphicon glyphicon-ok pos'
+            *ngIf="answers[question.sequence - 1]?.value==true"> 
+        </span>        
+        <span
+            class='glyphicon glyphicon-remove neg'
+            *ngIf="answers[question.sequence - 1]?.value==false"> 
         </span>
+        <span
+            class='glyphicon glyphicon-info-sign low'
+            *ngIf="answers[question.sequence - 1]?.riskValue &&
+                    answers[question.sequence - 1]?.riskValue < 20">
+        </span>        
+        <span
+            class='glyphicon'
+            *ngIf="answers[question.sequence - 1]?.riskValue &&
+                    answers[question.sequence - 1]?.riskValue > 20"
+            [ngClass]="{'glyphicon-warning-sign high': answers[question.sequence - 1].riskValue>30,  
+                        'glyphicon-exclamation-sign moderate':answers[question.sequence - 1].riskValue>20}"> 
+        </span>
+        <span
+            class='glyphicon glyphicon-pencil info'
+            *ngIf="answers[question.sequence - 1]?.rationale">
+        </span>
+        
+        
         <span class='q_menu_item'> {{question.content}} </span>
         
     </li>

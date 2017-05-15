@@ -1,7 +1,9 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ElementRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { CardService } from '../../card.service';
+import { KEY_CODE } from '../../../shared/key-code.enum';
+
 
 @Component({
   selector: 'app-ansr-rationale',
@@ -12,11 +14,24 @@ export class AnsrRationaleComponent implements OnInit {
  
   @Input() a_value:boolean = null;
   @Input() a_details;
-
+  
   private myForm: FormGroup;
   private start_content:string;
   
-  constructor(private cardService: CardService ) { }
+  @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
+    keyEvent(event: KeyboardEvent) {
+      if (event.keyCode === KEY_CODE.ESCAPE_KEY) {
+        console.log('escape')
+        console.log(this.elementRef.nativeElement.previousSibling);
+        let buttonList = document.getElementsByClassName("btn-xl"); 
+        console.log(buttonList)
+        console.log(buttonList[0].classList);
+        //btn btn-primary btn-xl selected-pos
+        return;
+      }
+    }
+      
+  constructor(private cardService: CardService, private elementRef: ElementRef ) { }
   
   ngOnInit() {
     this.myForm = new FormGroup({

@@ -23,23 +23,34 @@ lix:hover{
     color:tomato;
 }
 
-.glyphicon-ok {
-    padding-right: 5px;
-    padding-left: 5px;
-    padding:5px;
+.glyphicon {
+    padding:3px;
+    background:white;
+    opacity: .8;
+    color:rgb(158, 158, 158);
+    background:#222;
 }
 
 .q_menu_item {
-    padding-bottom: 5px;
-    padding-left: 10px;
+    padding-bottom: 6px;
 }
 
 .pos {
-    background-color:green;
-    color:white;  /*#d4e4cd; */
+    color:rgb(192, 255, 195);  /*#D4E4CDl  /*#5fbf5f;  /* green */
 }
 
 .neg {
-    background-color:tomato;
-    color:white;  /*#f2dede; */
+    color:#ff6d6d;  /*#F2DEDE;  /*tomato;  /*#f2dede; */
+}
+.info {
+    color:rgb(192, 255, 195); /*#fffd85  /*#FCF8E3; /*#fff; */
+}
+.low{
+    color:rgb(192, 255, 195); /*#5fbf5f;  /* green */
+}
+.moderate{
+    color:#fffd85; /*rgba(246, 243, 7, .9); /*yellow;*/
+}
+.high{
+    color:#ff6d6d;  /*red; */
 }

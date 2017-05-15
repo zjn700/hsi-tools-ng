@@ -54,7 +54,7 @@ export class TopMenuDirective implements OnInit {
 
   }
   
-  ngOnInit() {
+  ngOnInit(){
     this.cardService.textInputSelected
       .subscribe((textInputSelected: boolean) => {
         this.inTextInput = textInputSelected;
@@ -65,6 +65,7 @@ export class TopMenuDirective implements OnInit {
   keyEvent(event: KeyboardEvent) {
     
     this.inTextInput = this.cardService.isInTextInput(event)
+    
 
     if (!this.inTextInput) {
       let menuItems = document.getElementsByClassName("unblocked"); 

@@ -6,7 +6,7 @@ export class Answer {
         public sequence: number, 
         public value: boolean,
         public riskValue?: number,
-        public rationale?: String,
+        public rationale?: string,
         public dateCreated?: Date,
         public dateModified?: Date,
         public id?: String

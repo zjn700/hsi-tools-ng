@@ -13,6 +13,8 @@ export class QstnComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('this.q_content')
+    console.log(this.q_content)
   }
 
 }

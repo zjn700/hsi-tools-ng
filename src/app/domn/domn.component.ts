@@ -1,5 +1,8 @@
 'use strict'
-import { Component, OnInit, HostListener, ViewChild, OnDestroy } from '@angular/core';
+import {Component, 
+        OnInit, 
+        HostListener, OnDestroy, 
+        AfterViewInit } from '@angular/core';
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
@@ -15,7 +18,7 @@ import "rxjs/add/operator/takeWhile";
   templateUrl: './domn.component.html',
   styleUrls: ['./domn.component.css'],
 })
-export class DomnComponent implements OnInit, OnDestroy {
+export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
   qnnTitle: string;
   projectTitle: string;
   domain: Domain;
@@ -36,6 +39,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   menuItemSelected = false;
   answerSelected = null;
   
+  //private  isInitialized:boolean=false;
   private alive: boolean = true;
 
   private subscription: ISubscription;
@@ -52,7 +56,9 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   @HostListener('click', ['$event']) onClick(event:Event) {
+    if (this.isInitialized) {
       this.inTextInput = this.cardService.isInTextInput(event);
+    }
   }
   
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
@@ -115,9 +121,12 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.domains.length = 0;
     this.questions.length = 0;
     this.answers.length = 0; 
-
   }
-  
+
+  ngAfterViewInit(){
+    this.isInitialized=true;
+  }
+
   ngOnInit() {
     
     this.projectTitle = localStorage.getItem('ptitle');
@@ -135,7 +144,7 @@ export class DomnComponent implements OnInit, OnDestroy {
             this.activeDomainNumber = this.domain.sequence;
             this.updateContent(0);
             this.cleanUpFormat();
-            this.isInitialized=true;
+            //this.isInitialized=true;
         })
     })
 
@@ -163,6 +172,11 @@ export class DomnComponent implements OnInit, OnDestroy {
       .subscribe((answer: Answer) => {
         this.domain.answers[answer.sequence-1].rationale = answer.rationale;
         this.domain.answers[answer.sequence-1].value = answer.value;
+        if (answer.value == true){
+          console.log('answer value=true');
+          console.log(answer.value)
+          this.domain.answers[answer.sequence-1].riskValue = null;
+        }
         this.domain.answers[answer.sequence-1].riskValue = answer.riskValue;
         this.domain.answers[answer.sequence-1].dateModified = new Date;
         answer.dateModified = this.domain.answers[answer.sequence-1].dateModified
@@ -247,7 +261,8 @@ export class DomnComponent implements OnInit, OnDestroy {
        } else {
          if (this.domain.sequence < this.domains.length) {
            this.domain = this.domains[this.domain.sequence];
-           this.activeDomainNumber = this.domain.sequence
+           this.questions = this.domain.questions;
+           this.activeDomainNumber = this.domain.sequence;
            this.activeQuestionNumber = 1; 
            this.updateContent(this.activeQuestionNumber-1);
          }
@@ -261,7 +276,8 @@ export class DomnComponent implements OnInit, OnDestroy {
          this.updateContent(this.activeQuestionNumber-1);
        } else {
          if (this.domain.sequence > 1 ) { 
-           this.domain = this.domains[this.domain.sequence -2 ]
+           this.domain = this.domains[this.domain.sequence -2 ];
+           this.questions = this.domain.questions;
            this.activeDomainNumber = this.domain.sequence;
            this.activeQuestionNumber = this.domain.questions.length;
            this.updateContent(this.activeQuestionNumber-1);
@@ -278,12 +294,11 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   updateContent(index) {
-      this.q_content = this.domain.questions[index].content;
-      this.a_value = this.domain.answers[index].value;
-      this.a_details = this.domain.answers[index];
-      console.log('this.a_details')
-      console.log(this.a_details)
-
+    this.q_content = this.domain.questions[index].content;
+    this.a_value = this.domain.answers[index].value;
+    this.a_details = this.domain.answers[index];
+    console.log('this.a_details')
+    console.log(this.a_details)
   }
   
   cleanUpFormat(){

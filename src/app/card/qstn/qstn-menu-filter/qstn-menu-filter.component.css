@@ -1,0 +1,11 @@
+.filter-box {
+    margin-top:20px;
+    margin-left:20px;
+}
+.filter-list > div {
+    float:left;
+    margin-right:25px;
+}
+input {
+    margin-right:4px;
+}
