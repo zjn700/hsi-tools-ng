@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs'
@@ -23,7 +23,6 @@ export class DomainService {
     }
 
     getDomains(){
-        console.log('in getDomain')
         return this.http.get('/domain/' + localStorage.getItem('qnnId'))
             .map((response: Response) => {
                 if (response.json().obj.length == 0) {
@@ -43,11 +42,12 @@ export class DomainService {
                         t_Answers))
                 }
                 ////new
+                let j = 0;
                 for (let domain of t_domains) {
                     this.addDomainAnswers(domain)
                         .subscribe(answers => {
                             domain.answers = answers
-                        })
+                    })
                 }
                         
                 this.domains = t_domains
@@ -84,7 +84,6 @@ export class DomainService {
                     }                   
                     //need to add in actual answers returned from query
                     //domain.answers = t_Answers
-                    
                     return t_Answers    //t_domains
                 })
     }

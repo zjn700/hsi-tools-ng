@@ -15,7 +15,7 @@ export class QstnNumberComponent implements OnInit {
   
   onClick(){
     console.log('number click')
-    this.passToParent.emit('');  //('Jello Zac')
+    this.passToParent.emit('Jello Zac');  //('Jello Zac')
   }
 
 }

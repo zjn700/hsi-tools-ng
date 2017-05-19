@@ -9,7 +9,6 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/Rx');
 var rxjs_1 = require('rxjs');
-var ansr_model_1 = require('./ansr/ansr.model');
 var CardService = (function () {
     function CardService(http) {
         this.http = http;
@@ -17,8 +16,8 @@ var CardService = (function () {
         this.textInputSelected = new core_1.EventEmitter();
         this.menuItemSelected = new core_1.EventEmitter();
         this.answerSelected = new core_1.EventEmitter();
-        this.setActiveAnswer = new core_1.EventEmitter();
-        this.getNewAnswers = new core_1.EventEmitter();
+        this.updateThisAnswer = new core_1.EventEmitter();
+        this.escapePressed = new core_1.EventEmitter();
         this.domain = null;
         this.sequence = null;
         this.answers = [];
@@ -36,93 +35,23 @@ var CardService = (function () {
             return false;
         }
     };
-    CardService.prototype.emitTextInputSelected = function () {
-        this.textInputSelected.emit(true);
+    CardService.prototype.emitTextInputSelected = function (selected) {
+        this.textInputSelected.emit(selected);
     };
     CardService.prototype.emitMenuItemSelected = function () {
         this.menuItemSelected.emit(true);
     };
-    CardService.prototype.emitSetActiveAnswer = function (number) {
-        this.setActiveAnswer.emit(number);
-    };
-    CardService.prototype.emitGetAnswers = function (domain, sequence) {
-        if (!(this.domain === domain && this.sequence === sequence)) {
-            this.domain = domain;
-            this.sequence = sequence;
-            this.getNewAnswers.emit({ domain: domain, sequence: sequence });
-        }
+    CardService.prototype.emitUpdateThisAnswer = function (answer) {
+        this.updateThisAnswer.emit(answer);
     };
     CardService.prototype.emitAnswerSelected = function (answer) {
-        //console.log('emitAnswerSelected = ' + answer)
         this.answerSelected.emit(answer);
     };
-    CardService.prototype.getAnswers = function (domain) {
-        // use pid
-        //console.log('in getAnswers')
-        // const headers = new Headers({'content-Type': 'application/json'})
-        //   let query = {
-        //     projectId: localStorage.getItem('pid'),
-        //     domainId: domain.id,
-        //   } 
-        // const body = JSON.stringify(query)
-        var queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
-        //console.log(queryString)
-        // const token = localStorage.getItem('token') 
-        //     ? '?token=' + localStorage.getItem('token')
-        //     : '';
-        return this.http.get('/answers' + queryString) //, body, {headers: headers})
-            .map(function (response) {
-            //console.log('response')
-            //console.log(response)
-            var answers = response.json().obj;
-            var t_Answers = [];
-            for (var i = 0; i < domain.questions.length; i++) {
-                t_Answers.push(new ansr_model_1.Answer(localStorage.getItem('pid'), domain.id, i + 1, null));
-            }
-            if (answers.length != 0) {
-                for (var _i = 0, answers_1 = answers; _i < answers_1.length; _i++) {
-                    var answer = answers_1[_i];
-                    var i = answer.sequence - 1;
-                    //t_Answers[i].projectId = answer.projectId;
-                    //t_Answers[i].domainId = answer.domainId;
-                    //t_Answers[i].sequence = answer.sequence;
-                    t_Answers[i].value = answer.value;
-                    t_Answers[i].riskValue = answer.riskValue;
-                    t_Answers[i].rationale = answer.rationale;
-                    t_Answers[i].dateCreated = answer.dateCreated;
-                    t_Answers[i].dateModified = answer.dateModified;
-                    t_Answers[i].id = answer._id;
-                }
-            }
-            answers = t_Answers;
-            t_Answers = [];
-            //console.log(answers);
-            return answers;
-            //this.domains = this.sortDomainList();
-            //return transformedDomns;
-            // const answer = new Answer(
-            //         result.obj.projectId, 
-            //         result.obj.domainId,[]
-            //         result.obj.sequence,
-            //         result.obj.value,
-            //         result.obj.riskValue,
-            //         result.obj.rationale,
-            //         result.obj.dateCreated,
-            //         result.obj.dateModified,
-            //         result.obj._id);
-            // this.answers.push(answer);
-            // this.answers = this.sortList();
-            // // this.projectIsUpdated.emit(true)
-            // return this.answers;
-        });
-        //.catch((error: Response) => Observable.throw(error));
+    CardService.prototype.emitEscapePressed = function (value) {
+        this.escapePressed.emit(value);
     };
-    CardService.prototype.getAnswer = function (domainId, sequence) {
-        // use pid
-    };
-    CardService.prototype.updateAnswer = function (answer) {
-    };
-    CardService.prototype.addAnswer = function (answer) {
+    CardService.prototype.addAnswerToDb = function (answer) {
+        answer.dateCreated = answer.dateModified;
         var headers = new http_1.Headers({ 'content-Type': 'application/json' });
         var body = JSON.stringify(answer);
         var token = localStorage.getItem('token')
@@ -131,11 +60,20 @@ var CardService = (function () {
         return this.http.post('/answers' + token, body, { headers: headers })
             .map(function (response) {
             var result = response.json();
-            var answer = new ansr_model_1.Answer(result.obj.projectId, result.obj.domainId, result.obj.sequence, result.obj.value, result.obj.riskValue, result.obj.rationale, result.obj.dateCreated, result.obj.dateModified, result.obj._id);
-            // this.projects.push(project);
-            // this.projects = this.sortProjectList();
-            // this.projectIsUpdated.emit(true)
-            return answer;
+            return result;
+        })
+            .catch(function (error) { return rxjs_1.Observable.throw(error); });
+    };
+    CardService.prototype.updateAnswerInDb = function (answer) {
+        var headers = new http_1.Headers({ 'content-Type': 'application/json' });
+        var body = JSON.stringify(answer);
+        var token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.patch('/answers/' + answer.id + token, body, { headers: headers })
+            .map(function (response) {
+            var result = response.json();
+            return result;
         })
             .catch(function (error) { return rxjs_1.Observable.throw(error); });
     };
@@ -156,3 +94,95 @@ var CardService = (function () {
     return CardService;
 }());
 exports.CardService = CardService;
+// getAnswers(domain: Domain){
+//   // use pid
+//   //console.log('in getAnswers')
+//   // const headers = new Headers({'content-Type': 'application/json'})
+//   //   let query = {
+//   //     projectId: localStorage.getItem('pid'),
+//   //     domainId: domain.id,
+//   //   } 
+//     // const body = JSON.stringify(query)
+//     const queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
+//     //console.log(queryString)
+//     // const token = localStorage.getItem('token') 
+//     //     ? '?token=' + localStorage.getItem('token')
+//     //     : '';
+//     return this.http.get('/answers' + queryString) //, body, {headers: headers})
+//             .map((response: Response) => {
+//               //console.log('response')
+//               //console.log(response)
+//               let answers = response.json().obj;
+//               let t_Answers: Answer[] = [];
+//               for (let i=0; i < domain.questions.length; i++) {
+//                 t_Answers.push(new Answer(
+//                     localStorage.getItem('pid'), 
+//                     domain.id,
+//                     i+1,
+//                     null));
+//               }
+//               if (answers.length != 0 ) {  //response.json().obj.length != 0) {
+//                 for (let answer of answers) {
+//                   let i = answer.sequence-1;
+//                   //t_Answers[i].projectId = answer.projectId;
+//                   //t_Answers[i].domainId = answer.domainId;
+//                   //t_Answers[i].sequence = answer.sequence;
+//                   t_Answers[i].value = answer.value;
+//                   t_Answers[i].riskValue = answer.riskValue;
+//                   t_Answers[i].rationale = answer.rationale;
+//                   t_Answers[i].dateCreated = answer.dateCreated;
+//                   t_Answers[i].dateModified = answer.dateModified;
+//                   t_Answers[i].id = answer._id;
+//                 }
+//               }
+//               answers = t_Answers;
+//               t_Answers = []
+//               //console.log(answers);
+//               return answers
+//                 //this.domains = this.sortDomainList();
+//                 //return transformedDomns;
+//               // const answer = new Answer(
+//               //         result.obj.projectId, 
+//               //         result.obj.domainId,[]
+//               //         result.obj.sequence,
+//               //         result.obj.value,
+//               //         result.obj.riskValue,
+//               //         result.obj.rationale,
+//               //         result.obj.dateCreated,
+//               //         result.obj.dateModified,
+//               //         result.obj._id);
+//               // this.answers.push(answer);
+//               // this.answers = this.sortList();
+//               // // this.projectIsUpdated.emit(true)
+//               // return this.answers;
+//             })
+//             //.catch((error: Response) => Observable.throw(error));
+// }
+// // getAnswer(domainId, sequence){
+// //   // use pid
+// // }
+// updateAnswer(answer: Answer){
+// }
+// addAnswer(answer: Answer){
+//     const headers = new Headers({'content-Type': 'application/json'})
+//     const body = JSON.stringify(answer)
+//     const token = localStorage.getItem('token') 
+//         ? '?token=' + localStorage.getItem('token')
+//         : '';
+//     return this.http.post('/answers' + token, body, {headers: headers})
+//             .map((response: Response) => {
+//                 const result = response.json();
+//                 const answer = new Answer(
+//                         result.obj.projectId, 
+//                         result.obj.domainId,
+//                         result.obj.sequence,
+//                         result.obj.value,
+//                         result.obj.riskValue,
+//                         result.obj.rationale,
+//                         result.obj.dateCreated,
+//                         result.obj.dateModified,
+//                         result.obj._id);
+//                 return answer;
+//             })
+//             .catch((error: Response) => Observable.throw(error));
+// }

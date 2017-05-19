@@ -4,6 +4,10 @@
     
 }
 
+#card-middle-row {
+    min-width:1280px;
+}
+
 .hidden {
     opacity: 0;
     visibility: hidden;
@@ -11,8 +15,35 @@
 
 #blank {
     color:#222;
-    height: 390px;
+    height: 450px;
     width:inherit;
     z-index: -10;
     
+}
+#card-top-row {
+    height: 150px;
+}
+#card-middle-row {
+    height: 450px;
+}
+
+.answerTitle {
+  color: white;
+  background-color: #333;
+  font-size:1.1em;
+  width:175px;
+  padding:10px;
+  margin-top: 0;
+
+}
+
+.glyphicon[_ngcontent-c1] {
+    font-size: 50px;
+    margin: 30px;
+    padding-top: 5px;
+    top-margin:0px
+}
+
+.glyphicon-menu-right, .glyphicon-menu-left {
+    cursor:pointer;
 }

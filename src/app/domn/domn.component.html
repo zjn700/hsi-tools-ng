@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse disable-text-selection">
+<nav *ngIf='isInitialized' class="navbar navbar-inverse disable-text-selection">
   
   <!-- Title -->
   <div class="container-fluid">
@@ -23,18 +23,23 @@
         (click)="getDomainQuestions(domain)">
         {{domain.title}}
         <span 
+            title='Show full question list'
             (click)=toggleMenu() 
             *ngIf="!showMenu && domain.sequence==activeDomainNumber" 
             class='glyphicon glyphicon-menu-down'>
         </span>
         <span 
+            title='Hide question list'
             (click)=toggleMenu() 
             *ngIf="showMenu && domain.sequence==activeDomainNumber" 
             class='glyphicon glyphicon-menu-up'>
         </span>
       </a>
     </li>
+    
     <!--app-qstn-menu-filter></app-qstn-menu-filter-->
+    
+    
     <app-qstn-menu 
           *ngIf="showMenu && domain.sequence==activeDomainNumber" 
           [questions]="questions"
@@ -55,6 +60,7 @@
 </app-card>
 
 <!-- Prev/Next Buttons -->
+<div id='footer'>
 <div 
     *ngIf="!atFirstQuestion && !showMenu" 
     (click)="getPrevQuestion()" 
@@ -65,4 +71,5 @@
     *ngIf="!atLastQuestion && !showMenu" 
     (click)="getNextQuestion()" 
     class="glyphicon glyphicon-circle-arrow-right pull-right">
+</div>
 </div>

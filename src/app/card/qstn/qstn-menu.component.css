@@ -33,24 +33,27 @@ lix:hover{
 
 .q_menu_item {
     padding-bottom: 6px;
+    font-size:1.1em;
 }
 
+/*  icon colors are also in qstn-menu-filter.component.css */
+
 .pos {
-    color:rgb(192, 255, 195);  /*#D4E4CDl  /*#5fbf5f;  /* green */
+    color:rgb(192, 255, 195);
 }
 
 .neg {
-    color:#ff6d6d;  /*#F2DEDE;  /*tomato;  /*#f2dede; */
+    color:#ff6d6d;  
 }
 .info {
-    color:rgb(192, 255, 195); /*#fffd85  /*#FCF8E3; /*#fff; */
+    color:rgb(192, 255, 195);
 }
 .low{
-    color:rgb(192, 255, 195); /*#5fbf5f;  /* green */
+    color:rgb(192, 255, 195); 
 }
 .moderate{
-    color:#fffd85; /*rgba(246, 243, 7, .9); /*yellow;*/
+    color:#fffd85; 
 }
 .high{
-    color:#ff6d6d;  /*red; */
+    color:#ff6d6d; 
 }

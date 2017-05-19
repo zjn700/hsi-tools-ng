@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./qstn-menu-filter.component.css']
 })
 export class QstnMenuFilterComponent implements OnInit {
-
+  allIcons:boolean = true;
+  
   constructor() { }
 
   ngOnInit() {

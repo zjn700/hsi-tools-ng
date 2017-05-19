@@ -1,8 +1,8 @@
 'use strict'
 import {Component, 
         OnInit, 
-        HostListener, OnDestroy, 
-        AfterViewInit } from '@angular/core';
+        HostListener, 
+        OnDestroy } from '@angular/core';
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
@@ -18,7 +18,7 @@ import "rxjs/add/operator/takeWhile";
   templateUrl: './domn.component.html',
   styleUrls: ['./domn.component.css'],
 })
-export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DomnComponent implements OnInit, OnDestroy {
   qnnTitle: string;
   projectTitle: string;
   domain: Domain;
@@ -57,6 +57,7 @@ export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
   
   @HostListener('click', ['$event']) onClick(event:Event) {
     if (this.isInitialized) {
+      console.log('initialized')
       this.inTextInput = this.cardService.isInTextInput(event);
     }
   }
@@ -123,8 +124,17 @@ export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
     this.answers.length = 0; 
   }
 
-  ngAfterViewInit(){
-    this.isInitialized=true;
+  testAnswersArray(answers, index) {  // in this case the last domain's answers
+    if (!(answers.length>0)){
+      index++
+      if (index>360){
+        this.isInitialized = true; // all answers loaded
+        return
+      }
+      setTimeout(this.testAnswersArray(answers, index), 1000);
+      return
+    }
+    this.isInitialized = true; // all answers loaded
   }
 
   ngOnInit() {
@@ -142,12 +152,12 @@ export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
             this.domain = domains[0];
             this.questions = this.domain.questions;
             this.activeDomainNumber = this.domain.sequence;
+            this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
             this.updateContent(0);
             this.cleanUpFormat();
-            //this.isInitialized=true;
         })
     })
-
+      
     this.cardService.questionSelected
       .takeWhile(() => this.alive)
       .subscribe(
@@ -170,6 +180,40 @@ export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cardService.updateThisAnswer
       .takeWhile(() => this.alive)
       .subscribe((answer: Answer) => {
+        
+        //is_expired = parse_json(UrlBase64Decode(token.split('.')[1])).exp < current_date_unix_format
+        //console.log(parse_json(UrlBase64Decode(token.split('.')[1])).exp); // < current_date_unix_format)
+        //console.log(localStorage.getItem('token').split('.')[1]);
+        //=> Retrieve the 2nd part of the JWT token (this the JWT payload)
+        var payloadBytes = localStorage.getItem('token').split('.')[1];
+        console.log(payloadBytes)
+        console.log(atob(payloadBytes))
+        
+        console.log(JSON.parse(atob(payloadBytes)).exp)
+        console.log(new Date().valueOf())
+
+        console.log(new Date(Number(JSON.parse(atob(payloadBytes)).exp) * 1000))
+        console.log(new Date())
+        console.log(new Date(1495098477427/1000))
+        
+
+        
+        if (JSON.parse(atob(payloadBytes)).exp *1000 < new Date().valueOf()) {
+          console.log('yep')
+        }
+
+        //=> Padding the raw payload with "=" chars to reach a length that is multiple of 4
+        var mod4 = payloadBytes.length % 4;
+        console.log(mod4)
+        if (mod4 > 0) payloadBytes += new String().concat('=', (4 - mod4).toString());
+        console.log(payloadBytes)
+        //=> Decoding the base64 string
+        // var payloadBytesDecoded = atob(payloadBytes);
+        // console.log(payloadBytesDecoded);
+
+        
+
+        
         this.domain.answers[answer.sequence-1].rationale = answer.rationale;
         this.domain.answers[answer.sequence-1].value = answer.value;
         if (answer.value == true){
@@ -188,7 +232,6 @@ export class DomnComponent implements OnInit, OnDestroy, AfterViewInit {
             .takeWhile(() => this.alive)
             .subscribe(data => {
               console.log(data)
-              
               this.domain.answers[answer.sequence-1].id = data.obj._id
               this.domain.answers[answer.sequence-1].dateCreated = data.obj.dateCreated
               console.log(this.domain.answers[answer.sequence-1])

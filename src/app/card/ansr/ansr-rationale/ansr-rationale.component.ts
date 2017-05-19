@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { CardService } from '../../card.service';
@@ -22,10 +22,11 @@ export class AnsrRationaleComponent implements OnInit {
     keyEvent(event: KeyboardEvent) {
       if (event.keyCode === KEY_CODE.ESCAPE_KEY) {
         console.log('escape')
-        console.log(this.elementRef.nativeElement.previousSibling);
+        //console.log(this.elementRef.nativeElement.previousSibling);
         let buttonList = document.getElementsByClassName("btn-xl"); 
-        console.log(buttonList)
-        console.log(buttonList[0].classList);
+        //console.log(buttonList)
+        //console.log(buttonList[0].classList);
+        this.cardService.emitEscapePressed(true);
         //btn btn-primary btn-xl selected-pos
         return;
       }

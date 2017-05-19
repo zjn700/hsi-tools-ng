@@ -1,40 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 /**** div table for risk probability and severity/impact ratings */
 #table_box {   /* contains all the table elements */
   float:left;
   width:400%; /*100.5%; */
   height:40%;
-  margin-top: 40px;
   background:white;
   font-size: 1.1em;
   padding-left:0px;
   visibility: hidden;
   /* visible | hidden  */
 }
-
-#risk_table_box {
-  margin-top: 10px;
-  min-width: 780;
-}
-
 .row {
   float:left;
   width:115%;
   font-size:1em;
   text-align:center;
-  position: relative
   /*word-wrap: break-word; */
   /*word-wrap: break-word; */
 }
 .rh { /* row header attributes - to the left of the row */
   float: left;
-  width: 120px;
-  height: 20px;
+  width: 15%;
+  height: 30px;
   color:#C8C8C8;
   font-size: 1.12em;
   padding: 2px 2px;
-  padding-top:10px;
+  padding-top:20px;
   padding-right:5px;
   text-align: right;
   
@@ -55,7 +48,6 @@
 }
 .th {  /* table/column header unique attributes */
   height:30px;
-  width:12%;
   display: table-cell;
   vertical-align: bottom;
   color:#C8C8C8;
@@ -65,72 +57,13 @@
   background-color:#D4E4CD;
 }
 
-.tdxx {   /* table cell unique attributes  */
+.td {   /* table cell unique attributes  */
   height:59px;
-  width:115px;
   border-style: solid;
   border-color:black;
-  border-width:3px;
+  border-width:1px;
   font-size:0px;  /* don't show the x */
 }
-
-.td {
-    height: 59px;
-    margin: 1px;
-    width: 12%;
-    border-style: solid;
-    border-color: transparent;
-    font-size: 0px;
-}
-
-button {
-  /*outline-color: tomato;
-  outline-width: 3px; */
-}
-button:focus {
-  /*outline:0; */
-  outline-color: #337ab7;
-  border-color:#337ab7;
-}
-
-.th2 {
-  height:59px;
-  width:115px;
-  padding-left: 30px;
-  display: table-cell;
-  vertical-align: bottom;
-  color:#C8C8C8;
-  font-size:1.12em; 
-  border:none;
-}
-
-.vertical {
-    position: absolute;
-    background: none;
-    top: 15px;
-    left: 40px;
-    width: 1em;
-    height: 280px;
-    font-size: 1.12em !important;
-    border-right: dotted 1px #777;
-    padding-right: 25px;
-    padding-top: 25px;
-    font-size: 1em;
-}
-
-.horizontal {
-    position: absolute;
-    top: 38px;
-    left: 182px;
-    width: 62%;
-    font-size: 1.12em;
-    border-top-color: white;
-    border-top-color: #777;
-    border-top-width: 1px;
-    border-top-style: dotted;
-    padding-top: 10px;
-}
-
 /*.th1:hover {
   cursor:cell;
   background:yellow; /*#69aa31 previous ; /* selected #;
@@ -179,11 +112,6 @@ html, body, .container {
   opacity: 0%;
   border:none
 }
-.th112{
-  width:65px;
-  border:none;
-  
-}
 
 .disable-text-selection {
   -webkit-touch-callout: none;
@@ -207,7 +135,7 @@ html, body, .container {
 }
 
 
-#probabilityx, #impactx{
+#probability, #impact{
   background-color: #333;
   padding-top: 10px;
   padding-bottom:30px;

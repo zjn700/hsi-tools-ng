@@ -1,5 +1,5 @@
 
-.form-control{
+.form-controlx{
   width:115%;
   padding-top:5px;
   margin-top:20px;
@@ -32,5 +32,15 @@
 }
 
 .form-control {
-  margin-top: 0;
+  margin-top: 10px;
+  height: 313px;
+  width:100%;
+}
+
+textarea {
+  margin-top: 20px;
+  font-size: 1.5em;
+  background:#eee;
+  resize: none;
+
 }

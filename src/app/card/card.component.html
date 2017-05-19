@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div id='card-top-row' class="row">
     <h2>{{childMessage}}</h2>
 
     <div class="col-md-1">
@@ -23,10 +23,10 @@
     </div>
   </div>
 
-  <div class="row">
+  <div id='card-middle-row' class="row">
     <div class="form-group">
-
-      <div class="col-md-7">
+      <div class="col-md-6" [ngClass]="{'hidden': a_value==true || a_value==null || fullScreen}" >
+        <div class='answerTitle' >Risk</div>
         <app-ansr-riskbox 
               [a_details]='a_details' 
               [a_value]='a_value' 
@@ -34,7 +34,25 @@
         </app-ansr-riskbox>
       </div>
       
-      <div class="col-md-4">
+      <div [ngClass]="{'hidden': a_value==null, 'col-md-10': a_value==true || fullScreen, 'col-md-5': a_value==false && !fullScreen}" >
+        <div class='answerTitle'>
+          <span 
+            title='Expand'
+            (click)='toggleFullScreen()'
+            *ngIf="!fullScreen && a_value==false"
+            class='glyphicon glyphicon-menu-left'>
+          </span>          
+          
+          Rationale
+          <span 
+            title='Show risk chart.'
+            (click)='toggleFullScreen()'
+            *ngIf="fullScreen && a_value==false"
+            class='glyphicon glyphicon-menu-right'>
+          </span>          
+          
+          
+          </div>
         <app-ansr-rationale 
               [a_details]='a_details' 
               [a_value]='a_value' 

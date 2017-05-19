@@ -1,29 +1,114 @@
-<div class="filter-box">
-    <div class="col-md_10 filter-list">
-        <div>Make these icons visible:</div>
+<div class="filter-box container">
+    <div class="col-md_12 filter-list">
+        <div class='action' title="Select the icons you wish to see listed in the question menu">Display:</div>
         <div>
-          <input  type="checkbox" name="gender" value="male">Yes
-          <label class="glyphicon glyphicon-ok"> </label><br>
+          <input type="checkbox" name="yes" value="yes">Yes
+          <label class="glyphicon glyphicon-ok pos"> </label><br>
         </div>
         <div>
-          <input  type="checkbox" name="gender" value="male">No
-          <label class="glyphicon glyphicon-remove"> </label><br>
+          <input  type="checkbox" name="no" value="no">No
+          <label class="glyphicon glyphicon-remove neg"> </label><br>
         </div>
         <div>
-          <input  type="checkbox" name="gender" value="male">Low Risk
-          <label class="glyphicon glyphicon-info-sign"> </label><br>
+          <input  type="checkbox" name="low" value="low">Low Risk
+          <label class="glyphicon glyphicon-info-sign low"> </label><br>
         </div>
         <div>
-          <input  type="checkbox" name="gender" value="male">Medium Risk
-          <label class="glyphicon glyphicon-exclamation-sign"> </label><br>
+          <input  type="checkbox" name="medium" value="medium">Medium Risk
+          <label class="glyphicon glyphicon-exclamation-sign moderate"> </label><br>
         </div>
         <div>
-          <input  type="checkbox" name="gender" value="male">High Risk
-          <label class="glyphicon glyphicon-warning-sign"> </label><br>
+          <input  type="checkbox" name="high" value="high">High Risk
+          <label class="glyphicon glyphicon-warning-sign high"> </label><br>
         </div>
         <div>
-          <input  type="checkbox" name="gender" value="male">Rationale
-          <label class="glyphicon glyphicon-pencil"> </label><br>
+          <input  type="checkbox" name="rationale" value="rationale">Rationale
+          <label class="glyphicon glyphicon-pencil info"> </label>
+          <span class='divider'>|</span>
+        </div>
+        <div *ngIf='allIcons'>
+          <input type="checkbox" name="all" value="all">All
+          <!--label class="glyphicon glyphicon-warning-sign high"> </label--><br>
+        </div>
+        <div *ngIf='!allIcons'>
+          <input type="checkbox" name="none" value="none">None
+          <!--label class="glyphicon glyphicon-pencil info" > </label--><br>
+        </div>        
+    </div>
+</div>
+
+<div class="filter-box container">
+    <div class="col-md_12 filter-list">
+        <div class='action' title="Filter questions by answers choices.">Filter by:</div>
+        <div>
+          <input  type="checkbox" name="yes" value="yes">Yes
+          <label class="glyphicon glyphicon-ok pos"> </label><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="no" value="no">No
+          <label class="glyphicon glyphicon-remove neg"> </label><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="low" value="low">Low Risk
+          <label class="glyphicon glyphicon-info-sign low"> </label><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="medium" value="medium">Medium Risk
+          <label class="glyphicon glyphicon-exclamation-sign moderate"> </label><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="high" value="high">High Risk
+          <label class="glyphicon glyphicon-warning-sign high"> </label><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="rationale" value="rationale">Rationale
+          <label class="glyphicon glyphicon-pencil info"> </label>
+          <span class='divider'>|</span><br>
+        </div>
+        <div>
+          <input  type="checkbox" name="all" value="all">All
+          <!--label class="glyphicon glyphicon-warning-sign high"> </label--><br>
         </div>
     </div>
 </div>
+
+<div class="filter-box container">
+    <div class="col-md_12 filter-list">
+        <div class='action' title="Sort questions by answers">Sort by:</div>
+        <div>
+          <input  type="radio" name="yes" value="yes">Yes
+          <label class="glyphicon glyphicon-ok pos"> </label><br>
+        </div>
+        <div>
+          <input  type="radio" name="no" value="no">No
+          <label class="glyphicon glyphicon-remove neg"> </label><br>
+        </div>
+        <div>
+          <input  type="radio" name="low" value="low">Low Risk
+          <label class="glyphicon glyphicon-info-sign low"> </label><br>
+        </div>
+        <div>
+          <input  type="radio" name="medium" value="medium">Medium Risk
+          <label class="glyphicon glyphicon-exclamation-sign moderate"> </label><br>
+        </div>
+        <div>
+          <input  type="radio" name="high" value="high">High Risk
+          <label class="glyphicon glyphicon-warning-sign high"> </label><br>
+        </div>
+        <div>
+          <input  type="radio" name="rationale" value="rationale">Rationale
+          <label class="glyphicon glyphicon-pencil info" > </label>
+          <span class='divider'>|</span><br>
+        </div>
+        <div>
+          <input  type="radio" name="number" value="number">Number
+          <!--label class="glyphicon glyphicon-warning-sign high"> </label--><br>
+        </div>
+      </div>
+</div>
+
+<!--      
+glyphicon glyphicon-sort-by-attributes-alt
+glyphicon glyphicon-filter
+
+-->

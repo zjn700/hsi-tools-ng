@@ -8,7 +8,7 @@
 
 .nav-tabs{
   height: 0px;
-  font-size:1.4em; /*larger;  /*1.1em; */
+  font-size:1.6em; /*larger;  /*1.1em; */
 }
 
 h2{
@@ -24,8 +24,16 @@ h2{
   user-select: none;
 }
 
-#projectx {
-  color:tomato;
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: tomato;
+    cursor: default;
+    background-color: #222;
+    /* border: 1px solid #ddd; */
+    border-width: 1px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-top-color: white;
 }
 
 .glyphicon{
@@ -42,6 +50,9 @@ app-qstn-menu {
   color:tomato;
 }
 
+#footer{
+  height: 50px;
+}
 .glyphicon-menu-down, .glyphicon-menu-up {
   font-size: 10px;
   margin:0px;
@@ -55,3 +66,4 @@ app-qstn-menu {
 .glyphicon-circle-arrow-leftx, .glyphicon-circle-arrow-rightx {
   font-size: 1em;
 }
+

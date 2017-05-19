@@ -6,6 +6,35 @@
     float:left;
     margin-right:25px;
 }
+
+.action{
+    width:120px;
+}
+
+.divider{
+    padding-left:10px;
+}
+
 input {
     margin-right:4px;
+}
+
+.pos {
+    color:rgb(192, 255, 195);  /*#D4E4CDl  /*#5fbf5f;  /* green */
+}
+
+.neg {
+    color:#ff6d6d;  /*#F2DEDE;  /*tomato;  /*#f2dede; */
+}
+.info {
+    color:rgb(192, 255, 195); /*#fffd85  /*#FCF8E3; /*#fff; */
+}
+.low{
+    color:rgb(192, 255, 195); /*#5fbf5f;  /* green */
+}
+.moderate{
+    color:#fffd85; /*rgba(246, 243, 7, .9); /*yellow;*/
+}
+.high{
+    color:#ff6d6d;  /*red; */
 }
