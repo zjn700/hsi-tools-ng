@@ -75,26 +75,38 @@
 }
 
 .td {
-    height: 59px;
-    margin: 1px;
+    height: 62px;
+    /*margin: 1px;*/
     width: 12%;
+    border-width:1px;
     border-style: solid;
-    border-color: transparent;
+    border-color: #272b31; /*#222*/
     font-size: 0px;
 }
 
 button {
-  /*outline-color: tomato;
+  /*outline-color: peachpuff;
   outline-width: 3px; */
 }
 button:focus {
-  /*outline:0; */
+  /*outline:0; 
+  outline-width: thick;
   outline-color: #337ab7;
   border-color:#337ab7;
+  border-width:2px; */
+
 }
 
+.td[_ngcontent-c7]:focus {  
+  border-width:2px;
+  border-color:#337ab7;
+  border-style: groove;
+
+}
+
+
 .th2 {
-  height:59px;
+  height:62px;
   width:115px;
   padding-left: 30px;
   display: table-cell;
@@ -111,6 +123,7 @@ button:focus {
     left: 40px;
     width: 1em;
     height: 280px;
+    color: #bbb;
     font-size: 1.12em !important;
     border-right: dotted 1px #777;
     padding-right: 25px;
@@ -124,6 +137,7 @@ button:focus {
     left: 182px;
     width: 62%;
     font-size: 1.12em;
+    color: #bbb;
     border-top-color: white;
     border-top-color: #777;
     border-top-width: 1px;

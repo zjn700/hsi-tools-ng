@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intgrn.component.css']
 })
 export class IntgrnComponent implements OnInit {
-
+  projectTitle:string;
+  
   constructor() { }
 
   ngOnInit() {
+    this.projectTitle = localStorage.getItem('ptitle');
+
   }
 
 }

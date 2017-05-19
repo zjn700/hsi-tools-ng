@@ -1,4 +1,8 @@
-<div class="container">
+<div *ngIf='!isInitialized' class="loading">
+    <img src="/assets/images/ring.gif" alt="loading...">
+</div>
+
+<div *ngIf='isInitialized' class="container">
     <h1>HSI-CART Questionnaires</h1>
     <h3 class='p-title'>{{projectTitle}}</h3>
 

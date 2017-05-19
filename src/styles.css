@@ -2,13 +2,24 @@
 body{
     margin-left:20px;
     color: #777;
-    background-color: #222;
+    background-color: #272b31;  /*darkslategray*/
     width:95%;
     min-width: 1280px;
 }
 .p-title {
-    color:tomato;
+    color:peachpuff;
 }
 .row-qnn {
     margin-bottom: 20px;
+}
+
+.loading  {
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading > img {
+    width:250px;
+    height: 250px; 
 }

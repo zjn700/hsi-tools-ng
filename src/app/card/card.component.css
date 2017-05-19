@@ -14,7 +14,7 @@
 }
 
 #blank {
-    color:#222;
+    color:#272b31; /*#222; */
     height: 450px;
     width:inherit;
     z-index: -10;
@@ -29,16 +29,17 @@
 
 .answerTitle {
   color: white;
-  background-color: #333;
+  background-color: #30343b;
   font-size:1.1em;
   width:175px;
   padding:10px;
   margin-top: 0;
+  margin-left: 15px
 
 }
 
 .glyphicon[_ngcontent-c1] {
-    font-size: 50px;
+    font-size: 4.5em; /*50px;*/
     margin: 30px;
     padding-top: 5px;
     top-margin:0px

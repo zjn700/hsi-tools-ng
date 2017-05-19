@@ -18,6 +18,8 @@ export class CardComponent implements OnInit {
   @Input() q_number:string;
   @Input() a_details:Answer;
   @Input() a_value:boolean;
+  @Input() showIntegrationCard:boolean;
+  
   private fullScreen:boolean = false;
   
   constructor(private cardService: CardService ) { }

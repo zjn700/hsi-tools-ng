@@ -10,7 +10,8 @@ export enum TOP_MENU{
   TOOLS =  2,     //'/tools',
   CART = 3,       //'/crt-qnns',
   PRAT = 4,       // '/at-qnns',
-  QUESTIONS = 5   //'/questions'
+  QUESTIONS = 5,   //'/questions'
+  INTEGRATIONS = 6 //'/integrations'
 }
 
 @Directive({
@@ -44,6 +45,9 @@ export class TopMenuDirective implements OnInit {
     case TOP_MENU.QUESTIONS:
         route='/questions'
         break;
+    case TOP_MENU.INTEGRATIONS:
+        route='/integrations'
+        break;        
     default:
         route='';
 

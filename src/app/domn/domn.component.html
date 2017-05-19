@@ -1,4 +1,9 @@
-<nav *ngIf='isInitialized' class="navbar navbar-inverse disable-text-selection">
+<div *ngIf='!isInitialized' class="loading">
+    <img src="/assets/images/ring.gif" alt="loading...">
+</div>
+
+<div *ngIf='isInitialized' >
+<nav  class="navbar navbar-inverse disable-text-selection">
   
   <!-- Title -->
   <div class="container-fluid">
@@ -36,7 +41,14 @@
         </span>
       </a>
     </li>
-    
+    <!--li>
+        <a
+            class="nav-linkx" 
+            (click)="showIntegrations()"
+            >
+            Integration
+         </a>
+    </li-->
     <!--app-qstn-menu-filter></app-qstn-menu-filter-->
     
     
@@ -56,20 +68,22 @@
       [q_content]='q_content' 
       [q_number]='q_number' 
       [a_details]='a_details'
-      [a_value]='a_value'>
+      [a_value]='a_value'
+      [showIntegrationCard]='showIntegrationCard'>
 </app-card>
 
 <!-- Prev/Next Buttons -->
 <div id='footer'>
-<div 
-    *ngIf="!atFirstQuestion && !showMenu" 
-    (click)="getPrevQuestion()" 
-    class="glyphicon glyphicon-circle-arrow-left pull-left">
-</div>
-
-<div 
-    *ngIf="!atLastQuestion && !showMenu" 
-    (click)="getNextQuestion()" 
-    class="glyphicon glyphicon-circle-arrow-right pull-right">
+    <div 
+        *ngIf="!atFirstQuestion && !showMenu" 
+        (click)="getPrevQuestion()" 
+        class="glyphicon glyphicon-circle-arrow-left pull-left">
+    </div>
+    
+    <div 
+        *ngIf="!atLastQuestion && !showMenu" 
+        (click)="getNextQuestion()" 
+        class="glyphicon glyphicon-circle-arrow-right pull-right">
+    </div>
 </div>
 </div>

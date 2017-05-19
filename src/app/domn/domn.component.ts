@@ -35,6 +35,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   atFirstQuestion=true;
   atLastQuestion=false;
   showMenu=false;
+  showIntegrationCard=false;
   inTextInput = false;
   menuItemSelected = false;
   answerSelected = null;
@@ -274,6 +275,10 @@ export class DomnComponent implements OnInit, OnDestroy {
   toggleMenu(){
     this.showMenu=!this.showMenu
   }
+  
+  showIntegrations() {
+    this.showIntegrationCard = !this.showIntegrationCard;
+    }
   
   getNextDomain() {
     if (this.domain.sequence < this.domains.length) {

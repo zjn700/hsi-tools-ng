@@ -16,6 +16,7 @@ export class CrtQnnsComponent implements OnInit, OnDestroy {
   projectTitle: string;
   qnns: Questionnaire[] = [];
   private alive:boolean = true;
+  private isInitialized = false;
 
   constructor(private selectorService: SelectorService, private topMenuService: TopMenuService, private  router: Router) { }
 
@@ -25,6 +26,7 @@ export class CrtQnnsComponent implements OnInit, OnDestroy {
       .takeWhile(() => this.alive)
       .subscribe((qnns: Questionnaire[]) => {
         this.qnns = qnns;
+        this.isInitialized=true;
       })
   }
   ngOnDestroy(){

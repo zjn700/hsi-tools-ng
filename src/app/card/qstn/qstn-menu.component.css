@@ -1,10 +1,10 @@
 ul, ol {
     opacity:1;
     width:92.5%;
-    margin-top:50px;
+    margin-top:65px;
     margin-left:5%;
     margin-right:2.5%;
-    background-color: #222;
+    background-color: #272b31;
     position: relative;
     padding:30px;
     padding-top:10px;
@@ -15,12 +15,12 @@ li {
 }
 
 lix:hover{
-  color: tomato;
+  color: peachpuff;
   cursor: pointer;
 }
 
 .selected {
-    color:tomato;
+    color:peachpuff;
 }
 
 .glyphicon {
@@ -28,7 +28,7 @@ lix:hover{
     background:white;
     opacity: .8;
     color:rgb(158, 158, 158);
-    background:#222;
+    background:#272b31; /*#222*/
 }
 
 .q_menu_item {

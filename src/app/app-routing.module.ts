@@ -9,6 +9,7 @@ import { AtQnnsComponent } from './selectors/at-qnns.component'
 import { ProjectComponent } from './proj/proj.component';
 import { DomnComponent } from './domn/domn.component';
 import { CardHolderComponent } from './card/card-holder.component';
+import { IntgrnComponent } from './intgrn/intgrn.component';
 import { SigninComponent } from './users/signin.component';
 import { SignupComponent } from './users/signup.component';
 import { LogoutComponent } from './users/logout.component';
@@ -26,6 +27,7 @@ const APP_ROUTES: Routes = [
     { path: 'crt-qnns', component: CrtQnnsComponent },
     { path: 'at-qnns', component: AtQnnsComponent },
     { path: 'questions', component: DomnComponent },
+    { path: 'integrations', component: IntgrnComponent },
 
     //{ path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
     //{ path: '**', redirectTo: '/auth/signin', pathMatch: 'full' }

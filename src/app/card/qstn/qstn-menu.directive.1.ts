@@ -20,7 +20,7 @@ export class QstnMenuDirective {
     }
     
     @HostListener('mouseenter') onMouseEnter() {
-       this.highlight('tomato');
+       this.highlight('peachpuff');
        console.log('m-enter')
     }
 

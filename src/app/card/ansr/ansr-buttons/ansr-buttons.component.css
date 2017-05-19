@@ -10,8 +10,8 @@
 .xbtn-xl{
   width:70px;
   font-size: 1.2em;
-  background-color:#777;
-  border-color: #777;
+  background-color:#555;
+  border-color: #555;
   color:#222;
   font-weight: bold;
 }
@@ -26,20 +26,31 @@ buttonx:focus {
 
 }
 
-.btn-xl {
+.xbtn-xl {
     width: 70px;
     font-size: 1.2em;
-    background-color: #777777;
-    border-color: #777;
-    color: #154975;
+    background-color: #494d50; /*#777777; */
+    border-color: #494d50;  /*#777;*/
+    color: white; /*#95c1e8; /*#154975;*/
     font-weight: bold;
 }
 
-.btn-primary:active{
-  background-color:#ddd;
-  border-color:#ddd;
-  color:#777;
+.btn-xl {
+    width: 100px;
+    height: 50px;
+    font-size: 1.5em;
+    background-color: #7f868c;
+    border-color: #7f868c;
+    color: white;
+    font-weight: bold;
 
+}
+
+.btn-primary:active{
+  /*background-color:#ddd;
+  border-color:#ddd;
+  border-width:5px;
+  color:#777; */
 }
 
 button:focus {
@@ -51,14 +62,14 @@ button:focus {
 .btn-primary:hover{
   background-color:#eee;
   border-color:#eee;
-  color:#222;
+  color:#272b31; /*#222; */
 
 }
 
 .selected-neg {
-  background-color: tomato;
-  border-color: tomato;
-  color:#fff;
+  background-color: peachpuff;
+  border-color: peachpuff;
+  color:#272b31; /*#222;*/
 }
 
 .selected-pos {

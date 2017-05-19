@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="!showIntegrationCard" class="container-fluid">
   <div id='card-top-row' class="row">
     <h2>{{childMessage}}</h2>
 
@@ -34,7 +34,7 @@
         </app-ansr-riskbox>
       </div>
       
-      <div [ngClass]="{'hidden': a_value==null, 'col-md-10': a_value==true || fullScreen, 'col-md-5': a_value==false && !fullScreen}" >
+      <div [ngClass]="{'hidden': a_value==null, 'col-md-11': a_value==true || fullScreen, 'col-md-5': a_value==false && !fullScreen}" >
         <div class='answerTitle'>
           <span 
             title='Expand'
@@ -66,3 +66,4 @@
   </div>
 
 </div>
+<app-intgrn *ngIf="showIntegrationCard"></app-intgrn>
