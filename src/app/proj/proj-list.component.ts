@@ -12,6 +12,7 @@ import "rxjs/add/operator/takeWhile";
 export class ProjListComponent implements OnInit {
     projects: Project[] = [];
     private alive:boolean = true;
+    private isInitialized:boolean = false;
     
       constructor(private projectService: ProjectService, private router: Router) {}
       
@@ -21,6 +22,7 @@ export class ProjListComponent implements OnInit {
           .subscribe(
             (projects: Project[]) => {
               this.projects = projects; 
+              this.isInitialized = true;
             }
           );
           

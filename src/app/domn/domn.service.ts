@@ -3,6 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs'
 
+import { ProjectService } from '../proj/proj.service'
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
@@ -11,8 +12,12 @@ import { Answer } from '../card/ansr/ansr.model';
 export class DomainService {
     private questions: Question[] = [];
     private domains: Domain[] = [];
+    public lastActiveProject:string = '';
+    public lastActiveQnn:string = '';
+    // public t_Response:Observable<Response>
+    
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private projectService: ProjectService) { }
 
     getOneAnswer(domain, sequence){
         const queryString = '/'+ sequence +'?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id
@@ -22,39 +27,88 @@ export class DomainService {
             })
     }
 
+    updateRequired(){
+        if (this.lastActiveProject == localStorage.getItem('pid')) {
+            if ( this.lastActiveQnn == localStorage.getItem('qnnId')){
+                return false
+                
+            } else {
+                return true;  //console.log('THIS IS new project')
+            }            
+        } else {
+            return true; // console.log('THIS IS new project')
+        }
+    }
+
+    // getActiveDomains():Observable<Response> {
+    //     let res = new Observable<Response>
+    //     return res.status(200).json({
+    //         title: "error occured",
+    //         obj: this.domains
+    //     }); 
+    // }
+    
     getDomains(){
-        return this.http.get('/domain/' + localStorage.getItem('qnnId'))
-            .map((response: Response) => {
-                if (response.json().obj.length == 0) {
-                    console.log("response is empty");
-                    return this.questions = response.json().obj;
-                } 
-                const domains = response.json().obj;
-                let t_domains: Domain[] = [];
-                for (let domain of domains) {
-                    let t_Answers: Answer[] = []
-                    t_domains.push(new Domain(
-                        domain.qnn,
-                        domain.title,
-                        domain.sequence,
-                        domain._id,
-                        domain.questions,
-                        t_Answers))
-                }
-                ////new
-                let j = 0;
-                for (let domain of t_domains) {
-                    this.addDomainAnswers(domain)
-                        .subscribe(answers => {
-                            domain.answers = answers
-                    })
-                }
-                        
-                this.domains = t_domains
-                return this.domains
-            })
-            .catch((error: Response) => Observable.throw(error));
+
+        if (!this.updateRequired()) {
+            console.log('update not Required')
+            return this.http.get('/domain/dummy')
+                .map((response:Response)=> {
+                    console.log('response.message')
+                    console.log(response)
+                    // console.log(this.domains)
+                    return this.domains
+
+                })
+            //return this.domains
+
+        } else {
+            console.log('update Required');
+                //this.questions.length = 0;
+                //this.answers.length = 0; 
+                this.domains.length = 0;
+
+        }
+            return this.http.get('/domain/' + localStorage.getItem('qnnId'))
+                .map((response: Response) => {
+                    if (response.json().obj.length == 0) {
+                        console.log("response is empty");
+                        return this.questions = response.json().obj;
+                    } 
+                    const domains = response.json().obj;
+                    let t_domains: Domain[] = [];
+                    for (let domain of domains) {
+                        let t_Answers: Answer[] = []
+                        t_domains.push(new Domain(
+                            domain.qnn,
+                            domain.title,
+                            domain.sequence,
+                            domain._id,
+                            domain.questions,
+                            t_Answers))
+                    }
+                    ////new
+                    let j = 0;
+                    for (let domain of t_domains) {
+                        this.addDomainAnswers(domain)
+                            .subscribe(answers => {
+                                domain.answers = answers
+                        })
+                    }
+                     this.lastActiveProject=localStorage.getItem('pid')       
+                     this.lastActiveQnn=localStorage.getItem('qnnId')       
+                    this.domains = t_domains
+                    this.projectService.domains = this.domains
+                    // console.log(this.projectService.domains)
+                    return this.domains
+                })
+                .catch((error: Response) => Observable.throw(error));
+        //}
     }    
+    
+    // getServiceDomains(){
+    //     return this.domains
+    // }
     
     addDomainAnswers(domain){
         let t_domain = domain;

@@ -34,6 +34,7 @@ export class ProjDetailComponent {
       localStorage.setItem('ptitle', this.project.title.valueOf());
       this.router.navigate([button.getAttribute('ng-reflect-router-link')])   //(['/tools']) 
       this.topMenuService.updateTopMenu(button)
+      this.projectService.setActiveProject(this.project)
 
     }
 }

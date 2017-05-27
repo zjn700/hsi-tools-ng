@@ -3,6 +3,7 @@ import { Http, Response,Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs'
 
+import { Domain } from '../domn/domn.model'
 import { Project } from './proj.model';
 
 @Injectable()
@@ -10,8 +11,29 @@ export class ProjectService {
     private projects: Project[] = [];
     projectIsInEditMode = new EventEmitter<Project>();
     projectIsUpdated = new EventEmitter<boolean>();
+    public t_str:string = 'ok';
+    public activeProject: Project;
+    public lastActiveProject:string = null;
+    public domains: Domain[] = [];
     
     constructor(private http: Http) { }
+    
+    getTestStr(){
+        return this.t_str
+    }
+    
+    getDomains(){
+        return this.domains
+    }
+    
+    getActiveProject(): Project {
+        return this.activeProject
+    }
+    
+    setActiveProject(project: Project){
+        this.activeProject = project;
+
+    }
     
     addProject(project: Project){
         const headers = new Headers({'content-Type': 'application/json'})

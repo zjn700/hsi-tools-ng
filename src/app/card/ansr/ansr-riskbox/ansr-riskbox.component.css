@@ -155,22 +155,22 @@ button:focus {
 }
 
 .green:hover{
-  background:green;
+  background:#00b200; /*green;*/
   cursor:pointer;
 }
 .g-on{
-  background:green;
+  background:#00b200; /*green;*/
 }
 
 .yellow{
   background-color:#FCF8E3;
 }
 .yellow:hover{
-  background:yellow;
+  background:#ffff4f; /*yellow; */
   cursor:pointer;
 }
 .y-on {
-   background:yellow;
+   background:#ffff4f; /*yellow; */
 }
 
 .red{
@@ -178,11 +178,11 @@ button:focus {
 }
 
 .red:hover{
-  background:red;
+  background:#fa3636; /*red; */
   cursor:pointer;
 }
 .r-on{
-  background:red;
+  background:#fa3636; /*red;*/
 }
 
 html, body, .container {
@@ -199,14 +199,7 @@ html, body, .container {
   
 }
 
-.disable-text-selection {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.disable-text-selection {}
 
 #first_td_impactx {
     border-left: white 1px solid;

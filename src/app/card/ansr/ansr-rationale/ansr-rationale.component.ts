@@ -20,12 +20,17 @@ export class AnsrRationaleComponent implements OnInit {
   
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
     keyEvent(event: KeyboardEvent) {
+        console.log('event.keyCode');
+        console.log(event.keyCode)
+      
       if (event.keyCode === KEY_CODE.ESCAPE_KEY) {
         console.log('escape')
         //console.log(this.elementRef.nativeElement.previousSibling);
-        let buttonList = document.getElementsByClassName("btn-xl"); 
+        ///////// let buttonList = document.getElementsByClassName("btn-xl"); 
         //console.log(buttonList)
         //console.log(buttonList[0].classList);
+        console.log('event.keyCode');
+        console.log(event.keyCode)
         this.cardService.emitEscapePressed(true);
         //btn btn-primary btn-xl selected-pos
         return;
@@ -38,6 +43,14 @@ export class AnsrRationaleComponent implements OnInit {
     this.myForm = new FormGroup({
       comment: new FormControl(null)
     })
+    
+    this.cardService.focusOnText
+      .subscribe(()=>{
+          let t_textArea = <HTMLElement>document.getElementsByClassName("rationalText")[0];
+          if (t_textArea) {
+            t_textArea.focus();
+          }
+      })
   }
   
   getRationale(){

@@ -1,11 +1,4 @@
-.disable-text-selection {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.disable-text-selection {}
 
 
 .nav{
@@ -17,8 +10,10 @@
 }
 
 .navbar {
-    background-color:#7f868c; /*#555;*/
-    border-color: #7f868c; /* #080808; */
+    /*background-color:#7f868c; /*#555;*/
+    /*border-color: #7f868c; /* #080808; */
+    background-color: rgba(255,255,255,.15);
+    border-color: rgba(0,0,0,.0001);    
     width: 103%;
 }
 
@@ -48,6 +43,7 @@ a {
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: peachpuff; /*#272b31;*/
+    border-radius: 12px 12px 0px 0px;
     cursor: default;
     background-color: #272b31; /*peachpuff;  /*#a94442; */
     /* border: 1px solid #ddd; */
@@ -58,7 +54,7 @@ a {
     border-top-color: transparent; /*#272b31;*/
 }
 
-a[_ngcontent-c1]:hover {
+a:hover {
     background-color: peachpuff;
     border-color:peachpuff;
     color: #272b31;  /*#222; */

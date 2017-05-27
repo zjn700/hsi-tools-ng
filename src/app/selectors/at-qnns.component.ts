@@ -14,6 +14,7 @@ export class AtQnnsComponent implements OnInit, OnDestroy {
   projectTitle: string;
   qnns: Questionnaire[] = [];
   private alive:boolean = true;
+  private isInitialized:boolean = false;
 
   constructor(private selectorService: SelectorService) { }
 
@@ -23,6 +24,7 @@ export class AtQnnsComponent implements OnInit, OnDestroy {
         .takeWhile(() => this.alive)
         .subscribe((qnns: Questionnaire[]) => {
           this.qnns = qnns;
+          this.isInitialized=true;
         })    
   }
   ngOnDestroy(){

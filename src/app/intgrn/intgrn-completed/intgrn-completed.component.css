@@ -1,0 +1,49 @@
+h2 {
+    color:white;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: transparent;
+    border: none;
+    width:auto;
+    /* border: 1px solid #ddd; */
+}
+
+.btn-default {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .25);
+    border-color: rgba(0,0,0,.0001);
+    font-size:2em;
+}
+
+.btn:hover {
+    background:white;
+    color:#222;
+}
+
+.glyphicon{
+  color: silver;
+  font-size:4.5em;
+  margin:30px;
+}
+
+.glyphicon:hover{
+  color:#eee;
+  cursor:pointer;
+}
+
+.glyphicon-thumbs-up {
+    color:#5bc0de;
+}
+
+.smaller {
+    font-size: 3em;
+}
+
+.btn-title {
+    padding-left:10px;
+}

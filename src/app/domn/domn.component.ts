@@ -6,10 +6,12 @@ import {Component,
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
+import { AuthService } from '../users/auth.service'
 import { DomainService } from './domn.service';
 import { CardService } from '../card/card.service';
+import { ProjectService } from '../proj/proj.service';
 import { KEY_CODE } from '../shared/key-code.enum';
-import { ISubscription } from "rxjs/Subscription";
+//import { ISubscription } from "rxjs/Subscription";
 import "rxjs/add/operator/takeWhile";
 
 
@@ -25,6 +27,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   private domains: Domain[] = [];
   private questions: Question[] = [];
   private answers: Answer[] = [];
+  private projectId:string
   q_content: string;
   q_number: string;
   a_value = null;
@@ -43,10 +46,10 @@ export class DomnComponent implements OnInit, OnDestroy {
   //private  isInitialized:boolean=false;
   private alive: boolean = true;
 
-  private subscription: ISubscription;
-  private sub_up1: ISubscription;
-  private sub_up2: ISubscription;
-  private sub_up3: ISubscription;
+  // private subscription: ISubscription;
+  // private sub_up1: ISubscription;
+  // private sub_up2: ISubscription;
+  // private sub_up3: ISubscription;
 
   
   childMessage:string;
@@ -66,6 +69,13 @@ export class DomnComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
 
   keyEvent(event: KeyboardEvent) {
+    if (this.inTextInput && this.isInitialized) {
+      if (event.keyCode === KEY_CODE.T_KEY) {
+        console.log('t')
+      }
+    }
+    
+    
     if (!this.inTextInput && this.isInitialized) {
       if ((event.keyCode === KEY_CODE.RIGHT_ARROW  && event.ctrlKey) || event.keyCode === KEY_CODE.GREATER_THAN) {
         this.getNextDomain()
@@ -110,19 +120,38 @@ export class DomnComponent implements OnInit, OnDestroy {
       }
       
       if (event.keyCode === KEY_CODE.UP_ARROW) {
+      } 
+      
+      if (event.keyCode === KEY_CODE.E_KEY) {
+         if (!this.a_value) {
+          this.cardService.emitToggleFullScreen()
+         }
+      }      
+      
+      if (event.keyCode === KEY_CODE.R_KEY) {
+          this.cardService.emitFocusOnRisk()
+      }      
+      
+      if (event.keyCode === KEY_CODE.T_KEY) {
+         this.cardService.emitFocusOnText()
       }      
       
     }
   }
 
   constructor(private domainService: DomainService, 
-              private cardService: CardService) { }
+              private cardService: CardService,
+              private projectService: ProjectService,
+              private authService: AuthService) { }
 
   ngOnDestroy(){
     this.alive = false;
-    this.domains.length = 0;
-    this.questions.length = 0;
-    this.answers.length = 0; 
+    //this.projectService.lastActiveQnn = this.projectId
+    //this.domainService.lastActiveQnn = this.qnnId;
+    //this.domainService.lastActiveProject = this
+    //this.domains.length = 0;
+    //this.questions.length = 0;
+    //this.answers.length = 0; 
   }
 
   testAnswersArray(answers, index) {  // in this case the last domain's answers
@@ -140,8 +169,12 @@ export class DomnComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
+
+
+    
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle');
+    this.projectId = localStorage.getItem('pid')
     
     this.domainService.getDomains()
       .takeWhile(() => this.alive)
@@ -151,7 +184,9 @@ export class DomnComponent implements OnInit, OnDestroy {
           .takeWhile(() => this.alive)
           .subscribe(answers => {
             this.domain = domains[0];
+            // console.log(domains)
             this.questions = this.domain.questions;
+            // console.log(this.domain.questions)
             this.activeDomainNumber = this.domain.sequence;
             this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
             this.updateContent(0);
@@ -186,31 +221,37 @@ export class DomnComponent implements OnInit, OnDestroy {
         //console.log(parse_json(UrlBase64Decode(token.split('.')[1])).exp); // < current_date_unix_format)
         //console.log(localStorage.getItem('token').split('.')[1]);
         //=> Retrieve the 2nd part of the JWT token (this the JWT payload)
-        var payloadBytes = localStorage.getItem('token').split('.')[1];
-        console.log(payloadBytes)
-        console.log(atob(payloadBytes))
+        // var payloadBytes = localStorage.getItem('token').split('.')[1];
+        // console.log(payloadBytes)
+        // console.log(atob(payloadBytes))
         
-        console.log(JSON.parse(atob(payloadBytes)).exp)
-        console.log(new Date().valueOf())
+        // console.log(JSON.parse(atob(payloadBytes)).exp)
+        // console.log(new Date().valueOf())
 
-        console.log(new Date(Number(JSON.parse(atob(payloadBytes)).exp) * 1000))
-        console.log(new Date())
-        console.log(new Date(1495098477427/1000))
+        // console.log(new Date(Number(JSON.parse(atob(payloadBytes)).exp) * 1000))
+        // console.log(new Date())
+        // //console.log(new Date(1495098477427/1000))
         
-
-        
-        if (JSON.parse(atob(payloadBytes)).exp *1000 < new Date().valueOf()) {
-          console.log('yep')
-        }
-
-        //=> Padding the raw payload with "=" chars to reach a length that is multiple of 4
-        var mod4 = payloadBytes.length % 4;
-        console.log(mod4)
-        if (mod4 > 0) payloadBytes += new String().concat('=', (4 - mod4).toString());
-        console.log(payloadBytes)
-        //=> Decoding the base64 string
-        // var payloadBytesDecoded = atob(payloadBytes);
-        // console.log(payloadBytesDecoded);
+        // if (JSON.parse(atob(payloadBytes)).exp < (new Date().valueOf()/1000) + 30000) {
+        //   console.log('yep');
+          
+          //this.authService.forceLogout();
+        // }
+        if (this.authService.checkToken()){
+          //.subscribe(expired => {
+            //if (expired) {
+              console.log('yep')
+              //console.log(expired)
+            }
+         // })
+        // //=> Padding the raw payload with "=" chars to reach a length that is multiple of 4
+        // var mod4 = payloadBytes.length % 4;
+        // console.log(mod4)
+        // if (mod4 > 0) payloadBytes += new String().concat('=', (4 - mod4).toString());
+        // console.log(payloadBytes)
+        // //=> Decoding the base64 string
+        // // var payloadBytesDecoded = atob(payloadBytes);
+        // // console.log(payloadBytesDecoded);
 
         
 
@@ -221,12 +262,12 @@ export class DomnComponent implements OnInit, OnDestroy {
           console.log('answer value=true');
           console.log(answer.value)
           this.domain.answers[answer.sequence-1].riskValue = null;
+          
         }
         this.domain.answers[answer.sequence-1].riskValue = answer.riskValue;
         this.domain.answers[answer.sequence-1].dateModified = new Date;
         answer.dateModified = this.domain.answers[answer.sequence-1].dateModified
         this.a_value =  answer.value;
-        
         if (this.domain.answers[answer.sequence-1].id == null) {
           console.log('addAnswerToDb()')
           this.cardService.addAnswerToDb(answer)
@@ -235,6 +276,9 @@ export class DomnComponent implements OnInit, OnDestroy {
               console.log(data)
               this.domain.answers[answer.sequence-1].id = data.obj._id
               this.domain.answers[answer.sequence-1].dateCreated = data.obj.dateCreated
+              if (this.domain.answers[answer.sequence-1].value==true) {
+                this.cardService.emitFocusOnText();
+              }
               console.log(this.domain.answers[answer.sequence-1])
             })
         } else {
@@ -345,8 +389,11 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.q_content = this.domain.questions[index].content;
     this.a_value = this.domain.answers[index].value;
     this.a_details = this.domain.answers[index];
+    this.cardService.setFullScreen(this.a_details)
+    this.cardService.setRiskValue(this.a_details.riskValue);
     console.log('this.a_details')
     console.log(this.a_details)
+    //console.log(this.cardService.convertRiskValue(this.a_details.riskValue))
   }
   
   cleanUpFormat(){

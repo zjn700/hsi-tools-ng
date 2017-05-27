@@ -1,11 +1,4 @@
-.disable-text-selection {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.disable-text-selection{}
 
 .xbtn-xl{
   width:70px;
@@ -15,8 +8,6 @@
   color:#222;
   font-weight: bold;
 }
-
-
 
 buttonx:focus {
   outline:0; 
@@ -39,8 +30,10 @@ buttonx:focus {
     width: 100px;
     height: 50px;
     font-size: 1.5em;
-    background-color: #7f868c;
-    border-color: #7f868c;
+    /*background-color: #7f868c;
+    border-color: #7f868c;*/
+    background-color: rgba(255,255,255,.25);
+    border-color: rgba(0,0,0,.0001);    
     color: white;
     font-weight: bold;
 
@@ -66,13 +59,13 @@ button:focus {
 
 }
 
-.selected-neg {
+.selected-btn {
   background-color: peachpuff;
   border-color: peachpuff;
   color:#272b31; /*#222;*/
 }
 
-.selected-pos {
+.selected-posX {
   background-color: green;
   border-color: green;
   color:#fff;

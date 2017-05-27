@@ -113,14 +113,7 @@ html, body, .container {
   border:none
 }
 
-.disable-text-selection {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.disable-text-selection {}
 
 #first_td_impactx {
     border-left: white 1px solid;

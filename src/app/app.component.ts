@@ -9,6 +9,8 @@ import { SelectorService } from './selectors/selector.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
+  
+  
   constructor(private authService: AuthService, 
               private projectService: ProjectService, 
               private selectorService: SelectorService) { }

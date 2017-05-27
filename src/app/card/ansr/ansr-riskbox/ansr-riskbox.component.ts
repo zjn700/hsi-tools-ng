@@ -12,13 +12,26 @@ export class AnsrRiskboxComponent implements OnInit {
 
   constructor(private cardService: CardService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.cardService.focusOnRisk
+      .subscribe(()=>{
+        let t_riskCell = <HTMLElement>document.getElementsByClassName("th1")[0];
+        if (t_riskCell) {
+          setTimeout(function(){ t_riskCell.focus(); }, 500);
+        }
+      })
+    
+  }
   
   onClick(riskValue){
     if (this.a_details.riskValue != riskValue) {
       this.a_details.riskValue = riskValue; 
       this.cardService.emitUpdateThisAnswer(this.a_details);
+      this.cardService.setFullScreen(this.a_details);
+      this.cardService.emitFocusOnText();
+      //console.log(this.cardService.convertRiskValue(this.a_details.riskValue))
     }
   }
+  
 
 }

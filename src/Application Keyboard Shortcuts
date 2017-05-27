@@ -1,0 +1,31 @@
+Current list of application keyboard shortcuts
+
+- RIGHT_BRACKET/LEFT_BRACKET:  traverse the top menu
+
+- RIGHT_ARROW  + ctrlKey or GREATER_THAN: go to the next question tab/domain
+
+- LEFT_ARROW + ctrlKey or LESS_THAN: go to the previous question tab/domain
+
+- RIGHT_ARROW: if the question card is visible, then get the next question
+
+- LEFT_ARROW: if the question card is visible, then get the previous question
+
+- ESCAPE_KEY: 
+  -- if the menu is open, close it
+  -- if the cursor is in the rationale text box, exit it and focus on the selected answer button
+
+- ENTER_KEY: select the current button or menu item 
+
+- DOWN_ARROW or SPACE_BAR:  open the question menu, and move down the list
+
+- UP_ARROW:  if question menu is visible, then move up the list
+
+- E_KEY:  if no is selected, then expand/collapse the rationale box
+
+- R_KEY:  if no is selected and the riskbox is visible, then select the first button in the riskbox
+
+- T_KEY:  if the rational input box is visible, then put the cursor in it
+
+Note:  only the escape key works when the cursor is in the rationale text box, and that is to exit 
+the text box. The rest only work if the cursor is not in the rationale text box.
+      

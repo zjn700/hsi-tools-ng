@@ -1,4 +1,5 @@
 import { Component, OnInit,  OnDestroy  } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import "rxjs/add/operator/takeWhile";
 
@@ -17,8 +18,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     project: Project;
     private alive: boolean = true;
 
-    //constructor(private projectService: ProjectService, private topMenuService:TopMenuService) { }
-    constructor(private projectService: ProjectService, private cardService:CardService) { }
+    constructor(private projectService: ProjectService, private cardService:CardService, private router: Router) { }
     
     onSave(form: NgForm, titleInput){
         if (this.project) {
@@ -47,8 +47,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
             this.projectService.addProject(project)      
                 .takeWhile(() => this.alive)
                 .subscribe(
-                    data => console.log(data),
-                    error => console.log(error)
+                    project => {console.log(project); 
+                    localStorage.setItem('pid', project.id);
+                    localStorage.setItem('ptitle', project.title.valueOf());
+                    this.projectService.setActiveProject(project)
+
+                    this.router.navigate(['/tools']);},
+                    error => console.log(error),
+                     //ng-reflect-router-link')])   //(['/tools']) 
+
             );            
         }
         

@@ -1,4 +1,6 @@
-<div *ngIf="!showIntegrationCard" class="container-fluid">
+<div *ngIf="!showIntegrationCard" 
+      class="container-fluid">
+  
   <div id='card-top-row' class="row">
     <h2>{{childMessage}}</h2>
 
@@ -24,6 +26,8 @@
   </div>
 
   <div id='card-middle-row' class="row">
+    <div *ngIf='showMessage' class="message">{{message}}</div>
+
     <div class="form-group">
       <div class="col-md-6" [ngClass]="{'hidden': a_value==true || a_value==null || fullScreen}" >
         <div class='answerTitle' >Risk</div>
@@ -35,7 +39,20 @@
       </div>
       
       <div [ngClass]="{'hidden': a_value==null, 'col-md-11': a_value==true || fullScreen, 'col-md-5': a_value==false && !fullScreen}" >
+
         <div class='answerTitle'>
+          <span>
+            <div class='riskValue'
+                  (click)='toggleFullScreen()'
+                  [ngClass]="{'gry' : riskValue==null,
+                              'grn' : a_details?.riskValue<20 && a_details?.riskValue!=null,
+                              'red' : a_details?.riskValue>30,
+                              'ylo' : a_details?.riskValue>20 && a_details?.riskValue<30}"
+                  *ngIf="fullScreen && !a_value">
+              {{riskValue}}
+            </div>          
+          </span>
+          
           <span 
             title='Expand'
             (click)='toggleFullScreen()'
@@ -49,10 +66,10 @@
             (click)='toggleFullScreen()'
             *ngIf="fullScreen && a_value==false"
             class='glyphicon glyphicon-menu-right'>
-          </span>          
+          </span>    
           
-          
-          </div>
+        </div>
+
         <app-ansr-rationale 
               [a_details]='a_details' 
               [a_value]='a_value' 

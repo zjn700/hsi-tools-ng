@@ -11,7 +11,7 @@
         <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/integrations']">Integrations</a></div>
     </div>
 </nav><!-- routerLinkActive='active' -->
-<hr>
+<!--hr-->
 <div id='main' class="row spacing">
     <h1 class="row col-md-8 col-md-offset-2" *ngIf="!isLoggedIn()">HSI Tools</h1>
     <router-outlet></router-outlet>

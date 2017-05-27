@@ -1,5 +1,6 @@
 //import { User } from '../users/user.model';
 import { Answer } from '../card/ansr/ansr.model';
+import { State } from '../state/state.model';
 
 export class Project {
 
@@ -9,7 +10,8 @@ export class Project {
         public id?: string,
         public dateCreated?: Date,
         public users?: string[],
-        public answers?: Answer[],
+        public state?: State,
+        // public answers?: Answer[],
         public dateCompleted?: Date) { 
         }
 }

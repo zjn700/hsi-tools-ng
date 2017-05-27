@@ -7,10 +7,11 @@
           RATIONALE:
         </div-->
         <div class='rationalBox'></div>
-        <textarea [ngModel]='a_details?.rationale' 
+        <textarea
+                  [ngModel]='a_details?.rationale' 
                   (focus)='setStart($event)' 
                   (focusout)="updateAnswer($event)" 
-                  class="form-control" 
+                  class="form-control rationalText" 
                   rows="5" 
                   id="comment" 
                   formControlName='comment'>

@@ -1,3 +1,24 @@
 input, textarea {
-    font-size:1.5em;
+    font-size:1.4em;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.btn{
+    font-size: 1.4em;
+}
+
+.hsi-btn-default-alt {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, .25);
+    border-color: transparent;
+}
+
+.hsi-btn-default-alt:hover {
+  color: #222;
+  background-color: rgba(255, 255, 255, .75);
 }

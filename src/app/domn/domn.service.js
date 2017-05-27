@@ -10,15 +10,32 @@ require('rxjs/Rx');
 var rxjs_1 = require('rxjs');
 var domn_model_1 = require('./domn.model');
 var qstn_model_1 = require('../card/qstn/qstn.model');
+var ansr_model_1 = require('../card/ansr/ansr.model');
 var DomainService = (function () {
-    function DomainService(http) {
+    function DomainService(http, projectService) {
         this.http = http;
+        this.projectService = projectService;
         this.questions = [];
         this.domains = [];
+        this.lastActiveProject = '';
+        this.lastActiveQnn = '';
     }
+    DomainService.prototype.getOneAnswer = function (domain, sequence) {
+        var queryString = '/' + sequence + '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
+        this.http.get('/answers' + queryString)
+            .map(function (response) {
+            console.log(response);
+        });
+    };
     DomainService.prototype.getDomains = function () {
         var _this = this;
-        console.log('in getDomain');
+        console.log(this.lastActiveProject);
+        console.log(this.projectService.lastActiveQnn);
+        console.log(localStorage.getItem('pid'));
+        console.log(localStorage.getItem('qnnId'));
+        if (this.projectService.lastActiveProject != localStorage.getItem('pid')) {
+            console.log('new project');
+        }
         return this.http.get('/domain/' + localStorage.getItem('qnnId'))
             .map(function (response) {
             if (response.json().obj.length == 0) {
@@ -26,16 +43,63 @@ var DomainService = (function () {
                 return _this.questions = response.json().obj;
             }
             var domains = response.json().obj;
-            var transformedDomns = [];
+            var t_domains = [];
             for (var _i = 0, domains_1 = domains; _i < domains_1.length; _i++) {
                 var domain = domains_1[_i];
-                transformedDomns.push(new domn_model_1.Domain(domain.qnn, domain.title, domain.sequence, domain._id, domain.questions));
+                var t_Answers = [];
+                t_domains.push(new domn_model_1.Domain(domain.qnn, domain.title, domain.sequence, domain._id, domain.questions, t_Answers));
             }
-            _this.domains = transformedDomns;
-            //this.domains = this.sortDomainList();
-            return transformedDomns;
+            ////new
+            var j = 0;
+            var _loop_1 = function(domain) {
+                _this.addDomainAnswers(domain)
+                    .subscribe(function (answers) {
+                    domain.answers = answers;
+                });
+            };
+            for (var _a = 0, t_domains_1 = t_domains; _a < t_domains_1.length; _a++) {
+                var domain = t_domains_1[_a];
+                _loop_1(domain);
+            }
+            _this.lastActiveProject = localStorage.getItem('pid');
+            _this.lastActiveQnn = localStorage.getItem('qnnId');
+            _this.domains = t_domains;
+            _this.projectService.domains = _this.domains;
+            console.log(_this.projectService.domains);
+            return _this.domains;
         })
             .catch(function (error) { return rxjs_1.Observable.throw(error); });
+    };
+    DomainService.prototype.getServiceDomains = function () {
+        return this.domains;
+    };
+    DomainService.prototype.addDomainAnswers = function (domain) {
+        var t_domain = domain;
+        //for (let domain of t_domains) {
+        var queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
+        return this.http.get('/answers' + queryString)
+            .map(function (response) {
+            var answers = response.json().obj;
+            var t_Answers = [];
+            for (var i = 0; i < domain.questions.length; i++) {
+                t_Answers.push(new ansr_model_1.Answer(localStorage.getItem('pid'), domain.id, i + 1, null));
+            }
+            if (t_Answers.length > 0) {
+                for (var _i = 0, answers_1 = answers; _i < answers_1.length; _i++) {
+                    var answer = answers_1[_i];
+                    var i = answer.sequence - 1;
+                    t_Answers[i].value = answer.value;
+                    t_Answers[i].riskValue = answer.riskValue;
+                    t_Answers[i].rationale = answer.rationale;
+                    t_Answers[i].dateCreated = answer.dateCreated;
+                    t_Answers[i].dateModified = answer.dateModified;
+                    t_Answers[i].id = answer._id;
+                }
+            }
+            //need to add in actual answers returned from query
+            //domain.answers = t_Answers
+            return t_Answers; //t_domains
+        });
     };
     DomainService.prototype.getDomainQuestions = function (domainId) {
         var _this = this;

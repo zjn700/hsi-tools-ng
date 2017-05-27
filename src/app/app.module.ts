@@ -47,6 +47,7 @@ import { QstnMenuDirective } from './card/qstn/qstn-menu.directive';
 import { TopMenuDirective } from './top-menu.directive';
 import { TopMenuMouseDirective } from './top-menu-mouse.directive';
 import { QstnMenuFilterComponent } from './card/qstn/qstn-menu-filter/qstn-menu-filter.component';
+import { IntgrnCompletedComponent } from './intgrn/intgrn-completed/intgrn-completed.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { QstnMenuFilterComponent } from './card/qstn/qstn-menu-filter/qstn-menu-
     QstnMenuDirective,
     TopMenuDirective,
     TopMenuMouseDirective,
-    QstnMenuFilterComponent
+    QstnMenuFilterComponent,
+    IntgrnCompletedComponent
   ],
   imports: [
     BrowserModule,

@@ -15,9 +15,13 @@ var AnsrButtonsComponent = (function () {
     AnsrButtonsComponent.prototype.ngOnInit = function () {
         this.cardService.escapePressed
             .subscribe(function (data) {
-            var menuItemList = document.getElementsByClassName("selected-neg");
-            var noButton = menuItemList[0];
-            noButton.focus();
+            var menuItemList = document.getElementsByClassName("selected-btn");
+            console.log('menuItemList')
+            console.log(menuItemList)
+            if (menuItemList.length>0) {
+                var noButton = menuItemList[0];
+                noButton.focus();
+            }
         });
     };
     AnsrButtonsComponent.prototype.testStatus = function () {

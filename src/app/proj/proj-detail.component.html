@@ -1,10 +1,10 @@
 <li class="list-group-item">
-    <h3 title="Go to the last edited item in this project"><a ng-reflect-router-link='/tools' (click)='onGoToProject(t)' #t>{{project.title}}</a></h3> 
+    <h2 title="Go to the last edited item in this project"><a ng-reflect-router-link='/tools' (click)='onGoToProject(t)' #t>{{project.title}}</a></h2> 
     <div>
-        {{project.description}}
+        <span class='p-desc'>{{project.description}}</span>
         <hr>
-        <button type="button" class="btn btn-info" (click)="onEdit()">Edit</button>
-        <button type="button" class="btn btn-default" ng-reflect-router-link='/tools' (click)="onGoToProject(q)" #q>Resume</button>
-        <button type="button" class="btn btn-default" (click)="onDelete()">Delete</button>
+        <button type="button" class="btn btn-info" ng-reflect-router-link='/tools' (click)="onGoToProject(q)" #q>Resume</button>
+        <button type="button" class="btn btn-default hsi-btn-default" (click)="onEdit()">Edit</button>
+        <button type="button" class="btn btn-default hsi-btn-default" (click)="onDelete()">Delete</button>
     </div>
 </li>

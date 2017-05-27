@@ -15,6 +15,11 @@ export class CardService {
   answerSelected = new EventEmitter<boolean>();
   updateThisAnswer = new EventEmitter<Answer>();
   escapePressed = new EventEmitter<boolean>();
+  fullScreen = new EventEmitter<boolean>();
+  riskValue = new EventEmitter<number>();
+  focusOnText = new EventEmitter();
+  focusOnRisk = new EventEmitter();
+  toggleFullScreen = new EventEmitter();
   
   private domain: Domain = null;
   private sequence: number = null;
@@ -53,7 +58,16 @@ export class CardService {
   }
   
   emitEscapePressed(value) {
-    this.escapePressed.emit(value)
+    this.escapePressed.emit(value);
+
+  }
+  
+  emitFocusOnText(){
+    this.focusOnText.emit();
+  }
+  
+  emitFocusOnRisk(){
+      this.focusOnRisk.emit()
   }
   
   addAnswerToDb(answer: Answer){
@@ -70,6 +84,7 @@ export class CardService {
             })
             .catch((error: Response) => Observable.throw(error));
   }
+  
 
   updateAnswerInDb(answer: Answer) {
         const headers = new Headers({'content-Type': 'application/json'})
@@ -85,6 +100,7 @@ export class CardService {
                 .catch((error: Response) => Observable.throw(error)); 
   }
   
+  
   sortList(answers) {  // numerical order - lowest to highest
        return  answers.sort(function(a, b){
                 if ( a.sequence < b.sequence ) {
@@ -95,7 +111,88 @@ export class CardService {
               })
     }
    
-}  
+   emitToggleFullScreen() {
+      this.toggleFullScreen.emit()
+   }
+   
+   setFullScreen(answer:Answer) {
+      if (answer.value) {  // yes 
+        this.fullScreen.emit(answer.value)
+      } else {   // no
+        if (answer.riskValue != null) {  // risk value selected
+          this.fullScreen.emit(true);
+        } else {
+          this.fullScreen.emit(false)
+        }
+      }
+   }
+   
+   setRiskValue(cellValue){
+     this.riskValue.emit(this.convertRiskValue(cellValue))
+   }
+   
+   convertRiskValue(cellValue) {
+    switch(cellValue) {
+        //green
+        case 1:
+            return 1
+        case 2:
+            return 2
+        case 3:
+            return 3
+        case 4:
+            return 4
+        case 5:
+            return 2
+        case 6:
+            return 4
+        case 7:
+            return 6
+        case 8:
+            return 3
+        case 9:
+            return 6
+        case 10:
+            return 4
+        case 11:
+            return 5
+        // yellow    
+        case 21:
+            return 5
+        case 22:
+            return 8
+        case 23:
+            return 10
+        case 24:
+            return 9
+        case 25:
+            return 12
+        case 26:
+            return 8
+        case 27:
+            return 12
+        case 28:
+            return 10
+        // red    
+        case 31:
+            return 15
+        case 32:
+            return 16
+        case 33:
+            return 20
+        case 34:
+            return 15
+        case 35:
+            return 20
+        case 36:
+            return 25
+        default:
+            return null;
+      }  
+   }
+}
+   
+   
 
   // getAnswers(domain: Domain){
   //   // use pid
