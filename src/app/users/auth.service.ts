@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { User } from './user.model';
@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthService  {
     logoutNow = new EventEmitter<boolean>();
-    //checkToken = new EventEmitter<boolean>();
+    @Output() showWarning = new EventEmitter<boolean>();
+    //showWarning = new EventEmitter<boolean>();
 
     constructor(private http: Http, private router: Router) { }
     
@@ -32,7 +33,22 @@ export class AuthService  {
     
     checkToken(){
         var payloadBytes = localStorage.getItem('token').split('.')[1];
-        return JSON.parse(atob(payloadBytes)).exp > new Date().valueOf()/1000
+        console.log(JSON.parse(atob(payloadBytes)).exp)
+        console.log( new Date().valueOf()/1000 )
+        if ( JSON.parse(atob(payloadBytes)).exp < new Date().valueOf()/1000 ) {
+            console.log('emit showwarning')
+            //this.showWarning.emit(true)
+            this.forceLogout();
+            return true
+            //setTimeout(()=>{this.showWarning.emit(false)}, 1500)    
+
+            //setTimeout(this.showWarning.emit(false), 10000)
+            //this.forceLogout();
+        } else {
+            //this.showWarning.emit(false)
+            return false
+        }
+        // if .exp - 10 minutes < new date 
         // { // + 30000) {
         //   //console.log('yep');
         //   //this.authService.forceLogout();
@@ -42,13 +58,15 @@ export class AuthService  {
     
     forceLogout(){
         console.log('forceLogout')
-        //this.logoutNow.emit(true);
-        localStorage.clear();
+        this.logout();
         this.router.navigate(['/signin'])
+
     }
     
     logout(){
-        localStorage.clear(); 
+        console.log('logout')
+        localStorage.clear();
+
         
     }
     

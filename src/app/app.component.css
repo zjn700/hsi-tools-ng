@@ -2,6 +2,19 @@
     margin-top:45px;
 }
 
+.hidden {
+    display: none;
+    
+}
+#warningMessage {
+    top: 20%;
+    left: 25%;
+    width: 50%;
+    height: 400px;
+    position: absolute;
+    background: rgba(255, 255, 255, .9);
+    color: rgba(0, 0, 0, .85);
+}
 .hsi-navbar-top {
     background:#272b31;  /*#494d50; */
     color:#272b31;

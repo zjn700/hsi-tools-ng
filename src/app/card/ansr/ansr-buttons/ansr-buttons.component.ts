@@ -21,6 +21,13 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(){
+    
+    this.cardService.answerKeyPressed
+      .takeWhile(() => this.alive)
+      .subscribe(answer => {
+        this.emitAnswerSelected(answer)
+      })
+      
     this.cardService.escapePressed
       .takeWhile(() => this.alive)
       .subscribe((data:boolean)=>{
@@ -36,8 +43,10 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
 
       })
   }
+
   
   emitAnswerSelected(value){
+    console.log('emitAnswerSelected ' + value)
     if (this.a_value != value) {
       this.cardService.emitAnswerSelected(value)
       this.a_details.value = value; 

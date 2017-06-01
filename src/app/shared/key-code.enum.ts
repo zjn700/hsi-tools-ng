@@ -14,7 +14,9 @@ export enum KEY_CODE {
   GREATER_THAN = 190,
   E_KEY = 69,
   R_KEY = 82,
-  T_KEY = 84
+  T_KEY = 84,
+  Y_KEY = 89,
+  N_KEY = 78
 }
 
 //https://css-tricks.com/snippets/javascript/javascript-keycodes/

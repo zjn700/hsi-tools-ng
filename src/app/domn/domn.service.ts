@@ -33,113 +33,90 @@ export class DomainService {
                 return false
                 
             } else {
-                return true;  //console.log('THIS IS new project')
+                return true;  
             }            
         } else {
-            return true; // console.log('THIS IS new project')
+            return true; 
         }
     }
-
-    // getActiveDomains():Observable<Response> {
-    //     let res = new Observable<Response>
-    //     return res.status(200).json({
-    //         title: "error occured",
-    //         obj: this.domains
-    //     }); 
-    // }
     
     getDomains(){
 
         if (!this.updateRequired()) {
             console.log('update not Required')
-            return this.http.get('/domain/dummy')
+            return this.http.get('/domain/dummy')  // returns nothing, but creates the required observable
                 .map((response:Response)=> {
-                    console.log('response.message')
-                    console.log(response)
-                    // console.log(this.domains)
-                    return this.domains
-
+                    return this.domains   // pass back the current domain array
                 })
-            //return this.domains
 
         } else {
             console.log('update Required');
-                //this.questions.length = 0;
-                //this.answers.length = 0; 
-                this.domains.length = 0;
+                this.domains.length = 0;  // empty the current array
 
         }
-            return this.http.get('/domain/' + localStorage.getItem('qnnId'))
-                .map((response: Response) => {
-                    if (response.json().obj.length == 0) {
-                        console.log("response is empty");
-                        return this.questions = response.json().obj;
-                    } 
-                    const domains = response.json().obj;
-                    let t_domains: Domain[] = [];
-                    for (let domain of domains) {
-                        let t_Answers: Answer[] = []
-                        t_domains.push(new Domain(
-                            domain.qnn,
-                            domain.title,
-                            domain.sequence,
-                            domain._id,
-                            domain.questions,
-                            t_Answers))
-                    }
-                    ////new
-                    let j = 0;
-                    for (let domain of t_domains) {
-                        this.addDomainAnswers(domain)
-                            .subscribe(answers => {
-                                domain.answers = answers
-                        })
-                    }
-                     this.lastActiveProject=localStorage.getItem('pid')       
-                     this.lastActiveQnn=localStorage.getItem('qnnId')       
-                    this.domains = t_domains
-                    this.projectService.domains = this.domains
-                    // console.log(this.projectService.domains)
-                    return this.domains
-                })
-                .catch((error: Response) => Observable.throw(error));
-        //}
+        return this.http.get('/domain/' + localStorage.getItem('qnnId'))
+            .map((response: Response) => {
+                if (response.json().obj.length == 0) {
+                    console.log("response is empty");
+                    return this.questions = response.json().obj;
+                } 
+                const domains = response.json().obj;
+                let t_domains: Domain[] = [];
+                for (let domain of domains) {
+                    let t_Answers: Answer[] = []
+                    t_domains.push(new Domain(
+                        domain.qnn,
+                        domain.title,
+                        domain.sequence,
+                        domain._id,
+                        domain.questions,
+                        t_Answers))
+                }
+                
+                // build answers array for each domain
+                let j = 0;
+                for (let domain of t_domains) {
+                    this.addDomainAnswers(domain)
+                        .subscribe(answers => {
+                            domain.answers = answers
+                    })
+                }
+                this.lastActiveProject=localStorage.getItem('pid')       
+                this.lastActiveQnn=localStorage.getItem('qnnId')       
+                this.domains = t_domains
+                this.projectService.domains = this.domains
+                return this.domains
+            })
+            .catch((error: Response) => Observable.throw(error));
     }    
-    
-    // getServiceDomains(){
-    //     return this.domains
-    // }
     
     addDomainAnswers(domain){
         let t_domain = domain;
-        //for (let domain of t_domains) {
-            const queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
-            return this.http.get('/answers' + queryString)
-                .map((response: Response) => {
-                    let answers = response.json().obj;
-                    let t_Answers: Answer[] = [];
-                    for (let i=0; i < domain.questions.length; i++) {
-                      t_Answers.push(new Answer(
-                          localStorage.getItem('pid'), 
-                          domain.id,
-                          i+1,
-                          null));
-                    }     
-                    if (t_Answers.length > 0 ) {  //response.json().obj.length != 0) {
-                      for (let answer of answers) {
-                         let i = answer.sequence-1;
-                         t_Answers[i].value = answer.value;
-                         t_Answers[i].riskValue = answer.riskValue;
-                         t_Answers[i].rationale = answer.rationale;
-                         t_Answers[i].dateCreated = answer.dateCreated;
-                         t_Answers[i].dateModified = answer.dateModified;
-                         t_Answers[i].id = answer._id;
-                      }
-                    }                   
-                    //need to add in actual answers returned from query
-                    //domain.answers = t_Answers
-                    return t_Answers    //t_domains
-                })
+        const queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
+        return this.http.get('/answers' + queryString)
+            .map((response: Response) => {
+                let answers = response.json().obj;
+                let t_Answers: Answer[] = [];
+                for (let i=0; i < domain.questions.length; i++) {
+                  t_Answers.push(new Answer(
+                      localStorage.getItem('pid'), 
+                      domain.id,
+                      i+1,
+                      null));
+                }     
+                if (t_Answers.length > 0 ) {  // add answer details stored in the db
+                  for (let answer of answers) {
+                     let i = answer.sequence-1;
+                     t_Answers[i].value = answer.value;
+                     t_Answers[i].riskValue = answer.riskValue;
+                     t_Answers[i].rationale = answer.rationale;
+                     t_Answers[i].dateCreated = answer.dateCreated;
+                     t_Answers[i].dateModified = answer.dateModified;
+                     t_Answers[i].id = answer._id;
+                  }
+                }                   
+                return t_Answers    
+            })
     }
     
     getDomainQuestions(domainId){

@@ -13,6 +13,8 @@ export class CardService {
   textInputSelected = new EventEmitter<boolean>();
   menuItemSelected = new EventEmitter<boolean>();
   answerSelected = new EventEmitter<boolean>();
+  answerKeyPressed = new EventEmitter<boolean>();
+  
   updateThisAnswer = new EventEmitter<Answer>();
   escapePressed = new EventEmitter<boolean>();
   fullScreen = new EventEmitter<boolean>();
@@ -24,6 +26,7 @@ export class CardService {
   private domain: Domain = null;
   private sequence: number = null;
   private answers: Answer[] = []
+  
   
   constructor(private http: Http) { }
   
@@ -57,6 +60,10 @@ export class CardService {
      this.answerSelected.emit(answer);
   }
   
+  emitAnswerKeyPressed(answer) {  // yes/no keys
+      this.answerKeyPressed.emit(answer)
+  }
+      
   emitEscapePressed(value) {
     this.escapePressed.emit(value);
 

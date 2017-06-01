@@ -1,8 +1,8 @@
 'use strict'
 import {Component, 
-        OnInit, 
+        OnInit,
         HostListener, 
-        OnDestroy } from '@angular/core';
+        OnDestroy} from '@angular/core';
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
@@ -21,6 +21,7 @@ import "rxjs/add/operator/takeWhile";
   styleUrls: ['./domn.component.css'],
 })
 export class DomnComponent implements OnInit, OnDestroy {
+
   qnnTitle: string;
   projectTitle: string;
   domain: Domain;
@@ -43,6 +44,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   menuItemSelected = false;
   answerSelected = null;
   
+  
   //private  isInitialized:boolean=false;
   private alive: boolean = true;
 
@@ -60,6 +62,8 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   @HostListener('click', ['$event']) onClick(event:Event) {
+    console.log(this.authService.checkToken())
+
     if (this.isInitialized) {
       console.log('initialized')
       this.inTextInput = this.cardService.isInTextInput(event);
@@ -69,6 +73,8 @@ export class DomnComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
 
   keyEvent(event: KeyboardEvent) {
+    console.log(this.authService.checkToken())
+
     if (this.inTextInput && this.isInitialized) {
       if (event.keyCode === KEY_CODE.T_KEY) {
         console.log('t')
@@ -134,7 +140,15 @@ export class DomnComponent implements OnInit, OnDestroy {
       
       if (event.keyCode === KEY_CODE.T_KEY) {
          this.cardService.emitFocusOnText()
-      }      
+      }
+      
+      if (event.keyCode === KEY_CODE.Y_KEY) {
+         this.cardService.emitAnswerKeyPressed(true)
+      }
+      
+      if (event.keyCode === KEY_CODE.N_KEY) {
+         this.cardService.emitAnswerKeyPressed(false)
+      }
       
     }
   }
@@ -143,6 +157,7 @@ export class DomnComponent implements OnInit, OnDestroy {
               private cardService: CardService,
               private projectService: ProjectService,
               private authService: AuthService) { }
+
 
   ngOnDestroy(){
     this.alive = false;
@@ -167,15 +182,21 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.isInitialized = true; // all answers loaded
   }
 
+  ngAfterViewInit(){
+      console.log('domn after view init')    
+  }
+  
   ngOnInit() {
+      console.log('domn init')    
     
-
-
-    
+    // get values from localStorage
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle');
     this.projectId = localStorage.getItem('pid')
     
+    // set up subscriptions:
+    
+    // get question domains
     this.domainService.getDomains()
       .takeWhile(() => this.alive)
       .subscribe((domains: Domain[])=>{
@@ -184,9 +205,7 @@ export class DomnComponent implements OnInit, OnDestroy {
           .takeWhile(() => this.alive)
           .subscribe(answers => {
             this.domain = domains[0];
-            // console.log(domains)
             this.questions = this.domain.questions;
-            // console.log(this.domain.questions)
             this.activeDomainNumber = this.domain.sequence;
             this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
             this.updateContent(0);
@@ -213,54 +232,19 @@ export class DomnComponent implements OnInit, OnDestroy {
         this.inTextInput = selected;
     })
     
+    
     this.cardService.updateThisAnswer
       .takeWhile(() => this.alive)
       .subscribe((answer: Answer) => {
-        
-        //is_expired = parse_json(UrlBase64Decode(token.split('.')[1])).exp < current_date_unix_format
-        //console.log(parse_json(UrlBase64Decode(token.split('.')[1])).exp); // < current_date_unix_format)
-        //console.log(localStorage.getItem('token').split('.')[1]);
-        //=> Retrieve the 2nd part of the JWT token (this the JWT payload)
-        // var payloadBytes = localStorage.getItem('token').split('.')[1];
-        // console.log(payloadBytes)
-        // console.log(atob(payloadBytes))
-        
-        // console.log(JSON.parse(atob(payloadBytes)).exp)
-        // console.log(new Date().valueOf())
-
-        // console.log(new Date(Number(JSON.parse(atob(payloadBytes)).exp) * 1000))
-        // console.log(new Date())
-        // //console.log(new Date(1495098477427/1000))
-        
-        // if (JSON.parse(atob(payloadBytes)).exp < (new Date().valueOf()/1000) + 30000) {
-        //   console.log('yep');
-          
-          //this.authService.forceLogout();
+      
+        // if (this.authService.checkToken()){
+        //       console.log('yep expired')
         // }
-        if (this.authService.checkToken()){
-          //.subscribe(expired => {
-            //if (expired) {
-              console.log('yep')
-              //console.log(expired)
-            }
-         // })
-        // //=> Padding the raw payload with "=" chars to reach a length that is multiple of 4
-        // var mod4 = payloadBytes.length % 4;
-        // console.log(mod4)
-        // if (mod4 > 0) payloadBytes += new String().concat('=', (4 - mod4).toString());
-        // console.log(payloadBytes)
-        // //=> Decoding the base64 string
-        // // var payloadBytesDecoded = atob(payloadBytes);
-        // // console.log(payloadBytesDecoded);
-
         
-
-        
+        // uodate the answers values in memory (answer array) before submitting to the db
         this.domain.answers[answer.sequence-1].rationale = answer.rationale;
         this.domain.answers[answer.sequence-1].value = answer.value;
-        if (answer.value == true){
-          console.log('answer value=true');
-          console.log(answer.value)
+        if (answer.value == true){    // if answer is yes, remove risk value
           this.domain.answers[answer.sequence-1].riskValue = null;
           
         }
@@ -268,21 +252,20 @@ export class DomnComponent implements OnInit, OnDestroy {
         this.domain.answers[answer.sequence-1].dateModified = new Date;
         answer.dateModified = this.domain.answers[answer.sequence-1].dateModified
         this.a_value =  answer.value;
+        
+        // if this answer has no id, it is new, so add to the db
         if (this.domain.answers[answer.sequence-1].id == null) {
-          console.log('addAnswerToDb()')
           this.cardService.addAnswerToDb(answer)
             .takeWhile(() => this.alive)
             .subscribe(data => {
-              console.log(data)
-              this.domain.answers[answer.sequence-1].id = data.obj._id
+              // add field values created by the db
+              this.domain.answers[answer.sequence-1].id = data.obj._id   
               this.domain.answers[answer.sequence-1].dateCreated = data.obj.dateCreated
               if (this.domain.answers[answer.sequence-1].value==true) {
                 this.cardService.emitFocusOnText();
               }
-              console.log(this.domain.answers[answer.sequence-1])
             })
-        } else {
-          console.log('updateAnswerInDb')
+        } else {   // otherwise update the existing answer
           this.cardService.updateAnswerInDb(answer)
             .takeWhile(() => this.alive)
             .subscribe(data => console.log(data))
@@ -290,7 +273,7 @@ export class DomnComponent implements OnInit, OnDestroy {
 
       })
 
-    this.cardService.answerSelected
+    this.cardService.answerSelected  // needs to be rolled into update function
       .takeWhile(() => this.alive)
       .subscribe((selected: boolean) => {
         this.answerSelected = selected;
@@ -391,9 +374,6 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.a_details = this.domain.answers[index];
     this.cardService.setFullScreen(this.a_details)
     this.cardService.setRiskValue(this.a_details.riskValue);
-    console.log('this.a_details')
-    console.log(this.a_details)
-    //console.log(this.cardService.convertRiskValue(this.a_details.riskValue))
   }
   
   cleanUpFormat(){
@@ -411,7 +391,7 @@ export class DomnComponent implements OnInit, OnDestroy {
     return q_number
   }
   
-  checkEdges() {
+  checkEdges() {   // first and final questions
     if (this.activeDomainNumber ==1 && this.activeQuestionNumber == 1) {
       this.atFirstQuestion=true
     } else {

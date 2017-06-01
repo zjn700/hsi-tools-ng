@@ -1,4 +1,4 @@
-import { Component, OnInit,  OnDestroy  } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import "rxjs/add/operator/takeWhile";
@@ -6,6 +6,7 @@ import "rxjs/add/operator/takeWhile";
 import { Project } from "./proj.model";
 import { ProjectService } from './proj.service';
 import { CardService } from '../card/card.service';
+import { AuthService } from '../users/auth.service';
 //import { TopMenuService } from '../shared/top-menu.service';
 
 @Component({
@@ -17,8 +18,23 @@ import { CardService } from '../card/card.service';
 export class ProjectComponent implements OnInit, OnDestroy {
     project: Project;
     private alive: boolean = true;
+    
+  @HostListener('click', ['$event']) 
+  onClick(event:Event) {
+    console.log(this.authService.checkToken())
+  }
+  
+  @HostListener('window:keyup', ['$event'])     
+  keyEvent(event: KeyboardEvent) {
+    console.log(this.authService.checkToken())    
+  }    
+    
+    
 
-    constructor(private projectService: ProjectService, private cardService:CardService, private router: Router) { }
+    constructor(private projectService: ProjectService, 
+                private cardService:CardService, 
+                private authService: AuthService,
+                private router: Router) { }
     
     onSave(form: NgForm, titleInput){
         if (this.project) {
@@ -73,6 +89,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     }
     
     ngOnInit(){
+      console.log('proj init')    
       this.projectService.projectIsInEditMode
         .takeWhile(() => this.alive)
         .subscribe(
