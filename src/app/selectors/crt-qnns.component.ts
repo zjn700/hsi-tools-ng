@@ -36,6 +36,7 @@ export class CrtQnnsComponent implements OnInit, OnDestroy {
     localStorage.setItem('qnnId', qnn.id.valueOf());
     localStorage.setItem('qnnTitle', qnn.title.valueOf());
     localStorage.setItem('qnnAbbreviation', qnn.abbreviation.valueOf());
+    localStorage.setItem('resume', 'false')
     this.router.navigate(['/questions']) 
   }
   

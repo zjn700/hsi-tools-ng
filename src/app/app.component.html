@@ -1,5 +1,5 @@
 <!--nav class="navbar navbar-inverse navbar-fixed-top"-->
-<div [ngClass]="{'hidden' : doShowMessage()}">
+<div [ngClass]="{'hidden' : showWarningMessage}">
 <!--div-->
     <nav class="navbar navbar-fixed-top hsi-navbar-top">
         <div class="navx nav-tabsx" appTopMenu>
@@ -22,7 +22,15 @@
     </div>
 </div>
 
-<div id='warningMessage' [ngClass]="{'hidden' : !doShowMessage()}">{{warningMessage}}</div>
+<div id='warningMessage' 
+     [ngClass]="{'hidden' : !showWarningMessage}">
+    <h2>{{warningMessage}}</h2>
+    <button id='logoutWarning'
+            class="btn btn-info"
+            (click)="onButtonClick($event)">
+        Ok
+    </button>
+</div>
 
 
 <!--app-domn></app-domn-->

@@ -30,11 +30,25 @@ export class ProjDetailComponent {
     }
     
     onGoToProject(button) {
+      localStorage.setItem('resume', 'false')
       localStorage.setItem('pid', this.project.id);
       localStorage.setItem('ptitle', this.project.title.valueOf());
       this.router.navigate([button.getAttribute('ng-reflect-router-link')])   //(['/tools']) 
       this.topMenuService.updateTopMenu(button)
       this.projectService.setActiveProject(this.project)
 
+    }
+    
+    onResumeProject(){
+      localStorage.setItem('resume', 'true')
+      localStorage.setItem('pid', this.project.id);
+      localStorage.setItem('ptitle', this.project.title.valueOf());
+      localStorage.setItem('qnnId', this.project.state.qnnId);
+      localStorage.setItem('qnnTitle', this.project.state.qnnTitle);
+      localStorage.setItem('qnnAbbreviation', this.project.state.qnnAbbreviation);
+      this.router.navigate(['/questions'])
+      this.topMenuService.updateTopMenu('/questions')
+      this.projectService.setActiveProject(this.project)
+        
     }
 }

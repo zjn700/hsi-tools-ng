@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthService  {
     logoutNow = new EventEmitter<boolean>();
+    //public active_user:User;
     @Output() showWarning = new EventEmitter<boolean>();
     //showWarning = new EventEmitter<boolean>();
 
@@ -33,34 +34,33 @@ export class AuthService  {
     
     checkToken(){
         var payloadBytes = localStorage.getItem('token').split('.')[1];
-        console.log(JSON.parse(atob(payloadBytes)).exp)
-        console.log( new Date().valueOf()/1000 )
-        if ( JSON.parse(atob(payloadBytes)).exp < new Date().valueOf()/1000 ) {
-            console.log('emit showwarning')
-            //this.showWarning.emit(true)
+        //console.log(JSON.parse(atob(payloadBytes)).exp)
+        let t_date = new Date().valueOf()/1000 
+        let exp_date = JSON.parse(atob(payloadBytes)).exp
+        console.log('t_date')
+        console.log(t_date)
+        if ( exp_date < t_date) {
+            this.showWarning.emit(false)
             this.forceLogout();
             return true
-            //setTimeout(()=>{this.showWarning.emit(false)}, 1500)    
-
-            //setTimeout(this.showWarning.emit(false), 10000)
-            //this.forceLogout();
-        } else {
-            //this.showWarning.emit(false)
-            return false
         }
-        // if .exp - 10 minutes < new date 
-        // { // + 30000) {
-        //   //console.log('yep');
-        //   //this.authService.forceLogout();
-        // }
+        console.log(exp_date -10 < t_date)
+        console.log(exp_date -1  > t_date)
+        if (exp_date -10 < t_date  &&
+             exp_date -1 > t_date ) {
+                console.log('issue warningMessage')
+                this.showWarning.emit(true)
+                //setTimeout(this.showWarning.emit(false), 3000)
+            } 
+
+        return false
         
     }
     
     forceLogout(){
         console.log('forceLogout')
         this.logout();
-        this.router.navigate(['/signin'])
-
+        this.router.navigate(['/signin']);
     }
     
     logout(){

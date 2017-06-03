@@ -17,15 +17,19 @@ export class TopMenuService {
     }
     
     updateTopMenu(button) {
-        
+        var route;
         if (typeof button == 'string') {
-            console.log('is string')
+            console.log('is string');
+            route = button
+        } else {
+            route = button.getAttribute('ng-reflect-router-link')
         }
         
         let menuItems = document.getElementsByClassName("topMenuItem"); 
            for (let i=0; i < menuItems.length; i++) {
                 menuItems[i].classList.remove('active')
-                  if (menuItems[i].getAttribute('href') == button.getAttribute('ng-reflect-router-link')) {
+                  //if (menuItems[i].getAttribute('href') == button.getAttribute('ng-reflect-router-link')) {
+                  if (menuItems[i].getAttribute('href') == route) {
                     menuItems[i].classList.add('active')
                   }
            }

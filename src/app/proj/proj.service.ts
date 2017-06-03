@@ -31,8 +31,9 @@ export class ProjectService {
     }
     
     setActiveProject(project: Project){
-        this.activeProject = project;
-
+        console.log('setActiveProject')
+        console.log(project)
+        this.activeProject = project
     }
     
     addProject(project: Project){
@@ -73,7 +74,8 @@ export class ProjectService {
                         project.description,
                         project._id,
                         project.dateCreated,
-                        project.users))
+                        project.users,
+                        project.state))
                 }
                 this.projects = transformedProjects;
                 return transformedProjects;

@@ -12,8 +12,14 @@
     width: 50%;
     height: 400px;
     position: absolute;
+    padding:35px;
     background: rgba(255, 255, 255, .9);
     color: rgba(0, 0, 0, .85);
+}
+
+#logoutWarning{
+    margin-left: 10px;
+    
 }
 .hsi-navbar-top {
     background:#272b31;  /*#494d50; */

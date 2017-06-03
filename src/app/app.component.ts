@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         console.log('9999999999999999')
         console.log(showMessage)
         this.showWarningMessage = showMessage
-        this.warningMessage = 'yep'
+        this.warningMessage = 'Your session has expired. Please sign in again.'
 
       })
   }
@@ -47,10 +47,23 @@ export class AppComponent implements OnInit, AfterViewInit {
   //   this.showWarningMessage = event;
   //   this.warningMessage = 'yep'
   // }
+  onClick(){
+    console.log(this.authService.checkToken())
+  }
+  
+  onButtonClick(){
+    this.authService.forceLogout();
+    this.showWarningMessage = false;
+
+  }  
+  onKeyup(){
+    console.log('app comp keyup')
+  }
   
   isLoggedIn() {
         return this.authService.isLoggedIn();   
   }
+  
   
   doShowMessage(){
     return this.showWarningMessage

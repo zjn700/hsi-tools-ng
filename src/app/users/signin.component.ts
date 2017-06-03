@@ -43,6 +43,7 @@ export class SigninComponent implements OnInit, OnDestroy {
                 data => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
+                    //this.authService.active_user = user;
                     this.router.navigateByUrl('/project');
                     this.topMenuService.activateThisItem('/project');
                     //this.topMenuService.updateTopMenu(button)

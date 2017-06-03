@@ -6,10 +6,12 @@ import {Component,
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
+import { SessionState } from '../state/state.model'
 import { AuthService } from '../users/auth.service'
 import { DomainService } from './domn.service';
 import { CardService } from '../card/card.service';
 import { ProjectService } from '../proj/proj.service';
+import { Project } from '../proj/proj.model';
 import { KEY_CODE } from '../shared/key-code.enum';
 //import { ISubscription } from "rxjs/Subscription";
 import "rxjs/add/operator/takeWhile";
@@ -28,6 +30,8 @@ export class DomnComponent implements OnInit, OnDestroy {
   private domains: Domain[] = [];
   private questions: Question[] = [];
   private answers: Answer[] = [];
+  private activeProject: Project
+  
   private projectId:string
   q_content: string;
   q_number: string;
@@ -160,7 +164,21 @@ export class DomnComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
-    this.alive = false;
+    //this.alive = false;
+    console.log(this.projectService.activeProject)
+    console.log(this.activeProject)
+    this.projectService.updateProject(this.activeProject)
+            .takeWhile(() => this.alive)
+            .subscribe(result => {
+                console.log('result');
+                console.log(result);
+                this.alive = false;
+
+            } )     
+    
+    
+    
+    //this.projectService.updateProject(this.projectService.activeProject)
     //this.projectService.lastActiveQnn = this.projectId
     //this.domainService.lastActiveQnn = this.qnnId;
     //this.domainService.lastActiveProject = this
@@ -194,6 +212,7 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.qnnTitle = localStorage.getItem('qnnTitle');
     this.projectId = localStorage.getItem('pid')
     
+    this.activeProject = this.projectService.activeProject
     // set up subscriptions:
     
     // get question domains
@@ -201,16 +220,46 @@ export class DomnComponent implements OnInit, OnDestroy {
       .takeWhile(() => this.alive)
       .subscribe((domains: Domain[])=>{
         this.domains = domains;
-        this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
-          .takeWhile(() => this.alive)
-          .subscribe(answers => {
-            this.domain = domains[0];
-            this.questions = this.domain.questions;
-            this.activeDomainNumber = this.domain.sequence;
-            this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
-            this.updateContent(0);
-            this.cleanUpFormat();
-        })
+        
+        if (localStorage.getItem('resume') == 'true' && this.activeProject) {
+          this.domainService.addDomainAnswers(domains[this.activeProject.state.domainNumber-1])  // extra step for initialization only
+            .takeWhile(() => this.alive)
+            .subscribe(answers => {
+                this.domain = domains[this.activeProject.state.domainNumber-1];
+                this.questions = this.domain.questions;
+                this.activeDomainNumber = this.domain.sequence;
+                this.activeQuestionNumber = this.activeProject.state.questionNumber;
+                this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
+                this.updateContent(this.activeProject.state.questionNumber-1);
+                this.cleanUpFormat();
+          })
+        } else {
+            this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
+              .takeWhile(() => this.alive)
+              .subscribe(answers => {
+                this.domain = domains[0];
+                this.questions = this.domain.questions;
+                this.activeDomainNumber = this.domain.sequence;
+                this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
+                this.updateContent(0);
+                this.cleanUpFormat();
+                localStorage.setItem('resume', 'true')
+            })          
+        }
+
+        
+        // this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
+        //   .takeWhile(() => this.alive)
+        //   .subscribe(answers => {
+        //     this.domain = domains[0];
+        //     this.questions = this.domain.questions;
+        //     this.activeDomainNumber = this.domain.sequence;
+        //     this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
+        //     this.updateContent(0);
+        //     this.cleanUpFormat();
+        // })
+        
+        
     })
       
     this.cardService.questionSelected
@@ -369,11 +418,54 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   updateContent(index) {
+    console.log(index)
+    console.log(this.domain.questions)
     this.q_content = this.domain.questions[index].content;
+    console.log(this.q_content)
     this.a_value = this.domain.answers[index].value;
     this.a_details = this.domain.answers[index];
     this.cardService.setFullScreen(this.a_details)
     this.cardService.setRiskValue(this.a_details.riskValue);
+    //console.log(this.projectService.activeProject)
+    console.log(this.projectService.activeProject)
+    console.log(location.pathname);
+    console.log(this.domain.id)
+    console.log(this.a_details.sequence)
+    console.log(localStorage.getItem('userId'))
+    //console.log(this.authService.active_user)
+    this.updateState();
+  }
+  
+  updateState(){
+
+    var t_state = new SessionState(
+      location.pathname,
+      localStorage.getItem('qnnId'),
+      localStorage.getItem('qnnTitle'),
+      localStorage.getItem('qnnAbbreviation'),
+      this.domain.id,
+      this.domain.sequence,
+      this.a_details.sequence,
+      null,
+      new Date()
+      ); 
+    if (this.activeProject)  {
+      console.log('XXXXthis.projectService.activeProject')
+      console.log(this.activeProject)
+    
+      this.activeProject.state = t_state;
+      console.log('t_state')
+      console.log(t_state)
+    }
+    //console.log(this.projectService.activeProject.state)
+    // t_state.url = location.pathname;
+    // t_state.domainId = this.domain.id;
+    // t_state.domainNumber = this.domain.sequence
+    // t_state.questionNumber = this.a_details.sequence;
+    // //t_state.userId
+    // t_state.dateModified = new Date();
+    // console.log(t_state)
+    // //console.log(this.projectService.activeProject.state)
   }
   
   cleanUpFormat(){

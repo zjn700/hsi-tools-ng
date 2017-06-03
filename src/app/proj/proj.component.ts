@@ -29,8 +29,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
     console.log(this.authService.checkToken())    
   }    
     
-    
-
     constructor(private projectService: ProjectService, 
                 private cardService:CardService, 
                 private authService: AuthService,
@@ -102,6 +100,17 @@ export class ProjectComponent implements OnInit, OnDestroy {
     ngOnDestroy(){
         //this.projectService.projectIsInEditMode.unsubscribe();
         //this.project = null;
+        console.log('this.projectService.activeProject')
+        console.log(this.projectService.activeProject)
+        // this.projectService.updateProject(this.projectService.activeProject)
+        //         .takeWhile(() => this.alive)
+        //         .subscribe(result => {
+        //             console.log('result');
+        //             console.log(result);
+        //             this.alive = false;
+
+        //         } ) 
+        
         this.alive = false;
 
     }

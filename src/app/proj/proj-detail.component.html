@@ -3,7 +3,9 @@
     <div>
         <span class='p-desc'>{{project.description}}</span>
         <hr>
-        <button type="button" class="btn btn-info" ng-reflect-router-link='/tools' (click)="onGoToProject(q)" #q>Resume</button>
+        <!--button *ngIf="project.state!=null" type="button" class="btn btn-info" ng-reflect-router-link='/tools' (click)="onGoToProject(q)" #q>Resume</button-->
+        <button *ngIf="project.state!=null" type="button" class="btn btn-info" ng-reflect-router-link='/tools' (click)="onResumeProject(q)" #q>Resume</button>
+
         <button type="button" class="btn btn-default hsi-btn-default" (click)="onEdit()">Edit</button>
         <button type="button" class="btn btn-default hsi-btn-default" (click)="onDelete()">Delete</button>
     </div>
