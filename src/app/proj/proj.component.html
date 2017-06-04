@@ -7,13 +7,54 @@
         Each questionnaire produces a report with risk matrices and comments for each question item.
     </h3>
     </div>
-    <h2>Add a Project:</h2>
-    <form (ngSubmit)='onSave(f, title)' #f="ngForm">
+    <button (click)="onAddProject()" 
+            *ngIf='!showForm'
+            title='Add a project' 
+            class='btn btn-danger glyphicon glyphicon-plus  floating'>
+        
+    </button>
+    <button (click)="onAddProject()"
+            *ngIf='showForm'
+            title='Hide form' 
+            class='btn btn-danger glyphicon glyphicon-minus floating'>
+        
+    </button>
+    <h2 *ngIf="!inEditMode && showForm">Add a Project:</h2>
+    <h2 *ngIf="inEditMode && showForm">Edit Project Details:</h2>
+
+    <!--<form [ngClass]="{'hidden' : !showForm}" [formGroup]='myForm' (ngSubmit)="onSave(f, title)" #f>-->
+    <!--    <div class="form-group">-->
+    <!--        <label for="title">Title xxx </label>-->
+    <!--        <input -->
+    <!--            type="text" -->
+    <!--            id="project-title" -->
+    <!--            class="form-control p_title" -->
+    <!--            [ngModel]='project?.title' -->
+    <!--            formControlName='title'-->
+    <!--            #title>-->
+    <!--    </div>-->
+    <!--    <div class="form-group">-->
+    <!--        <label for="description">Description xxx </label>-->
+    <!--        <textarea type="description" -->
+    <!--                id="description" -->
+    <!--                class="form-control" -->
+    <!--                [ngModel]='project?.description' -->
+    <!--                formControlName='description'>-->
+    <!--    </div>-->
+    <!--    <button [disabled]="!myForm.valid" class="btn btn-primary"  type='submit' ng-reflect-router-link='/project' #s >Save</button>-->
+    <!--    <button class="btn btn-primary"  type='button' (click)='onClear(f, title)' #c >Clrar</button>-->
+    <!--</form>-->
+    
+    
+    
+    
+    <form [ngClass]="{'hidden' : !showForm}" (ngSubmit)='onSave(f, title)' #f="ngForm">
         <div class="form-group">
+            <div class='hsi-error' *ngIf='isError'>{{errorMessage}}</div>
             <label for="title">Title</label>
             <input id='project-title' 
                    type="text" 
-                   class="form-control" 
+                   class="form-control p_title" 
                    [ngModel]='project?.title' 
                    name="title" 
                    #title 
@@ -33,8 +74,16 @@
                       name="desc">
             </textarea>
         </div>
-        <button class="btn btn-info" type='submit'>Save</button>
-        <button class="btn btn-default hsi-btn-default-alt" type=button (click)='onClear(f, title)'>Clear</button>
+        <button class="btn btn-info" 
+                type='submit'>
+            Save
+        </button>
+        <button class="btn btn-default hsi-btn-default-alt" 
+                title="Clear and close the form"
+                type=button 
+                (click)='onClear(f, title)'>
+            Clear
+        </button>
         
     </form>
 </div>

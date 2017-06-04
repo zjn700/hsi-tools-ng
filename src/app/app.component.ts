@@ -19,8 +19,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(){
      this.authService.showWarning
       .subscribe(showMessage =>{
-        console.log('9999999999999999')
-        console.log(showMessage)
+        // console.log('9999999999999999')
+        // console.log(showMessage)
         this.showWarningMessage = showMessage
         this.warningMessage = 'Your session has expired. Please sign in again.'
 

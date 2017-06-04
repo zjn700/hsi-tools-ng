@@ -14,8 +14,6 @@ export class DomainService {
     private domains: Domain[] = [];
     public lastActiveProject:string = '';
     public lastActiveQnn:string = '';
-    // public t_Response:Observable<Response>
-    
 
     constructor(private http: Http, private projectService: ProjectService) { }
 
@@ -84,7 +82,6 @@ export class DomainService {
                 this.lastActiveProject=localStorage.getItem('pid')       
                 this.lastActiveQnn=localStorage.getItem('qnnId')       
                 this.domains = t_domains
-                this.projectService.domains = this.domains
                 return this.domains
             })
             .catch((error: Response) => Observable.throw(error));

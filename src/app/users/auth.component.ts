@@ -11,8 +11,6 @@ export class AuthComponent {
     constructor(private authService: AuthService) { }
 
     isLoggedIn() {
-          //console.log('logged in')
-          //onsole.log(this.authService.isLoggedIn())
           return this.authService.isLoggedIn();   
     }
     

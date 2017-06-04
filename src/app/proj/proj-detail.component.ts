@@ -30,12 +30,14 @@ export class ProjDetailComponent {
     }
     
     onGoToProject(button) {
-      localStorage.setItem('resume', 'false')
+      localStorage.setItem('resume', 'false');
       localStorage.setItem('pid', this.project.id);
       localStorage.setItem('ptitle', this.project.title.valueOf());
-      this.router.navigate([button.getAttribute('ng-reflect-router-link')])   //(['/tools']) 
-      this.topMenuService.updateTopMenu(button)
-      this.projectService.setActiveProject(this.project)
+      this.router.navigate([button.getAttribute('ng-reflect-router-link')]);   //(['/tools']) 
+      this.topMenuService.updateTopMenu(button);
+      this.projectService.setActiveProject(this.project);
+      localStorage.removeItem('qnnId');
+
 
     }
     

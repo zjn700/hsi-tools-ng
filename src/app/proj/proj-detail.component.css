@@ -1,7 +1,11 @@
-.p-desc{
+.p-desc, .p-date{
    font-size:1.4em; 
 }
 
+.p-date {
+    margin-top: 8px;
+    float:right;
+}
 a {
     cursor:pointer;
 }

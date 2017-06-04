@@ -13,7 +13,6 @@ import { CardService } from '../card/card.service';
 import { ProjectService } from '../proj/proj.service';
 import { Project } from '../proj/proj.model';
 import { KEY_CODE } from '../shared/key-code.enum';
-//import { ISubscription } from "rxjs/Subscription";
 import "rxjs/add/operator/takeWhile";
 
 
@@ -48,14 +47,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   menuItemSelected = false;
   answerSelected = null;
   
-  
-  //private  isInitialized:boolean=false;
   private alive: boolean = true;
-
-  // private subscription: ISubscription;
-  // private sub_up1: ISubscription;
-  // private sub_up2: ISubscription;
-  // private sub_up3: ISubscription;
 
   
   childMessage:string;
@@ -162,29 +154,32 @@ export class DomnComponent implements OnInit, OnDestroy {
               private projectService: ProjectService,
               private authService: AuthService) { }
 
+  checkAndUpdate(n){
+    console.log(n)
+    n++
+    if (!this.authService.checkToken()) {
+      this.projectService.updateProject(this.activeProject)
+        .takeWhile(() => this.alive)
+        .subscribe(result => {
+            console.log('result');
+            console.log(result);
+            setTimeout(()=>this.checkAndUpdate(n), 15000)
+  
+        } )     
+    }
+  }
 
   ngOnDestroy(){
-    //this.alive = false;
-    console.log(this.projectService.activeProject)
-    console.log(this.activeProject)
-    this.projectService.updateProject(this.activeProject)
-            .takeWhile(() => this.alive)
-            .subscribe(result => {
-                console.log('result');
-                console.log(result);
-                this.alive = false;
+    if (!this.authService.checkToken()) {
+      this.projectService.updateProject(this.activeProject)
+       .takeWhile(() => this.alive)
+       .subscribe(result => {
+          this.alive = false;
 
-            } )     
-    
-    
-    
-    //this.projectService.updateProject(this.projectService.activeProject)
-    //this.projectService.lastActiveQnn = this.projectId
-    //this.domainService.lastActiveQnn = this.qnnId;
-    //this.domainService.lastActiveProject = this
-    //this.domains.length = 0;
-    //this.questions.length = 0;
-    //this.answers.length = 0; 
+       }) 
+    } else {
+      this.alive = false;
+    }
   }
 
   testAnswersArray(answers, index) {  // in this case the last domain's answers
@@ -199,21 +194,18 @@ export class DomnComponent implements OnInit, OnDestroy {
     }
     this.isInitialized = true; // all answers loaded
   }
-
-  ngAfterViewInit(){
-      console.log('domn after view init')    
-  }
   
   ngOnInit() {
-      console.log('domn init')    
+    console.log('domn init')    
     
-    // get values from localStorage
+    // get values from localStorage for use in the html view
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle');
     this.projectId = localStorage.getItem('pid')
     
     this.activeProject = this.projectService.activeProject
-    // set up subscriptions:
+    
+    // begin:  set up subscriptions...
     
     // get question domains
     this.domainService.getDomains()
@@ -221,7 +213,7 @@ export class DomnComponent implements OnInit, OnDestroy {
       .subscribe((domains: Domain[])=>{
         this.domains = domains;
         
-        if (localStorage.getItem('resume') == 'true' && this.activeProject) {
+        if (localStorage.getItem('resume') == 'true' && this.activeProject) {  // resume where left off
           this.domainService.addDomainAnswers(domains[this.activeProject.state.domainNumber-1])  // extra step for initialization only
             .takeWhile(() => this.alive)
             .subscribe(answers => {
@@ -232,8 +224,10 @@ export class DomnComponent implements OnInit, OnDestroy {
                 this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
                 this.updateContent(this.activeProject.state.questionNumber-1);
                 this.cleanUpFormat();
+                this.checkAndUpdate(0);
+
           })
-        } else {
+        } else {   // start from the beginning
             this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
               .takeWhile(() => this.alive)
               .subscribe(answers => {
@@ -244,23 +238,22 @@ export class DomnComponent implements OnInit, OnDestroy {
                 this.updateContent(0);
                 this.cleanUpFormat();
                 localStorage.setItem('resume', 'true')
+                this.checkAndUpdate(0);
+
             })          
         }
-
-        
-        // this.domainService.addDomainAnswers(domains[0])  // extra step for initialization only
-        //   .takeWhile(() => this.alive)
-        //   .subscribe(answers => {
-        //     this.domain = domains[0];
-        //     this.questions = this.domain.questions;
-        //     this.activeDomainNumber = this.domain.sequence;
-        //     this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
-        //     this.updateContent(0);
-        //     this.cleanUpFormat();
-        // })
-        
-        
     })
+    
+    this.authService.showWarning  // if token is about to expire, then update the project state
+      .takeWhile(() => this.alive)
+      .subscribe(loggingOut => {
+        this.projectService.updateProject(this.activeProject)
+        .takeWhile(() => this.alive)
+        .subscribe(result => {
+            console.log('result');
+            console.log(result);
+        })
+    })    
       
     this.cardService.questionSelected
       .takeWhile(() => this.alive)
@@ -281,16 +274,11 @@ export class DomnComponent implements OnInit, OnDestroy {
         this.inTextInput = selected;
     })
     
-    
     this.cardService.updateThisAnswer
       .takeWhile(() => this.alive)
       .subscribe((answer: Answer) => {
       
-        // if (this.authService.checkToken()){
-        //       console.log('yep expired')
-        // }
-        
-        // uodate the answers values in memory (answer array) before submitting to the db
+        // update the answers values in memory (answer array) before submitting to the db
         this.domain.answers[answer.sequence-1].rationale = answer.rationale;
         this.domain.answers[answer.sequence-1].value = answer.value;
         if (answer.value == true){    // if answer is yes, remove risk value
@@ -307,7 +295,7 @@ export class DomnComponent implements OnInit, OnDestroy {
           this.cardService.addAnswerToDb(answer)
             .takeWhile(() => this.alive)
             .subscribe(data => {
-              // add field values created by the db
+              // add field values created by the db to the in memory array
               this.domain.answers[answer.sequence-1].id = data.obj._id   
               this.domain.answers[answer.sequence-1].dateCreated = data.obj.dateCreated
               if (this.domain.answers[answer.sequence-1].value==true) {
@@ -418,26 +406,15 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   updateContent(index) {
-    console.log(index)
-    console.log(this.domain.questions)
     this.q_content = this.domain.questions[index].content;
-    console.log(this.q_content)
     this.a_value = this.domain.answers[index].value;
     this.a_details = this.domain.answers[index];
     this.cardService.setFullScreen(this.a_details)
     this.cardService.setRiskValue(this.a_details.riskValue);
-    //console.log(this.projectService.activeProject)
-    console.log(this.projectService.activeProject)
-    console.log(location.pathname);
-    console.log(this.domain.id)
-    console.log(this.a_details.sequence)
-    console.log(localStorage.getItem('userId'))
-    //console.log(this.authService.active_user)
     this.updateState();
   }
   
   updateState(){
-
     var t_state = new SessionState(
       location.pathname,
       localStorage.getItem('qnnId'),
@@ -450,22 +427,8 @@ export class DomnComponent implements OnInit, OnDestroy {
       new Date()
       ); 
     if (this.activeProject)  {
-      console.log('XXXXthis.projectService.activeProject')
-      console.log(this.activeProject)
-    
       this.activeProject.state = t_state;
-      console.log('t_state')
-      console.log(t_state)
     }
-    //console.log(this.projectService.activeProject.state)
-    // t_state.url = location.pathname;
-    // t_state.domainId = this.domain.id;
-    // t_state.domainNumber = this.domain.sequence
-    // t_state.questionNumber = this.a_details.sequence;
-    // //t_state.userId
-    // t_state.dateModified = new Date();
-    // console.log(t_state)
-    // //console.log(this.projectService.activeProject.state)
   }
   
   cleanUpFormat(){
