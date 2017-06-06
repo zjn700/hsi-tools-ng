@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   //   this.warningMessage = 'yep'
   // }
   onClick(){
-    console.log(this.authService.checkToken())
+    console.log(this.authService.isTokenExpired())
   }
   
   onButtonClick(){

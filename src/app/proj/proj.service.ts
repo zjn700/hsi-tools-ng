@@ -6,6 +6,7 @@ import { Observable } from 'rxjs'
 import { Domain } from '../domn/domn.model'
 import { Project } from './proj.model';
 import { SessionState } from '../state/state.model'
+import { Answer } from '../card/ansr/ansr.model';
 
 @Injectable()
 export class ProjectService {
@@ -23,6 +24,30 @@ export class ProjectService {
     
     setActiveProject(project: Project){
         this.activeProject = project
+    }
+    
+    isStateUpdateRequired(answer: Answer) {
+        console.log(answer);
+        console.log(this.activeProject.state)
+        if (answer.projectId != this.activeProject.id) {
+            console.log('state update required')
+            return true
+        }
+        if (localStorage.getItem('qnnId') != this.activeProject.state.qnnId) {
+            console.log('state update required')
+            return true
+        }
+        if (answer.domainId != this.activeProject.state.domainId) {
+            console.log('state update required')
+            return true
+        }
+        if (answer.sequence != this.activeProject.state.questionNumber) {
+                console.log('state update required')
+                return true
+        }
+        console.log("no state update req'd");
+        return false
+
     }
     
     addState(project: Project):Project {

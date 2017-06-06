@@ -32,7 +32,7 @@ export class AuthService  {
             .catch((error: Response) => Observable.throw(error));
     }    
     
-    checkToken(){
+    isTokenExpired(){
         var payloadBytes = localStorage.getItem('token').split('.')[1];
         //console.log(JSON.parse(atob(payloadBytes)).exp)
         let t_date = new Date().valueOf()/1000 

@@ -58,7 +58,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   @HostListener('click', ['$event']) onClick(event:Event) {
-    console.log(this.authService.checkToken())
+    console.log(this.authService.isTokenExpired())
 
     if (this.isInitialized) {
       console.log('initialized')
@@ -69,7 +69,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
 
   keyEvent(event: KeyboardEvent) {
-    console.log(this.authService.checkToken())
+    console.log(this.authService.isTokenExpired())
 
     if (this.inTextInput && this.isInitialized) {
       if (event.keyCode === KEY_CODE.T_KEY) {
@@ -157,20 +157,25 @@ export class DomnComponent implements OnInit, OnDestroy {
   checkAndUpdate(n){
     console.log(n)
     n++
-    if (!this.authService.checkToken()) {
-      this.projectService.updateProject(this.activeProject)
-        .takeWhile(() => this.alive)
-        .subscribe(result => {
-            console.log('result');
-            console.log(result);
-            setTimeout(()=>this.checkAndUpdate(n), 15000)
-  
-        } )     
+    if (this.alive) {
+      if (!this.authService.isTokenExpired()) {
+        if (this.projectService.isStateUpdateRequired(this.a_details)) {
+          this.projectService.updateProject(this.activeProject)
+            .takeWhile(() => this.alive)
+            .subscribe(result => {
+                console.log('result');
+                console.log(result);
+                setTimeout(()=>this.checkAndUpdate(n), 15000)
+            })     
+        } else {
+          setTimeout(()=>this.checkAndUpdate(n), 15000);
+        }
+      } 
     }
   }
 
   ngOnDestroy(){
-    if (!this.authService.checkToken()) {
+    if (!this.authService.isTokenExpired()) {
       this.projectService.updateProject(this.activeProject)
        .takeWhile(() => this.alive)
        .subscribe(result => {

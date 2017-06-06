@@ -27,12 +27,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   @HostListener('click', ['$event']) 
   onClick(event:Event) {
-    console.log(this.authService.checkToken())
+    console.log(this.authService.isTokenExpired())
   }
   
   @HostListener('window:keyup', ['$event'])     
   keyEvent(event: KeyboardEvent) {
-    console.log(this.authService.checkToken())    
+    console.log(this.authService.isTokenExpired())    
   }    
     
     constructor(private projectService: ProjectService, 
