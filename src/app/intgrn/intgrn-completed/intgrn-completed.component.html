@@ -1,64 +1,47 @@
-<div class="container disable-text-selection">
-    <div class="row">
-        <div class="col-md-12">
-            <!--p style="font-size: 28px; color:white">Integration Trade-Offs: <span style="color:coral">Manpower vs. Personnel vs. Training</span></p-->
-            <h1>Integration Trade-Offs: <span style="color:coral">Evaluation Review</span></h1>
+<div class="disable-text-selection hsi-intgrn-form">
+    <h2 *ngIf='integrations.length>0'>Select an evaluation:</h2>
+    <h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:</h2>
+        <div row col-md-8 col-md-offset-2>
             
-            <h2>{{qnnTitle}}: 
-                <span class='p-title' 
-                      id='project'>
-                  {{projectTitle}}
-                </span>
-            </h2>
-                <h3>Click on the evaluations to edit them. When the review is complete, click the submit button for the report preview.</h3>
+            <div *ngFor="let integration  of integrations" 
+                  id={{integration.id}}
+                  class="hsi-intgrn-complete"
+                  #evaluation>
+                <a  title="Resume work on this in this evaluation"
+                    (click)="onResumeEvaluation(evaluation)" >
+                    {{integration.title}}
+                </a>
+                <div class='row hsi-btn-row'>
+                    <button *ngIf="1!=0" 
+                            title="Resume work on this in this evaluation"
+                            id={{integration.id}}
+                            type="button" 
+                            class="btn btn-info" 
+                            (click)="onResumeEvaluation(evaluation)">
+                        Resume
+                    </button>                        
+                    <button type="button"
+                            title="Add or remove domiains in this evaluation"
+                            class="btn btn-default hsi-btn-default" 
+                            (click)="onEdit(evaluation)">
+                        Edit Title
+                    </button>
+                    <button type="button" 
+                            title="Archive this evaluation"
+                            class="btn btn-default hsi-btn-default"
+                            (click)="onArchive()">
+                        Archive
+                    </button>
+                </div>
+            </div>
+            
+            <!--div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
+            <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
+            <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
+            <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
+            <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div-->
         </div>
-    </div>
-
-    <!--div class="row"-->
-        <ul>
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Manpower vs. Personnel vs. Training (MPT)</button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Environment vs. Safety vs. Occupational Health (ESOH)</button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Manpower vs. Human Factors </button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Personnel vs Human Factors</button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Training vs. Human Factors </button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Environment vs Occupational Health </button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Safety vs Occupational Health</button>
-            </li>
-            
-            <li class="list-group-item">
-                <button type="button" class="btn btn-default btn-block">Occupational Health vs. Survivability </button>
-            </li>
-            
-        </ul>
-    <!--/div-->
-
-    <footer>
-      <div 
-          (click)="hideCompleted()" 
-          class="glyphicon glyphicon-circle-arrow-left pull-left">
-      </div>        
-      <div
-          class="glyphicon glyphicon-thumbs-up pull-right smaller"><span class='btn-title'>Submit</span>
-      </div>
-    </footer>
-
 </div>

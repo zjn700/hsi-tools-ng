@@ -1,4 +1,8 @@
-h2 {
+.hsi-intgrn-form{
+    padding-top: 4px;
+}
+
+.hsi-intgrn-title {
     color:white;
 }
 
@@ -13,6 +17,34 @@ h2 {
     /* border: 1px solid #ddd; */
 }
 
+.hsi-intgrn-complete {
+  width:80%;
+  min-width: 800px
+}
+
+.hsi-intgrn-complete {
+    width: 100%;
+    cursor: pointer;
+    min-width: 1000px;
+    font-size: 1.8em;
+    color: rgba(0, 0, 0, .75);
+    text-align: left;
+    padding: 15px 25px;
+    padding-bottom: 6px;
+    margin-bottom: 1px;
+    border-bottom: 4px solid #eee;
+    background: rgba(255, 255, 255, 1);
+}
+
+.hsi-intgrn-completex:hover {
+    color:#5bc0de; /*#337ab7;*/
+
+}
+
+.hsi-btn-row {
+    margin-left:5px;
+}
+
 .btn-default {
     color: #fff;
     background-color: rgba(255, 255, 255, .25);
@@ -20,11 +52,29 @@ h2 {
     font-size:2em;
 }
 
+.btn-default {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .5);
+    border-color: rgba(0,0,0,.0001);
+
+}
+
+.btn {
+    font-size: .8em;
+    float: left;
+    margin-right: 8px;
+    margin-top: 8px;    
+}
+
 .btn:hover {
-    background:white;
+    background-color: rgba(0, 0, 0, .15);
     color:#222;
 }
 
+.btn-info:hover {
+    background:#53acc7; /*#6edeff;*/
+    color:white;
+}
 .glyphicon{
   color: silver;
   font-size:4.5em;

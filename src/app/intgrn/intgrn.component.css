@@ -1,6 +1,33 @@
+.btn.glyphicon{
+    font-size: 1.4em;
+    background: tomato;
+    color:white;
+}
+
+.floating {
+    position: fixed;
+    top: 82.5%;
+    left: 73%;
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+    /*background: coral;*/
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+/**************/
 .btn-group, .btn-group-vertical {
     width: 100%;
-    margin-left: 25%;
+    margin-left: 5%;
 }
 
 .btn-blockx{
@@ -13,14 +40,10 @@
 
 
 .btn, .btn-warning{
-  background-color:coral;
 }
 
 .disable-text-selection {}
 
-h2 {
-  color:white;
-}
 
 .p-title{
   color:peachpuff;
@@ -30,7 +53,7 @@ h2 {
 
 .btn-block {
     height: 55px;
-    width:50%;
+    width:70%;
     font-size: 1.5em;
     text-align:center;
     
@@ -76,3 +99,121 @@ button:focus {
   background-color: peachpuff;
   color: #222;
 }
+
+
+
+/********************/
+
+.hsi-intgrn-title{
+  color: white;
+}
+
+.hsi-intgrn-instruction{
+  width:1000px;
+}
+
+.checkbox-box {
+  min-width: 1000px
+}
+
+.checkbox-divx {
+  float: left;
+  font-size: 2em;
+  width: 50%;
+  min-width: 500px;
+  background: white;
+  margin: 0;
+}
+
+.checkbox-div {
+  cursor: pointer;
+  float: left;
+  font-size: 1.7em;
+  width: 33%;
+  height: 100px;
+  min-width: 333px;
+  background: white;
+  margin: 0;
+}
+
+.checkbox-div:hover {
+  color:#272b31;
+}
+
+.glyphicon-check, .glyphicon-unchecked {
+  font-size: 1em;
+  background: transparent;
+}
+
+.glyphicon-check:hover, .glyphicon-unchecked:hover {
+  color:coral;
+  background:transparent;
+}
+
+.blank {
+  color:transparent;
+  background:transparent;
+}
+
+.blank:hover {
+  color:transparent;
+  background: transparent;
+  
+}
+
+.glyphicon-check.blank:hover {
+  background:transparent;
+  color:transparent;
+}
+
+.hsi-intgrn-btn-row {
+  width:100%;
+  min-width: 1000px;
+}
+
+.hsi-btn-default-alt {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, .25);
+    border-color: transparent;
+}
+
+.hsi-btn-default-alt:hover {
+  color: #222;
+  background-color: rgba(255, 255, 255, .75);
+  border-color: transparent;
+}
+
+.hsi-intgrn-btn-row > .btn {
+  margin-top:8px;
+  margin-left:8px;
+}
+.hsi-right {
+  float:right;
+}
+
+.hsi-btn-intgrn {
+  width:200px;
+  color:#fff;
+  background-color: rgba(255, 255, 255, .25);
+  border-color: transparent;
+
+}
+
+.hsi-btn-intgrn:hover {
+  color: #222;
+  background-color: rgba(255, 255, 255, .75);
+  border-color: transparent;
+
+}
+
+.btn-div {
+  margin-top:8px;
+}
+
+.errorMessage {
+    float: right;
+    margin: 10px;
+    font-size: 1.5em;
+    color: tomato;
+}
+

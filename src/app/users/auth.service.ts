@@ -37,23 +37,13 @@ export class AuthService  {
         //console.log(JSON.parse(atob(payloadBytes)).exp)
         let t_date = new Date().valueOf()/1000 
         let exp_date = JSON.parse(atob(payloadBytes)).exp
-        // console.log('t_date')
-        // console.log(t_date)
         if ( exp_date - 35 < t_date) {
             this.router.navigate(['/logout'])
             setTimeout(this.showWarning.emit(true), 5000)
-            //this.forceLogout();
             return true
         }
         // console.log(exp_date -10 < t_date)
         // console.log(exp_date -1  > t_date)
-        // if (exp_date -10 < t_date  &&
-        //      exp_date -1 > t_date ) {
-        //         console.log('issue warningMessage')
-        //         this.showWarning.emit(true)
-        //         //setTimeout(this.showWarning.emit(false), 3000)
-        //     } 
-
         return false
         
     }

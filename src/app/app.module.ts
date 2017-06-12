@@ -31,6 +31,7 @@ import { DomainService } from './domn/domn.service';
 //import { QstnService } from './card/qstn/qstn.service';
 import { CardService } from './card/card.service';
 import { TopMenuService } from './shared/top-menu.service';
+import { IntegrationService } from './intgrn/intgrn.service';
 
 import { routing } from './app-routing.module';
 import { CardHolderComponent } from './card/card-holder.component';
@@ -93,7 +94,7 @@ import { IntgrnCompletedComponent } from './intgrn/intgrn-completed/intgrn-compl
     ReactiveFormsModule,
     routing
   ],
-  providers: [AuthService, ProjectService, SelectorService, DomainService, CardService, TopMenuService],          
+  providers: [AuthService, ProjectService, SelectorService, DomainService, CardService, TopMenuService, IntegrationService],          
 
   bootstrap: [AppComponent]
 })

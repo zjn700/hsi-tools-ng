@@ -31,10 +31,10 @@ export class ProjListComponent implements OnInit {
           .subscribe(
             (isUpdated: boolean) => {
               if (isUpdated) {
-                console.log('before sort')
-                console.log(this.projects)
+                // console.log('before sort')
+                // console.log(this.projects)
                 this.projects = this.projectService.sortProjectList();
-                console.log(this.projects)
+                // console.log(this.projects)
 
                }
           });

@@ -3,6 +3,7 @@ import {Component,
         OnInit,
         HostListener, 
         OnDestroy} from '@angular/core';
+import { Router } from '@angular/router';
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
@@ -152,19 +153,20 @@ export class DomnComponent implements OnInit, OnDestroy {
   constructor(private domainService: DomainService, 
               private cardService: CardService,
               private projectService: ProjectService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router:Router) { }
 
-  checkAndUpdate(n){
-    console.log(n)
-    n++
+  checkAndUpdate(n){   // if user doesn't leave the domain, state isn't updated
+    console.log(n)     // ...so run periodic checks for changes while...
+    n++                // ...user is still logged in and still in this domain
     if (this.alive) {
       if (!this.authService.isTokenExpired()) {
         if (this.projectService.isStateUpdateRequired(this.a_details)) {
-          this.projectService.updateProject(this.activeProject)
+          this.projectService.updateProject(this.projectService.activeProject)
             .takeWhile(() => this.alive)
             .subscribe(result => {
-                console.log('result');
-                console.log(result);
+                // console.log('result');
+                // console.log(result);
                 setTimeout(()=>this.checkAndUpdate(n), 15000)
             })     
         } else {
@@ -176,12 +178,23 @@ export class DomnComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     if (!this.authService.isTokenExpired()) {
-      this.projectService.updateProject(this.activeProject)
-       .takeWhile(() => this.alive)
-       .subscribe(result => {
-          this.alive = false;
+      if (this.projectService.activeProject) {
+        this.projectService.updateProject(this.projectService.activeProject)
+         .takeWhile(() => this.alive)
+         .subscribe(result => {
+            this.alive = false;
+  
+         }) } else {
+           this.projectService.resetActiveProject(localStorage.getItem('pid'))
+           console.log('no activeProject');
+           localStorage.removeItem('qnnId')
+           localStorage.removeItem('pid');
+           this.router.navigate(['/project'])
 
-       }) 
+           this.alive = false;
+
+           //this.authService.showWarning.emit(true)
+         }
     } else {
       this.alive = false;
     }
@@ -208,7 +221,7 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.qnnTitle = localStorage.getItem('qnnTitle');
     this.projectId = localStorage.getItem('pid')
     
-    this.activeProject = this.projectService.activeProject
+    //this.activeProject = this.projectService.activeProject
     
     // begin:  set up subscriptions...
     
@@ -218,16 +231,16 @@ export class DomnComponent implements OnInit, OnDestroy {
       .subscribe((domains: Domain[])=>{
         this.domains = domains;
         
-        if (localStorage.getItem('resume') == 'true' && this.activeProject) {  // resume where left off
-          this.domainService.addDomainAnswers(domains[this.activeProject.state.domainNumber-1])  // extra step for initialization only
+        if (localStorage.getItem('resume') == 'true' && this.projectService.activeProject) {  // resume where left off
+          this.domainService.addDomainAnswers(domains[this.projectService.activeProject.state.domainNumber-1])  // extra step for initialization only
             .takeWhile(() => this.alive)
             .subscribe(answers => {
-                this.domain = domains[this.activeProject.state.domainNumber-1];
+                this.domain = domains[this.projectService.activeProject.state.domainNumber-1];
                 this.questions = this.domain.questions;
                 this.activeDomainNumber = this.domain.sequence;
-                this.activeQuestionNumber = this.activeProject.state.questionNumber;
+                this.activeQuestionNumber = this.projectService.activeProject.state.questionNumber;
                 this.testAnswersArray(this.domains[this.domains.length-1].answers,0)
-                this.updateContent(this.activeProject.state.questionNumber-1);
+                this.updateContent(this.projectService.activeProject.state.questionNumber-1);
                 this.cleanUpFormat();
                 this.checkAndUpdate(0);
 
@@ -252,10 +265,10 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.authService.showWarning  // if token is about to expire, then update the project state
       .takeWhile(() => this.alive)
       .subscribe(loggingOut => {
-        this.projectService.updateProject(this.activeProject)
+        this.projectService.updateProject(this.projectService.activeProject)
         .takeWhile(() => this.alive)
         .subscribe(result => {
-            console.log('result');
+            console.log('showWarning-update-project');
             console.log(result);
         })
     })    
@@ -431,8 +444,8 @@ export class DomnComponent implements OnInit, OnDestroy {
       null,
       new Date()
       ); 
-    if (this.activeProject)  {
-      this.activeProject.state = t_state;
+    if (this.projectService.activeProject)  {
+      this.projectService.activeProject.state = t_state;
     }
   }
   

@@ -23,31 +23,36 @@ export class ProjectService {
     }
     
     setActiveProject(project: Project){
+        console.log('reset activeProject')
         this.activeProject = project
     }
     
+    resetActiveProject(projectId) {
+        console.log(this.projects)
+    }
+    
     isStateUpdateRequired(answer: Answer) {
-        console.log(answer);
-        console.log(this.activeProject.state)
-        if (answer.projectId != this.activeProject.id) {
-            console.log('state update required')
-            return true
-        }
-        if (localStorage.getItem('qnnId') != this.activeProject.state.qnnId) {
-            console.log('state update required')
-            return true
-        }
-        if (answer.domainId != this.activeProject.state.domainId) {
-            console.log('state update required')
-            return true
-        }
-        if (answer.sequence != this.activeProject.state.questionNumber) {
+        if (this.activeProject) {
+            if (answer.projectId != this.activeProject.id) {
                 console.log('state update required')
                 return true
+            }
+            if (localStorage.getItem('qnnId') != this.activeProject.state.qnnId) {
+                console.log('state update required')
+                return true
+            }
+            if (answer.domainId != this.activeProject.state.domainId) {
+                console.log('state update required')
+                return true
+            }
+            if (answer.sequence != this.activeProject.state.questionNumber) {
+                    console.log('state update required')
+                    return true
+            }
         }
         console.log("no state update req'd");
         return false
-
+        
     }
     
     addState(project: Project):Project {
@@ -153,19 +158,21 @@ export class ProjectService {
     }
     
     updateProject(project: Project) {
-        const headers = new Headers({'content-Type': 'application/json'})
-        const body = JSON.stringify(project);
-        const token = localStorage.getItem('token') 
-            ? '?token=' + localStorage.getItem('token')
-            : '';
-        return this.http.patch('/projects/' + project.id + token, body, {headers: headers})
-                .map((response: Response) => {
-                    response.json();
-                    this.projectIsUpdated.emit(true);
-                    //this.projects = this.sortProjectList();
-                    
-                })
-                .catch((error: Response) => Observable.throw(error)); 
+        if (project) {
+            const headers = new Headers({'content-Type': 'application/json'})
+            const body = JSON.stringify(project);
+            const token = localStorage.getItem('token') 
+                ? '?token=' + localStorage.getItem('token')
+                : '';
+            return this.http.patch('/projects/' + project.id + token, body, {headers: headers})
+                    .map((response: Response) => {
+                        response.json();
+                        this.projectIsUpdated.emit(true);
+                        //this.projects = this.sortProjectList();
+                        
+                    })
+                    .catch((error: Response) => Observable.throw(error)); 
+        }
     }
     
     sortProjectList() {  // reverse alpabetical order

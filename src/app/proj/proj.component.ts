@@ -112,13 +112,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
                 this.projectService.addProject(project)      
                     .takeWhile(() => this.alive)
                     .subscribe(
-                        project => {console.log(project); 
-                        localStorage.setItem('pid', project.id);
-                        localStorage.setItem('ptitle', project.title.valueOf());
-                        this.showForm = false;
-                        this.projectService.setActiveProject(project)
-                        this.router.navigate(['/tools']);
-                        this.topMenuService.updateTopMenu('/tools')
+                        project => {
+                            console.log(project); 
+                            localStorage.setItem('pid', project.id);
+                            localStorage.setItem('ptitle', project.title.valueOf());
+                            this.showForm = false;
+                            this.projectService.setActiveProject(project)
+                            this.router.navigate(['/tools']);
+                            this.topMenuService.updateTopMenu('/tools')
                         },
                         error => console.log(error),
                 );            
@@ -150,5 +151,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
         if (this.showForm) {
             this.focusOnTitleInput()
         }
+        //window.print()
     }
 }
