@@ -10,19 +10,29 @@
   width:120%;
   padding-top:5px;
   margin-top:20px;
-  height:275px;
+  height:250px;
   font-size:1.2em;
 }
 
 .disable-text-selection {}
 
-.glyphicon{
+.glyphiconx{
   color: silver;
   font-size:4.5em;
   margin:30px;
+}
+
+.glyphicon {
+    color: silver;
+    font-size: 4.5em;
+    margin: 30px;
+    position: fixed;
+    top: 80%;
+    left: 80%;
 }
 
 .glyphicon:hover{
   color:#eee;
   cursor:pointer;
 }
+

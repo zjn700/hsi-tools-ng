@@ -70,6 +70,9 @@
               Clear
             </button>
             <div *ngIf="showErrorMessage" class='errorMessage'>You must select at least two domains</div>
+            <div *ngIf="showDupeErrorMessage" class='errorMessage'>An evaluation with these domains already exists. Click 'Save' again to go to it.</div>
+
+
           </div>  
       </div>  
     </div>

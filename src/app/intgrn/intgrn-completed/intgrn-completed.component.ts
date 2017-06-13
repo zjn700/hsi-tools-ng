@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import "rxjs/add/operator/takeWhile";
+
 import { IntegrationService } from '../intgrn.service';
 import { Integration } from '../intgrn.model';
 
@@ -7,16 +9,19 @@ import { Integration } from '../intgrn.model';
   templateUrl: './intgrn-completed.component.html',
   styleUrls: ['./intgrn-completed.component.css']
 })
-export class IntgrnCompletedComponent implements OnInit {
+export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   
   @Input() projectTitle:string;
   @Input() qnnTitle:string;
   @Output() hideMe:EventEmitter<boolean> = new EventEmitter<boolean>();  
   private integrations: Integration[] = [];
-  
+  private alive: boolean = true;
 
   constructor(private integrationService: IntegrationService) { }
 
+  ngOnDestroy() {
+    this.alive =false;
+  }
   ngOnInit() {
     this.integrations = this.integrationService.getIntegrations()
     
@@ -38,7 +43,8 @@ export class IntgrnCompletedComponent implements OnInit {
     this.integrationService.editThisEvaluationTitle(evaluation.id)
   }
  
-  onArchive(){
+  onArchive(evaluation){
+    this.integrationService.archiveThisEvaluation(evaluation)
     
   } 
   

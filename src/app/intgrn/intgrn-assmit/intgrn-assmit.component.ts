@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import "rxjs/add/operator/takeWhile";
+
 import { IntegrationService } from '../intgrn.service';
 import { Integration } from '../intgrn.model';
 
@@ -19,6 +21,8 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   private myForm: FormGroup;
   private showCompleted=false;
   private integration: Integration;
+  private alive: boolean = true;
+
 
   constructor(private integrationService: IntegrationService) { }
 
@@ -33,26 +37,22 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(){
-    
+    this.alive = false;
   }
   
   updateAnswer(input){
-    console.log(input.id)
-    console.log(input.value)
-    console.log(this.myForm)
-    console.log(this.myForm.value)
     switch (input.id) {
     case 'risks':
-      console.log(this.activeEvaluation)
-      this.activeEvaluation.risksIssuesConcerns=input.value
+      this.activeEvaluation.risksIssuesConcerns=input.value;
+      //this.activeEvaluation.dateModified = new Date();
       break;
     case 'strategy':
-      console.log(this.activeEvaluation)
-      this.activeEvaluation.mitigationStrategy=input.value
-      break;      
+      this.activeEvaluation.mitigationStrategy=input.value;
+      //this.activeEvaluation.dateModified = new Date();
+      break;  
     }
-    console.log(this.activeEvaluation)
-    
+    this.integrationService.updateEvalDateModifiedById(this.activeEvaluation.id)
+
     
   }
   

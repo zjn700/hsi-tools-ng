@@ -1,5 +1,6 @@
-import { Component, OnInit, HostListener, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import "rxjs/add/operator/takeWhile";
 
 import { CardService } from '../../card.service';
 import { KEY_CODE } from '../../../shared/key-code.enum';
@@ -10,13 +11,14 @@ import { KEY_CODE } from '../../../shared/key-code.enum';
   templateUrl: './ansr-rationale.component.html',
   styleUrls: ['./ansr-rationale.component.css']
 })
-export class AnsrRationaleComponent implements OnInit {
+export class AnsrRationaleComponent implements OnInit, OnDestroy {
  
   @Input() a_value:boolean = null;
   @Input() a_details;
   
   private myForm: FormGroup;
   private start_content:string;
+  private alive: boolean = true;
   
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
     keyEvent(event: KeyboardEvent) {
@@ -45,6 +47,7 @@ export class AnsrRationaleComponent implements OnInit {
     })
     
     this.cardService.focusOnText
+      .takeWhile(() => this.alive)
       .subscribe(()=>{
           let t_textArea = <HTMLElement>document.getElementsByClassName("rationalText")[0];
           if (t_textArea) {
@@ -53,6 +56,9 @@ export class AnsrRationaleComponent implements OnInit {
       })
   }
   
+  ngOnDestroy() {
+    this.alive = false;
+  }
   getRationale(){
     return this.myForm.value.comment
   }

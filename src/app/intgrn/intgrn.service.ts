@@ -15,6 +15,11 @@ export class IntegrationService {
     return this.integrations
   }
   
+  getSortedEvals(){
+    this.sortEvalList();
+    this.updatedIntegrationList.emit(this.integrations)
+  }
+  
   addIntegration(domainList: string[], title: string){
     console.log('in addIntegration');
     console.log(domainList)
@@ -33,10 +38,20 @@ export class IntegrationService {
         new Date(t_date).getTime().toString()
       )
     this.integrations.push(t_integration);
-    console.log(t_integration)
-    this.setActiveIntegration(t_integration.id)
+    this.setActiveIntegration(t_integration.id);
+    this.sortEvalList();
     this.updatedIntegrationList.emit(this.integrations)
 
+  }
+  
+  updateEvalDateModifiedById(evalId){
+    for (var i=0;i < this.integrations.length; i++) {
+      if (this.integrations[i].id == evalId) {
+        this.integrations[i].dateModified = new Date();
+        this.sortEvalList();
+        this.updatedIntegrationList.emit(this.integrations)
+      }
+    }
   }
   
   updateIntegration(index, domainList: string[], title) {
@@ -48,8 +63,8 @@ export class IntegrationService {
     this.integrations[index].title =  title;
     this.integrations[index].dateModified = new Date();
     this.setActiveIntegration(this.integrations[index].id)
-
-    console.log(this.integrations[index])
+    this.sortEvalList();
+    this.updatedIntegrationList.emit(this.integrations)
   }
   
   setActiveIntegration(integrationId) {
@@ -67,8 +82,33 @@ export class IntegrationService {
      for (var i=0; i < this.integrations.length; i++) {
       if (this.integrations[i].id == evaluationId ) {
           console.log(this.integrations[i])
+          this.sortEvalList();
           return this.editEvauationTitle.emit(this.integrations[i])
       }
     }   
   }
+  
+  archiveThisEvaluation(evaluation) {
+     for (var i=0; i < this.integrations.length; i++) {
+      if (this.integrations[i].id == evaluation.id ) {
+          console.log(this.integrations[i])
+          this.integrations.splice(i, 1);
+          return this.updatedIntegrationList.emit(this.integrations)
+      }
+    }    
+  }
+  
+  sortEvalList() {  // reverse chrono order -- newest first
+      console.log('sorting...')
+     return  this.integrations.sort(function(a, b){
+              //if ( a.title > b.title ) {
+              if ( a.dateModified > b.dateModified) {
+                  return -1;}
+              if ( a.dateModified < b.dateModified ) {
+                  return 1;}
+              return 0;
+            })
+  }  
+  
+  
 }

@@ -27,14 +27,31 @@ var DomainService = (function () {
             console.log(response);
         });
     };
+    DomainService.prototype.updateRequired = function () {
+        if (this.lastActiveProject == localStorage.getItem('pid')) {
+            if (this.lastActiveQnn == localStorage.getItem('qnnId')) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            return true;
+        }
+    };
     DomainService.prototype.getDomains = function () {
         var _this = this;
-        console.log(this.lastActiveProject);
-        console.log(this.projectService.lastActiveQnn);
-        console.log(localStorage.getItem('pid'));
-        console.log(localStorage.getItem('qnnId'));
-        if (this.projectService.lastActiveProject != localStorage.getItem('pid')) {
-            console.log('new project');
+        if (!this.updateRequired()) {
+            console.log('update not Required');
+            return this.http.get('/domain/dummy') // returns nothing, but creates the required observable
+                .map(function (response) {
+                return _this.domains; // pass back the current domain array
+            });
+        }
+        else {
+            console.log('update Required');
+            this.domains.length = 0; // empty the current array
         }
         return this.http.get('/domain/' + localStorage.getItem('qnnId'))
             .map(function (response) {
@@ -49,7 +66,7 @@ var DomainService = (function () {
                 var t_Answers = [];
                 t_domains.push(new domn_model_1.Domain(domain.qnn, domain.title, domain.sequence, domain._id, domain.questions, t_Answers));
             }
-            ////new
+            // build answers array for each domain
             var j = 0;
             var _loop_1 = function(domain) {
                 _this.addDomainAnswers(domain)
@@ -64,18 +81,12 @@ var DomainService = (function () {
             _this.lastActiveProject = localStorage.getItem('pid');
             _this.lastActiveQnn = localStorage.getItem('qnnId');
             _this.domains = t_domains;
-            _this.projectService.domains = _this.domains;
-            console.log(_this.projectService.domains);
             return _this.domains;
         })
             .catch(function (error) { return rxjs_1.Observable.throw(error); });
     };
-    DomainService.prototype.getServiceDomains = function () {
-        return this.domains;
-    };
     DomainService.prototype.addDomainAnswers = function (domain) {
         var t_domain = domain;
-        //for (let domain of t_domains) {
         var queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
         return this.http.get('/answers' + queryString)
             .map(function (response) {
@@ -96,9 +107,7 @@ var DomainService = (function () {
                     t_Answers[i].id = answer._id;
                 }
             }
-            //need to add in actual answers returned from query
-            //domain.answers = t_Answers
-            return t_Answers; //t_domains
+            return t_Answers;
         });
     };
     DomainService.prototype.getDomainQuestions = function (domainId) {

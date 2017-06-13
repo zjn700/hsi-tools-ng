@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import "rxjs/add/operator/takeWhile";
+
 import { IntegrationService } from './intgrn.service';
 import { Integration } from './intgrn.model';
 import { DomainService } from '../domn/domn.service';
@@ -9,16 +11,21 @@ import { ProjectService } from '../proj/proj.service';
   templateUrl: './intgrn.component.html',
   styleUrls: ['./intgrn.component.css']
 })
-export class IntgrnComponent implements OnInit {
+export class IntgrnComponent implements OnInit, OnDestroy {
   private projectTitle:string;
   private qnnTitle:string;
   private evaluationTitle:string;
   private activeEvaluation:Integration;
-  private showHeuristics:boolean = true;
   private domainList:string[] = [];
-  private showForm = false;
-  private showErrorMessage = false;
-  private isInEditMode=false;
+  // state:
+  private showHeuristics:boolean = true;
+  private showForm:boolean = false;
+  private showErrorMessage:boolean = false;
+  private showDupeErrorMessage:boolean = false
+  private pauseForDupe:boolean = false
+  private isInEditMode:boolean = false;
+  private alive:boolean = true;
+  // checkboxes:
   private mp:boolean=false;
   private sa:boolean=false;
   private pe:boolean=false;
@@ -33,27 +40,27 @@ export class IntgrnComponent implements OnInit {
               private projectService: ProjectService,
               private integrationService: IntegrationService) { }
 
+  ngOnDestroy() {
+    this.alive = false;
+  }
+  
   ngOnInit() {
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle')
     
-    // this.integrationService.setActiveIntegration
-    //   .subscribe((integration)=>{
-    //     this.evaluationTitle = integration.title;
-    //     this.activeEvaluation = integration;
-    //   })
-    
     this.integrationService.updateActiveIntegration
+      .takeWhile(() => this.alive)
       .subscribe((integration)=>{
         this.evaluationTitle = integration.title;
         this.activeEvaluation = integration;
-        console.log('this.activeEvaluation000000000000')
-        console.log(this.activeEvaluation)
         this.showHeuristics=false;
         this.showErrorMessage = false;
+        this.showDupeErrorMessage = false;
+
       })
 
     this.integrationService.editEvauationTitle
+      .takeWhile(() => this.alive)
       .subscribe((integration)=>{
         this.evaluationTitle = integration.title;
         this.activeEvaluation = integration;
@@ -62,9 +69,11 @@ export class IntgrnComponent implements OnInit {
           this.domainList.push(integration.domainList[i])
           this.toggleByTitle(integration.domainList[i])
         }
-        console.log('this.domainList9999999')
-        console.log(this.domainList)
-        this.onAddHeuristic()
+        this.isInEditMode = true;
+        this.showForm=!this.showForm
+        window.scrollTo(0, 0);
+
+        //this.onAddHeuristic()
       })      
   }
   
@@ -90,7 +99,7 @@ export class IntgrnComponent implements OnInit {
           }
         }
       }
-      if (total ==  this.domainList.length) {
+      if (total ==  this.domainList.length && total == t_integrations[i].domainList.length) {
         return i
       } else {
         total = 0;
@@ -99,27 +108,59 @@ export class IntgrnComponent implements OnInit {
     return null
   }
   
-  goToEvaluation(){
-    if (this.domainList.length < 2 ){
+  goToEvaluation(){                     // save key pressed
+    if (this.domainList.length < 2 ){   // need 2 domains for
       this.showErrorMessage = true;
-    } else {
-      let index = this.checkDomainListForDuplicates()
-      if ( index != null) {
-        this.evaluationTitle = this.buildEvaluationTitle()
-        this.integrationService.updateIntegration(index, this.domainList, this.evaluationTitle);
-        this.showHeuristics=false;
-        this.showErrorMessage = false;
+      this.showDupeErrorMessage = false;
+
+    } else {                            // if at least 2 domains sewlected
+      if (this.isInEditMode){           // ...if edit title button was pressed
+        let index = this.checkDomainListForDuplicates()
+        if ( index != null) {           // there is a dupe
+          this.isInEditMode = false;
+          this.showDupeErrorMessage = true;
+          this.pauseForDupe = !this.pauseForDupe
+
+        } else {
+            console.log('edit mode 0000000000000000000000')
+            this.evaluationTitle = this.buildEvaluationTitle()
+            this.activeEvaluation.title = this.evaluationTitle;
+            this.activeEvaluation.domainList.length = 0;
+            for (var i=0; i < this.domainList.length; i++) { 
+              this.activeEvaluation.domainList.push(this.domainList[i])
+              this.toggleByTitle(this.domainList[i])
+            }            
+            this.integrationService.updateEvalDateModifiedById(this.activeEvaluation.id);
+            
+            this.isInEditMode = false;
+            this.showHeuristics=false;
+            this.showErrorMessage = false;
+            this.showDupeErrorMessage = false;
+        }
       } else {
-        this.evaluationTitle = this.buildEvaluationTitle();
-        this.showHeuristics=false;
-        this.showErrorMessage = false;
-        this.integrationService.addIntegration(this.domainList, this.evaluationTitle)
+        let index = this.checkDomainListForDuplicates()
+        if ( index != null) {
+          this.pauseForDupe = !this.pauseForDupe
+          if (this.pauseForDupe) {
+            this.showDupeErrorMessage = true;
+          } else {
+            this.evaluationTitle = this.buildEvaluationTitle()
+            this.integrationService.updateIntegration(index, this.domainList, this.evaluationTitle);
+            
+            this.showHeuristics=false;
+            this.showErrorMessage = false;
+            this.showDupeErrorMessage = false;
+          }
+        } else {
+          this.evaluationTitle = this.buildEvaluationTitle();
+          this.integrationService.addIntegration(this.domainList, this.evaluationTitle)
+         
+          this.showHeuristics=false;
+          this.showErrorMessage = false;
+          this.showDupeErrorMessage = false;
+        }
       }
     }
-  }
-  
-  onHideMe(){
-    this.showHeuristics=true;
   }
   
   toggleByTitle(title){
@@ -155,9 +196,6 @@ export class IntgrnComponent implements OnInit {
   }
   
   toggleMe(item){
-    console.log(<HTMLElement>item.id)
-    console.log(item.classList)
-
     switch(item.id) {
     case 'mp':
       this.mp = !this.mp;
@@ -197,30 +235,29 @@ export class IntgrnComponent implements OnInit {
       break;
     }
   }
+  
+  deleteEval(){
+    
+  }
  
-  updateDomainList(title){
+  updateDomainList(domainTitle){   // if the domain is in the list, remove it; if not, add it
     var wasNotInList = true;
     for (var i=0; i < this.domainList.length; i++) {
-      if (this.domainList[i] == title) {
+      if (this.domainList[i] == domainTitle) {
         this.domainList.splice(i, 1);
         wasNotInList = false;
-        console.log(this.domainList)
         return;
       }
     }
     if (wasNotInList) { 
-      this.domainList.push(title)
+      this.domainList.push(domainTitle)
     }
     if (this.domainList.length >= 2) {
         this.showErrorMessage = false;
     }
-    console.log(this.domainList)
-    
   }
  
   toggleMPT(){
-    //this.showErrorMessage = false;
-    //this.domainList = [];
     this.onClear();
     this.mp = true;
     this.pe = true;
@@ -231,8 +268,6 @@ export class IntgrnComponent implements OnInit {
   }
   
   toggleESOH(){
-    //this.showErrorMessage = false;
-    //this.domainList.length = 0;
     this.onClear();
     this.sa = true;
     this.oh = true;
@@ -240,13 +275,12 @@ export class IntgrnComponent implements OnInit {
     this.updateDomainList('Environment')
     this.updateDomainList('Safety')
     this.updateDomainList('Occupational Health')
-    //this.evaluationTitle = this.buildEvaluationTitle()
-
   }
  
   onClear() {
     this.domainList.length = 0;
     this.showErrorMessage = false
+    this.showDupeErrorMessage = false
     this.mp = false;
     this.sa = false;
     this.pe = false;
@@ -260,12 +294,13 @@ export class IntgrnComponent implements OnInit {
 
   onAddHeuristic(){
     this.showForm=!this.showForm
-    //this.inEditMode = false;
-    //this.isError=false;
+    this.onClear();
     window.scrollTo(0, 0);
-    if (this.showForm) {
-        //this.focusOnTitleInput()
-    }
   }
-
+  
+  onHideMe(){
+    this.showHeuristics=true;
+    this.showForm=false;
+  }
+  
 }
