@@ -25,7 +25,7 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
     this.cardService.answerKeyPressed
       .takeWhile(() => this.alive)
       .subscribe(answer => {
-        this.emitAnswerSelected(answer)
+        this.emitAnswerSelected(answer, null)
       })
       
     this.cardService.escapePressed
@@ -45,7 +45,12 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
   }
 
   
-  emitAnswerSelected(value){
+  emitAnswerSelected(value, event){
+    if (event) {
+      if (event.ctrlKey){
+        value=null;
+      }
+    }
     console.log('emitAnswerSelected ' + value)
     if (this.a_value != value) {
       this.cardService.emitAnswerSelected(value)

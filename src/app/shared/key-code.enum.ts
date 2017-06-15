@@ -16,6 +16,8 @@ export enum KEY_CODE {
   R_KEY = 82,
   T_KEY = 84,
   Y_KEY = 89,
+  EQUALS_KEY = 187,
+  DASH_KEY = 189,
   N_KEY = 78
 }
 

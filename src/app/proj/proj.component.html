@@ -7,16 +7,16 @@
         Each questionnaire produces a report with risk matrices and comments for each question item.
     </h3>
     </div>
-    <button (click)="onAddProject()" 
+    <button (click)="onAddProject($event)" 
             *ngIf='!showForm'
             title='Add a heuristic' 
-            class='btn btn-danger glyphicon glyphicon-plus  floating'>
+            class='btn glyphicon glyphicon-plus  floating floating-green'>
         
     </button>
-    <button (click)="onAddProject()"
+    <button (click)="onAddProject($event)"
             *ngIf='showForm'
             title='Hide form' 
-            class='btn btn-danger glyphicon glyphicon-minus floating'>
+            class='btn glyphicon glyphicon-minus floating floating-red'>
         
     </button>
     <h2 *ngIf="!inEditMode && showForm">Add a Project:</h2>
@@ -87,4 +87,5 @@
         
     </form>
 </div>
+    
 <app-proj-list></app-proj-list>

@@ -8,7 +8,9 @@ import { User } from './user.model';
 
 @Component({
     selector: 'hsi-signup',
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    styleUrls: ['./user.css']
+    
 })
 export class SignupComponent implements OnInit, OnDestroy {
     myForm: FormGroup

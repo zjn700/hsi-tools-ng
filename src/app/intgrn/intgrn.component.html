@@ -1,6 +1,6 @@
 <div class="row col-md-8 col-md-offset-2"
       *ngIf='showHeuristics'>
-  <h1>Integration Trade-Offs</h1> <!--span style="color:coral">Heuristics</span></h1-->
+  <h1>Integration Trade-Offs</h1>
   <h2 class='hsi-intgrn-title'>{{qnnTitle}}: 
     <span class='p-title' 
           id='project'>
@@ -8,17 +8,15 @@
     </span>
   </h2>
 
-  <button (click)="onAddHeuristic()" 
+  <button (click)="addEval()" 
           *ngIf='!showForm'
           title='Add an evaluation.' 
-          class='btn btn-danger glyphicon glyphicon-plus  floating'>
-      
+          class='btn glyphicon glyphicon-plus  floating floating-green'>
   </button>
-  <button (click)="onAddHeuristic()"
+  <button (click)="addEval()"
           *ngIf='showForm'
           title='Hide form' 
-          class='btn btn-danger glyphicon glyphicon-minus floating'>
-      
+          class='btn glyphicon glyphicon-minus floating floating-red'>
   </button>
 
   <hr>
@@ -34,29 +32,27 @@
       </div>
       <div class="row checkbox-box">
           <div>
-            <div id='mp' *ngIf='!mp' (click)='toggleMe(mp)' class='checkbox-div' #mp><span class="glyphicon glyphicon-unchecked"></span>Manpower</div>
-            <div id='mp' *ngIf='mp'  (click)='toggleMe(mp)' class='selected checkbox-div' #mp><span  class="selected glyphicon glyphicon-check" ></span>Manpower</div>
-            <div id='pe' *ngIf='!pe' (click)='toggleMe(pe)' class='checkbox-div' #pe><span class="glyphicon glyphicon-unchecked"></span>Personnel</div>
-            <div id='pe' *ngIf='pe'  (click)='toggleMe(pe)' class='selected checkbox-div' #pe><span  class="selected glyphicon glyphicon-check" ></span>Personnel</div>
-            <div id='tr' *ngIf='!tr' (click)='toggleMe(tr)' class='checkbox-div' #tr><span class="glyphicon glyphicon-unchecked"></span>Training</div>
-            <div id='tr' *ngIf='tr'  (click)='toggleMe(tr)' class='selected checkbox-div' #tr><span  class="selected glyphicon glyphicon-check" ></span>Training</div>
-            <div id='en' *ngIf='!en' (click)='toggleMe(en)' class='checkbox-div' #en><span class="glyphicon glyphicon-unchecked"></span>Environment</div>
-            <div id='en' *ngIf='en'  (click)='toggleMe(en)' class='selected checkbox-div' #en><span class="selected glyphicon glyphicon-check"></span>Environment</div>
-            <div id='sa' *ngIf='!sa' (click)='toggleMe(sa)' class='checkbox-div' #sa><span class="glyphicon glyphicon-unchecked"></span>Safety</div>
-            <div id='sa' *ngIf='sa'  (click)='toggleMe(sa)' class='selected checkbox-div' #sa><span class="selected glyphicon glyphicon-check"></span>Safety</div>
-            <div id='oh' *ngIf='!oh' (click)='toggleMe(oh)' class='checkbox-div' #oh><span class="glyphicon glyphicon-unchecked"></span>Occupational Health</div>
-            <div id='oh' *ngIf='oh'  (click)='toggleMe(oh)' class='selected checkbox-div' #oh><span class="selected glyphicon glyphicon-check"></span>Occupational Health</div>
-            <div id='hu' *ngIf='!hu' (click)='toggleMe(hu)' class='checkbox-div' #hu><span class="glyphicon glyphicon-unchecked"></span>Human Factors</div>
-            <div id='hu' *ngIf='hu'  (click)='toggleMe(hu)' class='selected checkbox-div' #hu><span  class="selected glyphicon glyphicon-check" ></span>Human Factors</div>
-            <div id='su' *ngIf='!su' (click)='toggleMe(su)' class='checkbox-div' #su><span class="glyphicon glyphicon-unchecked"></span>Survivability</div>
-            <div id='su' *ngIf='su'  (click)='toggleMe(su)' class='selected checkbox-div' #su><span class="selected glyphicon glyphicon-check"></span>Survivability</div>
-            <!--div class='checkbox-div'><span class="glyphicon glyphicon-unchecked blank"></span></div-->
-            <div id='ha' *ngIf='!ha' (click)='toggleMe(ha)' class='checkbox-div' #ha><span class="glyphicon glyphicon-unchecked"></span>Habitability</div>
-            <div id='ha' *ngIf='ha'  (click)='toggleMe(ha)' class='selected checkbox-div' #ha><span class="selected glyphicon glyphicon-check"></span>Habitability</div>
+            <div id='mp' *ngIf='!mp' (click)='toggleCheckbox(mp)' class='checkbox-div' #mp><span class="glyphicon glyphicon-unchecked"></span>Manpower</div>
+            <div id='mp' *ngIf='mp'  (click)='toggleCheckbox(mp)' class='selected checkbox-div' #mp><span  class="selected glyphicon glyphicon-check" ></span>Manpower</div>
+            <div id='pe' *ngIf='!pe' (click)='toggleCheckbox(pe)' class='checkbox-div' #pe><span class="glyphicon glyphicon-unchecked"></span>Personnel</div>
+            <div id='pe' *ngIf='pe'  (click)='toggleCheckbox(pe)' class='selected checkbox-div' #pe><span  class="selected glyphicon glyphicon-check" ></span>Personnel</div>
+            <div id='tr' *ngIf='!tr' (click)='toggleCheckbox(tr)' class='checkbox-div' #tr><span class="glyphicon glyphicon-unchecked"></span>Training</div>
+            <div id='tr' *ngIf='tr'  (click)='toggleCheckbox(tr)' class='selected checkbox-div' #tr><span  class="selected glyphicon glyphicon-check" ></span>Training</div>
+            <div id='en' *ngIf='!en' (click)='toggleCheckbox(en)' class='checkbox-div' #en><span class="glyphicon glyphicon-unchecked"></span>Environment</div>
+            <div id='en' *ngIf='en'  (click)='toggleCheckbox(en)' class='selected checkbox-div' #en><span class="selected glyphicon glyphicon-check"></span>Environment</div>
+            <div id='sa' *ngIf='!sa' (click)='toggleCheckbox(sa)' class='checkbox-div' #sa><span class="glyphicon glyphicon-unchecked"></span>Safety</div>
+            <div id='sa' *ngIf='sa'  (click)='toggleCheckbox(sa)' class='selected checkbox-div' #sa><span class="selected glyphicon glyphicon-check"></span>Safety</div>
+            <div id='oh' *ngIf='!oh' (click)='toggleCheckbox(oh)' class='checkbox-div' #oh><span class="glyphicon glyphicon-unchecked"></span>Occupational Health</div>
+            <div id='oh' *ngIf='oh'  (click)='toggleCheckbox(oh)' class='selected checkbox-div' #oh><span class="selected glyphicon glyphicon-check"></span>Occupational Health</div>
+            <div id='hu' *ngIf='!hu' (click)='toggleCheckbox(hu)' class='checkbox-div' #hu><span class="glyphicon glyphicon-unchecked"></span>Human Factors</div>
+            <div id='hu' *ngIf='hu'  (click)='toggleCheckbox(hu)' class='selected checkbox-div' #hu><span  class="selected glyphicon glyphicon-check" ></span>Human Factors</div>
+            <div id='su' *ngIf='!su' (click)='toggleCheckbox(su)' class='checkbox-div' #su><span class="glyphicon glyphicon-unchecked"></span>Survivability</div>
+            <div id='su' *ngIf='su'  (click)='toggleCheckbox(su)' class='selected checkbox-div' #su><span class="selected glyphicon glyphicon-check"></span>Survivability</div>
+            <div id='ha' *ngIf='!ha' (click)='toggleCheckbox(ha)' class='checkbox-div' #ha><span class="glyphicon glyphicon-unchecked"></span>Habitability</div>
+            <div id='ha' *ngIf='ha'  (click)='toggleCheckbox(ha)' class='selected checkbox-div' #ha><span class="selected glyphicon glyphicon-check"></span>Habitability</div>
 
           </div>
           <br>
-          <!--div class="col-md-10 col-md-offset-7 btn-div"-->
           <div class='row hsi-intgrn-btn-row'>
             <button class="btn btn-info hsi-right" 
                 type='submit'
@@ -66,36 +62,19 @@
             <button class="btn btn-default hsi-btn-default-alt hsi-right" 
                   title="Clear and close the form"
                   type=button 
-                  (click)='onClear()'>
+                  (click)='clearAll()'>
               Clear
             </button>
             <div *ngIf="showErrorMessage" class='errorMessage'>You must select at least two domains</div>
             <div *ngIf="showDupeErrorMessage" class='errorMessage'>An evaluation with these domains already exists. Click 'Save' again to go to it.</div>
-
 
           </div>  
       </div>  
     </div>
   </form>
   
-  
-  
- <app-intgrn-completed *ngIf=!showForm>
- </app-intgrn-completed>
+ <app-intgrn-completed *ngIf=!showForm></app-intgrn-completed>
 
-<!-- Prev/Next Buttons -->
-  <div id='footer'>
-      <!--div 
-          *ngIf="!atFirstQuestion && !showMenu" 
-          (click)="getPrevQuestion()" 
-          class="glyphicon glyphicon-circle-arrow-left pull-left">
-      </div-->
-      
-      <!--div 
-          (click)="goToEvaluation()" 
-          class="glyphicon glyphicon-circle-arrow-right pull-right">
-      </div-->
-  </div>
 </div>
 
 
@@ -106,5 +85,4 @@
                    [projectTitle]='projectTitle'
                    [qnnTitle]='qnnTitle'
                    [showHeuristics]='showHeuristics'>
-  
 </app-intgrn-assmit>

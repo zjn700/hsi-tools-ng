@@ -4,7 +4,9 @@ import { AuthService } from './auth.service';
 
 @Component({
     selector: 'hsi-logout',
-    templateUrl: './logout.component.html'
+    templateUrl: './logout.component.html',
+    styleUrls: ['./user.css']
+    
 }) 
 export class LogoutComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router) { }

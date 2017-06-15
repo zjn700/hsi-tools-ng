@@ -4,7 +4,7 @@
               type="button" 
               class="btn btn-primary btn-xl" 
               value=true
-              (click)='emitAnswerSelected(true)'>
+              (click)='emitAnswerSelected(true, $event)'>
           YES
       </button>
       <br>
@@ -12,7 +12,7 @@
               type="button" 
               class="btn btn-primary btn-xl" 
               value=false 
-              (click)='emitAnswerSelected(false)'>
+              (click)='emitAnswerSelected(false, $event)'>
           NO
       </button>
     </div>

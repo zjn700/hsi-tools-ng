@@ -12,13 +12,15 @@ import { ProjectService } from '../proj/proj.service';
   styleUrls: ['./intgrn.component.css']
 })
 export class IntgrnComponent implements OnInit, OnDestroy {
+  // internal
+  private domainList:string[] = [];
+  // output
   private projectTitle:string;
   private qnnTitle:string;
   private evaluationTitle:string;
   private activeEvaluation:Integration;
-  private domainList:string[] = [];
   // state:
-  private showHeuristics:boolean = true;
+  private showHeuristics:boolean = true;  // also output
   private showForm:boolean = false;
   private showErrorMessage:boolean = false;
   private showDupeErrorMessage:boolean = false
@@ -64,7 +66,7 @@ export class IntgrnComponent implements OnInit, OnDestroy {
       .subscribe((integration)=>{
         this.evaluationTitle = integration.title;
         this.activeEvaluation = integration;
-        this.onClear()
+        this.clearAll()
         for (var i=0; i < integration.domainList.length; i++) { 
           this.domainList.push(integration.domainList[i])
           this.toggleByTitle(integration.domainList[i])
@@ -72,8 +74,6 @@ export class IntgrnComponent implements OnInit, OnDestroy {
         this.isInEditMode = true;
         this.showForm=!this.showForm
         window.scrollTo(0, 0);
-
-        //this.onAddHeuristic()
       })      
   }
   
@@ -108,12 +108,12 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     return null
   }
   
-  goToEvaluation(){                     // save key pressed
-    if (this.domainList.length < 2 ){   // need 2 domains for
+  goToEvaluation(){                     // save button or edit title button clicked
+    if (this.domainList.length < 2 ){   // need 2 domains for valid response
       this.showErrorMessage = true;
       this.showDupeErrorMessage = false;
 
-    } else {                            // if at least 2 domains sewlected
+    } else {                            // if at least 2 domains selected
       if (this.isInEditMode){           // ...if edit title button was pressed
         let index = this.checkDomainListForDuplicates()
         if ( index != null) {           // there is a dupe
@@ -122,7 +122,6 @@ export class IntgrnComponent implements OnInit, OnDestroy {
           this.pauseForDupe = !this.pauseForDupe
 
         } else {
-            console.log('edit mode 0000000000000000000000')
             this.evaluationTitle = this.buildEvaluationTitle()
             this.activeEvaluation.title = this.evaluationTitle;
             this.activeEvaluation.domainList.length = 0;
@@ -195,7 +194,7 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     }
   }
   
-  toggleMe(item){
+  toggleCheckbox(item){
     switch(item.id) {
     case 'mp':
       this.mp = !this.mp;
@@ -235,10 +234,6 @@ export class IntgrnComponent implements OnInit, OnDestroy {
       break;
     }
   }
-  
-  deleteEval(){
-    
-  }
  
   updateDomainList(domainTitle){   // if the domain is in the list, remove it; if not, add it
     var wasNotInList = true;
@@ -257,8 +252,8 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     }
   }
  
-  toggleMPT(){
-    this.onClear();
+  toggleMPT(){   // MPT button clicked
+    this.clearAll();
     this.mp = true;
     this.pe = true;
     this.tr = true;
@@ -267,8 +262,8 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     this.updateDomainList('Training')
   }
   
-  toggleESOH(){
-    this.onClear();
+  toggleESOH(){  // ESOH button clicked
+    this.clearAll();
     this.sa = true;
     this.oh = true;
     this.en = true;
@@ -277,7 +272,7 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     this.updateDomainList('Occupational Health')
   }
  
-  onClear() {
+  clearAll() {
     this.domainList.length = 0;
     this.showErrorMessage = false
     this.showDupeErrorMessage = false
@@ -292,9 +287,9 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     this.en = false;    
   }
 
-  onAddHeuristic(){
+  addEval(){
     this.showForm=!this.showForm
-    this.onClear();
+    this.clearAll();
     window.scrollTo(0, 0);
   }
   

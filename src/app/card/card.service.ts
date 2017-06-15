@@ -74,6 +74,7 @@ export class CardService {
   }
   
   emitFocusOnRisk(){
+      console.log('focusOnRisk')
       this.focusOnRisk.emit()
   }
   

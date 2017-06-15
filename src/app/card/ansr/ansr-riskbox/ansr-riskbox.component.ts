@@ -15,7 +15,14 @@ export class AnsrRiskboxComponent implements OnInit {
   ngOnInit() {
     this.cardService.focusOnRisk
       .subscribe(()=>{
-        let t_riskCell = <HTMLElement>document.getElementsByClassName("th1")[0];
+        let t_riskCell = <HTMLElement>document.getElementsByClassName("td-selected")[0];
+        console.log('t_riskCell')
+        console.log(t_riskCell)
+        if (!t_riskCell) {
+          t_riskCell = <HTMLElement>document.getElementsByClassName("th1")[0]; 
+          console.log('t_riskCell2')
+          console.log(t_riskCell)
+        }
         if (t_riskCell) {
           setTimeout(function(){ t_riskCell.focus(); }, 500);
         }

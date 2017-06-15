@@ -142,7 +142,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
     }
     
-    onAddProject(){
+    onAddProject(event){
+        
+        if (event.ctrlKey) {
+            console.log('ctrlKey')
+        }
+        console.log(event)
         this.project = null;
         this.showForm=!this.showForm
         this.inEditMode = false;
@@ -152,5 +157,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
             this.focusOnTitleInput()
         }
         //window.print()
+    }
+    
+    onDblclick(){
+        console.log(event)
+        console.log('onDblclick')
     }
 }

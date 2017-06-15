@@ -49,9 +49,14 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
     this.cardService.focusOnText
       .takeWhile(() => this.alive)
       .subscribe(()=>{
+        console.log('focusontext')
           let t_textArea = <HTMLElement>document.getElementsByClassName("rationalText")[0];
+          console.log('t_textArea')
+          console.log(t_textArea)
           if (t_textArea) {
-            t_textArea.focus();
+            setTimeout(function(){ t_textArea.focus(); }, 500);
+
+            ;
           }
       })
   }

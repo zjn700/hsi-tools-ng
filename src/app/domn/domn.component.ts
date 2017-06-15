@@ -20,7 +20,7 @@ import "rxjs/add/operator/takeWhile";
 @Component({
   selector: 'app-domn',
   templateUrl: './domn.component.html',
-  styleUrls: ['./domn.component.css'],
+  styleUrls: ['./domn.component.css']
 })
 export class DomnComponent implements OnInit, OnDestroy {
 
@@ -139,13 +139,17 @@ export class DomnComponent implements OnInit, OnDestroy {
          this.cardService.emitFocusOnText()
       }
       
-      if (event.keyCode === KEY_CODE.Y_KEY) {
+      if (event.keyCode === KEY_CODE.Y_KEY || event.keyCode === KEY_CODE.EQUALS_KEY) {
          this.cardService.emitAnswerKeyPressed(true)
       }
       
-      if (event.keyCode === KEY_CODE.N_KEY) {
+      if (event.keyCode === KEY_CODE.N_KEY || event.keyCode === KEY_CODE.DASH_KEY) {
          this.cardService.emitAnswerKeyPressed(false)
       }
+      
+      if (event.keyCode === KEY_CODE.BACKSPACE_KEY) {
+         this.cardService.emitAnswerKeyPressed(null)
+      }      
       
     }
   }

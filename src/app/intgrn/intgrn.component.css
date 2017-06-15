@@ -1,10 +1,10 @@
-.btn.glyphicon{
+.btn.glyphiconx{
     font-size: 1.4em;
     background: tomato;
     color:white;
 }
 
-.floating {
+.floatingx {
     position: fixed;
     top: 82.5%;
     left: 73%;
@@ -15,6 +15,7 @@
     box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
     /*background: coral;*/
 }
+
 
 .hidden {
     display: none;
@@ -129,6 +130,7 @@ button:focus {
   cursor: pointer;
   float: left;
   font-size: 1.7em;
+  color:silver;
   width: 33%;
   height: 100px;
   min-width: 333px;
@@ -217,3 +219,29 @@ button:focus {
     color: tomato;
 }
 
+.floating {
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    font-size:3em;
+    color:white;
+    background: #5ed263;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+}
+
+.floating-red {
+  background: coral; /*#5bc0de; /*tomato; */
+  border-color:coral; /*#5bc0de; /*tomato; */
+}
+
+
+.floating-green {
+  background: #4caf50; /*#5bc0de; /* #5ed263;*/
+  border-color: #4caf50; /* #5bc0de; /* #5ed263;*/
+}
+
+/* #5ed263 */

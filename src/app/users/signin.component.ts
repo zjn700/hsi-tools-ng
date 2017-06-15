@@ -8,7 +8,8 @@ import "rxjs/add/operator/takeWhile";
 
 @Component({
     selector: 'hsi-signin',
-    templateUrl: './signin.component.html'
+    templateUrl: './signin.component.html',
+    styleUrls: ['./user.css']
 })
 export class SigninComponent implements OnInit, OnDestroy {
     myForm: FormGroup

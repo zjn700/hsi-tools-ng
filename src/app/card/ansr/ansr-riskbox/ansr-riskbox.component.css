@@ -97,13 +97,23 @@ button:focus {
 
 }
 
-.td[_ngcontent-c7]:focus {  
-  border-width:2px;
+.td:focus {  
+  border-width:5px;
   border-color:#337ab7;
-  border-style: groove;
-
+  border-style: solid; /*groove; */
 }
 
+.td.green:focus {  
+  /*background:#00b200; */
+}
+
+.td.yellow:focus {
+  background: inherited; /*#ffff4f; /*#FCF8E3; */ /*#ffff4f; */
+}
+
+.td.red:focus {
+  /*background: #fa3636;*/
+}
 
 .th2 {
   height:62px;
@@ -145,15 +155,9 @@ button:focus {
     padding-top: 10px;
 }
 
-/*.th1:hover {
-  cursor:cell;
-  background:yellow; /*#69aa31 previous ; /* selected #;
-}*/
-
 .green{
   background-color:#D4E4CD;
 }
-
 .green:hover{
   background:#00b200; /*green;*/
   cursor:pointer;
@@ -176,7 +180,6 @@ button:focus {
 .red{
   background: #F2DEDE;
 }
-
 .red:hover{
   background:#fa3636; /*red; */
   cursor:pointer;
