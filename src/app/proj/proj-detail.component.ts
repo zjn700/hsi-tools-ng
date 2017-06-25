@@ -42,14 +42,18 @@ export class ProjDetailComponent {
     }
     
     onResumeProject(){
+      console.log('this.project.state.url')    
+      console.log(this.project.state.url)    
       localStorage.setItem('resume', 'true')
       localStorage.setItem('pid', this.project.id);
       localStorage.setItem('ptitle', this.project.title.valueOf());
       localStorage.setItem('qnnId', this.project.state.qnnId);
       localStorage.setItem('qnnTitle', this.project.state.qnnTitle);
       localStorage.setItem('qnnAbbreviation', this.project.state.qnnAbbreviation);
-      this.router.navigate(['/questions'])
-      this.topMenuService.updateTopMenu('/questions')
+      //this.router.navigate(['/questions'])
+      this.router.navigate([this.project.state.url])
+      //this.topMenuService.updateTopMenu('/questions')
+      this.topMenuService.updateTopMenu(this.project.state.url)
       this.projectService.setActiveProject(this.project)
         
     }

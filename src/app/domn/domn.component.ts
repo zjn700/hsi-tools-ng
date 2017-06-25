@@ -67,7 +67,7 @@ export class DomnComponent implements OnInit, OnDestroy {
     }
   }
   
-  @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
+  @HostListener('window:keyup', ['$event'])    //  event.ctrlKey or altKey or shiftKey) 
 
   keyEvent(event: KeyboardEvent) {
     console.log(this.authService.isTokenExpired())
@@ -105,7 +105,7 @@ export class DomnComponent implements OnInit, OnDestroy {
       }
 
       
-      if (event.keyCode === KEY_CODE.ESCAPE_KEY) {  //KEY_CODE.ENTER_KEY) {
+      if (event.keyCode === KEY_CODE.ESCAPE_KEY || (event.keyCode === KEY_CODE.BACKSPACE_KEY && event.ctrlKey)) {  //KEY_CODE.ENTER_KEY) {
         if (this.showMenu) {   ///(this.menuItemSelected) {
           this.showMenu=false;
           this.menuItemSelected=false;

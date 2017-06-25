@@ -16,6 +16,7 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   @Output() hideMe:EventEmitter<boolean> = new EventEmitter<boolean>();  
   private integrations: Integration[] = [];
   private alive: boolean = true;
+  private isInitialized = false;
 
   constructor(private integrationService: IntegrationService) { }
 
@@ -23,7 +24,14 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
     this.alive =false;
   }
   ngOnInit() {
-    this.integrations = this.integrationService.getIntegrations()
+    //this.integrations = this.integrationService.getIntegrations()
+    this.integrationService.getIntegrationsFromDb()
+      .subscribe((integrations: Integration[])=>{
+        console.log('completed')
+        this.integrations = integrations;
+        this.isInitialized = true;
+        
+      })
     
     this.integrationService.updatedIntegrationList
       .subscribe((integrations: Integration[])=> {

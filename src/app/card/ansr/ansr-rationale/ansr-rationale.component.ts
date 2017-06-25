@@ -25,7 +25,7 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
         console.log('event.keyCode');
         console.log(event.keyCode)
       
-      if (event.keyCode === KEY_CODE.ESCAPE_KEY) {
+      if (event.keyCode === KEY_CODE.ESCAPE_KEY || (event.keyCode === KEY_CODE.BACKSPACE_KEY && event.ctrlKey)) {
         console.log('escape')
         //console.log(this.elementRef.nativeElement.previousSibling);
         ///////// let buttonList = document.getElementsByClassName("btn-xl"); 

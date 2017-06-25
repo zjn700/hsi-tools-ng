@@ -14,6 +14,7 @@ import { ProjectService } from '../proj/proj.service';
 export class IntgrnComponent implements OnInit, OnDestroy {
   // internal
   private domainList:string[] = [];
+  private integrations: Integration[] = [];
   // output
   private projectTitle:string;
   private qnnTitle:string;
@@ -27,6 +28,8 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   private pauseForDupe:boolean = false
   private isInEditMode:boolean = false;
   private alive:boolean = true;
+  private isInitialized = false;
+
   // checkboxes:
   private mp:boolean=false;
   private sa:boolean=false;
@@ -49,7 +52,26 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.projectTitle = localStorage.getItem('ptitle');
     this.qnnTitle = localStorage.getItem('qnnTitle')
-    
+
+    // this.integrationService.getIntegrationsFromDb()
+    //   .takeWhile(() => this.alive)
+    //   .subscribe(
+    //     (integrations: Integration[]) => {
+    //       this.integrations = integrations; 
+    //       this.isInitialized = true;
+    //     }
+    //   );
+
+    if (this.projectService.activeProject)  {
+      console.log('this.projectService.activeProject.state.url')
+      console.log(this.projectService.activeProject.state.url)
+      this.projectService.activeProject.state.url = location.pathname;
+      this.projectService.activeProject.state.dateModified = new Date();
+      this.projectService.projectIsUpdated.emit(true);
+        //this.projectService.activeProject.state = t_state;
+    }
+
+
     this.integrationService.updateActiveIntegration
       .takeWhile(() => this.alive)
       .subscribe((integration)=>{
@@ -89,8 +111,29 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   }
   
   checkDomainListForDuplicates() {
+    console.log('checkDomainListForDuplicates')
     let total = 0
     let t_integrations = this.integrationService.getIntegrations();
+    // this.integrationService.getIntegrationsFromDb()
+    //   .subscribe((integrations:Integration[])=>{
+    //     let total = 0;
+    //     let t_integrations = integrations;
+    //     for (var i=0; i < t_integrations.length; i++) {
+    //       for (var j=0; j < t_integrations[i].domainList.length; j++) {
+    //         for (var k=0; k < this.domainList.length; k++) {
+    //           if (this.domainList[k] == t_integrations[i].domainList[j]) {
+    //           total++
+    //           }
+    //         }
+    //       }
+    //       if (total ==  this.domainList.length && total == t_integrations[i].domainList.length) {
+    //         return i
+    //       } else {
+    //         total = 0;
+    //       }
+    //     }
+    //     return null
+    //   })
     for (var i=0; i < t_integrations.length; i++) {
       for (var j=0; j < t_integrations[i].domainList.length; j++) {
         for (var k=0; k < this.domainList.length; k++) {
@@ -106,6 +149,48 @@ export class IntgrnComponent implements OnInit, OnDestroy {
       }
     }
     return null
+  }
+  
+  
+  checkDomainListForDuplicatesx() {
+    console.log('checkDomainListForDuplicates')
+    //let total = 0
+    //let t_integrations = this.integrationService.getIntegrations();
+    this.integrationService.getIntegrationsFromDb()
+      .subscribe((integrations:Integration[])=>{
+        let total = 0;
+        let t_integrations = integrations;
+        for (var i=0; i < t_integrations.length; i++) {
+          for (var j=0; j < t_integrations[i].domainList.length; j++) {
+            for (var k=0; k < this.domainList.length; k++) {
+              if (this.domainList[k] == t_integrations[i].domainList[j]) {
+               total++
+              }
+            }
+          }
+          if (total ==  this.domainList.length && total == t_integrations[i].domainList.length) {
+            return i
+          } else {
+            total = 0;
+          }
+        }
+        return null
+      })
+    // for (var i=0; i < t_integrations.length; i++) {
+    //   for (var j=0; j < t_integrations[i].domainList.length; j++) {
+    //     for (var k=0; k < this.domainList.length; k++) {
+    //       if (this.domainList[k] == t_integrations[i].domainList[j]) {
+    //         total++
+    //       }
+    //     }
+    //   }
+    //   if (total ==  this.domainList.length && total == t_integrations[i].domainList.length) {
+    //     return i
+    //   } else {
+    //     total = 0;
+    //   }
+    // }
+    // return null
   }
   
   goToEvaluation(){                     // save button or edit title button clicked

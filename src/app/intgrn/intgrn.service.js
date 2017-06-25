@@ -6,11 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+var rxjs_1 = require('rxjs');
 var intgrn_model_1 = require('./intgrn.model');
 var IntegrationService = (function () {
-    function IntegrationService() {
+    function IntegrationService(http) {
+        this.http = http;
         // questionSelected = new EventEmitter<Question>();
         // textInputSelected = new EventEmitter<boolean>();
+        this.dbAccessed = false;
         this.integrations = [];
         this.updatedIntegrationList = new core_1.EventEmitter();
         this.updateActiveIntegration = new core_1.EventEmitter();
@@ -19,7 +23,44 @@ var IntegrationService = (function () {
     IntegrationService.prototype.getIntegrations = function () {
         return this.integrations;
     };
+    IntegrationService.prototype.getProjects = function () {
+        var _this = this;
+        if (this.dbAccessed) {
+            console.log('update not Required');
+            return this.http.get('/projects/dummy') // returns nothing, but creates the required observable
+                .map(function (response) {
+                return _this.integrations; // pass back the current domain array
+            });
+        }
+        else {
+            return this.http.get('/integrations')
+                .map(function (response) {
+                if (response.json().obj.length == 0) {
+                    return _this.integrations = response.json().obj;
+                }
+                var integrations = response.json().obj;
+                var t_evaluations = [];
+                var i = 0;
+                for (var _i = 0, integrations_1 = integrations; _i < integrations_1.length; _i++) {
+                    var integration = integrations_1[_i];
+                    t_evaluations.push(new intgrn_model_1.Integration(integration.projectId, integration.qnnId, integration.domainList, integration.title, integration.dateCreated = new Date(integration.dateCreated), integration.state));
+                    // convert from iso date format -- for sorting
+                    projects[i].state.dateModified = new Date(projects[i].state.dateModified);
+                    i++;
+                }
+                _this.projects = t_evaluations;
+                _this.dbAccessed = true;
+                return t_evaluations;
+            })
+                .catch(function (error) { return rxjs_1.Observable.throw(error); });
+        }
+    };
+    IntegrationService.prototype.getSortedEvals = function () {
+        this.sortEvalList();
+        this.updatedIntegrationList.emit(this.integrations);
+    };
     IntegrationService.prototype.addIntegration = function (domainList, title) {
+        var _this = this;
         console.log('in addIntegration');
         console.log(domainList);
         var t_domainList = [];
@@ -29,10 +70,63 @@ var IntegrationService = (function () {
         }
         var t_date = new Date();
         var t_integration = new intgrn_model_1.Integration(localStorage.getItem('pid'), localStorage.getItem('qnnId'), t_domainList, title, t_date, t_date, new Date(t_date).getTime().toString());
-        this.integrations.push(t_integration);
-        console.log(t_integration);
-        this.setActiveIntegration(t_integration.id);
-        this.updatedIntegrationList.emit(this.integrations);
+        this.addIntegrationToDb(t_integration)
+            .subscribe(function (response) {
+            console.log('response');
+            console.log(response);
+            console.log(t_integration);
+            t_integration.id = response.obj._id;
+            _this.integrations.push(t_integration);
+            _this.setActiveIntegration(t_integration.id);
+            _this.sortEvalList();
+            _this.updatedIntegrationList.emit(_this.integrations);
+        });
+        // this.integrations.push(t_integration);
+        // this.setActiveIntegration(t_integration.id);
+        // this.sortEvalList();
+        // this.updatedIntegrationList.emit(this.integrations)
+    };
+    IntegrationService.prototype.testAddToDb = function () {
+        return this.http.get('/integrations/dummy') // returns nothing, but creates the required observable
+            .map(function (response) {
+            return response;
+            //return this.projects  // pass back the current domain array
+        });
+    };
+    IntegrationService.prototype.addIntegrationToDb = function (evaluation) {
+        // //project = this.addState(project)
+        var headers = new http_1.Headers({ 'content-Type': 'application/json' });
+        var body = JSON.stringify(evaluation);
+        var token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        return this.http.post('/integrations' + token, body, { headers: headers })
+            .map(function (response) {
+            var result = response.json();
+            // const project = new Project(
+            //     result.obj.title, 
+            //     result.obj.description,
+            //     result.obj._id,
+            //     result.obj.dateCreated,
+            //     result.obj.users,
+            //     result.obj.state);
+            //     project.state.dateModified = new Date(project.state.dateModified)
+            // this.projects.push(project);
+            // this.projects = this.sortProjectList();
+            // this.projectIsUpdated.emit(true)
+            // localStorage.removeItem('qnnId')
+            return result;
+        })
+            .catch(function (error) { return rxjs_1.Observable.throw(error); });
+    };
+    IntegrationService.prototype.updateEvalDateModifiedById = function (evalId) {
+        for (var i = 0; i < this.integrations.length; i++) {
+            if (this.integrations[i].id == evalId) {
+                this.integrations[i].dateModified = new Date();
+                this.sortEvalList();
+                this.updatedIntegrationList.emit(this.integrations);
+            }
+        }
     };
     IntegrationService.prototype.updateIntegration = function (index, domainList, title) {
         var t_domainList = [];
@@ -44,7 +138,8 @@ var IntegrationService = (function () {
         this.integrations[index].title = title;
         this.integrations[index].dateModified = new Date();
         this.setActiveIntegration(this.integrations[index].id);
-        console.log(this.integrations[index]);
+        this.sortEvalList();
+        this.updatedIntegrationList.emit(this.integrations);
     };
     IntegrationService.prototype.setActiveIntegration = function (integrationId) {
         for (var i = 0; i < this.integrations.length; i++) {
@@ -60,6 +155,7 @@ var IntegrationService = (function () {
         for (var i = 0; i < this.integrations.length; i++) {
             if (this.integrations[i].id == evaluationId) {
                 console.log(this.integrations[i]);
+                this.sortEvalList();
                 return this.editEvauationTitle.emit(this.integrations[i]);
             }
         }
@@ -72,6 +168,19 @@ var IntegrationService = (function () {
                 return this.updatedIntegrationList.emit(this.integrations);
             }
         }
+    };
+    IntegrationService.prototype.sortEvalList = function () {
+        console.log('sorting...');
+        return this.integrations.sort(function (a, b) {
+            //if ( a.title > b.title ) {
+            if (a.dateModified > b.dateModified) {
+                return -1;
+            }
+            if (a.dateModified < b.dateModified) {
+                return 1;
+            }
+            return 0;
+        });
     };
     IntegrationService = __decorate([
         core_1.Injectable()

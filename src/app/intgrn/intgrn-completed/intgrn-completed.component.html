@@ -1,47 +1,50 @@
-<div class="disable-text-selection hsi-intgrn-form">
-    <h2 *ngIf='integrations.length>0'>Select an evaluation:</h2>
-    <h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:</h2>
-        <div row col-md-8 col-md-offset-2>
-            
-            <div *ngFor="let integration  of integrations" 
-                  id={{integration.id}}
-                  class="hsi-intgrn-complete"
-                  #evaluation>
-                <a  title="Resume work on this in this evaluation"
-                    (click)="onResumeEvaluation(evaluation)" >
-                    {{integration.title}}
-                </a>
-                <div class='row hsi-btn-row'>
-                    <button *ngIf="1!=0" 
-                            title="Resume work on this in this evaluation"
-                            id={{integration.id}}
-                            type="button" 
-                            class="btn btn-info" 
-                            (click)="onResumeEvaluation(evaluation)">
-                        Resume
-                    </button>                        
-                    <button type="button"
-                            title="Add or remove domiains in this evaluation"
-                            class="btn btn-default hsi-btn-default" 
-                            (click)="onEdit(evaluation)">
-                        Edit Title
-                    </button>
-                    <button type="button" 
-                            title="Archive this evaluation"
-                            class="btn btn-default hsi-btn-default"
-                            (click)="onArchive(evaluation)">
-                        Archive
-                    </button>
-                </div>
+<div *ngIf="!isInitialized" class="loading" >
+    <img src="/assets/images/ring.gif" alt="loading...">
+</div>
+<div *ngIf="isInitialized"  class="disable-text-selection hsi-intgrn-form">
+<h2 *ngIf='integrations.length>0'>Select an evaluation:</h2>
+<h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:</h2>
+    <div row col-md-8 col-md-offset-2>
+        
+        <div *ngFor="let integration  of integrations" 
+              id={{integration.id}}
+              class="hsi-intgrn-complete"
+              #evaluation>
+            <a  title="Resume work on this in this evaluation"
+                (click)="onResumeEvaluation(evaluation)" >
+                {{integration.title}}
+            </a>
+            <div class='row hsi-btn-row'>
+                <button *ngIf="1!=0" 
+                        title="Resume work on this in this evaluation"
+                        id={{integration.id}}
+                        type="button" 
+                        class="btn btn-info" 
+                        (click)="onResumeEvaluation(evaluation)">
+                    Resume
+                </button>                        
+                <button type="button"
+                        title="Add or remove domiains in this evaluation"
+                        class="btn btn-default hsi-btn-default" 
+                        (click)="onEdit(evaluation)">
+                    Edit Title
+                </button>
+                <button type="button" 
+                        title="Archive this evaluation"
+                        class="btn btn-default hsi-btn-default"
+                        (click)="onArchive(evaluation)">
+                    Archive
+                </button>
             </div>
-            
-            <!--div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
-            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
-            <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
-            <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
-            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
-            <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
-            <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
-            <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div-->
         </div>
+        
+        <!--div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+        <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
+        <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
+        <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+        <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>
+        <div class="hsi-intgrn-complete">Manpower vs. Personnel vs. Training (MPT)Manpower vs. Personnel vs. Training (MPT)</div>
+        <div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
+        <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div-->
+    </div>
 </div>

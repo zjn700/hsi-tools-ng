@@ -25,7 +25,7 @@ export class QstnMenuComponent implements OnInit {
         }
       }
 
-      if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.SPACE_BAR) {
+      if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.SPACE_BAR  || event.keyCode === KEY_CODE.RIGHT_ARROW) {
         let menuItems = document.getElementsByClassName("menuItem");
         let selectedMenuItem = menuItems[0];
         
@@ -44,7 +44,7 @@ export class QstnMenuComponent implements OnInit {
         this.menuItemSelected()
       }
       
-      if (event.keyCode === KEY_CODE.UP_ARROW) { // && event.ctrlKey or altKey or shiftKey) {
+      if (event.keyCode === KEY_CODE.UP_ARROW  || event.keyCode === KEY_CODE.LEFT_ARROW) { // && event.ctrlKey or altKey or shiftKey) {
         let menuItems = document.getElementsByClassName("menuItem");
         let selectedMenuItem = menuItems[0];
         

@@ -34,6 +34,7 @@ lix:hover{
 .q_menu_item {
     padding-bottom: 6px;
     font-size:1.1em;
+    cursor: pointer;
 }
 
 /*  icon colors are also in qstn-menu-filter.component.css */
