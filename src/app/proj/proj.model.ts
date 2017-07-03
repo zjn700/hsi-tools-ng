@@ -9,6 +9,7 @@ export class Project {
         public dateCreated?: Date,
         public users?: string[],
         public state?: SessionState,
+        public states?: SessionState[],
         public dateCompleted?: Date) { 
         }
 }

@@ -449,7 +449,10 @@ export class DomnComponent implements OnInit, OnDestroy {
       new Date()
       ); 
     if (this.projectService.activeProject)  {
-      this.projectService.activeProject.state = t_state;
+      this.projectService.updateState(localStorage.getItem('qnnId'), t_state)
+      console.log('updateState');
+      console.log(this.projectService.activeProject)
+      //this.projectService.activeProject.state = t_state;
     }
   }
   

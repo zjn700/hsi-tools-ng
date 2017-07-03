@@ -31,7 +31,7 @@
   color: white;
   background-color: #30343b;
   font-size:1.1em;
-  width:175px;
+  width:200px;
   padding:10px;
   margin-top: 0;
   margin-left: 15px
@@ -87,11 +87,15 @@
 }
 
 
-.glyphicon[_ngcontent-c1] {
+.glyphiconx {
     font-size: 4.5em; /*50px;*/
     margin: 30px;
     padding-top: 5px;
     top-margin:0px
+}
+
+.glyphicon {
+    font-size: 1em; /*50px;*/
 }
 
 .glyphicon-menu-right, .glyphicon-menu-left {

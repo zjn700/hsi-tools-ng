@@ -138,6 +138,10 @@ button:focus {
   margin: 0;
 }
 
+.checkbox-div.selected {
+  color:#222;
+}
+
 .checkbox-div:hover {
   color:#272b31;
 }

@@ -31,6 +31,40 @@ export class ProjectService {
         console.log(this.projects)
     }
     
+    setStateByQnnId(qnnId): string {
+        if (this.activeProject.states) {   // the state array is not empty
+            for (var i=0; i < this.activeProject.states.length; i++) {
+                if (qnnId == this.activeProject.states[i].qnnId) {
+                    this.activeProject.state = this.activeProject.states[i];
+                    return this.activeProject.state.url
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+    
+    updateState(qnnId, state){
+        if (this.activeProject.states) {   // if the state array is not empty
+            var found = false
+            for (var i=0; i < this.activeProject.states.length; i++) {
+                if (qnnId == this.activeProject.states[i].qnnId) { 
+                    this.activeProject.states[i] = state;   // update the state in the array
+                    found = true
+                    break;   // don't need to go any farther
+                }
+            }
+            if (!found) {
+                this.activeProject.states.push(state) // ...add to thr states array
+            }
+        } else {
+            this.activeProject.states = [];        // initialize states...
+            this.activeProject.states.push(state)  //...and add to the array
+        }
+        this.activeProject.state = state;   // no matter what, update the current state 
+
+    }
+    
     isStateUpdateRequired(answer: Answer) {
         if (this.activeProject) {
             if (answer.projectId != this.activeProject.id) {
@@ -90,7 +124,8 @@ export class ProjectService {
                         result.obj._id,
                         result.obj.dateCreated,
                         result.obj.users,
-                        result.obj.state);
+                        result.obj.state,
+                        result.obj.states);
                         project.state.dateModified = new Date(project.state.dateModified)
                     this.projects.push(project);
                     this.projects = this.sortProjectList();
@@ -124,7 +159,10 @@ export class ProjectService {
                             project._id,
                             project.dateCreated,
                             project.users,
-                            project.state))
+                            project.state,
+                            project.states))
+                            console.log('project.states')
+                            console.log(project.states)
                             // convert from iso date format -- for sorting
                             projects[i].state.dateModified = new Date(projects[i].state.dateModified)
                             i++

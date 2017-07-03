@@ -30,7 +30,7 @@
 
     <div class="form-group">
       <div class="col-md-6" [ngClass]="{'hidden': a_value==true || a_value==null || fullScreen}" >
-        <div class='answerTitle' >Risk</div>
+        <div class='answerTitle' >Risk Matrix</div>
         <app-ansr-riskbox 
               [a_details]='a_details' 
               [a_value]='a_value' 
@@ -58,11 +58,13 @@
             (click)='toggleFullScreen()'
             *ngIf="!fullScreen && a_value==false"
             class='glyphicon glyphicon-menu-left'>
-          </span>          
+          </span>   
           
-          Rationale
+          <span *ngIf='a_value'>Rationale</span>
+          <span *ngIf='!a_value'>Risk details</span>
+
           <span 
-            title='Show risk chart.'
+            title='Show risk matrix.'
             (click)='toggleFullScreen()'
             *ngIf="fullScreen && a_value==false"
             class='glyphicon glyphicon-menu-right'>

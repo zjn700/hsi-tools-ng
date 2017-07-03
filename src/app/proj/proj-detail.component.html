@@ -1,16 +1,25 @@
 <li class="list-group-item">
-    <h2 title="Choose one of the questionnaires for this project">
+    <h2 *ngIf="project.state.qnnId!=null" 
+        title="Go to the last viewed item in this project">
+        <a ng-reflect-router-link='/questions' 
+           (click)='onResumeProject(t)' 
+           #t>
+         {{project.title}}
+        </a>
+    </h2> 
+    <h2 *ngIf="project.state.qnnId==null" 
+        title="Choose one of the questionnaires for this project">
         <a ng-reflect-router-link='/tools' 
            (click)='onGoToProject(t)' 
            #t>
          {{project.title}}
         </a>
-    </h2> 
+    </h2>     
     <div>
         <span class='p-desc'>{{project.description}}</span>
         <div class='p-date'>Updated: {{project.state.dateModified}}</div>
         <hr>
-        <button *ngIf="project.state.qnnId!=null" 
+        <!--button *ngIf="project.state.qnnId!=null" 
                 title="Go to the last viewed question in this project"
                 type="button" 
                 class="btn btn-info" 
@@ -18,7 +27,16 @@
                 (click)="onResumeProject(q)" 
                 #q>
             Resume
-        </button>
+        </button-->
+        <button
+                title="Choose one of the questionnaires for this project"
+                type="button" 
+                class="btn btn-info" 
+                ng-reflect-router-link='/tools' 
+                (click)="onGoToProject(q)" 
+                #q>
+            Tools
+        </button>        
         <button type="button"
                 title="Edit the details of this project"
                 class="btn btn-default hsi-btn-default" 
