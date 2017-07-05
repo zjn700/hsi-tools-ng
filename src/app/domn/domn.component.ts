@@ -433,6 +433,7 @@ export class DomnComponent implements OnInit, OnDestroy {
     this.a_details = this.domain.answers[index];
     this.cardService.setFullScreen(this.a_details)
     this.cardService.setRiskValue(this.a_details.riskValue);
+    this.cardService.emitUpdatedQuestionNumber(index)
     this.updateState();
   }
   

@@ -1,0 +1,88 @@
+<!--div class="container-fluid"-->
+
+    <form [formGroup]='myForm'>
+        <!--app-ansr-riskbox></app-ansr-riskbox-->
+        <div *ngIf='a_details?.riskValue>20'class='riskDetails'>
+
+            <div class="checkbox-box risk-detail-row  disable-text-selection"><h3>What is your Risk Mitigation Strategy?</h3>
+                  <div class='checkbox-row'>
+                    <div id='ac' *ngIf='!ac' (click)='updateRadioStrategy(ac)' class='checkbox-div' #ac><span class="glyphicon glyphicon-unchecked"></span>Accept</div>
+                    <div id='ac' *ngIf='ac'  (click)='updateRadioStrategy(ac)' class='selected checkbox-div' #ac><span  class="selected glyphicon glyphicon-check" ></span>Accept</div>
+                    <div id='tr' *ngIf='!tr' (click)='updateRadioStrategy(tr)' class='checkbox-div' #tr><span class="glyphicon glyphicon-unchecked"></span>Transfer</div>
+                    <div id='tr' *ngIf='tr'  (click)='updateRadioStrategy(tr)' class='selected checkbox-div' #tr><span  class="selected glyphicon glyphicon-check" ></span>Transfer</div>
+                    <div id='av' *ngIf='!av' (click)='updateRadioStrategy(av)' class='checkbox-div' #av><span class="glyphicon glyphicon-unchecked"></span>Avoid</div>
+                    <div id='av' *ngIf='av'  (click)='updateRadioStrategy(av)' class='selected checkbox-div' #av><span  class="selected glyphicon glyphicon-check" ></span>Avoid</div>
+                    <div id='co' *ngIf='!co' (click)='updateRadioStrategy(co)' class='checkbox-div' #co><span class="glyphicon glyphicon-unchecked"></span>Control</div>
+                    <div id='co' *ngIf='co'  (click)='updateRadioStrategy(co)' class='selected checkbox-div' #co><span class="selected glyphicon glyphicon-check"></span>Control</div>
+                </div>
+            </div>
+
+            <div *ngIf='showCheckboxes' class="checkbox-box risk-detail-row  disable-text-selection">
+                <div class='risk-detail-title'>
+                    <h3>Does the risk impact primarily cost, schedule, or performance?</h3>
+                </div>    
+                  <div class='checkbox-row'>
+                    <div id='cs' *ngIf='!cs' (click)='updateRadioImpact(cs)' class='checkbox-div risk-impact' #cs><span class="glyphicon glyphicon-unchecked"></span>Cost</div>
+                    <div id='cs' *ngIf='cs'  (click)='updateRadioImpact(cs)' class='selected checkbox-div risk-impact' #cs><span  class="selected glyphicon glyphicon-check" ></span>Cost</div>
+                    <div id='sc' *ngIf='!sc' (click)='updateRadioImpact(sc)' class='checkbox-div risk-impact' #sc><span class="glyphicon glyphicon-unchecked"></span>Schedule</div>
+                    <div id='sc' *ngIf='sc'  (click)='updateRadioImpact(sc)' class='selected checkbox-div risk-impact' #sc><span  class="selected glyphicon glyphicon-check" ></span>Schedule</div>
+                    <div id='pe' *ngIf='!pe' (click)='updateRadioImpact(pe)' class='checkbox-div risk-impact' #pe><span class="glyphicon glyphicon-unchecked"></span>Performance</div>
+                    <div id='pe' *ngIf='pe'  (click)='updateRadioImpact(pe)' class='selected checkbox-div risk-impact' #pe><span  class="selected glyphicon glyphicon-check" ></span>Performance</div>
+                </div>
+            </div>
+    
+            <div *ngIf='showTextAreas' class='risk-detail-row' >
+                 <div class='risk-detail-title'>
+                    <h3>What is the risk mitigation plan? Be sure to identify who is responsible for monitoring the risk, the desired timeline as applicable, and affordability and feasibility.</h3>
+                </div>
+                <textarea
+                          class="form-control rationalText" 
+                          rows="5" 
+                          id="comment" 
+                          formControlName='comment'>
+                </textarea>
+            </div>
+            
+            <div *ngIf='showTextAreas' class='risk-detail-row' ><h3>How is the mitigation plan being monitored and tracked?</h3>
+                <textarea
+                          class="form-control rationalText" 
+                          rows="5" 
+                          id="comment" 
+                          formControlName='comment'>
+                </textarea>
+            </div>
+            
+            
+            <div *ngIf='showCheckboxes' class="checkbox-box risk-detail-row bool">
+                <div class='risk-detail-title'>
+                    <h3>Have the appropriate stakeholders been informed?</h3></div>
+                <div class='checkbox-row'>
+                    <div id='yeS' *ngIf='!yeS' (click)='updateRadioStakeholders(yeS)' class='checkbox-div yes-no' #yeS><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
+                    <div id='yeS' *ngIf='yeS'  (click)='updateRadioStakeholders(yeS)' class='selected checkbox-div yes-no' #yeS><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
+                    <div id='noS' *ngIf='!noS' (click)='updateRadioStakeholders(noS)' class='checkbox-div yes-no' #noS><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noS' *ngIf='noS'  (click)='updateRadioStakeholders(noS)' class='selected checkbox-div yes-no' #noS><span  class="selected glyphicon glyphicon-check" ></span>No</div>
+                </div>
+            </div>
+            
+            <div *ngIf='showCheckboxes' class="checkbox-box risk-detail-row bool"><div class='risk-detail-title'><h3>Have the mitigation strategy and plan been documented and presented at all relevant decision points?</h3></div>
+                <div class='checkbox-row'>
+                    <div id='yeD' *ngIf='!yeD' (click)='updateRadioDocumented(yeD)' class='checkbox-div yes-no' #yeD><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
+                    <div id='yeD' *ngIf='yeD'  (click)='updateRadioDocumented(yeD)' class='selected checkbox-div yes-no' #yeD><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
+                    <div id='noD' *ngIf='!noD' (click)='updateRadioDocumented(noD)' class='checkbox-div yes-no' #noD><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noD' *ngIf='noD'  (click)='updateRadioDocumented(noD)' class='selected checkbox-div yes-no' #noD><span  class="selected glyphicon glyphicon-check" ></span>No</div>
+                </div>            
+            </div>            
+        </div>
+
+        <!--textarea
+                  [ngModel]='a_details?.rationale' 
+                  (focus)='setStart($event)' 
+                  (focusout)="updateAnswer($event)" 
+                  class="form-control rationalText" 
+                  rows="5" 
+                  id="comment" 
+                  formControlName='comment'>
+       </textarea-->
+    </form>
+
+<!--/div-->

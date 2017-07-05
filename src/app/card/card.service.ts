@@ -16,6 +16,7 @@ export class CardService {
   answerKeyPressed = new EventEmitter<boolean>();
   
   updateThisAnswer = new EventEmitter<Answer>();
+  updatedQuestionNumber = new EventEmitter<number>();
   escapePressed = new EventEmitter<boolean>();
   fullScreen = new EventEmitter<boolean>();
   riskValue = new EventEmitter<number>();
@@ -54,6 +55,10 @@ export class CardService {
   
   emitUpdateThisAnswer(answer: Answer ) {
         this.updateThisAnswer.emit(answer)
+  }
+  
+  emitUpdatedQuestionNumber(index:number){
+      this.updatedQuestionNumber.emit(index)
   }
   
   emitAnswerSelected(answer) {   // yes/no buttons
@@ -119,11 +124,11 @@ export class CardService {
               })
     }
    
-   emitToggleFullScreen() {
+   emitToggleFullScreen() {   // none
       this.toggleFullScreen.emit()
    }
    
-   setFullScreen(answer:Answer) {
+   setFullScreen(answer:Answer) {    // ansr-riskbox.component
       if (answer.value) {  // yes 
         this.fullScreen.emit(answer.value)
       } else {   // no

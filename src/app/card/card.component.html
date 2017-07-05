@@ -30,6 +30,7 @@
 
     <div class="form-group">
       <div class="col-md-6" [ngClass]="{'hidden': a_value==true || a_value==null || fullScreen}" >
+        
         <div class='answerTitle' >Risk Matrix</div>
         <app-ansr-riskbox 
               [a_details]='a_details' 
@@ -37,7 +38,7 @@
               [ngClass]="{'hidden': a_value==true || a_value==null}">
         </app-ansr-riskbox>
       </div>
-      
+
       <div [ngClass]="{'hidden': a_value==null, 'col-md-11': a_value==true || fullScreen, 'col-md-5': a_value==false && !fullScreen}" >
 
         <div class='answerTitle'>
@@ -77,6 +78,14 @@
               [a_value]='a_value' 
               [ngClass]="{'hidden': a_value==null}"  >
         </app-ansr-rationale>
+        
+        <app-ansr-risk-details
+              [a_details]='a_details' 
+              [a_value]='a_value' 
+              [ngClass]="{'hidden': a_value==true || a_value==null || !fullScreen}">
+          
+        </app-ansr-risk-details>
+        
       </div> 
       
       <div class="col-md-11" id='blank'></div>

@@ -1,0 +1,95 @@
+.riskDetails{
+    position: relative;
+    margin:20px;
+    width:97%;
+    min-width: 650px;
+}
+
+.risk-detail-row {
+    
+}
+
+textarea {
+    font-size: 1.5em;
+    background: #eee;
+    color:#222;
+    resize: none;
+}
+
+.checkbox-row {
+    width: 100%;
+    background: #eeeeee;
+    background: #ffdab9;
+    background: #5d6065;
+
+    height: 50px;
+}
+
+.checkbox-div {
+  cursor: pointer;
+  float: left;
+  font-size: 1.7em;
+  color:#eee; /*#ffdab9;  /*#6a6a6a; /*#8a8a8a; /*silver+ */
+  width: auto;
+  background: transparent;
+  padding: 10px 20px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.checkbox-div.selected {
+  color:#222;
+  color:#fab679;
+  color:#ffdab9;
+
+}
+
+.checkbox-div:hover {
+  color:#272b31;
+  color:#fab679;
+  color:#ffdab9;
+}
+.checkbox-div:hover .glyphicon {
+    color:#ffdab9;
+}  /*https://stackoverflow.com/questions/8926806/css-hover-parent-and-child*/
+
+.risk-impact {
+    width:30%;
+    width: auto;
+
+}
+.blank {
+    width: 10%;
+    color:white;
+}
+.yes-no {
+    width:50%;
+    width: auto;
+}
+
+
+.bool {
+    width: 100%;
+}
+
+.risk-detail-title {
+    height: auto;
+    padding-top:8px;
+}
+.glyphicon-check, .glyphicon-unchecked {
+  font-size: 1em;
+  color:#ffdab9;
+  color:#eee;
+  background: transparent;
+}
+
+.glyphicon-check {
+  color:#ffdab9;
+}
+
+.glyphicon-checkx:hover, .glyphicon-uncheckedx:hover {
+  color:#fab679; /*coral; */
+  color:#ffdab9;
+
+  background:transparent;
+}

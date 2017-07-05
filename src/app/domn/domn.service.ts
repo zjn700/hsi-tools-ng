@@ -111,7 +111,8 @@ export class DomainService {
                      t_Answers[i].dateModified = answer.dateModified;
                      t_Answers[i].id = answer._id;
                   }
-                }                   
+                }         
+                console.log(t_Answers)
                 return t_Answers    
             })
     }
