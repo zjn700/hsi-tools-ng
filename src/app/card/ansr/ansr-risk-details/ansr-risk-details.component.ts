@@ -23,6 +23,7 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
 
   // Radio button groups:
   // Strategy
+  public strategy:string=null;
   public ac:boolean=false;  // Accept
   public tr:boolean=false;  // Transfer
   public av:boolean=false;  // Avoid
@@ -37,7 +38,11 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
   // Documented
   public yeD:boolean=false;  // yes
   public noD:boolean=false;  // no  
-
+  
+  //textAreas 
+  public plan_start_content:string = '';
+  public tracking_start_content:string = '';
+  
   constructor(private cardService: CardService) { }
   
   ngOnDestroy(){
@@ -46,16 +51,18 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.myForm = new FormGroup({
-      comment: new FormControl(null)
+      plan: new FormControl(null),
+      tracking: new FormControl(null)
     })
-    
+  
+  
   this.cardService.updatedQuestionNumber
     .takeWhile(() => this.alive)
     .subscribe((index: number) => {
-        console.log(this.a_details)
-        console.log(index)
         this.showCheckboxes=false;
         this.showTextAreas=false;
+        console.log(this.a_details.riskDetails)
+        //this.strategy = this.a_details.riskDetails.strategy
         // this.ac = false;
         // this.tr = false;
         // this.av = false;
@@ -66,12 +73,35 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
     
   }
   
+  showCheckBoxes(value) {
+    this.showCheckboxes = value;
+    if (value) {
+      console.log('this.a_details.riskDetails.strategy')
+      console.log(this.a_details)
+      console.log(this.a_details.riskDetails[0].strategy)
+      if (this.a_details.riskDetails[0].strategy == 'av' || this.a_details.riskDetails[0].strategy == 'co') {
+        this.showTextAreas = true;
+      } 
+    } else {
+      this.showTextAreas = false;
+    }
+  }
+  
+  updateAnswer(){
+    console.log('this.a_details')
+    console.log(this.a_details)
+    this.cardService.emitUpdateThisAnswer(this.a_details);
+  }
+  
   updateRadioStrategy(item){
     this.ac = false;
     this.tr = false;
     this.av = false;
     this.co = false;
     this.showCheckboxes = true;
+    this.strategy=item.id;
+    this.a_details.riskDetails[0].strategy = item.id; 
+    this.updateAnswer();
     
     switch(item.id) {
     case 'ac':
@@ -101,53 +131,105 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
     this.cs = false;
     this.sc = false;
     this.pe = false;
-
-    switch(item.id) {
-    case 'cs':
-      this.cs = true;
-      //this.updateDomainList('Manpower')
-      break;
-    case 'sc':
-      this.sc = true;
-      //this.updateDomainList('Safety')
-      break;
-    case 'pe':
-      this.pe = true;
-      //this.updateDomainList('Safety')
-      break;
-    }
+    this.a_details.riskDetails[0].impact = item.id; 
+    this.updateAnswer();
+    
+    // switch(item.id) {
+    // case 'cs':
+    //   this.cs = true;
+    //   //this.updateDomainList('Manpower')
+    //   break;
+    // case 'sc':
+    //   this.sc = true;
+    //   //this.updateDomainList('Safety')
+    //   break;
+    // case 'pe':
+    //   this.pe = true;
+    //   //this.updateDomainList('Safety')
+    //   break;
+    // }
   }  
   
   updateRadioStakeholders(item){
     this.yeS = false;
     this.noS = false;
-
-    switch(item.id) {
-    case 'yeS':
-      this.yeS = true;
-      //this.updateDomainList('Manpower')
-      break;
-    case 'noS':
-      this.noS = true;
-      //this.updateDomainList('Safety')
-      break;
+    let t_val=false;
+    console.log('item')
+    console.log(item.id)
+    if (item.id=='yeS') {
+      t_val = true
     }
+    this.a_details.riskDetails[0].stakeholdersInformed = t_val; 
+    this.updateAnswer();
+    
+
+    // switch(item.id) {
+    // case 'yeS':
+    //   this.yeS = true;
+    //   //this.updateDomainList('Manpower')
+    //   break;
+    // case 'noS':
+    //   this.noS = true;
+    //   //this.updateDomainList('Safety')
+    //   break;
+    // }
   }    
 
   updateRadioDocumented(item){
     this.yeD = false;
     this.noD = false;
-
-    switch(item.id) {
-    case 'yeD':
-      this.yeD = true;
-      //this.updateDomainList('Manpower')
-      break;
-    case 'noD':
-      this.noD = true;
-      //this.updateDomainList('Safety')
-      break;
+    let t_val = false;
+    if (item.id=='yeD') {
+      t_val = true
     }
+    this.a_details.riskDetails[0].documented = t_val; 
+    this.updateAnswer();
+
+    // switch(item.id) {
+    // case 'yeD':
+    //   this.yeD = true;
+    //   //this.updateDomainList('Manpower')
+    //   break;
+    // case 'noD':
+    //   this.noD = true;
+    //   //this.updateDomainList('Safety')
+    //   break;
+    // }
   } 
 
+
+    // Try to use (focus) and (focusout) instead of onfocus and onfocusout
+  
+  setStartPlan(event){  // (focus)
+    this.plan_start_content = this.myForm.value.plan;
+    this.cardService.emitTextInputSelected(true);
+    //console.log(event.srcElement.tagName)
+
+  }
+  
+  updatePlanAnswer(event){  // (focusout)
+      if (this.plan_start_content != this.myForm.value.plan) {
+        this.a_details.riskDetails[0].mitigationPlan = this.myForm.value.plan; 
+        this.cardService.emitUpdateThisAnswer(this.a_details);
+      }
+      this.cardService.emitTextInputSelected(false);
+
+  }
+
+
+  setStartTracking(event){  // (focus)
+    this.tracking_start_content = this.myForm.value.tracking;
+    this.cardService.emitTextInputSelected(true);
+    //console.log(event.srcElement.tagName)
+
+  }
+  
+  updateTrackingAnswer(event){  // (focusout)
+      if (this.tracking_start_content != this.myForm.value.tracking) {
+        this.a_details.riskDetails[0].planTracking = this.myForm.value.tracking; 
+        this.cardService.emitUpdateThisAnswer(this.a_details);
+      }
+      this.cardService.emitTextInputSelected(false);
+
+  }
 }

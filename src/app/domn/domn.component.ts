@@ -139,11 +139,11 @@ export class DomnComponent implements OnInit, OnDestroy {
          this.cardService.emitFocusOnText()
       }
       
-      if (event.keyCode === KEY_CODE.Y_KEY || event.keyCode === KEY_CODE.EQUALS_KEY) {
+      if (event.keyCode === KEY_CODE.Y_KEY || (event.keyCode === KEY_CODE.EQUALS_KEY && event.shiftKey)) {
          this.cardService.emitAnswerKeyPressed(true)
       }
       
-      if (event.keyCode === KEY_CODE.N_KEY || event.keyCode === KEY_CODE.DASH_KEY) {
+      if (event.keyCode === KEY_CODE.N_KEY  || (event.keyCode === KEY_CODE.DASH_KEY && event.shiftKey)) {
          this.cardService.emitAnswerKeyPressed(false)
       }
       
@@ -325,6 +325,8 @@ export class DomnComponent implements OnInit, OnDestroy {
               }
             })
         } else {   // otherwise update the existing answer
+          console.log('answer before upd in db call')
+          console.log(answer)
           this.cardService.updateAnswerInDb(answer)
             .takeWhile(() => this.alive)
             .subscribe(data => console.log(data))

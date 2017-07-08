@@ -7,6 +7,7 @@ import { ProjectService } from '../proj/proj.service'
 import { Domain } from './domn.model';
 import { Question } from '../card/qstn/qstn.model';
 import { Answer } from '../card/ansr/ansr.model';
+import { RiskDetails } from '../card/ansr/ansr-risk.model';
 
 @Injectable()
 export class DomainService {
@@ -95,24 +96,36 @@ export class DomainService {
                 let answers = response.json().obj;
                 let t_Answers: Answer[] = [];
                 for (let i=0; i < domain.questions.length; i++) {
+                  var t_RiskDetails:RiskDetails[] = [];
+                  var t_RiskDetailsItem:RiskDetails = new RiskDetails();
+                  t_RiskDetails.push(t_RiskDetailsItem)
                   t_Answers.push(new Answer(
                       localStorage.getItem('pid'), 
                       domain.id,
                       i+1,
-                      null));
+                      null,
+                      null,
+                      t_RiskDetails));
+                      //console.log(i)
+                      //t_Answers[i].riskDetails=t_RiskDetails
+                      //console.log(t_Answers)
                 }     
                 if (t_Answers.length > 0 ) {  // add answer details stored in the db
                   for (let answer of answers) {
                      let i = answer.sequence-1;
                      t_Answers[i].value = answer.value;
                      t_Answers[i].riskValue = answer.riskValue;
+                     if (answer.riskDetails) {
+                        t_Answers[i].riskDetails = answer.riskDetails;
+                     }
+                     //t_Answers[i].riskDetails = answer.riskDetails;
                      t_Answers[i].rationale = answer.rationale;
                      t_Answers[i].dateCreated = answer.dateCreated;
                      t_Answers[i].dateModified = answer.dateModified;
                      t_Answers[i].id = answer._id;
                   }
                 }         
-                console.log(t_Answers)
+                //console.log(t_Answers)
                 return t_Answers    
             })
     }

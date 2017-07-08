@@ -85,6 +85,6 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
       }
       this.cardService.emitTextInputSelected(false);
 
-    }
+  }
   
 }

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <form [formGroup]='myForm'>
         <div class='rationalBox'></div>
-        <textarea
+        <textarea *ngIf="a_details?.value"
                   [ngModel]='a_details?.rationale' 
                   (focus)='setStart($event)' 
                   (focusout)="updateAnswer($event)" 
@@ -10,5 +10,15 @@
                   id="comment" 
                   formControlName='comment'>
        </textarea>
+       <textarea *ngIf="!a_details?.value"
+                  placeholder="Identify and prioritize risks. Update the status of risks and risk matrix, as necessary"
+                  [ngModel]='a_details?.rationale' 
+                  (focus)='setStart($event)' 
+                  (focusout)="updateAnswer($event)" 
+                  class="form-control rationalText" 
+                  rows="5" 
+                  id="comment" 
+                  formControlName='comment'>
+       </textarea>    
     </form>
 </div>

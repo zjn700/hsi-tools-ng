@@ -101,7 +101,12 @@ export class CardService {
 
   updateAnswerInDb(answer: Answer) {
         const headers = new Headers({'content-Type': 'application/json'})
+        const t_RiskDetails = JSON.stringify(answer.riskDetails);
+        console.log(answer.riskDetails[0])
+        console.log(t_RiskDetails)
+        //answer.riskDetails = t_RiskDetails
         const body = JSON.stringify(answer);
+        console.log(body)
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token')
             : '';
