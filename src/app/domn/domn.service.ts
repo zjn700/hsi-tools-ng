@@ -12,7 +12,7 @@ import { RiskDetails } from '../card/ansr/ansr-risk.model';
 @Injectable()
 export class DomainService {
     private questions: Question[] = [];
-    private domains: Domain[] = [];
+    public domains: Domain[] = [];
     public lastActiveProject:string = '';
     public lastActiveQnn:string = '';
 

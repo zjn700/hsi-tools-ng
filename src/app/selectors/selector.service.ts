@@ -7,7 +7,7 @@ import { Questionnaire } from '../card/qnn/qnn.model';
 
 @Injectable()
 export class SelectorService {
-    private qnns: Questionnaire[] = [];
+    public qnns: Questionnaire[] = [];
     qnnIsInEditMode = new EventEmitter<Questionnaire>();
 
     constructor(private http: Http) { }

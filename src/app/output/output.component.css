@@ -1,0 +1,65 @@
+
+.riskValue {
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: #30343b;
+    background-color: transparent;
+    font-size: 1.1em;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 15px;
+    margin-left:150px;
+    text-align: center;
+}
+
+.gry{
+  background-color:#555;
+  color:white;
+}
+
+.grn{
+  background-color:#00b200; /*#D4E4CD;*/
+  color:white;
+}
+
+.ylo{
+  background-color:#ffff4f; /*#FCF8E3; */
+  color:#222;
+}
+
+.red{
+  background-color: #fa3636;/*#F2DEDE;*/
+  color:white;
+}
+
+
+.hsi-label {
+  font-size: 1.2em;
+  font-weight:700;
+}
+
+.label-left {
+  float:left;
+  
+}
+
+p, span {
+  font-size:1.2em;
+  font-weight: normal;
+}
+
+@media print {
+    footer {page-break-after: always;}
+    /*.qnn {page-break-after: always;} */
+    .riskValue {color:#ffffff !important; -webkit-print-color-adjust: exact; }
+    .gry {background-color:#ddd !important; -webkit-print-color-adjust: exact; }
+    .grn {background-color:#00b200 !important; -webkit-print-color-adjust: exact; }
+    .ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }
+    .red {background-color:#fa3636 !important; -webkit-print-color-adjust: exact; }
+
+}
+
+/* https://stackoverflow.com/questions/6553439/div-background-color-in-print-page-doesnt-work */

@@ -11,6 +11,7 @@
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"  [routerLink]="['/at-qnns']">PRAT</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/questions']">Questions</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/integrations']">Integrations</a></div>
+            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/review']">Review</a></div>
         </div>
     </nav><!-- routerLinkActive='active' -->
     <!--hr-->

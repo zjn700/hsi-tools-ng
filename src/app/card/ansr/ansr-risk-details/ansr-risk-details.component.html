@@ -67,8 +67,8 @@
                 <div class='checkbox-row'>
                     <div id='yeS' *ngIf="!this.a_details.riskDetails[0]?.stakeholdersInformed" (click)='updateRadioStakeholders(yeS)' class='checkbox-div yes-no' #yeS><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
                     <div id='yeS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed"  (click)='updateRadioStakeholders(yeS)' class='selected checkbox-div yes-no' #yeS><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
-                    <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed" (click)='updateRadioStakeholders(noS)' class='checkbox-div yes-no' #noS><span class="glyphicon glyphicon-unchecked"></span>No</div>
-                    <div id='noS' *ngIf="!this.a_details.riskDetails[0]?.stakeholdersInformed"  (click)='updateRadioStakeholders(noS)' class='selected checkbox-div yes-no' #noS><span  class="selected glyphicon glyphicon-check" ></span>No</div>
+                    <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed || this.a_details.riskDetails[0]?.documented==null" (click)='updateRadioStakeholders(noS)' class='checkbox-div yes-no' #noS><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed==false"  (click)='updateRadioStakeholders(noS)' class='selected checkbox-div yes-no' #noS><span  class="selected glyphicon glyphicon-check" ></span>No</div>
                 </div>
             </div>
             
@@ -76,8 +76,8 @@
                 <div class='checkbox-row'>
                     <div id='yeD' *ngIf="!this.a_details.riskDetails[0]?.documented" (click)='updateRadioDocumented(yeD)' class='checkbox-div yes-no' #yeD><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
                     <div id='yeD' *ngIf="this.a_details.riskDetails[0]?.documented"  (click)='updateRadioDocumented(yeD)' class='selected checkbox-div yes-no' #yeD><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
-                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.documented" (click)='updateRadioDocumented(noD)' class='checkbox-div yes-no' #noD><span class="glyphicon glyphicon-unchecked"></span>No</div>
-                    <div id='noD' *ngIf="!this.a_details.riskDetails[0]?.documented"  (click)='updateRadioDocumented(noD)' class='selected checkbox-div yes-no' #noD><span  class="selected glyphicon glyphicon-check" ></span>No</div>
+                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.documented || this.a_details.riskDetails[0]?.documented==null" (click)='updateRadioDocumented(noD)' class='checkbox-div yes-no' #noD><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.documented==false"  (click)='updateRadioDocumented(noD)' class='selected checkbox-div yes-no' #noD><span  class="selected glyphicon glyphicon-check" ></span>No</div>
                 </div>            
             </div>            
         </div>

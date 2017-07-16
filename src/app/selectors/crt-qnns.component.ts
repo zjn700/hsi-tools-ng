@@ -15,7 +15,7 @@ import "rxjs/add/operator/takeWhile";
 export class CrtQnnsComponent implements OnInit, OnDestroy {
   category = '1';   // RT: Requirements Tool
   projectTitle: string;
-  qnns: Questionnaire[] = [];
+  public qnns: Questionnaire[] = [];
   private alive:boolean = true;
   private isInitialized = false;
 
