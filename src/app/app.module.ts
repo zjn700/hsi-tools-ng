@@ -50,6 +50,8 @@ import { TopMenuMouseDirective } from './top-menu-mouse.directive';
 import { QstnMenuFilterComponent } from './card/qstn/qstn-menu-filter/qstn-menu-filter.component';
 import { IntgrnCompletedComponent } from './intgrn/intgrn-completed/intgrn-completed.component';
 import { AnsrRiskDetailsComponent } from './card/ansr/ansr-risk-details/ansr-risk-details.component';
+import { StandardOutputComponent } from './output/standard-output/standard-output.component';
+import { SortedByRiskComponent } from './output/sorted-by-risk/sorted-by-risk.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { AnsrRiskDetailsComponent } from './card/ansr/ansr-risk-details/ansr-ris
     TopMenuMouseDirective,
     QstnMenuFilterComponent,
     IntgrnCompletedComponent,
-    AnsrRiskDetailsComponent
+    AnsrRiskDetailsComponent,
+    StandardOutputComponent,
+    SortedByRiskComponent
   ],
   imports: [
     BrowserModule,

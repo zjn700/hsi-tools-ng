@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Rx"
 
 import { DomainService } from '../domn/domn.service';
 import { CardService } from '../card/card.service';
@@ -17,15 +19,25 @@ export class OutputComponent implements OnInit {
   public projectTitle = localStorage.getItem('ptitle')
   public qnnTitle = localStorage.getItem('qnnTitle')
   public activeUser;
+  private subscription: Subscription;
 
   constructor(private domainService: DomainService, 
               private cardService: CardService, 
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router:Router, 
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.domains = this.domainService.domains
     this.transformAnswers();
     this.activeUser=this.authService.getActiveUser();
+    
+    this.subscription = this.activatedRoute.params.subscribe(
+      (param:any) => {
+        console.log('param')
+        console.log(param)
+        //this.id = param['id']
+      });
   }
   
   convertRiskValue(val){

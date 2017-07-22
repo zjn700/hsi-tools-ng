@@ -1,4 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
+import { INTGRN_ROUTES } from './intgrn/intgrn.routes';
+import { OUTPUT_ROUTES } from './output/output.routes';
+
 
 //import { QnnsComponent } from './questionnaires/qnns.component';
 //import { DomainsComponent } from './domains/domains.component';
@@ -28,8 +31,10 @@ const APP_ROUTES: Routes = [
     { path: 'crt-qnns', component: CrtQnnsComponent },
     { path: 'at-qnns', component: AtQnnsComponent },
     { path: 'questions', component: DomnComponent },
-    { path: 'integrations', component: IntgrnComponent },
-    { path: 'review', component: OutputComponent },
+    { path: 'integrations', component: IntgrnComponent, children: INTGRN_ROUTES },
+    { path: 'review', component: OutputComponent, children: OUTPUT_ROUTES },
+    //{ path: 'integrations', component: IntgrnComponent },
+    //{ path: 'review', component: OutputComponent },
 
     //{ path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
     //{ path: '**', redirectTo: '/auth/signin', pathMatch: 'full' }
