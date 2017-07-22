@@ -10,6 +10,8 @@ import { CardService } from '../card/card.service';
 import { AuthService } from '../users/auth.service';
 import { TopMenuService } from '../shared/top-menu.service'
 
+import {Observable} from 'rxjs/Observable'
+
 @Component({
   selector: 'app-proj',
   templateUrl: './proj.component.html',
@@ -48,6 +50,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
         //     title: new FormControl(null, Validators.required),
         //     description: new FormControl(null)
         // }) 
+      
+        const myNumbers = Observable.interval(1000);
+        myNumbers
+        .takeWhile(() => this.alive)
+        .subscribe(
+            (number) => {
+            
+            console.log(number);
+        });
+      
       
         this.projectService.projectIsInEditMode
             .takeWhile(() => this.alive)

@@ -7,6 +7,7 @@
 
             <div title='Show risk detail questions' *ngIf='!showCheckboxes' (click)="showCheckBoxes(true)" class="checkbox-box risk-detail-row answerTitle disable-text-selection"><span class="glyphicon glyphicon-menu-down"></span>Risk Planning</div>
             <div title= 'Hide risk detail questions' *ngIf='showCheckboxes' (click)="showCheckBoxes(false)"  class="checkbox-box risk-detail-row answerTitle disable-text-selection"><span class="glyphicon glyphicon-menu-up"></span>Risk Planning</div>
+            
             <div *ngIf='showCheckboxes' class="checkbox-box risk-detail-row  disable-text-selection"><h3>What is your Risk Mitigation Strategy?</h3>
                   <div class='checkbox-row'>
                     <div id='ac' *ngIf="this.a_details.riskDetails[0]?.strategy!='ac'" (click)='updateRadioStrategy(ac)' class='checkbox-div' #ac><span class="glyphicon glyphicon-unchecked"></span>Accept</div>
@@ -67,7 +68,7 @@
                 <div class='checkbox-row'>
                     <div id='yeS' *ngIf="!this.a_details.riskDetails[0]?.stakeholdersInformed" (click)='updateRadioStakeholders(yeS)' class='checkbox-div yes-no' #yeS><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
                     <div id='yeS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed"  (click)='updateRadioStakeholders(yeS)' class='selected checkbox-div yes-no' #yeS><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
-                    <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed || this.a_details.riskDetails[0]?.documented==null" (click)='updateRadioStakeholders(noS)' class='checkbox-div yes-no' #noS><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed || this.a_details.riskDetails[0]?.stakeholdersInformed==null" (click)='updateRadioStakeholders(noS)' class='checkbox-div yes-no' #noS><span class="glyphicon glyphicon-unchecked"></span>No</div>
                     <div id='noS' *ngIf="this.a_details.riskDetails[0]?.stakeholdersInformed==false"  (click)='updateRadioStakeholders(noS)' class='selected checkbox-div yes-no' #noS><span  class="selected glyphicon glyphicon-check" ></span>No</div>
                 </div>
             </div>

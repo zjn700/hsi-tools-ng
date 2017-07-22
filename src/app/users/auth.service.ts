@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { User } from './user.model';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
+//var electron: any;
+//const {ipcRenderer, clipboard} = electron;
+
 
 @Injectable()
 export class AuthService  {
@@ -11,13 +14,15 @@ export class AuthService  {
     //public active_user:User;
     @Output() showWarning = new EventEmitter<boolean>();
     //showWarning = new EventEmitter<boolean>();
+    public signedInUser:User;
 
     constructor(private http: Http, private router: Router) { }
+    
     
     signup(user: User) {
         const headers = new Headers({'content-Type': 'application/json'})
         const body = JSON.stringify(user)
-
+        
         return this.http.post('/users', body, {headers: headers})
             .map((response : Response) =>  response.json())
             .catch((error: Response) => Observable.throw(error));
@@ -27,10 +32,36 @@ export class AuthService  {
         const headers = new Headers({'content-Type': 'application/json'})
         const body = JSON.stringify(user)
 
+        // electron.ipcRenderer.send('asynchronous-message', 'answer');
+        // //ipcRenderer.send('asynchronous-message', 'answer');
+        // electron.clipboard.writeText('Electron is ready!!');
+
+
         return this.http.post('/users/signin', body, {headers: headers})
-            .map((response : Response) =>  response.json())
+            .map((response : Response) => response.json())
             .catch((error: Response) => Observable.throw(error));
     }    
+    
+    getActiveUser() {
+        return this.signedInUser;
+    }
+    
+    setUser(userId) {
+        //const queryString = '/'+ sequence +'?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id
+        this.http.get('/users/' + localStorage.getItem('userId'))
+            .map((response: Response) => {
+                //response.json()
+                return response.json().obj
+                
+            })
+            .subscribe((response) => {
+                console.log('response');
+                console.log(response)
+                this.signedInUser=response;
+                console.log('this.signedInUser')
+                console.log(this.signedInUser)
+            })
+    }
     
     isTokenExpired(){
         var payloadBytes = localStorage.getItem('token').split('.')[1];
