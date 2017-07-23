@@ -15,79 +15,79 @@
     </div>
     <hr>
 </div>
-<footer></footer>
+<!--<footer></footer>-->
 
-<div class='domain container'
-    *ngFor="let domain of domains; let j=index;" >
-    <h2>{{domain.title}}</h2>
-    <div *ngFor="let question of domain.questions; let i = index">
-       <h3>
-           <span *ngIf="question.sequence<10">{{domain.sequence}}.0{{question.sequence}}</span>
-           <span *ngIf="question.sequence>=10">{{domain.sequence}}.{{question.sequence}}</span>
-           {{question.content}}
-       </h3>    
+<!--<div class='domain container'-->
+<!--    *ngFor="let domain of domains; let j=index;" >-->
+<!--    <h2>{{domain.title}}</h2>-->
+<!--    <div *ngFor="let question of domain.questions; let i = index">-->
+<!--       <h3>-->
+<!--           <span *ngIf="question.sequence<10">{{domain.sequence}}.0{{question.sequence}}</span>-->
+<!--           <span *ngIf="question.sequence>=10">{{domain.sequence}}.{{question.sequence}}</span>-->
+<!--           {{question.content}}-->
+<!--       </h3>    -->
        
-       <div class="hsi-label" *ngIf="domain.answers[i].value==null">NA</div>
-       <div class="hsi-label" *ngIf="domain.answers[i].value">Yes</div>
-       <div class="hsi-label" *ngIf="domain.answers[i].value==false">No</div>
+<!--       <div class="hsi-label" *ngIf="domain.answers[i].value==null">NA</div>-->
+<!--       <div class="hsi-label" *ngIf="domain.answers[i].value">Yes</div>-->
+<!--       <div class="hsi-label" *ngIf="domain.answers[i].value==false">No</div>-->
        
-       <div *ngIf="domain.answers[i].value!=null">
-           <div *ngFor="let item of domainText[j].rationale[i]">
-               <p>{{item}}</p>
-           </div>
+<!--       <div *ngIf="domain.answers[i].value!=null">-->
+<!--           <div *ngFor="let item of domainText[j].rationale[i]">-->
+<!--               <p>{{item}}</p>-->
+<!--           </div>-->
 
-           <div *ngIf="domain.answers[i].value==false">
-               <div class='hsi-label label-left'>Estimated Risk:</div>
-               <div 
-                *ngIf="domain.answers[i].value==false"
-                class='riskValue'
-                [ngClass]="{'gry' : domain.answers[i]?.riskValue==null,
-                            'grn' : domain.answers[i]?.riskValue<20 && domain.answers[i]?.riskValue!=null,
-                            'red' : domain.answers[i]?.riskValue>30,
-                            'ylo' : domain.answers[i]?.riskValue>20 && domain.answers[i]?.riskValue<30}">
-                   {{domainText[j]?.riskValue[i]}}
-                </div>
+<!--           <div *ngIf="domain.answers[i].value==false">-->
+<!--               <div class='hsi-label label-left'>Estimated Risk:</div>-->
+<!--               <div -->
+<!--                *ngIf="domain.answers[i].value==false"-->
+<!--                class='riskValue'-->
+<!--                [ngClass]="{'gry' : domain.answers[i]?.riskValue==null,-->
+<!--                            'grn' : domain.answers[i]?.riskValue<20 && domain.answers[i]?.riskValue!=null,-->
+<!--                            'red' : domain.answers[i]?.riskValue>30,-->
+<!--                            'ylo' : domain.answers[i]?.riskValue>20 && domain.answers[i]?.riskValue<30}">-->
+<!--                   {{domainText[j]?.riskValue[i]}}-->
+<!--                </div>-->
                 
-                <div *ngIf="domain.answers[i].riskValue>20">       
-                   <div *ngIf="domain.answers[i].riskDetails[0].strategy==null"><span class='hsi-label'>Strategy:</span> <span>None selected</span></div>
-                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='ac'"><span class='hsi-label'>Strategy:</span> <span>Accept</span></div>
-                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='tr'"><span class='hsi-label'>Strategy:</span> <span>Transfer</span></div>
-                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='av'"><span class='hsi-label'>Strategy:</span> <span>Avoid</span></div>
-                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='co'"><span class='hsi-label'>Strategy:</span> <span>Control</span></div>
+<!--                <div *ngIf="domain.answers[i].riskValue>20">       -->
+<!--                   <div *ngIf="domain.answers[i].riskDetails[0].strategy==null"><span class='hsi-label'>Strategy:</span> <span>None selected</span></div>-->
+<!--                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='ac'"><span class='hsi-label'>Strategy:</span> <span>Accept</span></div>-->
+<!--                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='tr'"><span class='hsi-label'>Strategy:</span> <span>Transfer</span></div>-->
+<!--                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='av'"><span class='hsi-label'>Strategy:</span> <span>Avoid</span></div>-->
+<!--                   <div *ngIf="domain.answers[i].riskDetails[0].strategy=='co'"><span class='hsi-label'>Strategy:</span> <span>Control</span></div>-->
     
-                    <div *ngIf="domain.answers[i].riskDetails[0].impact==null"><span class='hsi-label'>Impact:</span> <span>None selected</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='cs'"><span class='hsi-label'>Impact:</span> <span>Cost</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='sc'"><span class='hsi-label'>Impact:</span> <span>Schedule</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='pe'"><span class='hsi-label'>Impact:</span> <span>Performance</span></div>
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].impact==null"><span class='hsi-label'>Impact:</span> <span>None selected</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='cs'"><span class='hsi-label'>Impact:</span> <span>Cost</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='sc'"><span class='hsi-label'>Impact:</span> <span>Schedule</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].impact=='pe'"><span class='hsi-label'>Impact:</span> <span>Performance</span></div>-->
                     
-                    <div *ngIf="domain.answers[i].riskDetails[0].strategy=='av' || domain.answers[i].riskDetails[0].strategy=='co'">
-                        <div *ngIf="domainText[j].mitigationPlan[i]==''"><span class='hsi-label'>Mitigation Plan:</span> <span>None provided</span></div>
-                        <div *ngIf="domainText[j].mitigationPlan[i]"><span class='hsi-label'>Mitigation Plan: </span> </div>
-                        <div *ngFor="let item of domainText[j].mitigationPlan[i]">
-                           <p>{{item}}</p>
-                        </div>
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].strategy=='av' || domain.answers[i].riskDetails[0].strategy=='co'">-->
+<!--                        <div *ngIf="domainText[j].mitigationPlan[i]==''"><span class='hsi-label'>Mitigation Plan:</span> <span>None provided</span></div>-->
+<!--                        <div *ngIf="domainText[j].mitigationPlan[i]"><span class='hsi-label'>Mitigation Plan: </span> </div>-->
+<!--                        <div *ngFor="let item of domainText[j].mitigationPlan[i]">-->
+<!--                           <p>{{item}}</p>-->
+<!--                        </div>-->
                         
-                        <div *ngIf="domainText[j].planTracking[i]==''"><span class='hsi-label'>Plan Tracking: </span> <span>None provided</span></div>
-                        <div *ngIf="domainText[j].planTracking[i]" ><span class="hsi-label">Plan Tracking: </span></div>
-                        <div *ngFor="let item of domainText[j].planTracking[i]">
-                           <p>{{item}}</p>
-                        </div>
-                    </div>
+<!--                        <div *ngIf="domainText[j].planTracking[i]==''"><span class='hsi-label'>Plan Tracking: </span> <span>None provided</span></div>-->
+<!--                        <div *ngIf="domainText[j].planTracking[i]" ><span class="hsi-label">Plan Tracking: </span></div>-->
+<!--                        <div *ngFor="let item of domainText[j].planTracking[i]">-->
+<!--                           <p>{{item}}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     
-                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed==null"><span class='hsi-label'>Stakeholder informed:</span> <span>NA</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed"><span class='hsi-label'>Stakeholder informed:</span> <span>Yes</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed==false"><span class='hsi-label'>Stakeholder informed:</span> <span>No</span></div>
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed==null"><span class='hsi-label'>Stakeholder informed:</span> <span>NA</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed"><span class='hsi-label'>Stakeholder informed:</span> <span>Yes</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].stakeholdersInformed==false"><span class='hsi-label'>Stakeholder informed:</span> <span>No</span></div>-->
 
-                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented==null"><span class='hsi-label'>Strategy documented:</span> <span>NA</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented"><span class='hsi-label'>Strategy documented:</span> <span>Yes</span></div>
-                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented==false"><span class='hsi-label'>Strategy documented:</span> <span>No</span></div>
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented==null"><span class='hsi-label'>Strategy documented:</span> <span>NA</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented"><span class='hsi-label'>Strategy documented:</span> <span>Yes</span></div>-->
+<!--                    <div *ngIf="domain.answers[i].riskDetails[0].strategyDocumented==false"><span class='hsi-label'>Strategy documented:</span> <span>No</span></div>-->
 
-                </div>
-                <hr>
-            </div>    
-       </div>
-     </div>
-</div>
+<!--                </div>-->
+<!--                <hr>-->
+<!--            </div>    -->
+<!--       </div>-->
+<!--     </div>-->
+<!--</div>-->
 
 <div><a [routerLink]="['standard']">Standard Output z</a></div>
 <div><a [routerLink]="['sortedbyrisk']">Sorted by Risk</a></div>

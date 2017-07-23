@@ -9,8 +9,7 @@ import { SortedByRiskComponent } from './sorted-by-risk/sorted-by-risk.component
 export const OUTPUT_ROUTES: Routes = [
     //{ path: "", redirectTo: 'review', pathMatch: "full" }
     { path: "", component: StandardOutputComponent },
-    { path: "standard", component: StandardOutputComponent }
-     ,
+    { path: "standard", component: StandardOutputComponent },
     { path: "sortedbyrisk", component: SortedByRiskComponent }
     //,
     // { path: "signin", component: SigninComponent},
