@@ -10,7 +10,7 @@ import { QnnComponent } from './card/qnn/qnn.component';
 import { AnsrComponent } from './card/ansr/ansr.component';
 import { ProjectComponent } from './proj/proj.component';
 import { StateComponent } from './state/state.component';
-import { OutputComponent } from './output/output.component';
+import { OutputComponent } from './outputs/output.component';
 import { CardComponent } from './card/card.component';
 import { IntgrnComponent } from './intgrn/intgrn.component';
 import { AnsrButtonsComponent } from './card/ansr/ansr-buttons/ansr-buttons.component';
@@ -32,6 +32,7 @@ import { DomainService } from './domn/domn.service';
 import { CardService } from './card/card.service';
 import { TopMenuService } from './shared/top-menu.service';
 import { IntegrationService } from './intgrn/intgrn.service';
+import { OutputService } from './outputs/output.service';
 
 import { routing } from './app-routing.module';
 import { CardHolderComponent } from './card/card-holder.component';
@@ -47,11 +48,13 @@ import { QstnMenuItemComponent } from './card/qstn/qstn-menu-item.component';
 import { QstnMenuDirective } from './card/qstn/qstn-menu.directive';
 import { TopMenuDirective } from './top-menu.directive';
 import { TopMenuMouseDirective } from './top-menu-mouse.directive';
+import { OutputMouseDirective } from './outputs/output-menu-mouse.directive';
+
 import { QstnMenuFilterComponent } from './card/qstn/qstn-menu-filter/qstn-menu-filter.component';
 import { IntgrnCompletedComponent } from './intgrn/intgrn-completed/intgrn-completed.component';
 import { AnsrRiskDetailsComponent } from './card/ansr/ansr-risk-details/ansr-risk-details.component';
-import { StandardOutputComponent } from './output/standard-output/standard-output.component';
-import { SortedByRiskComponent } from './output/sorted-by-risk/sorted-by-risk.component';
+import { StandardOutputComponent } from './outputs/standard-output/standard-output.component';
+import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +93,7 @@ import { SortedByRiskComponent } from './output/sorted-by-risk/sorted-by-risk.co
     QstnMenuFilterComponent,
     IntgrnCompletedComponent,
     AnsrRiskDetailsComponent,
+    OutputMouseDirective,
     StandardOutputComponent,
     SortedByRiskComponent
   ],
@@ -100,8 +104,14 @@ import { SortedByRiskComponent } from './output/sorted-by-risk/sorted-by-risk.co
     ReactiveFormsModule,
     routing
   ],
-  providers: [AuthService, ProjectService, SelectorService, DomainService, CardService, TopMenuService, IntegrationService],          
-
+  providers: [AuthService, 
+              ProjectService, 
+              SelectorService, 
+              DomainService, 
+              CardService, 
+              TopMenuService, 
+              IntegrationService,
+              OutputService],          
   bootstrap: [AppComponent]
 })
 export class AppModule { }

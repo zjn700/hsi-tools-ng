@@ -32,7 +32,11 @@ h2{
 
 .p-title{
   text-shadow: 1px 1px 1px #272b31;
-  
+  color:peachpuff;
+}
+
+.qnn-title {
+  color:white;
 }
 
 a {

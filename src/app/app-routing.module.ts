@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { INTGRN_ROUTES } from './intgrn/intgrn.routes';
-import { OUTPUT_ROUTES } from './output/output.routes';
+import { OUTPUT_ROUTES } from './outputs/output.routes';
 
 
 //import { QnnsComponent } from './questionnaires/qnns.component';
@@ -13,7 +13,7 @@ import { ProjectComponent } from './proj/proj.component';
 import { DomnComponent } from './domn/domn.component';
 import { CardHolderComponent } from './card/card-holder.component';
 import { IntgrnComponent } from './intgrn/intgrn.component';
-import { OutputComponent } from './output/output.component';
+import { OutputComponent } from './outputs/output.component';
 import { SigninComponent } from './users/signin.component';
 import { SignupComponent } from './users/signup.component';
 import { LogoutComponent } from './users/logout.component';

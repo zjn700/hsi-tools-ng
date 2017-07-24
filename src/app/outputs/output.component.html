@@ -1,0 +1,51 @@
+<div class="container">
+    
+    <h1>HSI Tools Review</h1>
+    <div id="title-box">
+        <div class=' inline-title'><h2 class='p-title'>{{projectTitle}}:</h2></div>
+        <div class=' inline-title'><h2 class='qnn-Title'>{{qnnTitle}}</h2></div>
+    </div>
+    <hr>
+    <div *ngIf="activeUser">
+        <h3>
+            <span class="hsi-label" >Author: </span><span>{{activeUser.firstName}} {{activeUser.lastName}}</span> 
+        </h3>
+        <h3> 
+            <span *ngIf="activeUser.office">{{activeUser.office}}</span>
+            <span *ngIf="activeUser.email"> {{activeUser.email}}</span>
+            <span *ngIf="activeUser.phone"> {{activeUser.phone}}</span>
+        </h3>
+    </div>
+    <hr>
+    
+    <div *ngIf='!printing'>
+        <!--<div class="output-label">Sort order:</div>-->
+        <h2>Select a sort order:</h2>
+    
+        <div  id='menu-box'>
+            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link active' [routerLink]="['numerical']">Numerical</a></div>
+            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link' [routerLink]="['sortedbyrisk']">By risk within a domain</a></div>
+            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link' [routerLink]="['numerical']">By risk</a></div>
+            <!--li *ngIf="!isLoggedIn()"><a routerLinkActive='active' [routerLink]="['/signin']">Sign in</a></li-->
+        </div>
+        <hr><hr>
+    </div>
+    <!--glyphicon glyphicon-print-->
+
+    <button (click)="printPage()" 
+          *ngIf='!printing'
+          title='Print the selected review in report format.' 
+          class='btn glyphicon glyphicon-print  floating floating-green'>
+    </button>
+    <!--<button (click)="showMenu()"-->
+    <!--      *ngIf='printing'-->
+    <!--      title='Show menu' -->
+    <!--      class='btn glyphicon glyphicon-menu-hamburger floating floating-red'>-->
+    <!--</button>-->
+
+</div>
+
+
+
+
+<router-outlet></router-outlet>
