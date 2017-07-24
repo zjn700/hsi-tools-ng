@@ -23,10 +23,30 @@
         <h2>Select a sort order:</h2>
     
         <div  id='menu-box'>
-            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link active' [routerLink]="['numerical']">Numerical</a></div>
-            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link' [routerLink]="['sortedbyrisk']">By risk within a domain</a></div>
-            <div class='menu-item'><a appOutputMenuMouse class='menu-item-link' [routerLink]="['numerical']">By risk</a></div>
-            <!--li *ngIf="!isLoggedIn()"><a routerLinkActive='active' [routerLink]="['/signin']">Sign in</a></li-->
+            <div class='menu-item'>
+                <a appOutputMenuMouse 
+                    class='menu-item-link active' 
+                    [routerLink]="['flattened']" 
+                    title="This report shows only medium to high risk items">
+                    By risk only
+                </a>
+            </div>
+            <div class='menu-item'>
+                <a appOutputMenuMouse 
+                    class='menu-item-link' 
+                    [routerLink]="['sortedbyrisk']" 
+                    title="This report shows medium to high risk items grouped by domain">
+                By domain, then risk
+                </a>
+            </div>
+            <div class='menu-item'>
+                <a appOutputMenuMouse 
+                    class='menu-item-link' 
+                    [routerLink]="['numerical']" 
+                    title="This report shows all questions grouped by domain">
+                By Domain - unfiltered
+                </a>
+            </div>
         </div>
         <hr><hr>
     </div>

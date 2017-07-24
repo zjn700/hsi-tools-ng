@@ -1,32 +1,27 @@
-<!--<header></header>-->
-
-<!--<div class='domain container'>-->
-<!--    <h3>-->
-<!--      sorted-by-risk in the works!-->
-<!--    </h3>-->
-<!--</div>-->
-
+<!--<p>-->
+<!--  flattened works!-->
+<!--</p>-->
 <header></header>
-<!--{{report}}-->
+
 <!--<div *ngIf="report.children.length == 0" class='domain container'>-->
 <!--    <h3>No medium or higher risks found</h3>-->
 <!--</div>-->
 <!--stackoverflow.com/questions/37874432/if-ng-content-has-content-or-empty-angular2-->
 
 <div #report id='clip' class='domain container'
-    *ngFor="let domain of domains; let j=index;" >
+    *ngFor="let output of outputs; let j=index;" >
      <!--{{domain.outputs[j].riskValue}}-->
     <!--<hr>-->
     <!--<h2>{{domain.outputs[j].domainTitle}}</h2>-->
     <!--<hr>-->
     
-    <div *ngFor="let output of domain.outputs; let i = index">
-
+    <!--<div *ngFor="let output of domain.outputs; let i = index">-->
+     
 
         <div *ngIf="output.answerValue==false && output.riskValue>20">
     
            <h3>
-               <span>{{domain.outputs[j].domainTitle}}: </span>
+               <span>{{output.domainTitle}}: </span>
                <span *ngIf="output.questionSequence<10">{{output.domainSequence}}.0{{output.questionSequence}}</span>
                <span *ngIf="output.questionSequence>=10">{{output.domainSequence}}.{{output.questionSequence}}</span>
                {{output.questionContent}}
@@ -93,5 +88,5 @@
                 </div>    
            </div>
         </div>
-    </div>
+    <!--</div>-->
 </div>

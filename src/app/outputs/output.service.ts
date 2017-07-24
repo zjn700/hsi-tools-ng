@@ -38,6 +38,7 @@ export class OutputService {
                   domain.questions[index].content,
                   //answer.sequence,
                   answer.value,
+                  answer.riskValue,
                   this.convertRiskValue(answer.riskValue),
                   this.transformText(answer.rationale),
                   answer.riskDetails[0].strategy,
@@ -52,7 +53,8 @@ export class OutputService {
        }
        console.log('t_outputs') 
        console.log(t_outputs) 
-       console.log(this.sortByRiskValue(t_outputs))
+       this.sortByRiskValue(t_outputs)
+       return t_outputs
        
     }
     
@@ -111,8 +113,8 @@ export class OutputService {
         this.domains=domains
         
         console.log(domains)
-        this.flattenDomainsThenSortAnswersByRisk(domains);
-        this.sortDomainsByRisk(domains);
+       // this.flattenDomainsThenSortAnswersByRisk(domains);
+       // this.sortDomainsByRisk(domains);
         let t_domains: DomainText[] = [];
         for (let domain of this.domains) {
           let t_Rationale: string[] = [];

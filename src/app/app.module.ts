@@ -55,6 +55,7 @@ import { IntgrnCompletedComponent } from './intgrn/intgrn-completed/intgrn-compl
 import { AnsrRiskDetailsComponent } from './card/ansr/ansr-risk-details/ansr-risk-details.component';
 import { StandardOutputComponent } from './outputs/standard-output/standard-output.component';
 import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.component';
+import { FlattenedComponent } from './outputs/sorted-by-risk/flattened.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.c
     AnsrRiskDetailsComponent,
     OutputMouseDirective,
     StandardOutputComponent,
-    SortedByRiskComponent
+    SortedByRiskComponent,
+    FlattenedComponent,
   ],
   imports: [
     BrowserModule,
