@@ -40,12 +40,12 @@ export class OutputService {
                   answer.value,
                   this.convertRiskValue(answer.riskValue),
                   this.transformText(answer.rationale),
-                  answer.strategy,
-                  answer.impact,
-                  this.transformText(answer.mitigationPlan),
-                  this.transformText(answer.planTracking),
-                  answer.stakeholdersInformed,
-                  answer.strategyDocumented
+                  answer.riskDetails[0].strategy,
+                  answer.riskDetails[0].impact,
+                  this.transformText(answer.riskDetails[0].mitigationPlan),
+                  this.transformText(answer.riskDetails[0].planTracking),
+                  answer.riskDetails[0].stakeholdersInformed,
+                  answer.riskDetails[0].strategyDocumented
                 )
               )
           }
@@ -76,12 +76,12 @@ export class OutputService {
                   answer.riskValue,
                   this.convertRiskValue(answer.riskValue),
                   this.transformText(answer.rationale),
-                  answer.strategy,
-                  answer.impact,
-                  this.transformText(answer.mitigationPlan),
-                  this.transformText(answer.planTracking),
-                  answer.stakeholdersInformed,
-                  answer.strategyDocumented
+                  answer.riskDetails[0].strategy,
+                  answer.riskDetails[0].impact,
+                  this.transformText(answer.riskDetails[0].mitigationPlan),
+                  this.transformText(answer.riskDetails[0].planTracking),
+                  answer.riskDetails[0].stakeholdersInformed,
+                  answer.riskDetails[0].strategyDocumented
                 )
               )
             index++;
