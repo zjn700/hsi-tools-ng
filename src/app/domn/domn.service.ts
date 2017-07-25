@@ -15,8 +15,13 @@ export class DomainService {
     public domains: Domain[] = [];
     public lastActiveProject:string = '';
     public lastActiveQnn:string = '';
+    public allQuestionsLoaded:boolean = false
 
     constructor(private http: Http, private projectService: ProjectService) { }
+
+    questionsLoaded(){
+        return this.allQuestionsLoaded
+    }
 
     getOneAnswer(domain, sequence){
         const queryString = '/'+ sequence +'?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id
@@ -40,11 +45,12 @@ export class DomainService {
     }
     
     getDomains(){
-
+        this.allQuestionsLoaded = false;
         if (!this.updateRequired()) {
             console.log('update not Required')
             return this.http.get('/domain/dummy')  // returns nothing, but creates the required observable
                 .map((response:Response)=> {
+                    this.allQuestionsLoaded = true;
                     return this.domains   // pass back the current domain array
                 })
 
@@ -77,7 +83,8 @@ export class DomainService {
                 for (let domain of t_domains) {
                     this.addDomainAnswers(domain)
                         .subscribe(answers => {
-                            domain.answers = answers
+                            domain.answers = answers;
+                            this.allQuestionsLoaded = true;
                     })
                 }
                 this.lastActiveProject=localStorage.getItem('pid')       

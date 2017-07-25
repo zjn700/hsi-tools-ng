@@ -15,7 +15,10 @@ export class AuthService  {
     @Output() showWarning = new EventEmitter<boolean>();
     //showWarning = new EventEmitter<boolean>();
     public signedInUser:User;
-
+    public formFirstName:string = '';
+    public formLastName:string = '';
+    public formOffice:string= '';
+    
     constructor(private http: Http, private router: Router) { }
     
     
@@ -24,8 +27,13 @@ export class AuthService  {
         const body = JSON.stringify(user)
         
         return this.http.post('/users', body, {headers: headers})
-            .map((response : Response) =>  response.json())
-            .catch((error: Response) => Observable.throw(error));
+            .map((response : Response) =>  {
+                response.json();
+                console.log('response.json()');
+                console.log(response.json());
+                return response.json()
+            })
+            //.catch((error: Response) => Observable.throw(error));
     }    
 
     signin(user: User) {

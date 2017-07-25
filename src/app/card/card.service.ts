@@ -84,6 +84,8 @@ export class CardService {
   }
   
   addAnswerToDb(answer: Answer){
+      console.log('answer')
+      console.log(answer)
     answer.dateCreated  = answer.dateModified
     const headers = new Headers({'content-Type': 'application/json'})
     const body = JSON.stringify(answer)

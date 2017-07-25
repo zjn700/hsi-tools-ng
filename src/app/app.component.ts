@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from './users/auth.service';
 import { ProjectService } from './proj/proj.service';
 import { SelectorService } from './selectors/selector.service';
+import { DomainService } from './domn/domn.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   
   constructor(private authService: AuthService, 
               private projectService: ProjectService, 
-              private selectorService: SelectorService) { }
+              private selectorService: SelectorService,
+              private domainService: DomainService) { }
               
   ngOnInit(){
      this.authService.showWarning
@@ -77,5 +79,8 @@ export class AppComponent implements OnInit, AfterViewInit {
         return this.selectorService.qnnIsSelected();   
     }  
   
+  questionsLoaded() {
+    return this.domainService.questionsLoaded();
+  }
   
 }

@@ -22,7 +22,8 @@ import { LogoutComponent } from './users/logout.component';
 
 const APP_ROUTES: Routes = [
     //{ path: '', redirectTo: '/auth/signin', pathMatch: 'full' },
-    { path: '', redirectTo: '/signin', pathMatch: 'full' },
+    // { path: '', redirectTo: '/signin', pathMatch: 'full' },
+    { path: '', component: LogoutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'signup', component: SignupComponent },
@@ -38,7 +39,8 @@ const APP_ROUTES: Routes = [
 
     //{ path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
     //{ path: '**', redirectTo: '/auth/signin', pathMatch: 'full' }
-    { path: '**', redirectTo: '/signin', pathMatch: 'full' }
+    // { path: '**', redirectTo: '/signin', pathMatch: 'full' }
+    { path: '**', component: LogoutComponent }
 
     ]
 export const routing = RouterModule.forRoot(APP_ROUTES)

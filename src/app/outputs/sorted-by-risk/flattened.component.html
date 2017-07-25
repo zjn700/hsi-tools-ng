@@ -1,6 +1,3 @@
-<!--<p>-->
-<!--  flattened works!-->
-<!--</p>-->
 <header></header>
 
 <!--<div *ngIf="report.children.length == 0" class='domain container'>-->
@@ -10,13 +7,6 @@
 
 <div #report id='clip' class='domain container'
     *ngFor="let output of outputs; let j=index;" >
-     <!--{{domain.outputs[j].riskValue}}-->
-    <!--<hr>-->
-    <!--<h2>{{domain.outputs[j].domainTitle}}</h2>-->
-    <!--<hr>-->
-    
-    <!--<div *ngFor="let output of domain.outputs; let i = index">-->
-     
 
         <div *ngIf="output.answerValue==false && output.riskValue>20">
     

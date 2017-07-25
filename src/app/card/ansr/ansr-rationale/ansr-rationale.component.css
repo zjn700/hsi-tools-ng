@@ -27,7 +27,7 @@
 
 .form-control {
   margin-top: 10px;
-  height: 313px;
+  height: 270px; /*313px;*/
   width:100%;
 }
 

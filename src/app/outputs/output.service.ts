@@ -27,13 +27,15 @@ export class OutputService {
     flattenDomainsThenSortAnswersByRisk(domains) {
        let t_outputs: Output[] = [];
        for (let domain of domains) {
-          let t_domainTitle = domain.title;
-          let t_domainSequence =domain.sequence;
+          // let t_domainTitle = domain.title;
+          // let t_domainSequence =domain.sequence;
           let index = 0;
           for (let answer of domain.answers) {
               t_outputs.push(new Output(
-                  t_domainSequence,
-                  t_domainTitle,
+                  // t_domainSequence,
+                  // t_domainTitle,
+                  domain.sequence,
+                  domain.title,
                   domain.questions[index].sequence,
                   domain.questions[index].content,
                   //answer.sequence,
@@ -49,6 +51,7 @@ export class OutputService {
                   answer.riskDetails[0].strategyDocumented
                 )
               )
+              index++;
           }
        }
        console.log('t_outputs') 
@@ -62,15 +65,17 @@ export class OutputService {
        let t_outputDomains: OutputDomain[] = []
        for (let domain of domains) {
           let t_outputs: Output[] = [];
-          let t_domainTitle = domain.title;
-          let t_domainSequence =domain.sequence;
+          // let t_domainTitle = domain.title;
+          // let t_domainSequence =domain.sequence;
           let index = 0;
           for (let answer of domain.answers) {
               console.log('domain.questions[index].sequence')
               console.log(domain.questions[index].sequence)
               t_outputs.push(new Output(
-                  t_domainSequence,
-                  t_domainTitle,
+                  // t_domainSequence,
+                  // t_domainTitle,
+                  domain.sequence,
+                  domain.title,
                   domain.questions[index].sequence,
                   domain.questions[index].content,
                   //answer.sequence,

@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { Router } from '@angular/router';
 import { Project } from "./proj.model";
 import { ProjectService } from './proj.service';
+import { DomainService } from '../domn/domn.service';
 import { TopMenuService } from '../shared/top-menu.service';
 
 @Component({
@@ -14,7 +15,10 @@ export class ProjDetailComponent {
     
     @Input() project: Project;
 
-    constructor(private projectService: ProjectService, private topMenuService: TopMenuService, private router: Router) { }
+    constructor(private projectService: ProjectService, 
+                private domainService: DomainService,
+                private topMenuService: TopMenuService, 
+                private router: Router) { }
     
     onEdit() {
         console.log('in onEdit')
@@ -50,10 +54,11 @@ export class ProjDetailComponent {
       localStorage.setItem('qnnId', this.project.state.qnnId);
       localStorage.setItem('qnnTitle', this.project.state.qnnTitle);
       localStorage.setItem('qnnAbbreviation', this.project.state.qnnAbbreviation);
-      //this.router.navigate(['/questions'])
-      this.router.navigate([this.project.state.url])
-      //this.topMenuService.updateTopMenu('/questions')
-      this.topMenuService.updateTopMenu(this.project.state.url)
+
+      this.router.navigate(['/questions'])
+      this.topMenuService.updateTopMenu('/questions')
+      //   this.router.navigate([this.project.state.url])
+      //   this.topMenuService.updateTopMenu(this.project.state.url)
       this.projectService.setActiveProject(this.project)
         
     }

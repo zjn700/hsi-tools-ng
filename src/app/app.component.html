@@ -12,8 +12,9 @@
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/questions']">Questions</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/integrations']">Integrations</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/review']">Review</a></div>
+            <!--<div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected() && questionsLoaded()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected() && questionsLoaded()),  topMenuItem: true}" [routerLink]="['/review']">Review</a></div>-->
         </div>
-    </nav><!-- routerLinkActive='active' -->
+    </nav><!-- routerLinkActive='active' --> 
     <!--hr-->
     <div id='main' 
          class="row spacing">

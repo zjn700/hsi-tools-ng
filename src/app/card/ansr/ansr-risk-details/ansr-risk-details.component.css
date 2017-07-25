@@ -101,11 +101,22 @@ textarea {
   background:transparent;
 }
 
-.answerTitle {
+.answerTitlex {
   color: white;
   background-color: #30343b;
   font-size:1.1em;
   width:250px;
   padding:10px;
   margin-top: 0;
+}
+
+.answerTitle {
+    color: white;
+    background-color: #30343b;
+    font-size: 1.5em;
+    width: 350px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
+    height: 60px;
 }

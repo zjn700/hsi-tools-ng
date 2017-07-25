@@ -56,6 +56,7 @@ import { AnsrRiskDetailsComponent } from './card/ansr/ansr-risk-details/ansr-ris
 import { StandardOutputComponent } from './outputs/standard-output/standard-output.component';
 import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.component';
 import { FlattenedComponent } from './outputs/sorted-by-risk/flattened.component';
+import { EditOutputComponent } from './outputs/edit-output/edit-output.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { FlattenedComponent } from './outputs/sorted-by-risk/flattened.component
     StandardOutputComponent,
     SortedByRiskComponent,
     FlattenedComponent,
+    EditOutputComponent,
   ],
   imports: [
     BrowserModule,
