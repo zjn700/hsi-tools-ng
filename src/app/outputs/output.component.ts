@@ -17,7 +17,13 @@ export class OutputComponent implements OnInit {
   constructor( private authService: AuthService ) { }
   
   @HostListener('mouseover') onMouseUp() {
-    this.printing = false;
+    if (this.printing){
+        // document.body.style.webkitTransform =         // Chrome, Opera, Safari
+        // //document.body.style.msTransform =           // IE 9
+        // document.body.style.transform = 'scale(1)';  
+        
+        this.printing = false;
+    }
   }
 
 
@@ -27,6 +33,9 @@ export class OutputComponent implements OnInit {
   
   printPage() {
     this.printing=true;
+    // document.body.style.webkitTransform =         // Chrome, Opera, Safari
+    // //document.body.style.msTransform =           // IE 9
+    // document.body.style.transform = 'scale(.95)';
     setTimeout(function(){ window.print(); }, 100);
     
   }

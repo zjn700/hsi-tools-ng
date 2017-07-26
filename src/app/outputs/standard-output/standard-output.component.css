@@ -15,7 +15,7 @@
     height: 1.6em;
     margin-top: 10px;
     margin-right: 15px;
-    margin-left:150px;
+    margin-left:155px;
     text-align: center;
 }
 
@@ -40,25 +40,41 @@
 }
 
 
+
+px, spanx {
+  font-size:1.4em;
+  font-weight: normal;
+}
+p {
+  font-size:1.4em;
+  font-weight: normal;
+}
+span {
+  font-size:1em;
+  font-weight: 600;
+}
+
 .hsi-label {
-  font-size: 1.2em;
-  font-weight:700;
+  font-size: 1.3em;
+  font-weight:600;
+}
+
+.hsi-detail {
+  font-size: 1.3em;
+  font-weight:600;
+  color: #fd5f60;
 }
 
 .label-left {
   float:left;
-  
 }
 
-p, span {
-  font-size:1.2em;
-  font-weight: normal;
-}
 
 @media print {
     header {page-break-after: always;}
     /*.qnn {page-break-after: always;} */
     .riskValue {color:#ffffff !important; -webkit-print-color-adjust: exact; }
+    .hsi-detail {color:#fd5f60 !important; -webkit-print-color-adjust: exact; }
     .gry {background-color:#ddd !important; -webkit-print-color-adjust: exact; }
     .grn {background-color:#00b200 !important; -webkit-print-color-adjust: exact; }
     .ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }

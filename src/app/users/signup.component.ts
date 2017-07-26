@@ -45,13 +45,10 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
     
     checkPasswords(){
-        console.log('this.myForm.value.password == this.myForm.value.passwordCheck')
-        console.log(this.myForm.value.password == this.myForm.value.passwordCheck)
         return this.myForm.value.password == this.myForm.value.passwordCheck
     }
     
     onSubmit() {
-        console.log(this.myForm)
         const user = new User(
             this.myForm.value.email,
             this.myForm.value.password,
@@ -59,9 +56,6 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.myForm.value.lastName,
             this.myForm.value.office
             )
-        // this.authService.formFirstName= this.myForm.value.firstName;
-        // this.authService.formLastName= this.myForm.value.lastName;
-        // this.authService.formOffice= this.myForm.value.office;
         if (!this.checkPasswords()) {
             this.passwordMismatch = true;
         } else {
@@ -71,28 +65,17 @@ export class SignupComponent implements OnInit, OnDestroy {
             .takeWhile(() => this.alive)
             .subscribe(
                 data => {
-                    console.log('data');
-                    console.log(data);
-                    console.log(data.title);
-
                     if (!data.error) {
                         this.myForm.reset();
-                        this.router.navigate(['/signin'])   //(['/auth', 'signin'])
+                        this.router.navigate(['/signin'])
                     } else {
                         this.emailInUse=true;
                         setTimeout(()=> {this.emailInUse = false}, 8000)
                         // this.myForm.controls['firstName'].setValue(this.authService.formFirstName);
-                        // this.myForm.controls['lastName'].setValue(this.authService.formLastName);
-                        // this.myForm.controls['office'].setValue(this.authService.formOffice);
-                        // // console.log(this.authService.formFirstName)
-                        // // console.log('this.myForm.value.firstName')
-                        // // console.log(this.myForm.value.firstName)
-                        // // console.log(this.myForm)
                     }
                 },
                 error => console.log(error))
             
         }   
-        // this.myForm.reset();
     }
 }

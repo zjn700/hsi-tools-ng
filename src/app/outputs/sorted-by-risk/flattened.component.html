@@ -4,6 +4,7 @@
 <!--    <h3>No medium or higher risks found</h3>-->
 <!--</div>-->
 <!--stackoverflow.com/questions/37874432/if-ng-content-has-content-or-empty-angular2-->
+<!--ngClass="{'wider-margins': printing}"-->
 
 <div #report id='clip' class='domain container'
     *ngFor="let output of outputs; let j=index;" >
@@ -40,38 +41,38 @@
                     </div>
                     
                     <div *ngIf="output.riskValue>20">       
-                       <div *ngIf="output.strategy==null"><span class='hsi-label'>Strategy:</span> <span>None selected</span></div>
-                       <div *ngIf="output.strategy=='ac'"><span class='hsi-label'>Strategy:</span> <span>Accept</span></div>
-                       <div *ngIf="output.strategy=='tr'"><span class='hsi-label'>Strategy:</span> <span>Transfer</span></div>
-                       <div *ngIf="output.strategy=='av'"><span class='hsi-label'>Strategy:</span> <span>Avoid</span></div>
-                       <div *ngIf="output.strategy=='co'"><span class='hsi-label'>Strategy:</span> <span>Control</span></div>
+                       <div *ngIf="output.strategy==null"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>None selected</span></div>
+                       <div *ngIf="output.strategy=='ac'"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>Accept</span></div>
+                       <div *ngIf="output.strategy=='tr'"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>Transfer</span></div>
+                       <div *ngIf="output.strategy=='av'"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>Avoid</span></div>
+                       <div *ngIf="output.strategy=='co'"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>Control</span></div>
         
-                        <div *ngIf="output.impact==null"><span class='hsi-label'>Impact:</span> <span>None selected</span></div>
-                        <div *ngIf="output.impact=='cs'"><span class='hsi-label'>Impact:</span> <span>Cost</span></div>
-                        <div *ngIf="output.impact=='sc'"><span class='hsi-label'>Impact:</span> <span>Schedule</span></div>
-                        <div *ngIf="output.impact=='pe'"><span class='hsi-label'>Impact:</span> <span>Performance</span></div>
+                        <div *ngIf="output.impact==null"><span class='hsi-label'>Impact:</span> <span class='hsi-detail'>None selected</span></div>
+                        <div *ngIf="output.impact=='cs'"><span class='hsi-label'>Impact:</span> <span class='hsi-detail'>Cost</span></div>
+                        <div *ngIf="output.impact=='sc'"><span class='hsi-label'>Impact:</span> <span class='hsi-detail'>Schedule</span></div>
+                        <div *ngIf="output.impact=='pe'"><span class='hsi-label'>Impact:</span> <span class='hsi-detail'>Performance</span></div>
                         
                         <div *ngIf="output.strategy=='av' || output.strategy=='co'">
-                            <div *ngIf="output.mitigationPlan==''"><span class='hsi-label'>Mitigation Plan:</span> <span>None provided</span></div>
+                            <div *ngIf="output.mitigationPlan==''"><span class='hsi-label'>Mitigation Plan:</span> <span class='hsi-detail'>None provided</span></div>
                             <div *ngIf="output.mitigationPlan"><span class='hsi-label'>Mitigation Plan: </span> </div>
                             <div *ngFor="let item of output.mitigationPlan">
                                <p>{{item}}</p>
                             </div>
                             
-                            <div *ngIf="output.planTracking==''"><span class='hsi-label'>Plan Tracking: </span> <span>None provided</span></div>
+                            <div *ngIf="output.planTracking==''"><span class='hsi-label'>Plan Tracking: </span> <span class='hsi-detail'>None provided</span></div>
                             <div *ngIf="output.planTracking" ><span class="hsi-label">Plan Tracking: </span></div>
                             <div *ngFor="let item of output.planTracking">
                                <p>{{item}}</p>
                             </div>
                         </div>
                         
-                        <div *ngIf="output.stakeholdersInformed==null"><span class='hsi-label'>Stakeholder informed:</span> <span>NA</span></div>
-                        <div *ngIf="output.stakeholdersInformed"><span class='hsi-label'>Stakeholder informed:</span> <span>Yes</span></div>
-                        <div *ngIf="output.stakeholdersInformed==false"><span class='hsi-label'>Stakeholder informed:</span> <span>No</span></div>
+                        <div *ngIf="output.stakeholdersInformed==null"><span class='hsi-label'>Stakeholder informed:</span> <span class='hsi-detail'>NA</span></div>
+                        <div *ngIf="output.stakeholdersInformed"><span class='hsi-label'>Stakeholder informed:</span> <span class='hsi-detail'>Yes</span></div>
+                        <div *ngIf="output.stakeholdersInformed==false"><span class='hsi-label'>Stakeholder informed:</span> <span class='hsi-detail'>No</span></div>
     
-                        <div *ngIf="output.strategyDocumented==null"><span class='hsi-label'>Strategy documented:</span> <span>NA</span></div>
-                        <div *ngIf="output.strategyDocumented"><span class='hsi-label'>Strategy documented:</span> <span>Yes</span></div>
-                        <div *ngIf="output.strategyDocumented==false"><span class='hsi-label'>Strategy documented:</span> <span>No</span></div>
+                        <div *ngIf="output.strategyDocumented==null"><span class='hsi-label'>Strategy documented:</span> <span class='hsi-detail'>NA</span></div>
+                        <div *ngIf="output.strategyDocumented"><span class='hsi-label'>Strategy documented:</span> <span class='hsi-detail'>Yes</span></div>
+                        <div *ngIf="output.strategyDocumented==false"><span class='hsi-label'>Strategy documented:</span> <span class='hsi-detail'>No</span></div>
     
                     </div>
                     <hr>
