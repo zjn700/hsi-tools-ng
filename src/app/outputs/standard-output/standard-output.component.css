@@ -79,6 +79,10 @@ span {
     .grn {background-color:#00b200 !important; -webkit-print-color-adjust: exact; }
     .ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }
     .red {background-color:#fa3636 !important; -webkit-print-color-adjust: exact; }
+    
+    .container {margin-right:50px !important; margin-left:50px !important;}
+    /*margin-top:50px !important;margin-bottom:60px !important;}*/
+
 
 }
 
