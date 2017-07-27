@@ -1,7 +1,7 @@
+
 .domain.container {
   color:#222;
   background:#eee;
-  
 }
 
 .riskValue {
@@ -13,7 +13,7 @@
     font-weight: bold;
     width: 40px;
     height: 1.6em;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-right: 15px;
     margin-left:155px;
     text-align: center;
@@ -65,36 +65,31 @@ span {
 }
 
 
-
-/*.hsi-label {*/
-/*  font-size: 1.2em;*/
-/*  font-weight:700;*/
-/*}*/
-
-/*.label-left {*/
-/*  float:left;*/
-  
-/*}*/
-
-/*p, span {*/
-/*  font-size:1.2em;*/
-/*  font-weight: normal;*/
-/*}*/
-
 @media print {
     header {page-break-after: always;}
-    /*.qnn {page-break-after: always;} */
+
     .riskValue {color:#ffffff !important; -webkit-print-color-adjust: exact; }
     .hsi-detail {color:#fd5f60 !important; -webkit-print-color-adjust: exact; }
     .gry {background-color:#ddd !important; -webkit-print-color-adjust: exact; }
     .grn {background-color:#00b200 !important; -webkit-print-color-adjust: exact; }
     .ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }
     .red {background-color:#fa3636 !important; -webkit-print-color-adjust: exact; }
+
+    .container {
+      zoom:120% !important; 
+      background-color: white !important;
+    }
     
-    /*.container {margin-right:50px !important; margin-left:50px !important;}*/
-    .container {margin-right:50px !important; margin-left:50px}
-    /*!important;margin-top:50px !important;margin-bottom:60px !important;}*/
+    .report {
+      width: 75%; 
+      border: 0;
+      margin: 0 5%;
+      padding: none !important;
+      float: none !important;
+    }
 
 }
+
+
 
 /* https://stackoverflow.com/questions/6553439/div-background-color-in-print-page-doesnt-work */

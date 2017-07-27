@@ -14,13 +14,9 @@
        <div class="hsi-label" *ngIf="domain.answers[i].value">Yes</div>
        <div class="hsi-label" *ngIf="domain.answers[i].value==false">No</div>
        
-       <div *ngIf="domain.answers[i].value!=null">
-           <div *ngFor="let item of domainText[j].rationale[i]">
-               <p>{{item}}</p>
-           </div>
-
-           <div *ngIf="domain.answers[i].value==false">
-               <div class='hsi-label label-left'>Estimated Risk:</div>
+       
+       
+          <div *ngIf="domain.answers[i].value==false" class='hsi-label label-left'>Estimated Risk:</div>
                <div 
                 *ngIf="domain.answers[i].value==false"
                 class='riskValue'
@@ -30,6 +26,27 @@
                             'ylo' : domain.answers[i]?.riskValue>20 && domain.answers[i]?.riskValue<30}">
                    {{domainText[j]?.riskValue[i]}}
                 </div>
+                
+                
+                
+       
+       
+       <div *ngIf="domain.answers[i].value!=null">
+           <div *ngFor="let item of domainText[j].rationale[i]">
+               <p>{{item}}</p>
+           </div>
+
+           <div *ngIf="domain.answers[i].value==false">
+               <!--<div class='hsi-label label-left'>Estimated Risk:</div>-->
+               <!--<div -->
+               <!-- *ngIf="domain.answers[i].value==false"-->
+               <!-- class='riskValue'-->
+               <!-- [ngClass]="{'gry' : domain.answers[i]?.riskValue==null,-->
+               <!--             'grn' : domain.answers[i]?.riskValue<20 && domain.answers[i]?.riskValue!=null,-->
+               <!--             'red' : domain.answers[i]?.riskValue>30,-->
+               <!--             'ylo' : domain.answers[i]?.riskValue>20 && domain.answers[i]?.riskValue<30}">-->
+               <!--    {{domainText[j]?.riskValue[i]}}-->
+               <!-- </div>-->
                 
                 <div *ngIf="domain.answers[i].riskValue>20">       
                    <div *ngIf="domain.answers[i].riskDetails[0].strategy==null"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>None selected</span></div>

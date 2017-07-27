@@ -27,15 +27,13 @@ export class OutputService {
     flattenDomainsThenSortAnswersByRisk(domains) {
        let t_outputs: Output[] = [];
        for (let domain of domains) {
-          // let t_domainTitle = domain.title;
-          // let t_domainSequence =domain.sequence;
+          let t_domainTitle = domain.title;
+          let t_domainSequence =domain.sequence;
           let index = 0;
           for (let answer of domain.answers) {
               t_outputs.push(new Output(
-                  // t_domainSequence,
-                  // t_domainTitle,
-                  domain.sequence,
-                  domain.title,
+                  t_domainSequence,
+                  t_domainTitle,
                   domain.questions[index].sequence,
                   domain.questions[index].content,
                   //answer.sequence,
@@ -56,7 +54,8 @@ export class OutputService {
        }
        console.log('t_outputs') 
        console.log(t_outputs) 
-       this.sortByRiskValue(t_outputs)
+      // this.sortByRiskValue(t_outputs)
+       this.sortByRiskValueAndDomainNumber(t_outputs)
        return t_outputs
        
     }
@@ -65,17 +64,15 @@ export class OutputService {
        let t_outputDomains: OutputDomain[] = []
        for (let domain of domains) {
           let t_outputs: Output[] = [];
-          // let t_domainTitle = domain.title;
-          // let t_domainSequence =domain.sequence;
+          let t_domainTitle = domain.title;
+          let t_domainSequence =domain.sequence;
           let index = 0;
           for (let answer of domain.answers) {
               console.log('domain.questions[index].sequence')
               console.log(domain.questions[index].sequence)
               t_outputs.push(new Output(
-                  // t_domainSequence,
-                  // t_domainTitle,
-                  domain.sequence,
-                  domain.title,
+                  t_domainSequence,
+                  t_domainTitle,
                   domain.questions[index].sequence,
                   domain.questions[index].content,
                   //answer.sequence,
@@ -180,13 +177,24 @@ export class OutputService {
     sortByRiskValue(domain) {  // reverse alpabetical order
         console.log('sorting...')
         return  domain.sort(function(a, b){
-                //if ( a.title > b.title ) {
-                if ( a.riskValue > b.riskValue) {
-                    return -1;}
-                if ( a.riskValue < b.riskValue ) {
-                    return 1;}
+                if ( a.riskValue > b.riskValue) { return -1;}
+                if ( a.riskValue < b.riskValue ) { return 1;}
+                if ( a.questionSequence < b.questionSequence) { return -1;};
+                if ( a.questionSequence > b.questionSequence ) { return 1;};
                 return 0;
               })
     }
-    
+ 
+     sortByRiskValueAndDomainNumber(domain) {  // reverse alpabetical order
+        console.log('sorting...')
+        return  domain.sort(function(a, b){
+                if ( a.riskValue > b.riskValue) { return -1;};
+                if ( a.riskValue < b.riskValue ) { return 1;};
+                if ( a.domainSequence < b.domainSequence) { return -1;};
+                if ( a.domainSequence > b.domainSequence ) { return 1;};                
+                if ( a.questionSequence < b.questionSequence) { return -1;};
+                if ( a.questionSequence > b.questionSequence ) { return 1;};                
+                return 0;
+              })
+    }   
 }

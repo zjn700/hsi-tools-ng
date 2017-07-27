@@ -6,7 +6,7 @@
 <!--stackoverflow.com/questions/37874432/if-ng-content-has-content-or-empty-angular2-->
 <!--ngClass="{'wider-margins': printing}"-->
 
-<div #report id='clip' class='domain container'
+<div #report id='clip' class='domain container report'
     *ngFor="let output of outputs; let j=index;" >
 
         <div *ngIf="output.answerValue==false && output.riskValue>20">
@@ -23,22 +23,33 @@
            <div class="hsi-label" *ngIf="output.answerValue==false">No</div>
            <!--<div class="hsi-label" *ngIf="output.answerValue==false">No</div>-->
            
+           <div class='hsi-label label-left'>Estimated Risk:</div>
+           <div 
+            *ngIf="output.answerValue==false"
+            class='riskValue'
+            [ngClass]="{'gry' : output.riskValue==null,
+                        'grn' : output.riskValue<20 && output.riskValue!=null,
+                        'red' : output.riskValue>30,
+                        'ylo' : output.riskValue>20 && output.riskValue<30}">
+               {{output.convertedRiskValue}}
+            </div>
+
            <div *ngIf="output.answerValue!=null">
                <div *ngFor="let item of output.rationale">
                    <p>{{item}}</p>
                </div>
     
                <div *ngIf="output.answerValue==false">
-                   <div class='hsi-label label-left'>Estimated Risk:</div>
-                   <div 
-                    *ngIf="output.answerValue==false"
-                    class='riskValue'
-                    [ngClass]="{'gry' : output.riskValue==null,
-                                'grn' : output.riskValue<20 && output.riskValue!=null,
-                                'red' : output.riskValue>30,
-                                'ylo' : output.riskValue>20 && output.riskValue<30}">
-                       {{output.convertedRiskValue}}
-                    </div>
+                   <!--<div class='hsi-label label-left'>Estimated Risk:</div>-->
+                   <!--<div -->
+                   <!-- *ngIf="output.answerValue==false"-->
+                   <!-- class='riskValue'-->
+                   <!-- [ngClass]="{'gry' : output.riskValue==null,-->
+                   <!--             'grn' : output.riskValue<20 && output.riskValue!=null,-->
+                   <!--             'red' : output.riskValue>30,-->
+                   <!--             'ylo' : output.riskValue>20 && output.riskValue<30}">-->
+                   <!--    {{output.convertedRiskValue}}-->
+                   <!-- </div>-->
                     
                     <div *ngIf="output.riskValue>20">       
                        <div *ngIf="output.strategy==null"><span class='hsi-label'>Strategy:</span> <span class='hsi-detail'>None selected</span></div>

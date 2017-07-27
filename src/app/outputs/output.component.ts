@@ -13,6 +13,8 @@ export class OutputComponent implements OnInit {
   public qnnTitle = localStorage.getItem('qnnTitle')
   public activeUser;
   public printing=false;
+  public activeButton = 1;
+  
 
   constructor( private authService: AuthService ) { }
   
@@ -38,6 +40,10 @@ export class OutputComponent implements OnInit {
     // document.body.style.transform = 'scale(.95)';
     setTimeout(function(){ window.print(); }, 100);
     
+  }
+  
+  setButtonActive(index) {
+    this.activeButton = index;
   }
   
   showMenu(){

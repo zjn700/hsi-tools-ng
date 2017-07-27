@@ -1,6 +1,7 @@
-<div class="container">
+<div class="domain container">
     
     <h1>Human Systems Integration - Risk Management Tool (HSI-RMT)</h1>
+    <hr>
     <div id="title-box">
         <div class=' inline-title'><h2 class='p-title'>{{projectTitle}}:</h2></div>
         <div class=' inline-title'><h2 class='qnn-Title'>{{qnnTitle}}</h2></div>
@@ -16,7 +17,6 @@
             <span *ngIf="activeUser.phone"> {{activeUser.phone}}</span>
         </h3>
     </div>
-    <hr>
     
     <div *ngIf='!printing'>
         <!--<div class="output-label">Sort order:</div>-->
@@ -25,7 +25,9 @@
         <div  id='menu-box'>
             <div class='menu-item'>
                 <a appOutputMenuMouse 
-                    class='menu-item-link active' 
+                    (click)='setButtonActive(1)'
+                    [ngClass]="{'active-button' : activeButton==1}"
+                    class='menu-item-link' 
                     [routerLink]="['flattened']" 
                     title="This report shows only medium to high risk items">
                     By risk only
@@ -33,6 +35,8 @@
             </div>
             <div class='menu-item'>
                 <a appOutputMenuMouse 
+                    (click)='setButtonActive(2)'
+                    [ngClass]="{'active-button': activeButton==2}"
                     class='menu-item-link' 
                     [routerLink]="['sortedbyrisk']" 
                     title="This report shows medium to high risk items grouped by domain">
@@ -41,10 +45,12 @@
             </div>
             <div class='menu-item'>
                 <a appOutputMenuMouse 
+                    (click)='setButtonActive(3)'
+                    [ngClass]="{'active-button' : activeButton==3}"
                     class='menu-item-link' 
                     [routerLink]="['numerical']" 
                     title="This report shows all items grouped by domain">
-                By Domain - unfiltered
+                By domain - all questions
                 </a>
             </div>
         </div>

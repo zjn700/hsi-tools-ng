@@ -1,3 +1,6 @@
+h1 { 
+  string-set: doctitle content(); 
+}
 
 #title-box {
   width: 100%;
@@ -58,7 +61,7 @@ a:active {
   
 }
 
-.active {
+.active-button {
   background-color:peachpuff;
   color:#222;
 }
@@ -89,16 +92,16 @@ a:active {
 }
 
 @media print {
-    /*header {page-break-after: always;}*/
-    /*.qnn {page-break-after: always;} */
-    /*.riskValue {color:#ffffff !important; -webkit-print-color-adjust: exact; }*/
-    /*.hsi-detail {color:#fd5f60 !important; -webkit-print-color-adjust: exact; }*/
-    /*.gry {background-color:#ddd !important; -webkit-print-color-adjust: exact; }*/
-    /*.grn {background-color:#00b200 !important; -webkit-print-color-adjust: exact; }*/
-    /*.ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }*/
-    /*.red {background-color:#fa3636 !important; -webkit-print-color-adjust: exact; }*/
     
-    .container {text-align: center !important;margin-top:30% !important;}
+    .container {
+      width: 80%; 
+      zoom:90%;
+      text-align: center !important;
+      margin:0; 
+      margin-top:25% !important;
+      float:none!important;
+    }
     .inline-title {float: none !important;}
+
 
 }

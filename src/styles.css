@@ -41,3 +41,20 @@ body{
 .btn{
     font-size: 1.4em;
 }
+
+
+@page {
+   margin-bottom:2cm;
+   margin-top:2cm;
+}
+
+
+/*h1#app-title {  */
+/*  string-set: doctitle content();  */
+/*} */
+ 
+/*@page :right { */
+/*  @top-right { */
+/*    content: " New!";*/
+/*  } */
+/*}*/

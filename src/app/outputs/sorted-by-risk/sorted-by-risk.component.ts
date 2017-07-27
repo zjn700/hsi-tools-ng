@@ -18,5 +18,15 @@ export class SortedByRiskComponent implements OnInit {
     console.log(this.domains)
     
   }
+  
+  thereAreRisks(domainOutputs){
+    for (var i=0;i<domainOutputs.length;i++) {
+      console.log(domainOutputs[i])
+      if (domainOutputs[i].answerValue==false && domainOutputs[i].riskValue > 20) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 }
