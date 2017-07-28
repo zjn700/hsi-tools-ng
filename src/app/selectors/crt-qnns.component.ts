@@ -59,8 +59,10 @@ export class CrtQnnsComponent implements OnInit, OnDestroy {
 
     if (t_url) {
       localStorage.setItem('resume', 'true')
-      this.router.navigate([t_url]) ;
-      this.topMenuService.updateTopMenu(t_url)
+      // this.router.navigate([t_url]) ;
+      // this.topMenuService.updateTopMenu(t_url)
+      this.router.navigate(['/questions']) 
+      this.topMenuService.updateTopMenu('/questions');      
 
     } else {
       localStorage.setItem('resume', 'false')

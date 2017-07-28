@@ -182,9 +182,9 @@ export class CardService {
         case 22:
             return 8
         case 23:
-            return 10
-        case 24:
             return 9
+        case 24:
+            return 10
         case 25:
             return 12
         case 26:
