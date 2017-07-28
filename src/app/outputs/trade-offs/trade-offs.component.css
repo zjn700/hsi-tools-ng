@@ -32,7 +32,16 @@ p {
     /*.ylo {background-color:#ffff4f !important; color:#222 !important; -webkit-print-color-adjust: exact; }*/
     /*.red {background-color:#fa3636 !important; -webkit-print-color-adjust: exact; }*/
     
-    .container {margin-right:50px !important; margin-left:50px !important;}
+    /*.container * { */
+      /*.orphan-control *{*/
+    /*  orphans: 5 !important;*/
+    /*}*/
+    
+    .container {
+        margin-right:50px !important; 
+        margin-left:50px !important;
+        orphans: 10 !important;
+    }
     .container {zoom:120% !important; 
       background-color: white !important;
       text-align:left;

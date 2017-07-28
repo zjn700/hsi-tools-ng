@@ -5,16 +5,16 @@
     <div *ngFor="let tradeOff of tradeOffs">
         <h3>{{tradeOff.integration.title}}</h3>
         
-        <div *ngIf="tradeOff.risksIssuesConcerns==''"><span class='hsi-label'>Risks, Issues, and Concerns: </span> <span>None provided</span></div>
-        <div *ngIf="tradeOff.risksIssuesConcerns" ><span class="hsi-label">Risks, Issues, and Concerns: </span></div>
-         <div *ngFor="let item of tradeOff.risksIssuesConcerns">
-           <p>{{item}}</p>
+        <div class='orphan-control' *ngIf="tradeOff.risksIssuesConcerns==''"><span class='hsi-label'>Risks, Issues, and Concerns: </span> <span>None provided</span></div>
+        <div class='orphan-control' *ngIf="tradeOff.risksIssuesConcerns" ><span class="hsi-label">Risks, Issues, and Concerns: </span></div>
+         <div class='orphan-control' *ngFor="let item of tradeOff.risksIssuesConcerns">
+           <p class='orphan-control'>{{item}}</p>
         </div>
 
-        <div *ngIf="tradeOff.mitigationStrategy==''"><span class='hsi-label'>Mitigation Strategy: </span> <span>None provided</span></div>
-        <div *ngIf="tradeOff.mitigationStrategy" ><span class="hsi-label">Mitigation Strategy: </span></div>
-        <div *ngFor="let item of tradeOff.mitigationStrategy">
-           <p>{{item}}</p>
+        <div class='orphan-control' *ngIf="tradeOff.mitigationStrategy==''"><span class='hsi-label'>Mitigation Strategy: </span> <span>None provided</span></div>
+        <div class='orphan-control' *ngIf="tradeOff.mitigationStrategy" ><span class="hsi-label">Mitigation Strategy: </span></div>
+        <div class='orphan-control' *ngFor="let item of tradeOff.mitigationStrategy">
+           <p class='orphan-control'>{{item}}</p>
         </div>
 
     </div>

@@ -3,10 +3,9 @@ h2 {
   font-weight: 600;
 }
 
-.domain.container {
+.domain.container p {
   color:#222;
   background:#eee;
-  
 }
 
 .riskValue {
