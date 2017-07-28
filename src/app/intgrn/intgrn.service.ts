@@ -107,7 +107,7 @@ export class IntegrationService {
         title,
         t_date,
         t_date,
-        new Date(t_date).getTime().toString()
+        //new Date(t_date).getTime().toString()
       )
     
     this.addIntegrationToDb(t_integration)

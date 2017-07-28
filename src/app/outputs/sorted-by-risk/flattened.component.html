@@ -5,8 +5,11 @@
 <!--</div>-->
 <!--stackoverflow.com/questions/37874432/if-ng-content-has-content-or-empty-angular2-->
 <!--ngClass="{'wider-margins': printing}"-->
-
+<div class='domain container report'>
+    <h2>Questions and Answers</h2>
+</div>
 <div #report id='clip' class='domain container report'
+
     *ngFor="let output of outputs; let j=index;" >
 
         <div *ngIf="output.answerValue==false && output.riskValue>20">

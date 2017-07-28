@@ -57,6 +57,7 @@ import { StandardOutputComponent } from './outputs/standard-output/standard-outp
 import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.component';
 import { FlattenedComponent } from './outputs/sorted-by-risk/flattened.component';
 import { EditOutputComponent } from './outputs/edit-output/edit-output.component';
+import { TradeOffsComponent } from './outputs/trade-offs/trade-offs.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { EditOutputComponent } from './outputs/edit-output/edit-output.component
     SortedByRiskComponent,
     FlattenedComponent,
     EditOutputComponent,
+    TradeOffsComponent,
   ],
   imports: [
     BrowserModule,

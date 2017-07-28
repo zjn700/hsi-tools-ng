@@ -6,6 +6,7 @@ import { AuthService } from '../users/auth.service';
 import { DomainText } from './domainText.model';
 import { Output } from './output.model';
 import { OutputDomain } from './output-domain.model';
+import { OutputTradeOff } from './output-trade-off.model';
 
 @Injectable()
 export class OutputService {
@@ -23,6 +24,20 @@ export class OutputService {
     convertRiskValue(val){
         return this.cardService.convertRiskValue(val)
      }
+
+    transFormTradeOffs(tradeOffs) {
+      let t_outputTradeOffs: OutputTradeOff[] = [];
+      
+      for (let tradeOff of tradeOffs) {
+          t_outputTradeOffs.push(new OutputTradeOff(  
+            tradeOff,        
+            this.transformText(tradeOff.risksIssuesConcerns),
+            this.transformText(tradeOff.mitigationStrategy)
+            )
+          )
+      }
+      return t_outputTradeOffs
+    }
 
     flattenDomainsThenSortAnswersByRisk(domains) {
        let t_outputs: Output[] = [];

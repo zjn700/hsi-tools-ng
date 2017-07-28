@@ -1,0 +1,22 @@
+<header></header>
+
+<div class='domain container'>
+    <h2>Trade-Off Analysis</h2>
+    <div *ngFor="let tradeOff of tradeOffs">
+        <h3>{{tradeOff.integration.title}}</h3>
+        
+        <div *ngIf="tradeOff.risksIssuesConcerns==''"><span class='hsi-label'>Risks, Issues, and Concerns: </span> <span>None provided</span></div>
+        <div *ngIf="tradeOff.risksIssuesConcerns" ><span class="hsi-label">Risks, Issues, and Concerns: </span></div>
+         <div *ngFor="let item of tradeOff.risksIssuesConcerns">
+           <p>{{item}}</p>
+        </div>
+
+        <div *ngIf="tradeOff.mitigationStrategy==''"><span class='hsi-label'>Mitigation Strategy: </span> <span>None provided</span></div>
+        <div *ngIf="tradeOff.mitigationStrategy" ><span class="hsi-label">Mitigation Strategy: </span></div>
+        <div *ngFor="let item of tradeOff.mitigationStrategy">
+           <p>{{item}}</p>
+        </div>
+
+    </div>
+    <hr><br>
+</div>

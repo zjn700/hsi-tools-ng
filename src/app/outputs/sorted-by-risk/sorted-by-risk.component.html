@@ -4,8 +4,11 @@
 <!--    <h3>No medium or higher risks found</h3>-->
 <!--</div>-->
 <!--stackoverflow.com/questions/37874432/if-ng-content-has-content-or-empty-angular2-->
-
+<div class='domain container report'>
+    <h2>Questions and Answers</h2>
+</div>
 <div #report id='clip' class='domain container report'
+
     *ngFor="let domain of domains; let j=index;" >
     <h2 *ngIf="thereAreRisks(domain.outputs)"><span>{{domain.outputs[j].domainTitle}} </span></h2>
     <div *ngFor="let output of domain.outputs; let i = index">
