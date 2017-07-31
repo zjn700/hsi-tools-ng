@@ -13,7 +13,7 @@ export class GlossaryDirective {
                           {term: 'CBA', definition: "Capabilities Based Assessment"}, 
                           {term: 'CCTD', definition:'Concept Characterization and Technical Description'},
                           {term: 'CONOPS', definition: "Concept of Operations"},
-                          {term: 'ng', definition: "Angular Command Line Interface (CLI) tool"}
+                          {term: 'AFLCMC', definition: "Air Force Life Cycle Management Center"}
                           ]
   
   constructor() { }

@@ -1,0 +1,6 @@
+{term: 'AoA', definition: "Analysis of Alternatives"}, 
+{term: 'AOA', definition: "Analysis of Alternatives"}, 
+{term: 'CBA', definition: "Capabilities Based Assessment"}, 
+{term: 'CCTD', definition:'Concept Characterization and Technical Description'},
+{term: 'CONOPS', definition: "Concept of Operations"},
+{term: 'AFLCMC', definition: "Air Force Life Cycle Management Center"}
