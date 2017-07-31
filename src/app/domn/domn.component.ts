@@ -423,6 +423,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   getThisQuestion(question: Question){
+    console.log('getThisQuestion')
     this.activeQuestionNumber = question.sequence;
     this.updateContent(this.activeQuestionNumber-1);
     this.cleanUpFormat();
@@ -430,6 +431,9 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   updateContent(index) {
+    console.log('this.domain.questions[index].content')
+    console.log(this.domain.questions[index].content)
+
     this.q_content = this.domain.questions[index].content;
     this.a_value = this.domain.answers[index].value;
     this.a_details = this.domain.answers[index];

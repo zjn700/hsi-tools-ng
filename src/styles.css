@@ -55,6 +55,16 @@ body{
     right: 0;
 }
 
+.glossary {
+    cursor: pointer;
+    color:peachpuff;
+}
+
+.glossaryx:hover {
+    cursor: pointer;
+    color:peachpuff;
+}
+
 @page {
    margin-bottom:2cm;
    margin-top:2cm;

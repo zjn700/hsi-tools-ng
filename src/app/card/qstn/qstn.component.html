@@ -1,7 +1,16 @@
 <div class="container-fluid">
-  <div class="row">
-        <p class="question">
+  <div (click)="onClick($event)"  class="row">
+      <span *ngIf="glossaryOn" id="donthide me">
+        <p hsiGlossary  class="question">
           {{q_content}}
         </p>
-      </div>
+      </span>
+      <p *ngIf="!glossaryOn" class="question">
+          {{q_content}}
+      </p>
+  </div>
 </div>
+<input class="clipboard hidden" />
+
+  <!--<div class="row">-->
+        <!--<p hsiGlossary class="question">-->
