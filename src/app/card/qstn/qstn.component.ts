@@ -42,35 +42,24 @@ export class QstnComponent implements OnInit, OnDestroy {
       .subscribe((index: number) => {
         this.glossaryOn = false;
     })
-    // console.log('this.q_content')
-    // console.log(this.q_content)
-      // let elementList = document.getElementsByClassName("question"); 
-      // this.glossaryHtml = elementList[0].innerHTML
-      // console.log('glossaryHtml')
-      // console.log(this.glossaryHtml)
-      
-      // console.log(this.q_content)
-      // this.glossaryHtml = this.q_content
-
     
   }
   
   onClick(e) {
-    //this.glossaryOn = false
-    // this.glossaryOn=!this.glossaryOn
-    // if (this.glossaryOn) {
-    //   setTimeout(()=>this.glossaryOn=false, 4000)
-    // }
+    //this.copyTwo()
+    this.copyOne()
     
-    //var copy_text = document.getElementsByClassName("question")[0];
+  }
+  
+  copyTwo() {
+    var textToCopy = document.getElementsByClassName("question")[0];
     
-    var textToCopy = document.getElementsByTagName("p")[0] //document.querySelector(e);
+    //var textToCopy = document.getElementsByTagName("p")[0] //document.querySelector(e);
     var textBox = <HTMLInputElement>document.querySelector(".clipboard");
     textBox.setAttribute('value', textToCopy.innerHTML);
   
     textBox.select();
     document.execCommand('copy')
-    
   }
   
   copyOne(){
