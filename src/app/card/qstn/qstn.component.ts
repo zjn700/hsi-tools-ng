@@ -25,11 +25,11 @@ export class QstnComponent implements OnInit, OnDestroy {
     //setTimeout(()=>this.glossaryOn = false, 2000)
   }
 
-  @HostListener('mouseout') onMouseOut() {
-    console.log('mouseout')
-    // this.glossaryOn = false;
-    //setTimeout(()=>this.glossaryOn = false, 10000)
-  }
+  // @HostListener('mouseout') onMouseOut() {
+  //   console.log('mouseout')
+  //   // this.glossaryOn = false;
+  //   //setTimeout(()=>this.glossaryOn = false, 10000)
+  // }
 
   ngOnDestroy() {
     this.alive = false;
