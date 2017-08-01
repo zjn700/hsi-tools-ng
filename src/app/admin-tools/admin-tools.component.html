@@ -1,14 +1,39 @@
+<div *ngIf='!isInitialized()' class="loading">
+    <img src="/assets/images/ring.gif" alt="loading...">
+</div>
 
 <div class='container'>
-    <H2>Admin Tools</H2>
+    <h1>Admin Tools</h1>
+    <hr>
     <div class='menu-item'>
         <a appOutputMenuMouse 
             (click)='setButtonActive(1)'
             [ngClass]="{'active-button' : activeButton==1}"
             class='menu-item-link' 
+            [routerLink]="['qnnedit']" 
+            title="Edit domains and questions">
+            Edit questionnaires
+        </a>
+    </div>
+    <div class='menu-item'>
+        <a appOutputMenuMouse 
+            (click)='setButtonActive(2)'
+            *ngIf="qnnIsSelected()"
+            [ngClass]="{'active-button' : activeButton==2}"
+            class='menu-item-link' 
             [routerLink]="['domainedit']" 
             title="Edit domains and questions">
             Edit domains
+        </a>
+    </div>    
+    <div class='menu-item'>
+        <a appOutputMenuMouse 
+            (click)='setButtonActive(3)'
+            [ngClass]="{'active-button' : activeButton==3}"
+            class='menu-item-link' 
+            [routerLink]="['questionedit']" 
+            title="Edit domains and questions">
+            Edit questions
         </a>
     </div>
 </div>

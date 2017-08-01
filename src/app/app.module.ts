@@ -33,6 +33,7 @@ import { CardService } from './card/card.service';
 import { TopMenuService } from './shared/top-menu.service';
 import { IntegrationService } from './intgrn/intgrn.service';
 import { OutputService } from './outputs/output.service';
+import { AdminToolsService } from './admin-tools/admin-tools.service';
 
 import { routing } from './app-routing.module';
 import { CardHolderComponent } from './card/card-holder.component';
@@ -62,6 +63,8 @@ import { EditOutputComponent } from './outputs/edit-output/edit-output.component
 import { TradeOffsComponent } from './outputs/trade-offs/trade-offs.component';
 import { AdminToolsComponent } from './admin-tools/admin-tools.component';
 import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor.component';
+import { QnnEditorComponent } from './admin-tools/qnn-editor/qnn-editor.component';
+import { QuestionEditorComponent } from './admin-tools/question-editor/question-editor.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +112,8 @@ import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor
     TradeOffsComponent,
     AdminToolsComponent,
     DomainEditorComponent,
+    QnnEditorComponent,
+    QuestionEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +129,9 @@ import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor
               CardService, 
               TopMenuService, 
               IntegrationService,
-              OutputService],          
+              OutputService,
+              AdminToolsService
+              ],          
   bootstrap: [AppComponent]
 })
 export class AppModule { }

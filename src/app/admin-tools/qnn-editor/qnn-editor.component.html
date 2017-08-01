@@ -1,0 +1,19 @@
+<div class='container'>
+    <!--<h3>Questionnaire Editor</h3>-->
+    <h2>CART</h2>
+    <div *ngFor="let qnn of qnns">
+        <h3 *ngIf="qnn.category==1"
+            (click)="selectThisQnn(qnn)"
+            class="qnnTitle"
+            [ngClass]="{'active': isThisTheCurrenQnn(qnn)}">
+        {{qnn.title}} ({{qnn.abbreviation}})</h3>
+    </div>
+    <h2>PRAT</h2>
+    <div *ngFor="let qnn of qnns">
+        <h3 *ngIf="qnn.category==2"
+             (click)="selectThisQnn(qnn)"
+             class="qnnTitle"
+             [ngClass]="{'active': isThisTheCurrenQnn(qnn)}">
+        {{qnn.title}} ({{qnn.abbreviation}})</h3>
+    </div>    
+</div>

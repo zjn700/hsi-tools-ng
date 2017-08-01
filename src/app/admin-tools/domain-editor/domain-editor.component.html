@@ -1,3 +1,13 @@
 <div class='container'>
-    <h3>Domain Editor</h3>
+    <h2>{{getActiveQnn().title}}</h2>
+    <div *ngFor="let domain of domains">
+        <h3 *ngIf="qnnMatches(domain.qnn)">
+            {{domain.title}}
+        </h3>    
+    </div>
 </div>
+
+
+
+
+

@@ -66,6 +66,13 @@ a:active {
   color:#222;
 }
 
+.active-button:hover {
+  background-color:peachpuff;
+  color:#222;
+}
+
+
+
 .floating {
     position: fixed;
     top: 83%;
