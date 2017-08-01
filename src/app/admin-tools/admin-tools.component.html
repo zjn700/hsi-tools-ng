@@ -1,0 +1,17 @@
+
+<div class='container'>
+    <H2>Admin Tools</H2>
+    <div class='menu-item'>
+        <a appOutputMenuMouse 
+            (click)='setButtonActive(1)'
+            [ngClass]="{'active-button' : activeButton==1}"
+            class='menu-item-link' 
+            [routerLink]="['domainedit']" 
+            title="Edit domains and questions">
+            Edit domains
+        </a>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>

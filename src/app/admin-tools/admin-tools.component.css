@@ -1,0 +1,107 @@
+h1 { 
+  string-set: doctitle content(); 
+}
+
+#title-box {
+  width: 100%;
+  height: 5em;
+}
+
+.inline-title {
+  float: left;
+  margin-right: 10px;
+}
+
+.p-title {
+  color: peachpuff;
+}
+
+.qnn-Title {
+  color:inherit
+}
+
+.output-label{
+  color: white;
+  background-color: #30343b;
+  font-size:1.1em;
+  width:250px;
+  padding:10px;
+  margin-top: 0;  
+  margin-bottom: 10px;  
+}
+
+#menu-box {
+  width: 100%;
+  height: 4.1em;
+  margin-top: 20px; 
+}
+
+.menu-item {
+  font-size: 1.5em;
+  float: left;
+  margin-right: 10px;
+}
+
+a {
+    color:white;
+    background:#555;
+    cursor: auto;
+    padding:10px;
+    text-decoration: none;
+    border-radius: 4px;
+
+}
+
+a:hover {
+    color: #444;
+    background:#ddd;
+}
+
+a:active {
+  
+}
+
+.active-button {
+  background-color:peachpuff;
+  color:#222;
+}
+
+.floating {
+    position: fixed;
+    top: 83%;
+    left: 83%;
+    font-size:3em;
+    color:white;
+    background: #5ed263;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+}
+
+.floating-red {
+  background: coral; /*#5bc0de; /*tomato; */
+  border-color:coral; /*#5bc0de; /*tomato; */
+}
+
+
+.floating-green {
+  background: #4caf50; /*#5bc0de; /* #5ed263;*/
+  border-color: #4caf50; /* #5bc0de; /* #5ed263;*/
+}
+
+@media print {
+    
+    .container {
+      width: 80%; 
+      zoom:90%;
+      text-align: center !important;
+      margin:0; 
+      margin-top:25% !important;
+      float:none!important;
+    }
+    .inline-title {float: none !important;}
+
+
+}

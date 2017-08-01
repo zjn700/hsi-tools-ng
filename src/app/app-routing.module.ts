@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { INTGRN_ROUTES } from './intgrn/intgrn.routes';
 import { OUTPUT_ROUTES } from './outputs/output.routes';
+import { ADMIN_ROUTES } from './admin-tools/admin-tools.routes';
 
 
 //import { QnnsComponent } from './questionnaires/qnns.component';
@@ -17,6 +18,7 @@ import { OutputComponent } from './outputs/output.component';
 import { SigninComponent } from './users/signin.component';
 import { SignupComponent } from './users/signup.component';
 import { LogoutComponent } from './users/logout.component';
+import { AdminToolsComponent } from './admin-tools/admin-tools.component';
 //import { AUTH_ROUTES } from './users/auth.routes';
 
 
@@ -27,6 +29,7 @@ const APP_ROUTES: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'signup', component: SignupComponent },
+    { path: 'admin', component: AdminToolsComponent, children: ADMIN_ROUTES  },
     { path: 'project', component: ProjectComponent },
     { path: 'tools', component: ToolsComponent },
     { path: 'crt-qnns', component: CrtQnnsComponent },

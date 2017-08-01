@@ -6,13 +6,14 @@ import { KEY_CODE } from './shared/key-code.enum'
 
 export enum TOP_MENU{
   AUTH = 0,       //'/logout',
-  PROJECTS = 1,   //'/project',
-  TOOLS =  2,     //'/tools',
-  CART = 3,       //'/crt-qnns',
-  PRAT = 4,       // '/at-qnns',
-  QUESTIONS = 5,   //'/questions'
-  INTEGRATIONS = 6, //'/integrations'
-  REVIEW = 7      //'/review'
+  ADMIN = 1,   //'/project',
+  PROJECTS = 2,   //'/project',
+  TOOLS =  3,     //'/tools',
+  CART = 4,       //'/crt-qnns',
+  PRAT = 5,       // '/at-qnns',
+  QUESTIONS = 6,   //'/questions'
+  INTEGRATIONS = 7, //'/integrations'
+  REVIEW = 8      //'/review'
 }
 
 @Directive({
@@ -30,6 +31,9 @@ export class TopMenuDirective implements OnInit {
     switch(menuItem) {
     case TOP_MENU.AUTH:
         route='/logout'
+        break;
+    case TOP_MENU.ADMIN:
+        route='/admin'
         break;
     case TOP_MENU.PROJECTS:
         route='/project'

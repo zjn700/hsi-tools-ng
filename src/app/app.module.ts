@@ -60,6 +60,8 @@ import { SortedByRiskComponent } from './outputs/sorted-by-risk/sorted-by-risk.c
 import { FlattenedComponent } from './outputs/sorted-by-risk/flattened.component';
 import { EditOutputComponent } from './outputs/edit-output/edit-output.component';
 import { TradeOffsComponent } from './outputs/trade-offs/trade-offs.component';
+import { AdminToolsComponent } from './admin-tools/admin-tools.component';
+import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +107,8 @@ import { TradeOffsComponent } from './outputs/trade-offs/trade-offs.component';
     FlattenedComponent,
     EditOutputComponent,
     TradeOffsComponent,
+    AdminToolsComponent,
+    DomainEditorComponent,
   ],
   imports: [
     BrowserModule,
