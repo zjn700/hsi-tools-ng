@@ -1,0 +1,15 @@
+.qnnTitle{
+    cursor: pointer;
+}
+
+.qnnTitle:hover{
+    color: peachpuff;
+}
+
+.active {
+    color:coral;
+}
+
+.active:hover {
+    color:coral;
+}

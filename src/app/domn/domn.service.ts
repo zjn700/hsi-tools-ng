@@ -90,6 +90,7 @@ export class DomainService {
                 this.lastActiveProject=localStorage.getItem('pid')       
                 this.lastActiveQnn=localStorage.getItem('qnnId')       
                 this.domains = t_domains
+                // may have to sort here
                 return this.domains
             })
             .catch((error: Response) => Observable.throw(error));

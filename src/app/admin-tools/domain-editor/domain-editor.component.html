@@ -1,0 +1,24 @@
+<div *ngIf='!isInitialized' class="loading">
+    <img src="/assets/images/ring.gif" alt="loading...">
+</div>
+
+<div class='container'>
+    <h2>{{getActiveQnn().title}}</h2>
+    <div *ngFor="let domain of domains">
+        <h3>
+            {{domain.title}}
+        </h3>    
+    </div>
+    
+    <div *ngIf="addNewMessage">
+        <h2>Add domains?</h2>
+        <button (click)="addDomain()" 
+          title='Add domains for this questionnaire.' 
+          class='btn glyphicon glyphicon-plus  floating floating-green'>
+         </button>
+    </div>
+    
+</div>
+
+
+

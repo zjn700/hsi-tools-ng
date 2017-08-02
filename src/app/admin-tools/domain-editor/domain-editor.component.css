@@ -1,0 +1,25 @@
+
+.floating {
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    font-size:3em;
+    color:white;
+    background: #5ed263;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+}
+
+.floating-red {
+  background: coral; /*#5bc0de; /*tomato; */
+  border-color:coral; /*#5bc0de; /*tomato; */
+}
+
+
+.floating-green {
+  background: #4caf50; /*#5bc0de; /* #5ed263;*/
+  border-color: #4caf50; /* #5bc0de; /* #5ed263;*/
+}

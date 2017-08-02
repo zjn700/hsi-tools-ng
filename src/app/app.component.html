@@ -5,6 +5,7 @@
         <div class="navx nav-tabsx" appTopMenu>
             <div><a [ngClass]="{'blocked' : isLoggedIn(), 'unblocked': !isLoggedIn(), topMenuItem: true}"  [routerLink]="['/signin']">Sign in</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/logout']">Log out</a></div>
+            <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/admin']">Admin</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(),topMenuItem: true}" [routerLink]="['/project']">Projects</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"[routerLink]="['/tools']">Tools</a></div>
             <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}" [routerLink]="['/crt-qnns']">CART</a></div>
