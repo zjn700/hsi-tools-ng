@@ -1,9 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
 
-import { Domain } from '../domn/domn.model'
+import { Domain } from '../domn/domn.model';
+import { Question } from '../card/qstn/qstn.model';
 
 @Injectable()
 export class AdminToolsService { 
@@ -17,6 +18,9 @@ export class AdminToolsService {
 
     public currentQnn = null
     public currentDomain = null;
+    public currentQuestion = null;
+    
+    public sendDomainQuestions =  new EventEmitter<Question[]>();
 
     constructor(private http: Http) {}
     
@@ -29,6 +33,7 @@ export class AdminToolsService {
                     this.domains = response.json().obj
                     console.log(this.domains);
                     this.domainIsInitialized = true;
+                    
                     return this.domains
     
             })
@@ -73,7 +78,7 @@ export class AdminToolsService {
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.patch('/admindomains' + token, body, {headers: headers})
+        return this.http.post('/admindomains' + token, body, {headers: headers})
                 .map((response: Response) => {
                     const result = response.json();
                     const domain = new Domain(
@@ -82,7 +87,7 @@ export class AdminToolsService {
                         result.obj.sequence,
                         result.obj._id);
                     this.domains.push(domain);
-                    this.domains = this.sortDomains(this.domains);
+                    this.domains = this.sortBySequenceNumber(this.domains);
                     // this.projectIsUpdated.emit(true)
                     // localStorage.removeItem('qnnId')
                     return domain;
@@ -90,6 +95,29 @@ export class AdminToolsService {
                 .catch((error: Response) => Observable.throw(error));
     }
 
+    updateCurrentDomain(){
+        // if (this.currentDomain.questions.length=0) {
+        //     this.currentDomain.questions.push()
+        // }
+        
+        let updateDomain = this.currentDomain
+        const headers = new Headers({'content-Type': 'application/json'})
+            const body = JSON.stringify(updateDomain);
+            const token = localStorage.getItem('token') 
+                ? '?token=' + localStorage.getItem('token')
+                : '';
+            return this.http.patch('/admindomains' + token, body, {headers: headers})
+                .map((response: Response) => {
+                    response.json();
+                    console.log(response)
+                    //this.projectIsUpdated.emit(true);
+                    //this.projects = this.sortProjectList();
+                    return response.json()
+                    
+                })
+                .catch((error: Response) => Observable.throw(error)); 
+    }
+    
     isInitialized(){
        return this.qnnIsInitialized && this.domainIsInitialized
     }
@@ -106,9 +134,48 @@ export class AdminToolsService {
         return this.currentQnn
     }
     
+    setActiveDomain(domain){
+        if (!domain.questions)  {
+            console.log('no questions')
+            //alert('no questions')
+            console.log(domain.questions)
+            let t_questions: Question[] = [];
+            domain.questions = t_questions;
+            console.log('domain.questions')
+            console.log(domain.questions)
+        }
+        this.currentDomain = domain;
+    }
+    
+    getActiveDomain() {
+        return this.currentDomain
+    }
+    
+    setActiveQuestion(question){
+        this.currentQuestion = question
+    }
+    
+    getActiveQuestion(){
+        return this.currentQuestion
+    }
+    
+    getDomainQuestions(){
+        console.log('here in getDomainQuestions')
+        console.log(this.currentDomain.questions)
+        return this.currentDomain.questions
+        // this.sendDomainQuestions.emit(this.currentDomain.questions)
+    }
+    
     getDomainList(){
         return this.domains
     }
+    
+    // saveQuestion(questions) {
+    //     console.log('here in saveQuestion========')
+    //     console.log(questions)
+    //     console.log(this.currentDomain.questions)
+        
+    // }
     
     sortQnns(qnnList) {  // reverse alpabetical order
         console.log('sorting...')
@@ -121,9 +188,9 @@ export class AdminToolsService {
               })
     }
     
-    sortDomains(domains) {  // reverse alpabetical order
+    sortBySequenceNumber(thisList) {  // reverse alpabetical order
         console.log('sorting...')
-        return  domains.sort(function(a, b){
+        return  thisList.sort(function(a, b){
                 if ( a.sequence < b.sequence) { return -1;};
                 if ( a.sequence > b.sequence ) { return 1;};
                 return 0;

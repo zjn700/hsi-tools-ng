@@ -18,6 +18,7 @@ import { OutputComponent } from './outputs/output.component';
 import { SigninComponent } from './users/signin.component';
 import { SignupComponent } from './users/signup.component';
 import { LogoutComponent } from './users/logout.component';
+import { ProfileComponent } from './users/profile/profile.component';
 import { AdminToolsComponent } from './admin-tools/admin-tools.component';
 //import { AUTH_ROUTES } from './users/auth.routes';
 
@@ -37,6 +38,8 @@ const APP_ROUTES: Routes = [
     { path: 'questions', component: DomnComponent },
     { path: 'integrations', component: IntgrnComponent, children: INTGRN_ROUTES },
     { path: 'review', component: OutputComponent, children: OUTPUT_ROUTES },
+    { path: 'profile', component: ProfileComponent },
+
     //{ path: 'integrations', component: IntgrnComponent },
     //{ path: 'review', component: OutputComponent },
 

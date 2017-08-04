@@ -1,0 +1,48 @@
+<div class="col-md-8 col-md-offset-2">
+    
+    <div *ngIf='showMessage' class="message">{{message}}</div>
+
+    
+    <h2>Update your account</h2>
+    <form [formGroup]='profileForm' (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="firstName">First Name  </label>
+            <input [ngModel]='user?.firstName' type="text" id="firstName" class="form-control" formControlName='firstName'>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name  </label>
+            <input [ngModel]='user?.lastName' type="text" id="lastName" class="form-control" formControlName='lastName'>
+        </div>
+        <div class="form-group">
+            <label for="email">Email  </label>
+            <input [ngModel]='user?.email' type="text" id="email" class="form-control" formControlName='email'>
+            <div class='errorMessage' *ngIf="!profileForm.controls['email'].valid && profileForm.controls['email'].dirty" >You must enter a valid email</div>
+            <div class='errorMessage' *ngIf="emailInUse" >{{emailInUseMessage}}</div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone  </label>
+            <input [ngModel]='user?.phone'type="text" id="phone" class="form-control" formControlName='phone'>
+        </div>        
+        <!--<div class="form-group">-->
+        <!--    <label for="password">Password  </label>-->
+        <!--    <input type="password" id="password" class="form-control" formControlName='password'>-->
+        <!--    <div class='errorMessage' *ngIf="passwordMismatch" >{{passwordMismatchMessage}}</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--    <label for="passwordCheck">Re-enter your password  </label>-->
+        <!--    <input type="password" id="passwordCheck" class="form-control" formControlName='passwordCheck'>-->
+        <!--</div>        -->
+        <div class="form-group">
+            <label for="office">Office  </label>
+            <input [ngModel]='user?.office' type="text" id="office" class="form-control" formControlName='office'>
+        </div>
+        
+        <button [disabled]="!profileForm.valid" class="btn btn-primary" type='submit'>Submit</button>
+        
+    </form>
+    <!--button class="btn btn-danger" (click)="onLogout()">
+        Logout
+    </button-->
+    <!--https://scotch.io/tutorials/angular-2-form-validation-->
+</div>
+

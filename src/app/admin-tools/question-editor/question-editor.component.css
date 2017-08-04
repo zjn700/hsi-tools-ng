@@ -1,0 +1,137 @@
+
+.floating {
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    font-size:3em;
+    color:white;
+    background: #5ed263;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+}
+
+.floating-red {
+  background: coral; /*#5bc0de; /*tomato; */
+  border-color:coral; /*#5bc0de; /*tomato; */
+}
+
+
+.floating-green {
+  background: #4caf50; /*#5bc0de; /* #5ed263;*/
+  border-color: #4caf50; /* #5bc0de; /* #5ed263;*/
+}
+
+/****************************/
+#content {
+    height:6em;
+}
+
+.questionTitle{
+    cursor: pointer;
+    float: left;
+    width: 90%;
+    padding-right: 10px;
+}
+
+.questionTitle:hover{
+    color: peachpuff;
+}
+
+.active {
+    color:coral;
+}
+
+.active:hover {
+    color:coral;
+}
+
+.remove-red {
+    background: #333;
+    font-size: 2em;
+    padding-top: 20px;
+}
+
+.remove-red:hover{
+    color: coral;
+    cursor: pointer
+}
+
+
+/****************************/
+
+input, textarea {
+    font-size:1.5em;
+    height:auto;
+}
+
+textarea {
+    height: 250px;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.btn{
+    font-size: 1.4em;
+}
+
+.hsi-btn-default-alt {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, .25);
+    border-color: transparent;
+}
+
+.hsi-btn-default-alt:hover {
+  color: #222;
+  background-color: rgba(255, 255, 255, .75);
+}
+
+.floating {
+    position: fixed;
+    top: 82.5%;
+    left: 82.5%;
+    font-size: 3em;
+    background: #5ed263;
+    color: white;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(39, 43, 49, .5);
+}
+
+.floating-red {
+  background: coral; /*#5bc0de; /*tomato; */
+  border-color: coral; /*#5bc0de; /*tomato; */
+}
+
+.floating-green {
+  background: #4caf50; /*#5bc0de; /* #5ed263;*/
+  border-color: #4caf50; /*#5bc0de; /* #5ed263;*/
+}
+
+.floating-offset {
+    top: 70%;
+}
+ 
+.floating-black {
+    background: #d6d6d6;
+    color: #333333;
+}
+
+.hidden {
+    display: none;
+}
+
+.hsi-error{
+    font-size:1.3em;
+    color: tomato;
+}
+
+

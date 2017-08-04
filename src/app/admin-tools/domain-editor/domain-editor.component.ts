@@ -51,52 +51,31 @@ export class DomainEditorComponent implements OnInit, OnDestroy {
       })
   }
   
-  // qnnMatches(domain){
-  //   // console.log(domain.qnn)
-  //   // console.log(this.adminToolsService.currentQnn._id)
-  //   this.qnn = domain.qnn;
-  //   this.domain = domain;
-  //   // console.log('this.domain')
-  //   // console.log(this.domain)
-  //   return domain.qnn == this.adminToolsService.currentQnn._id
-  // }
+  setActiveDomain(domain){
+    console.log(domain)
+    // if (this.adminToolsService.domains) {     // add questions array latter
+    //   this.adminToolsService.domains = [];
+    // }
+    this.adminToolsService.setActiveDomain(domain);
+  }
   
   getActiveQnn(){
     return this.adminToolsService.getActiveQnn()
   }
-  
-  // this.adminToolsService.currentQnn._id
-  // areThereDomainsForThisQnn(domains) {
-  //   return this.adminToolsService.domains.length > 0;
-  // }
+
+  isThisTheCurrenDomain(domain){
+    return this.adminToolsService.currentDomain == domain;
+    
+  }
   
   
   addDomain() {
-    console.log('qnn')
-    console.log(this.qnn)
-    //this.adminToolsService.clearDomainList();
     let index=1
     for (let title of this.domainNames) {
       setTimeout(this.addOneDomain(title, index), 10000)
       
       index++
     }
-      // let t_domain = new Domain(
-      //   this.adminToolsService.currentQnn._id,
-      //   title,
-      //   index
-      //   )
-      //   index++
-      //   console.log('t_domain')
-      //   console.log(t_domain)
-      //   this.adminToolsService.addDomain(t_domain)
-      //     .subscribe((domain)=>{
-      //       console.log(domain)
-      //       this.domains = this.adminToolsService.getDomainList();
-      //       this.addNewMessage = false;
-      //     })
-
-    // }
   }
   
   addOneDomain(title, index) {
@@ -105,7 +84,6 @@ export class DomainEditorComponent implements OnInit, OnDestroy {
           title,
           index
           )
-          // index++
           console.log('t_domain')
           console.log(t_domain)
           this.adminToolsService.addDomain(t_domain)

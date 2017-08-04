@@ -30,14 +30,52 @@
     color:peachpuff;
 }
 
+
+/*.glyphicon-user, .glyphicon-off{*/
+    /*color: white;*/
+    /*float: right;*/
+    /*font-size: 1.3em;*/
+    /*padding: 6px;*/
+    /*padding-top: 10px;*/
+    /*margin-top: 5px;*/
+/*}*/
+
+/*.glyphicon-user:active, .glyphicon-off:active{*/
+/*    color: peachpuff;*/
+    /*float: right;*/
+    /*font-size: 1.3em;*/
+    /*padding: 6px;*/
+/*    padding-top: 5px;*/
+    /*margin-top: 5px;*/
+/*}*/
+
 .topMenuItem {
     float:left;
     padding: 10Px;
     font-size: 1.35em;
 }
+
 .topMenuItem:hover{
     /*background-color: peachpuff; /*#a94442;*/
 }
+
+.topMenuItem.active {
+    color:peachpuff;
+}
+
+.topMenuItem.active:hover {
+    color:white;
+}
+
+.glyphicon-user, .glyphicon-off, .glyphicon-wrench {
+    color: white;
+    padding:14px;
+}
+
+.glyphicon-wrench.active {
+    color:coral;
+}
+
 a {
     color:white;
     text-decoration: none;
@@ -55,6 +93,10 @@ a:hover {
 .blocked {
     display: none;
 
+}
+
+.float-right {
+    float:right;
 }
 
 /*

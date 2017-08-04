@@ -1,27 +1,106 @@
 <!--nav class="navbar navbar-inverse navbar-fixed-top"-->
 <div [ngClass]="{'hidden' : showWarningMessage}">
 <!--div-->
+    
     <nav class="navbar navbar-fixed-top hsi-navbar-top">
+
         <div class="navx nav-tabsx" appTopMenu>
-            <div><a [ngClass]="{'blocked' : isLoggedIn(), 'unblocked': !isLoggedIn(), topMenuItem: true}"  [routerLink]="['/signin']">Sign in</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/logout']">Log out</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/admin']">Admin</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(),topMenuItem: true}" [routerLink]="['/project']">Projects</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"[routerLink]="['/tools']">Tools</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}" [routerLink]="['/crt-qnns']">CART</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"  [routerLink]="['/at-qnns']">PRAT</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/questions']">Questions</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/integrations']">Integrations</a></div>
-            <div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" [routerLink]="['/review']">Review</a></div>
+            
+            <div *ngIf="bobIsOn()">
+                <a appTopMenuMouse 
+                   [ngClass]="{topMenuItem: true}" 
+                   [routerLink]="['/admin']"
+                   title="Administration"
+                   class='glyphicon glyphicon-wrench'>
+                 <!--Admin-->
+                </a>
+            </div>
+            
+            <div>
+                <a [ngClass]="{'blocked' : isLoggedIn(), 'unblocked': !isLoggedIn(), topMenuItem: true}"  
+                   [routerLink]="['/signin']">
+                  Sign in
+                </a>
+            </div>
+                
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(), topMenuItem: true}" 
+                   [routerLink]="['/logout']"
+                   title="Logout"
+                   class='glyphicon glyphicon-off'>
+                </a>
+           </div>
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(), topMenuItem: true}"
+                   [routerLink]="['/profile']"
+                   title="User Profile"
+                   class='glyphicon glyphicon-user'>
+                </a>            
+           </div>
+
+            <!--<div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/logout']">Log out</a></div>-->
+
+            <!--<div><a appTopMenuMouse [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/profile']">Profile</a></div>-->
+
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !isLoggedIn(), 'unblocked': isLoggedIn(),topMenuItem: true}" 
+                   [routerLink]="['/project']">
+                  Projects
+                </a>
+            </div>
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"
+                   [routerLink]="['/tools']">
+                  Tools
+                </a>
+            </div>
+            <div>
+                <a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}" [routerLink]="['/crt-qnns']">CART</a></div>
+            <div><a appTopMenuMouse
+                    [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected()), topMenuItem: true}"  
+                    [routerLink]="['/at-qnns']">
+                  PRAT
+                </a>
+            </div>
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" 
+                   [routerLink]="['/questions']">
+                  Questions
+                </a>
+            </div>
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" 
+                   [routerLink]="['/integrations']">
+                  Integrations
+                </a>
+            </div>
+            <div>
+                <a appTopMenuMouse 
+                   [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected()),  topMenuItem: true}" 
+                   [routerLink]="['/review']">
+                  Review
+                </a>
+            </div>
+
             <!--<div><a appTopMenuMouse [ngClass]="{'blocked' : !(isLoggedIn() && projectIsSelected() && qnnIsSelected() && questionsLoaded()), 'unblocked': (isLoggedIn() && projectIsSelected() && qnnIsSelected() && questionsLoaded()),  topMenuItem: true}" [routerLink]="['/review']">Review</a></div>-->
         </div>
     </nav><!-- routerLinkActive='active' --> 
     <!--hr-->
     <div id='main' 
          class="row spacing">
-        <h1 id='app-title' class="row col-md-8 col-md-offset-2" *ngIf="!isLoggedIn()">Human Systems Integration - Risk Management Tool (HSI-RMT)</h1>
-        <router-outlet>
-        </router-outlet>
+        <h1 id='app-title' 
+            class="row col-md-8 col-md-offset-2" 
+            *ngIf="!isLoggedIn()">
+            Human Systems Integration - Risk Management Tool (HSI-RMT)
+        </h1>
+        
+        <router-outlet></router-outlet>
     </div>
 </div>
 

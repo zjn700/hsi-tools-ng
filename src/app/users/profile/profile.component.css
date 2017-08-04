@@ -1,0 +1,40 @@
+label {
+    font-size: 1.5em;
+}
+
+input {
+    font-size: 2em;
+    height: auto;
+}
+
+.btn {
+    font-size: 1.9em;
+}
+
+.hsi-link{
+    font-size: 1.5em;
+   
+}
+
+.errorMessage {
+    /*float: right;*/
+    margin: 10px;
+    font-size: 1.5em;
+    color: tomato;
+}
+
+.message {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    font-size: 2em;
+    left: 25%;
+    top: 350px;
+    z-index: 10;
+    text-align: center;
+    background: #ffdab9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #222;
+    color: #272b31;
+}

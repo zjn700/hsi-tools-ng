@@ -1,5 +1,8 @@
 <br><br>
+  <!--<div><a [ngClass]="{'blocked' : !isLoggedIn(),'unblocked': isLoggedIn(), topMenuItem: true}" [routerLink]="['/profile']">Profile</a></div>-->
+
   <div class="col-md-8 col-md-offset-2 well well-lg hsi-h2">
+    <!--<app-profile></app-profile>-->
       <h2>Are you sure you want to leave?</h2>
     <button class="btn btn-danger" (click)="onLogout()">
         Logout

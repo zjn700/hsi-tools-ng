@@ -34,6 +34,7 @@ export class QnnEditorComponent implements OnInit, OnDestroy {
     //this.currentQnn = qnn;
     if (this.adminToolsService.domains) {
       this.adminToolsService.domains = [];
+      this.adminToolsService.currentDomain = null;
     }
     this.adminToolsService.setActiveQnn(qnn);
   }

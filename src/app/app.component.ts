@@ -12,6 +12,7 @@ import { DomainService } from './domn/domn.service';
 export class AppComponent implements OnInit, AfterViewInit {
   private showWarningMessage:boolean=false
   private warningMessage:string= ''
+  public isVis = true;
   
   constructor(private authService: AuthService, 
               private projectService: ProjectService, 
@@ -66,6 +67,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         return this.authService.isLoggedIn();   
   }
   
+  bobIsOn(){
+    return localStorage.getItem('userId') == "q300AWOoBnVGqkRZ"
+  }
   
   doShowMessage(){
     return this.showWarningMessage

@@ -32,5 +32,9 @@ export class AdminToolsComponent implements OnInit, OnDestroy {
   qnnIsSelected(){
     return this.adminToolsService.currentQnn != null;
   }
+  
+  domainIsSelected(){
+    return this.adminToolsService.currentDomain != null;
+  }
 
 }

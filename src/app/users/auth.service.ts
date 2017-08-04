@@ -50,8 +50,35 @@ export class AuthService  {
             .catch((error: Response) => Observable.throw(error));
     }    
     
+    updateUser(user){
+        // if (this.currentDomain.questions.length=0) {
+        //     this.currentDomain.questions.push()
+        // }
+        
+        //let updateDomain = this.currentDomain
+        const headers = new Headers({'content-Type': 'application/json'})
+            const body = JSON.stringify(user);
+            const token = localStorage.getItem('token') 
+                ? '?token=' + localStorage.getItem('token')
+                : '';
+            return this.http.patch('/users' + token, body, {headers: headers})
+                .map((response: Response) => {
+                    response.json();
+                    console.log(response)
+                    //this.projectIsUpdated.emit(true);
+                    //this.projects = this.sortProjectList();
+                    return response.json()
+                    
+                })
+                .catch((error: Response) => Observable.throw(error)); 
+    }
+    
     getActiveUser() {
         return this.signedInUser;
+    }
+    
+    resetUser(user: User){
+        this.signedInUser = user;
     }
     
     setUser(userId) {

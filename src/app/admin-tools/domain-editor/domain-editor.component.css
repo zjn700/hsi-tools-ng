@@ -23,3 +23,19 @@
   background: #4caf50; /*#5bc0de; /* #5ed263;*/
   border-color: #4caf50; /* #5bc0de; /* #5ed263;*/
 }
+
+.domainTitle{
+    cursor: pointer;
+}
+
+.domainTitle:hover{
+    color: peachpuff;
+}
+
+.active {
+    color:coral;
+}
+
+.active:hover {
+    color:coral;
+}

@@ -3,7 +3,7 @@
 <!--</div>-->
 
 <div class='container'>
-    <h1>Admin Tools</h1>
+    <h1>Human Systems Integration - Risk Management Tool (HSI-RMT) Admin Tools</h1>
     <hr>
     <div class='menu-item'>
         <a appOutputMenuMouse 
@@ -12,7 +12,7 @@
             class='menu-item-link' 
             [routerLink]="['qnnedit']" 
             title="Edit domains and questions">
-            Edit questionnaires
+            Questionnaires
         </a>
     </div>
     <div class='menu-item'>
@@ -23,17 +23,18 @@
             class='menu-item-link' 
             [routerLink]="['domainedit']" 
             title="Edit domains and questions">
-            Edit domains
+            Domains
         </a>
     </div>    
     <div class='menu-item'>
         <a appOutputMenuMouse 
             (click)='setButtonActive(3)'
+            *ngIf='domainIsSelected()'
             [ngClass]="{'active-button' : activeButton==3}"
             class='menu-item-link' 
             [routerLink]="['questionedit']" 
             title="Edit domains and questions">
-            Edit questions
+            Questions
         </a>
     </div>
 </div>

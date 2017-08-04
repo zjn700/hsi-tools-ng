@@ -1,3 +1,65 @@
-<div class="container">
-    <h2> Questions </h2> 
+<!--<div *ngIf='isInitialized' class='container'>-->
+
+<div class='container'>
+    <h2>{{getActiveQnn().title}}: {{getActiveDomain().title}}</h2>
+    
+    
+    <!--<h2>Edit/Add question</h2>-->
+    <form *ngIf='showForm' [formGroup]='questionForm' (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="sequence">Question Number  </label>
+            <input [ngModel]='question?.sequence'
+                   type="text" 
+                   id="sequence" 
+                   class="form-control" 
+                   formControlName='sequence'>
+        </div>
+        <div class="form-group">
+            <label for="content">Question Content </label>
+            <textarea [ngModel]='question?.content'
+                   type="text" 
+                   id="content" 
+                   class="form-control" 
+                   formControlName='content'>
+            </textarea>
+        </div>
+        <button [disabled]="!questionForm.valid" class="btn btn-primary" type='submit'>Submit</button>
+    </form>
+    
+    <div *ngFor="let question of questions; let i = index">
+        <div class='row'>
+            <h3 (click)="selectThisQuestion(question)"
+                class="questionTitle"
+                [ngClass]="{'active': isThisTheCurrenQuestion(question,qstn)}"
+                #qstn>
+                <span *ngIf="question.sequence<10">{{getActiveDomain().sequence}}.0{{question.sequence}}</span>
+                <span *ngIf="question.sequence>=10">{{getActiveDomain().sequence}}.{{question.sequence}}</span>
+                  {{question.content}} 
+            </h3>
+            <span (click)='deleteQuestion(question, i, qstn)'
+                  title="Delete this question. YOU CANNOT UNDO THIS!"
+                  class="glyphicon glyphicon-remove-sign remove-red"
+                  *ngIf='!showForm'>
+            </span>
+        </div>
+    
+    </div>
 </div>
+
+<button (click)="onAddQuestion($event)" 
+        *ngIf='!showForm'
+        title='Add a question' 
+        class='btn glyphicon glyphicon-plus  floating floating-green'>
+    
+</button>
+<button (click)="onClearQuestion($event)"
+        *ngIf='showForm'
+        title='Hide form' 
+        class='btn glyphicon glyphicon-minus floating floating-red'>
+</button>
+<button (click)="reorderQuestions()"
+        *ngIf='!showForm'
+        title='Reorder the questions' 
+        class='btn glyphicon glyphicon-sort-by-order floating floating-offset floating-black'>
+</button>
+
