@@ -14,6 +14,8 @@ import "rxjs/add/operator/takeWhile";
 export class SigninComponent implements OnInit, OnDestroy {
     myForm: FormGroup
     private alive:boolean = true;
+    public message:string = ''
+    public showMessage:boolean = false;
     
     constructor(private authService: AuthService, private topMenuService: TopMenuService, private router: Router) { }
     
@@ -42,13 +44,26 @@ export class SigninComponent implements OnInit, OnDestroy {
             .takeWhile(() => this.alive)
             .subscribe(
                 data => {
+                    console.log('data')
+                    console.log(data)
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
                     this.authService.setUser(data.userId)
                     this.router.navigateByUrl('/project');
                     this.topMenuService.activateThisItem('/project');
                 },
-                error => console.log(error))
+                error => {
+                    console.log('error'); 
+                    console.log(error);
+                    this.showThisMessage("There was an error with your credentials. Please re-enter them. If you don't have an account, please use the link below to create one")
+                })
         this.myForm.reset();
     }    
+    
+    showThisMessage(message) {
+        this.message=message;
+        this.showMessage=true;
+        setTimeout(()=>{this.showMessage=false}, 5000)    
+    }
+    
 }

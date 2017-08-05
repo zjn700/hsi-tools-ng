@@ -12,9 +12,9 @@
             <span class="hsi-label" >Author: </span><span>{{activeUser.firstName}} {{activeUser.lastName}}</span> 
         </h3>
         <h3> 
-            <span *ngIf="activeUser.office">{{activeUser.office}}</span>
-            <span *ngIf="activeUser.email"> {{activeUser.email}}</span>
-            <span *ngIf="activeUser.phone"> {{activeUser.phone}}</span>
+            <span *ngIf="activeUser.office">Office: {{activeUser.office}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span *ngIf="activeUser.email">Email: {{activeUser.email}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span *ngIf="activeUser.phone">Phone: {{activeUser.phone}}</span>
         </h3>
     </div>
     

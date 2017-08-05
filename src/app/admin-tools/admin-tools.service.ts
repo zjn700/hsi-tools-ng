@@ -21,7 +21,7 @@ export class AdminToolsService {
     public currentQuestion = null;
     
     public sendDomainQuestions =  new EventEmitter<Question[]>();
-
+    
     constructor(private http: Http) {}
     
     getDomains(){ 
@@ -96,10 +96,6 @@ export class AdminToolsService {
     }
 
     updateCurrentDomain(){
-        // if (this.currentDomain.questions.length=0) {
-        //     this.currentDomain.questions.push()
-        // }
-        
         let updateDomain = this.currentDomain
         const headers = new Headers({'content-Type': 'application/json'})
             const body = JSON.stringify(updateDomain);
@@ -170,13 +166,6 @@ export class AdminToolsService {
         return this.domains
     }
     
-    // saveQuestion(questions) {
-    //     console.log('here in saveQuestion========')
-    //     console.log(questions)
-    //     console.log(this.currentDomain.questions)
-        
-    // }
-    
     sortQnns(qnnList) {  // reverse alpabetical order
         console.log('sorting...')
         return  qnnList.sort(function(a, b){
@@ -188,7 +177,7 @@ export class AdminToolsService {
               })
     }
     
-    sortBySequenceNumber(thisList) {  // reverse alpabetical order
+    sortBySequenceNumber(thisList) {  // reverse alpabetical order  NEEDS TO CHANGE FOR DOUBLE DIGIT NUMBERS!!!
         console.log('sorting...')
         return  thisList.sort(function(a, b){
                 if ( a.sequence < b.sequence) { return -1;};
@@ -196,4 +185,5 @@ export class AdminToolsService {
                 return 0;
               })
     }
+    
 }

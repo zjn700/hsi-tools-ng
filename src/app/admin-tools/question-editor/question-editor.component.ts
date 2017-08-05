@@ -112,12 +112,6 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
         this.updateCurrentDomain();
       // }
 
-    // this.adminToolsService.updateCurrentDomain()
-    //   .takeWhile(()=> this.alive)
-    //   .subscribe((response)=>{
-    //     console.log(response)
-    //     this.isInitialized = true;
-    //   })
   }
   
   deleteQuestion(question, index, element) {
@@ -127,12 +121,7 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
     console.log(element)
     this.questions.splice(index, 1);
     this.updateCurrentDomain();
-    // this.adminToolsService.updateCurrentDomain()
-    //   .takeWhile(()=> this.alive)
-    //   .subscribe((response)=>{
-    //     console.log(response)
-    //     this.isInitialized = true;
-    //   })
+
   }
   
   reorderQuestions(){

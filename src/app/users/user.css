@@ -22,3 +22,35 @@ input {
     font-size: 1.5em;
     color: tomato;
 }
+
+.messagex {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    font-size: 2em;
+    left: 25%;
+    top: 350px;
+    z-index: 10;
+    text-align: center;
+    background: #ffdab9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #222;
+    color: #272b31;
+}
+
+.message{
+    position: absolute;
+    width: 70%;
+    height: auto;
+    padding: 15px;
+    font-size: 2em;
+    left: 15%;
+    top: 40%;
+    z-index: 10;
+    text-align: center;
+    background: #ffdab9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #222;
+    color: #272b31;
+}
