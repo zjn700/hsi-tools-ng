@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Questionnaire } from '../card/qnn/qnn.model';
 import { SelectorService } from './selector.service';
+import { TopMenuService } from '../shared/top-menu.service';
+import { ProjectService } from '../proj/proj.service'
 import "rxjs/add/operator/takeWhile";
 
 
@@ -11,12 +14,16 @@ import "rxjs/add/operator/takeWhile";
 })
 export class AtQnnsComponent implements OnInit, OnDestroy {
   category = '2';   // AT: Assesment Tool
+  //category = '1';   // RT: Requirements Tool
   projectTitle: string;
-  qnns: Questionnaire[] = [];
+  public qnns: Questionnaire[] = [];
   private alive:boolean = true;
-  private isInitialized:boolean = false;
+  private isInitialized = false;
 
-  constructor(private selectorService: SelectorService) { }
+  constructor(private selectorService: SelectorService, 
+              private topMenuService: TopMenuService, 
+              private projectService: ProjectService,
+              private  router: Router) { }
 
   ngOnInit() {
     this.projectTitle = localStorage.getItem('ptitle');
@@ -30,7 +37,49 @@ export class AtQnnsComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.alive = false;
   }
+  // goToQnn(qnn: Questionnaire) {
+  // }
+  
   goToQnn(qnn: Questionnaire) {
+    
+    // here is where state should be initially set
+    localStorage.setItem('qnnId', qnn.id.valueOf());
+    localStorage.setItem('qnnTitle', qnn.title.valueOf());
+    localStorage.setItem('qnnAbbreviation', qnn.abbreviation.valueOf());
+    localStorage.setItem('resume', 'false')
+    this.router.navigate(['/questions']) 
+  }
+  
+  
+  resumeQnn(qnn: Questionnaire) {
+    var t_url = null;
+    
+    // here is where state should be initially set
+    localStorage.setItem('qnnId', qnn.id.valueOf());
+    localStorage.setItem('qnnTitle', qnn.title.valueOf());
+    localStorage.setItem('qnnAbbreviation', qnn.abbreviation.valueOf());
+    
+    t_url = this.projectService.setStateByQnnId(qnn.id.valueOf());
+
+    if (t_url) {
+      localStorage.setItem('resume', 'true')
+      // this.router.navigate([t_url]) ;
+      // this.topMenuService.updateTopMenu(t_url)
+      this.router.navigate(['/questions']) 
+      this.topMenuService.updateTopMenu('/questions');      
+
+    } else {
+      localStorage.setItem('resume', 'false')
+      this.router.navigate(['/questions']) 
+      this.topMenuService.updateTopMenu('/questions');
+      
+    }
+  }  
+  
+  onClick(button){
+    console.log('crt button')
+    console.log(button)
+    //this.topMenuService.updateTopMenu(button)
   }
 
 }

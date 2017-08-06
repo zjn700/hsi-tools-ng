@@ -15,7 +15,8 @@
         </div>
         <div class="col-md-2">
             <br>
-            <button (click)="goToQnn(qnn)" class='btn btn-info'><h2>{{qnn.abbreviation}}</h2></button>
+            <!--<button (click)="goToQnn(qnn)" class='btn btn-info'><h2>{{qnn.abbreviation}}</h2></button>-->
+            <button (click)="resumeQnn(qnn)" class='btn btn-info' (click)="onClick(button)" ng-reflect-router-link='/questions' #button><h2>{{qnn.abbreviation}} </h2></button>
         </div>
     </div>  
     
