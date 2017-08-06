@@ -90,7 +90,7 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
   onSubmit() {
       if (this.addingQuestion) {
           const question = new Question(
-            Number(this.questionForm.value.sequence.replace(/\s/g,'')),
+            parseInt(this.questionForm.value.sequence.replace(/\s/g,'')),
             this.questionForm.value.content
             )
             
@@ -99,7 +99,7 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
           this.adminToolsService.setActiveQuestion(question);
   
       } else {
-        Number(this.questionForm.value.sequence.replace(/\s/g,'')),
+        this.question.sequence = parseInt(this.questionForm.value.sequence.replace(/\s/g,'')),
         //this.question.sequence = this.questionForm.value.sequence
         this.question.content = this.questionForm.value.content
       }  

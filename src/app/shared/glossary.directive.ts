@@ -30,7 +30,7 @@ export class GlossaryDirective {
                           {term: 'CCTD', definition:"Concept Characterization and Technical Description"}, 
                           {term: 'CDD', definition:"Capability Development Document"}, 
                           {term: 'CDR', definition:"Critical Design Review"}, 
-                          {term: 'CDRL', definition:"Contract Deliverable"},
+                          {term: 'CDRL', definition:"Contract Data Requirements List"},
                           {term: 'CI', definition:"Configuration Item"},  
                           {term: 'CONOPS', definition: "Concept of Operations"},
                           {term: 'COTS', definition: "Commercial Off-the-Shelf"},

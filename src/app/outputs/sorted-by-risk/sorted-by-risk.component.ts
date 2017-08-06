@@ -9,6 +9,7 @@ import { DomainService } from '../../domn/domn.service';
 })
 export class SortedByRiskComponent implements OnInit {
   public domains;
+  public totalDomains=0;
 
   constructor(private outputService: OutputService, private domainService: DomainService) { }
 
@@ -20,13 +21,18 @@ export class SortedByRiskComponent implements OnInit {
   }
   
   thereAreRisks(domainOutputs){
-    for (var i=0;i<domainOutputs.length;i++) {
-      console.log(domainOutputs[i])
-      if (domainOutputs[i].answerValue==false && domainOutputs[i].riskValue > 20) {
-        return true;
+    if (!this.totalDomains < domainOutputs.length) {
+      this.totalDomains += 1;
+      console.log(domainOutputs)
+      for (var i=0;i<domainOutputs.length;i++) {
+        // console.log('domainOutputs[i]')
+        // console.log(domainOutputs[i])
+        if (domainOutputs[i].answerValue==false && domainOutputs[i].riskValue > 20) {
+          return true;
+        }
       }
+      return false;
     }
-    return false;
   }
 
 }

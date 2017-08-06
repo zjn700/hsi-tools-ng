@@ -37,7 +37,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   q_number: string;
   a_value = null;
   a_details: Answer;
-  activeQuestionNumber = 1;
+  activeQuestionNumber:number = 1;
   activeDomainNumber = 1;
   isInitialized = false;
   atFirstQuestion=true;
@@ -391,8 +391,15 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   getNextQuestion() {
+        console.log('this.activeQuestionNumber')
+        console.log(this.activeQuestionNumber)
+        if (typeof this.activeQuestionNumber === 'string'){
+          alert('yep')
+        }
        if (this.activeQuestionNumber < this.domain.questions.length) {
-         this.activeQuestionNumber += 1;
+          this.activeQuestionNumber = this.activeQuestionNumber + 1;
+          console.log(this.activeQuestionNumber)
+
          this.updateContent(this.activeQuestionNumber-1);
        } else {
          if (this.domain.sequence < this.domains.length) {
@@ -424,14 +431,19 @@ export class DomnComponent implements OnInit, OnDestroy {
   
   getThisQuestion(question: Question){
     console.log('getThisQuestion')
+    console.log(question)
+
     this.activeQuestionNumber = question.sequence;
+    
     this.updateContent(this.activeQuestionNumber-1);
     this.cleanUpFormat();
     this.toggleMenu();
   }
   
   updateContent(index) {
-    console.log('this.domain.questions[index].content')
+    console.log('this.domain.questions[index].content=====================')
+    console.log('index')
+    console.log(index)
     console.log(this.domain.questions[index].content)
 
     this.q_content = this.domain.questions[index].content;

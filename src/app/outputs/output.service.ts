@@ -192,24 +192,46 @@ export class OutputService {
     sortByRiskValue(domain) {  // reverse alpabetical order
         console.log('sorting...')
         return  domain.sort(function(a, b){
-                if ( a.riskValue > b.riskValue) { return -1;}
-                if ( a.riskValue < b.riskValue ) { return 1;}
-                if ( a.questionSequence < b.questionSequence) { return -1;};
+                // if ( a.riskValue > b.riskValue) { return -1;}
+                // if ( a.riskValue < b.riskValue ) { return 1;}
+                
+                if ( a.convertedRiskValue > b.convertedRiskValue) { return -1;};
+                if ( a.convertedRiskValue < b.convertedRiskValue ) { return 1;};
+                
+                if ( a.questionSequence < b.questionSequence ) { return -1;};
                 if ( a.questionSequence > b.questionSequence ) { return 1;};
                 return 0;
               })
     }
- 
+
      sortByRiskValueAndDomainNumber(domain) {  // reverse alpabetical order
         console.log('sorting...')
         return  domain.sort(function(a, b){
-                if ( a.riskValue > b.riskValue) { return -1;};
-                if ( a.riskValue < b.riskValue ) { return 1;};
-                if ( a.domainSequence < b.domainSequence) { return -1;};
+                // if ( a.riskValue > b.riskValue) { return -1;};
+                // if ( a.riskValue < b.riskValue ) { return 1;};
+                
+                if ( a.convertedRiskValue > b.convertedRiskValue) { return -1;};
+                if ( a.convertedRiskValue < b.convertedRiskValue ) { return 1;};
+                
+                if ( a.domainSequence < b.domainSequence ) { return -1;};
                 if ( a.domainSequence > b.domainSequence ) { return 1;};                
-                if ( a.questionSequence < b.questionSequence) { return -1;};
+
+                if ( a.questionSequence < b.questionSequence ) { return -1;};
                 if ( a.questionSequence > b.questionSequence ) { return 1;};                
                 return 0;
               })
     }   
+ 
+    // sortByRiskValueAndDomainNumber(domain) {  // reverse alpabetical order
+    //     console.log('sorting...')
+    //     return  domain.sort(function(a, b){
+    //             if ( Number(a.riskValue) > Number(b.riskValue)) { return -1;};
+    //             if ( Number(a.riskValue) < Number(b.riskValue) ) { return 1;};
+    //             if ( Number(a.domainSequence) < Number(b.domainSequence) ) { return -1;};
+    //             if ( Number(a.domainSequence) > Number(b.domainSequence) ) { return 1;};                
+    //             if ( Number(a.questionSequence) < Number(b.questionSequence) ) { return -1;};
+    //             if ( Number(a.questionSequence) > Number(b.questionSequence) ) { return 1;};                
+    //             return 0;
+    //           })
+    // }   
 }

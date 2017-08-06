@@ -10,11 +10,12 @@
 <div #report id='clip' class='domain container report'
 
     *ngFor="let domain of domains; let j=index;" >
-    <h2 *ngIf="thereAreRisks(domain.outputs)"><span>{{domain.outputs[j].domainTitle}} </span></h2>
+    <!--<h2 *ngIf="thereAreRisks(domain.outputs)"><span>{{domain.outputs[j]?.domainTitle}} </span></h2>-->
     <div *ngFor="let output of domain.outputs; let i = index">
 
         <div *ngIf="output.answerValue==false && output.riskValue>20">
-    
+           <h2 *ngIf="i == 0 ">{{output.domainTitle}}: </h2>
+
            <h3>
                <!--<span>{{domain.outputs[j].domainTitle}}: </span>-->
                <span *ngIf="output.questionSequence<10">{{output.domainSequence}}.0{{output.questionSequence}}</span>
