@@ -67,6 +67,10 @@
     color:white;
 }
 
+.top-menu-help {
+    float: right;
+}
+
 .glyphicon-user, .glyphicon-off, .glyphicon-wrench {
     color: white;
     padding:14px;

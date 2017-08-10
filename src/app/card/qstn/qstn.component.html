@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div (click)="onClick($event)"  class="row">
-      <span *ngIf="glossaryOn" id="donthide me">
+      <span *ngIf="glossaryOn">
         <p hsiGlossary  class="question">
           {{q_content}}
         </p>
@@ -10,6 +10,7 @@
       </p>
   </div>
 </div>
+
 
 
 <input class="clipboard hidden" />

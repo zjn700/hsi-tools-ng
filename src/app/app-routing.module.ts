@@ -20,6 +20,7 @@ import { SignupComponent } from './users/signup.component';
 import { LogoutComponent } from './users/logout.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { AdminToolsComponent } from './admin-tools/admin-tools.component';
+import { HelpComponent } from './help/help.component';
 //import { AUTH_ROUTES } from './users/auth.routes';
 
 
@@ -39,6 +40,7 @@ const APP_ROUTES: Routes = [
     { path: 'integrations', component: IntgrnComponent, children: INTGRN_ROUTES },
     { path: 'review', component: OutputComponent, children: OUTPUT_ROUTES },
     { path: 'profile', component: ProfileComponent },
+    { path: 'help', component: HelpComponent },
 
     //{ path: 'integrations', component: IntgrnComponent },
     //{ path: 'review', component: OutputComponent },

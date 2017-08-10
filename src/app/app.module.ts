@@ -71,6 +71,7 @@ import { AdminToolsComponent } from './admin-tools/admin-tools.component';
 import { QnnEditorComponent } from './admin-tools/qnn-editor/qnn-editor.component';
 import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor.component';
 import { QuestionEditorComponent } from './admin-tools/question-editor/question-editor.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { QuestionEditorComponent } from './admin-tools/question-editor/question-
     DomainEditorComponent,
     QuestionEditorComponent,
     ProfileComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

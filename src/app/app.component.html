@@ -4,7 +4,14 @@
     
     <nav class="navbar navbar-fixed-top hsi-navbar-top">
 
-        <div class="navx nav-tabsx" appTopMenu>
+         <div class="navx nav-tabsx" appTopMenu>
+             
+            <div class="top-menu-help">
+                <a class="topMenuItem"
+                   title="Help"
+                   [routerLink]="['/help']">
+                Help</a>
+            </div>
             
             <div *ngIf="bobIsOn()">
                 <a appTopMenuMouse 

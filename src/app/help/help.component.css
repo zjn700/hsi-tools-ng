@@ -1,0 +1,66 @@
+h2 {
+    font-size: 1.5em;
+    
+}
+
+h3 {
+    font-size: 1em;
+}
+
+img {
+    width:80%;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.figure-label {
+    margin-left: 10%;
+}
+
+.row {
+    font-size:1.4em;
+    background-color: white;
+    color: #222;
+}
+ul {
+    list-style: none
+}
+
+ul.with-bullets {
+    list-style: disc;
+}
+
+li[class^="toc"]{
+    padding-bottom: 5px;
+    cursor: pointer
+}
+
+
+.toc-level-1{
+    font-size: 1.25em;
+}
+
+.toc-level-2{
+    margin-left: 8px;
+    /*font-size: 1.5em;*/
+    
+}
+
+.toc-level-3{
+    margin-left: 16px;
+    /*font-size: 1.5em;*/
+    
+}
+
+.toc-number {
+    padding-right:8px;
+    /*font-size: 1.5em;*/
+    
+}
+
+@media print {
+    footer {page-break-after: always;}
+    img, .figure-label {
+        margin-left: 2%;
+    }
+}

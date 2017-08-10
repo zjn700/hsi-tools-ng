@@ -38,7 +38,7 @@ export class OutputComponent implements OnInit {
     // document.body.style.webkitTransform =         // Chrome, Opera, Safari
     // //document.body.style.msTransform =           // IE 9
     // document.body.style.transform = 'scale(.95)';
-    setTimeout(function(){ window.print(); }, 100);
+    setTimeout(function(){ window.print(); }, 50);
     
   }
   
