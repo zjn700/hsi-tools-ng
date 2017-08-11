@@ -2,6 +2,12 @@
     <img src="/assets/images/ring.gif" alt="loading...">
 </div>
 
+<div *ngIf="showMessage"
+     class="row col-md-8 col-md-offset-2 message">
+   <h1>{{message}}</h1>
+ 
+</div>
+
 <div *ngIf="!projects.length == 0 && isInitialized" class="row col-md-8 col-md-offset-2">
     <h2>Select a project:</h2>
     <app-proj-detail class="list-group" *ngFor="let project of projects" 

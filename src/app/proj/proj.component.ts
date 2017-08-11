@@ -51,14 +51,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
         //     description: new FormControl(null)
         // }) 
       
-        const myNumbers = Observable.interval(1000);
-        myNumbers
-        .takeWhile(() => this.alive)
-        .subscribe(
-            (number) => {
+        // const myNumbers = Observable.interval(1000);
+        // myNumbers
+        // .takeWhile(() => this.alive)
+        // .subscribe(
+        //     (number) => {
             
-            console.log(number);
-        });
+        //     console.log(number);
+        // });
       
       
         this.projectService.projectIsInEditMode

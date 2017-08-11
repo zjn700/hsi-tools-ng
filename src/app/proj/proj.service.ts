@@ -146,6 +146,10 @@ export class ProjectService {
         } else {
             return this.http.get('/projects') 
                 .map((response: Response) => {
+                    console.log(response.status)
+                    if (response.status == 204) {
+                        return [];
+                    }
                     if (response.json().obj.length == 0) {
                         return this.projects = response.json().obj;
                     } 

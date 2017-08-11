@@ -13,10 +13,13 @@ export class ProjListComponent implements OnInit {
     projects: Project[] = [];
     private alive:boolean = true;
     private isInitialized:boolean = false;
+    public showMessage = false;
+    public message = "You have not entered a project. Please click the green plus button below to create one:"
     
       constructor(private projectService: ProjectService, private router: Router) {}
       
       ngOnInit(){
+        
         
         this.projects = this.projectService.sortProjectList();
 
@@ -24,8 +27,16 @@ export class ProjListComponent implements OnInit {
           .takeWhile(() => this.alive)
           .subscribe(
             (projects: Project[]) => {
-              this.projects = projects; 
-              this.isInitialized = true;
+              if (projects.length > 0 ) {
+                this.projects = projects; 
+                this.isInitialized = true;
+                this.showMessage = false;
+              } else {
+                this.isInitialized = true;
+                this.showMessage = true;
+
+                
+              }
             }
           );
           
@@ -34,10 +45,7 @@ export class ProjListComponent implements OnInit {
           .subscribe(
             (isUpdated: boolean) => {
               if (isUpdated) {
-                // console.log('before sort')
-                // console.log(this.projects)
                 this.projects = this.projectService.sortProjectList();
-                // console.log(this.projects)
 
                }
           });
