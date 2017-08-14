@@ -1,14 +1,61 @@
+<!--<div *ngIf="!isInitialized" class="loading" >-->
+<!--    <img src="/assets/images/ring.gif" alt="loading...">-->
+<!--</div>-->
+
+<!--<div *ngIf="showMessage"-->
+<!--     class="row col-md-8 col-md-offset-2 message">-->
+<!--   <h1>{{message}}</h1>-->
+ 
+<!--</div>-->
+
+<!--<div *ngIf="activeProjectsTotal == 0 && isInitialized" class="row col-md-8 col-md-offset-2">-->
+<!--    <div class='title-row'>-->
+        <!--<div class='direction'>Select a project:-->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> -->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> -->
+<!--    </div>    -->
+<!--<div>-->
+
+
+<!--<div *ngIf="activeProjectsTotal > 0 && isInitialized" class="row col-md-8 col-md-offset-2">-->
+<!--<div *ngIf="!projects.length == 0 && isInitialized" class="row col-md-8 col-md-offset-2">-->
+<!--    <div class='title-row'>-->
+<!--        <div class='direction'>Select a project:-->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> -->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> -->
+<!--    </div>-->
+<!--    <app-proj-detail class="list-group" *ngFor="let project of projects" -->
+<!--                [project]='project'-->
+<!--                [showArchives]='showArchives'>-->
+<!--        dk-->
+<!--    </app-proj-detail>-->
+<!--</div>  -->
+
+
 <div *ngIf="!isInitialized" class="loading" >
     <img src="/assets/images/ring.gif" alt="loading...">
 </div>
 
-<div *ngIf="showMessage"
+
+<!--<div *ngIf="showMessage || activeProjectsTotal == 0"-->
+<div *ngIf="activeProjectTotal == 0 && isInitialized"
      class="row col-md-8 col-md-offset-2 message">
-   <h1>{{message}}</h1>
- 
+    
+    <div *ngIf="projects.length > 0"
+         class='title-row'>
+        <div class='direction'>
+            <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> 
+            <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> 
+        </div>    
+    </div>
+        
+   <div class='title-row' ><h1>{{message}}</h1></div>
+   
 </div>
 
-<div *ngIf="!projects.length == 0 && isInitialized" class="row col-md-8 col-md-offset-2">
+<!--<div class="row col-md-8 col-md-offset-2">-->
+<!--<div *ngIf="!projects.length == 0 && isInitialized" class="row col-md-8 col-md-offset-2">-->
+<div *ngIf="activeProjectTotal > 0  && isInitialized" class="row col-md-8 col-md-offset-2">
     <div class='title-row'>
         <div class='direction'>Select a project:
         <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> 
@@ -19,3 +66,12 @@
                 [showArchives]='showArchives'>
     </app-proj-detail>
 </div>  
+
+<!--<div *ngIf="activeProjectTotal == 0 && isInitialized" class="row col-md-8 col-md-offset-2">-->
+<!--    <div class='title-row'>-->
+<!--        <div class='direction'>-->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> -->
+<!--        <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> -->
+<!--        </div>    -->
+<!--    <div>-->
+<!--</div>-->

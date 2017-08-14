@@ -13,6 +13,7 @@ export class ProjListComponent implements OnInit {
     projects: Project[] = [];
     private alive:boolean = true;
     private isInitialized:boolean = false;
+    public activeProjectTotal=0;
     public showArchives=false;
     public showMessage = false;
     public message = "You have not entered a project. Please click the green plus button below to create one:"
@@ -31,6 +32,7 @@ export class ProjListComponent implements OnInit {
           .takeWhile(() => this.alive)
           .subscribe(
             (projects: Project[]) => {
+              this.countActiveProjects(projects);
               if (projects.length > 0 ) {
                 this.projects = projects; 
                 this.isInitialized = true;
@@ -49,7 +51,13 @@ export class ProjListComponent implements OnInit {
           .subscribe(
             (isUpdated: boolean) => {
               if (isUpdated) {
+                console.log('list proj updated')
+                console.log(this.projects)
                 this.projects = this.projectService.sortProjectList();
+                console.log(this.projects)
+
+                this.countActiveProjects(this.projects)
+                console.log(this.activeProjectTotal)
 
                }
           });
@@ -62,6 +70,17 @@ export class ProjListComponent implements OnInit {
         this.showArchives = !this.showArchives;
         console.log(this.showArchives )
 
+      }
+      
+      countActiveProjects(projects){
+        this.activeProjectTotal = 0;
+        for (var i = 0; i < projects.length; i++) {
+          if (!projects[i].archived) {
+            this.activeProjectTotal += 1;
+          }
+        }
+        console.log('this.activeProjectTotal')
+        console.log(this.activeProjectTotal)
       }
       
 

@@ -1,13 +1,14 @@
 <li class="list-group-item"
-    *ngIf="!project.archived">
+    *ngIf="project.archived">
     <h2 *ngIf="project.state.qnnId!=null" 
         title="Go to the last viewed item in this project">
-        <a ng-reflect-router-link='/questions' 
-           (click)='onResumeProject(t)' 
-           #t>
+        <!--<a ng-reflect-router-link='/questions' -->
+        <!--   (click)='onResumeProject(t)' -->
+        <!--   #t>-->
          {{project.title}}
-        </a>
+        <!--</a>-->
     </h2> 
+    
     <h2 *ngIf="project.state.qnnId==null" 
         title="Choose one of the questionnaires for this project">
         <a ng-reflect-router-link='/tools' 
