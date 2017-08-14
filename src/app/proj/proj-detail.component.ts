@@ -14,6 +14,7 @@ import { TopMenuService } from '../shared/top-menu.service';
 export class ProjDetailComponent {
     
     @Input() project: Project;
+    @Input() showArchives;
 
     constructor(private projectService: ProjectService, 
                 private domainService: DomainService,
@@ -25,6 +26,13 @@ export class ProjDetailComponent {
         //this.editClicked.emit('Batman lives');
         this.projectService.editProject(this.project);
         window.scrollTo(0,0);
+    }
+
+    onArchive(){
+        this.project.archived = true;
+        this.projectService.archiveProject(this.project)
+            .subscribe(
+                result => console.log(result))
     }
     
     onDelete(){

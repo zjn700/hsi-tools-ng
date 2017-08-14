@@ -9,8 +9,13 @@
 </div>
 
 <div *ngIf="!projects.length == 0 && isInitialized" class="row col-md-8 col-md-offset-2">
-    <h2>Select a project:</h2>
+    <div class='title-row'>
+        <div class='direction'>Select a project:
+        <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> 
+        <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> 
+    </div>
     <app-proj-detail class="list-group" *ngFor="let project of projects" 
-                [project]='project' >
+                [project]='project'
+                [showArchives]='showArchives'>
     </app-proj-detail>
 </div>  

@@ -4,7 +4,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1em;
+    /*font-size: 1em;*/
 }
 
 img {
@@ -13,15 +13,38 @@ img {
     margin-right:10%;
 }
 
+p {
+
+}
+
+.manual-title {
+    color:peachpuff;
+}
+
+#help-page {
+    padding-left:2%;
+    padding-right:2%;
+    font-size:1.4em;
+    background-color: white;
+    color: #222;    
+}
+
+.inline-img-small {
+    width:2%;
+    margin-left:0;
+    margin-right:0;
+}
+
 .figure-label {
     margin-left: 10%;
 }
 
 .row {
-    font-size:1.4em;
-    background-color: white;
-    color: #222;
+    /*font-size:1.4em;*/
+    /*background-color: white;*/
+    /*color: #222;*/
 }
+
 ul {
     list-style: none
 }
@@ -58,9 +81,35 @@ li[class^="toc"]{
     
 }
 
+/*@media print {*/
+/*    footer {page-break-after: always;}*/
+/*    img, .figure-label {*/
+/*        margin-left: 2%;*/
+/*    }*/
+/*}*/
+
 @media print {
+
     footer {page-break-after: always;}
     img, .figure-label {
         margin-left: 2%;
     }
+
+    #help-page  {
+        padding: 0;
+    }  
+    
+    .row {
+      width: 80%; 
+      zoom:85%;
+      /*text-align: center !important;*/
+      margin:0; 
+      margin-left:4%;
+
+      /*margin-top:25% !important;*/
+      float:none!important;
+    }
+    .inline-title {float: none !important;}
+
+
 }

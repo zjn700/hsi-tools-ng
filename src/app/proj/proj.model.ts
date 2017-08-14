@@ -10,6 +10,7 @@ export class Project {
         public users?: string[],
         public state?: SessionState,
         public states?: SessionState[],
+        public archived?: boolean,
         public dateCompleted?: Date) { 
         }
 }

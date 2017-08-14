@@ -1,4 +1,5 @@
-<li class="list-group-item">
+<li class="list-group-item"
+    *ngIf="!project.archived">
     <h2 *ngIf="project.state.qnnId!=null" 
         title="Go to the last viewed item in this project">
         <a ng-reflect-router-link='/questions' 
@@ -44,10 +45,16 @@
             Edit
         </button>
         <button type="button" 
-                title="Delete this project"
+                title="Archive this project"
                 class="btn btn-default hsi-btn-default"
-                (click)="onDelete()">
-            Delete
+                (click)="onArchive()">
+            Archive
         </button>
+        <!--<button type="button" -->
+        <!--        title="Delete this project"-->
+        <!--        class="btn btn-default hsi-btn-default"-->
+        <!--        (click)="onDelete()">-->
+        <!--    Delete-->
+        <!--</button>-->
     </div>
 </li>

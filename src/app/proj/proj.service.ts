@@ -164,7 +164,8 @@ export class ProjectService {
                             project.dateCreated,
                             project.users,
                             project.state,
-                            project.states))
+                            project.states,
+                            project.archived))
                             console.log('project.states')
                             console.log(project.states)
                             // convert from iso date format -- for sorting
@@ -172,6 +173,8 @@ export class ProjectService {
                             i++
                     }
                     this.projects = transformedProjects;
+                    console.log('this.projects')
+                    console.log(this.projects)
                     this.dbAccessed = true;
                     return transformedProjects;
                 })
@@ -199,6 +202,7 @@ export class ProjectService {
         this.projectIsInEditMode.emit(project)
     }
     
+    
     updateProject(project: Project) {
         if (project) {
             const headers = new Headers({'content-Type': 'application/json'})
@@ -216,6 +220,29 @@ export class ProjectService {
                     .catch((error: Response) => Observable.throw(error)); 
         }
     }
+    
+    
+    archiveProject(project: Project) {
+        console.log('archiveProject')
+
+        if (project) {
+            console.log('project')
+            console.log(project)
+            const headers = new Headers({'content-Type': 'application/json'})
+            const body = JSON.stringify(project);
+            const token = localStorage.getItem('token') 
+                ? '?token=' + localStorage.getItem('token')
+                : '';
+            return this.http.patch('/projects/archive/' + project.id + token, body, {headers: headers})
+                    .map((response: Response) => {
+                        response.json();
+                        this.projectIsUpdated.emit(true);
+                        //this.projects = this.sortProjectList();
+                        
+                    })
+                    .catch((error: Response) => Observable.throw(error)); 
+        }
+    }    
     
     sortProjectList() {  // reverse alpabetical order
         console.log('sorting...')

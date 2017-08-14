@@ -13,13 +13,17 @@ export class ProjListComponent implements OnInit {
     projects: Project[] = [];
     private alive:boolean = true;
     private isInitialized:boolean = false;
+    public showArchives=false;
     public showMessage = false;
     public message = "You have not entered a project. Please click the green plus button below to create one:"
     
       constructor(private projectService: ProjectService, private router: Router) {}
       
+      ngOnDestroy(){
+        this.alive = false;
+      }      
+      
       ngOnInit(){
-        
         
         this.projects = this.projectService.sortProjectList();
 
@@ -52,8 +56,14 @@ export class ProjListComponent implements OnInit {
           
       }
       
-      ngOnDestroy(){
-        this.alive = false;
+      toggleArchivedProjects(){
+        console.log('this.showArchives' )
+        console.log(this.showArchives )
+        this.showArchives = !this.showArchives;
+        console.log(this.showArchives )
+
       }
+      
+
 
 }
