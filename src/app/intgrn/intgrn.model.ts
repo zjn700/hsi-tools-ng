@@ -7,6 +7,7 @@ export class Integration {
         public title: string,
         public dateCreated?: Date,
         public dateModified?: Date,
+        public archived?:boolean,        
         public id?: string,
         public risksIssuesConcerns?: string,
         public mitigationStrategy?: string) { }

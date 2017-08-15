@@ -108,3 +108,36 @@
     width:75px;
     height: 75px; 
 }
+
+.message{
+    color:coral;
+}
+
+/*//////from project-list/////*/
+
+h1 {
+    width:70%;
+    text-align: center;
+    margin: 15%;
+}
+
+.title-row{
+    width:95%;
+}
+
+.direction{
+    width: 100%;
+    font-size:30px;
+}
+
+.archives {
+    cursor: pointer;
+    font-size: 20px;
+    padding-top: 10px;
+    color: white;
+    float: right;
+}
+
+.archives:hover {
+    color: peachpuff;
+}

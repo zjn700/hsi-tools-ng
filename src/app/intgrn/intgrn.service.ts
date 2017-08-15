@@ -71,6 +71,7 @@ export class IntegrationService {
                         // convert from iso date format -- for sorting
                         integration.dateCreated = new Date(integration.dateCreated),
                         integration.dateModified = new Date(integration.dateModified),
+                        integration.archived,
                         integration._id,
                         integration.risksIssuesConcerns,
                         integration.mitigationStrategy))
@@ -107,6 +108,7 @@ export class IntegrationService {
         title,
         t_date,
         t_date,
+        false
         //new Date(t_date).getTime().toString()
       )
     
@@ -213,9 +215,28 @@ export class IntegrationService {
   }  
   
   
-  
-  
-  
+  archiveEvaluation(integration: Integration) {
+      console.log('integration')
+      console.log(integration)
+      if (integration) {
+          const headers = new Headers({'content-Type': 'application/json'})
+          const body = JSON.stringify(integration);
+          const token = localStorage.getItem('token') 
+              ? '?token=' + localStorage.getItem('token')
+              : '';
+          return this.http.patch('/integrations/archive/' + integration.id + token, body, {headers: headers})
+                  .map((response: Response) => {
+                      response.json();
+                      console.log('response.json()')
+                      console.log(response.json())
+                      //this.projectIsUpdated.emit(true);
+                      //this.projects = this.sortProjectList();
+                      
+                  })
+                  .catch((error: Response) => Observable.throw(error)); 
+      }
+  }
+    
   
   setActiveIntegration(integrationId) {
     for (var i=0; i < this.integrations.length; i++) {
@@ -239,18 +260,25 @@ export class IntegrationService {
   }
   
   archiveThisEvaluation(evaluation) {
-    for (var i=0; i < this.integrations.length; i++) {
-      if (this.integrations[i].id == evaluation.id ) {
-          this.integrations.splice(i, 1);
-          this.deleteIntegration(evaluation)
+      this.archiveEvaluation(evaluation)
             .subscribe(()=>{
                 return this.updatedIntegrationList.emit(this.integrations)
             })
-          
-          //return this.updatedIntegrationList.emit(this.integrations)
-      }
-    }    
   }
+    
+  //   for (var i=0; i < this.integrations.length; i++) {
+  //     if (this.integrations[i].id == evaluation.id ) {
+  //         this.integrations.splice(i, 1);
+  //         // this.deleteIntegration(evaluation)
+  //         this.archiveEvaluation(evaluation)
+  //           .subscribe(()=>{
+  //               return this.updatedIntegrationList.emit(this.integrations)
+  //           })
+          
+  //         //return this.updatedIntegrationList.emit(this.integrations)
+  //     }
+  //   }    
+  // }
  
   deleteIntegration(evaluation: Integration){
       const token = localStorage.getItem('token') 

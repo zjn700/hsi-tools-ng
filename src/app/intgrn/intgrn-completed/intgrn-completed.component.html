@@ -1,10 +1,19 @@
 <div *ngIf="!isInitialized" class="loading" >
     <img src="/assets/images/ring.gif" alt="loading...">
 </div>
+
 <div *ngIf="isInitialized"  class="disable-text-selection hsi-intgrn-form">
 <h2 *ngIf='integrations.length>0'>Select an evaluation:</h2>
 <h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:</h2>
     <div row col-md-8 col-md-offset-2>
+        {{activeEvaluationTotal}}
+        {{archiveEvaluationTotal}}
+        
+        <div *ngIf="archiveEvaluationTotal>0">
+            <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
+            <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active evaluations</span> 
+        </div>
+        <br>
         
         <div *ngFor="let integration  of integrations" 
               id={{integration.id}}
@@ -32,7 +41,7 @@
                 <button type="button" 
                         title="Archive this evaluation"
                         class="btn btn-default hsi-btn-default"
-                        (click)="onArchive(evaluation)">
+                        (click)="onArchive(integration)">
                     Archive
                 </button>
             </div>

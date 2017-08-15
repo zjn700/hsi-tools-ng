@@ -14,6 +14,9 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   @Input() projectTitle:string;
   @Input() qnnTitle:string;
   @Output() hideMe:EventEmitter<boolean> = new EventEmitter<boolean>();  
+  public activeEvaluationTotal = 0;
+  public archiveEvaluationTotal = 0
+  public showArchives = false;
   private integrations: Integration[] = [];
   private alive: boolean = true;
   private isInitialized = false;
@@ -29,6 +32,7 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
       .subscribe((integrations: Integration[])=>{
         console.log('completed')
         this.integrations = integrations;
+        this.countActiveEvaluations(this.integrations)
         this.isInitialized = true;
         
       })
@@ -36,6 +40,7 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
     this.integrationService.updatedIntegrationList
       .subscribe((integrations: Integration[])=> {
         this.integrations = integrations;
+        this.countActiveEvaluations(this.integrations)
       })
   }
 
@@ -52,8 +57,33 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   }
  
   onArchive(evaluation){
+    evaluation.archived = true;
+    console.log('evaluation')
+    console.log(evaluation)
     this.integrationService.archiveThisEvaluation(evaluation)
     
   } 
+  
+  toggleArchivedEvals() {
+    this.showArchives = !this.showArchives;
+  }
+  
+  countActiveEvaluations(evaluations){
+        this.activeEvaluationTotal = 0;
+        this.archiveEvaluationTotal = 0;
+        for (var i = 0; i < evaluations.length; i++) {
+          if (!evaluations[i].archived) {
+            this.activeEvaluationTotal += 1;
+          } else {
+            this.archiveEvaluationTotal += 1;
+          }
+        }
+        console.log('this.activeEvaluationTotal')
+        console.log(this.activeEvaluationTotal)
+        
+        if (this.archiveEvaluationTotal==0) {
+          this.showArchives=false;
+        }
+      }  
   
 }
