@@ -1,48 +1,49 @@
+
 <li class="list-group-item"
-    *ngIf="project.archived">
-    <h2 *ngIf="project.state.qnnId!=null" 
-        title="Go to the last viewed item in this project">
+    *ngIf="project?.archived">
+    <!--<h2 *ngIf="project.state.qnnId!=null" -->
+    <!--    title="Go to the last viewed item in this project">-->
         <!--<a ng-reflect-router-link='/questions' -->
         <!--   (click)='onResumeProject(t)' -->
         <!--   #t>-->
-         {{project.title}}
+    <!--     {{project.title}}-->
         <!--</a>-->
-    </h2> 
+    <!--</h2> -->
+    <!--<h2 *ngIf="project.state.qnnId==null" -->
+    <!--    title="Choose one of the questionnaires for this project">-->
+    <!--    <a ng-reflect-router-link='/tools' -->
+    <!--       (click)='onGoToProject(t)' -->
+    <!--       #t>-->
+    <!--     {{project.title}}-->
+    <!--    </a>-->
+    <!--</h2>     -->
     
-    <h2 *ngIf="project.state.qnnId==null" 
-        title="Choose one of the questionnaires for this project">
-        <a ng-reflect-router-link='/tools' 
-           (click)='onGoToProject(t)' 
-           #t>
-         {{project.title}}
-        </a>
-    </h2>     
+    <h2>{{project.title}}</h2>
+    
     <div>
         <span class='p-desc'>{{project.description}}</span>
         <div class='p-date'>Updated: {{project.state.dateModified}}</div>
         <hr>
-
         <button
-                title="Choose one of the questionnaires for this project"
+                title="Restore this project to the active project list"
                 type="button" 
                 class="btn btn-info" 
-                ng-reflect-router-link='/tools' 
-                (click)="onGoToProject(q)" 
+                (click)="onRestoreProject(q)" 
                 #q>
-            Tools
+            Restore
         </button>        
-        <button type="button"
-                title="Edit the details of this project"
-                class="btn btn-default hsi-btn-default" 
-                (click)="onEdit()">
-            Edit
-        </button>
-        <button type="button" 
-                title="Archive this project"
-                class="btn btn-default hsi-btn-default"
-                (click)="onArchive()">
-            Archive
-        </button>
+        <!--<button type="button"-->
+        <!--        title="Edit the details of this project"-->
+        <!--        class="btn btn-default hsi-btn-default" -->
+        <!--        (click)="onEdit()">-->
+        <!--    Edit-->
+        <!--</button>-->
+        <!--<button type="button" -->
+        <!--        title="Archive this project"-->
+        <!--        class="btn btn-default hsi-btn-default"-->
+        <!--        (click)="onArchive()">-->
+        <!--    Archive-->
+        <!--</button>-->
         <!--<button type="button" -->
         <!--        title="Delete this project"-->
         <!--        class="btn btn-default hsi-btn-default"-->

@@ -1,354 +1,1171 @@
 <div class="row col-md-8 col-md-offset-2">
-    <h1 class='manual-title'>User Tutorial and Manual</h1>
+
+  <h1 class='manual-title'>User Tutorial and Manual</h1>
+
 </div>
+
+
+
 
 
 <div id='help-page' class="row col-md-8 col-md-offset-2">
 
-    <h2>TABLE OF CONTENTS</h2>
-    
-    <ul>
+
+
+  <h2>TABLE OF CONTENTS</h2>
+
+
+
+  <ul>
+
     <li (click)="scrollToElement('1')" class="toc-level-1"><span class="toc-number">1.</span>GETTING STARTED</li>
+
     <li (click)="scrollToElement('1.1')" class="toc-level-2"><span class="toc-number">1.1</span>Introduction to Human Systems Integration</li>
+
     <li (click)="scrollToElement('1.2')" class="toc-level-2"><span class="toc-number">1.2</span>Launch the Application</li>
+
     <li (click)="scrollToElement('1.3')" class="toc-level-2"><span class="toc-number">1.3</span>Create an Account.</li>
+
     <!--<li (click)="scrollToElement('1.2.2')" class="toc-level-3"><span class="toc-number">1.2.2</span>Enter the Following Information as prompted by the screen and Click “Submit” at the bottom of the page.</li>-->
+
     <li (click)="scrollToElement('1.4')" class="toc-level-2"><span class="toc-number">1.4</span>Sign-in to the HSI-Risk Management Tool</li>
+
     <!--<li (click)="scrollToElement('1.3.1')" class="toc-level-3"><span class="toc-number">1.3.1</span>Username and password</li>-->
+
     <li (click)="scrollToElement('1.5')" class="toc-level-2"><span class="toc-number">1.5</span>Add a Project</li>
+
     <li (click)="scrollToElement('1.6')" class="toc-level-2"><span class="toc-number">1.6</span>Select a Tool and Questionnaire</li>
+
+
 
     <li (click)="scrollToElement('2')" class="toc-level-1"><span class="toc-number">2.</span>USING THE HSI RISK MANAGEMENT TOOL</li>
 
+
+
     <li (click)="scrollToElement('2.1')" class="toc-level-2"><span class="toc-number">2.1</span>Editing Projects</li>
+
     <li (click)="scrollToElement('2.1.1')" class="toc-level-3"><span class="toc-number">2.1.1</span>Return to the last edited questionnaire</li>
+
     <li (click)="scrollToElement('2.1.2')" class="toc-level-3"><span class="toc-number">2.1.2</span>Switch questionnaires</li>
+
     <li (click)="scrollToElement('2.1.3')" class="toc-level-3"><span class="toc-number">2.1,3</span>Edit the project title and description</li>
+
     <li (click)="scrollToElement('2.1.4')" class="toc-level-3"><span class="toc-number">2.1.4</span>Archive a project</li>
- 
+
+
+
     <li (click)="scrollToElement('2.2')" class="toc-level-2"><span class="toc-number">2.2</span>Answering Questions</li>
+
     <li (click)="scrollToElement('2.2.1')" class="toc-level-3"><span class="toc-number">2.2.1</span>Answering a question Yes</li>
+
     <li (click)="scrollToElement('2.2.2')" class="toc-level-3"><span class="toc-number">2.2.2</span>Answering a question No</li>
+
     <li (click)="scrollToElement('2.2.3')" class="toc-level-3"><span class="toc-number">2.2.3</span>Navigating the questionnaire</li>
+
     <li (click)="scrollToElement('2.2.4')" class="toc-level-3"><span class="toc-number">2.2.4</span>Changing an answer to NA</li>
 
+
+
     <li (click)="scrollToElement('2.3')" class="toc-level-2"><span class="toc-number">2.3</span>Creating And Editing Integration Evaluations</li>
+
     <li (click)="scrollToElement('2.4')" class="toc-level-2"><span class="toc-number">2.4</span>Reviewing and Printing Reports</li>
+
     <li (click)="scrollToElement('2.5')" class="toc-level-2"><span class="toc-number">2.5</span>Logging Out</li>
+
     <li (click)="scrollToElement('2.6')" class="toc-level-2"><span class="toc-number">2.6</span>Editing Your Profile</li>
-   
+
+
+
     <!--<li (click)="scrollToElement('1.4.2')" class="toc-level-3"><span class="toc-number">1.4.2</span>Creating a New Project</li> -->
+
     <!--<li (click)="scrollToElement('1.4.3')" class="toc-level-3"><span class="toc-number">1.4.3</span>Opening an Existing Project</li> -->
+
     <!--<li (click)="scrollToElement('2')" class="toc-level-1"><span class="toc-number">2</span>NAVIGATION THROUGH THE HSI RISK MANAGEMENT TOOL</li>-->
+
     <!--<li (click)="scrollToElement('2.1')" class="toc-level-2"><span class="toc-number">2.1</span>HSI Capabilities and Requirements Tool</li> -->
+
     <!--<li (click)="scrollToElement('2.2')" class="toc-level-2"><span class="toc-number">2.2</span>HSI Program Risk Analysis Tool</li> -->
+
     <!--<li (click)="scrollToElement('2.3')" class="toc-level-2"><span class="toc-number">2.3</span>Navigating between the CART and PRAT</li> -->
+
     <!--<li (click)="scrollToElement('2.4')" class="toc-level-2"><span class="toc-number">2.4</span>Navigating within the questionnaires</li> -->
+
     <!--<li (click)="scrollToElement('2.5')" class="toc-level-2"><span class="toc-number">2.5</span>Keyboard Shortcuts</li> -->
+
     <!--<li (click)="scrollToElement('3')" class="toc-level-1"><span class="toc-number">3</span>USING THE TOOL</li> -->
+
     <!--<li (click)="scrollToElement('3.1')" class="toc-level-2"><span class="toc-number">3.1</span>Navigating to specific questions</li>-->
-    </ul>
-     
-     
-    <h2>List of Figures and Tables</h2>
-    <ul>
+
+  </ul>
+
+
+
+
+
+  <h2>List of Figures and Tables</h2>
+
+  <ul>
+
     <li>Figure 1. Human Systems Integration</li>
+
     <li>Figure 2. HSI-RMT Sign-In</li>
+
     <li>Figure 3. Create an Account</li>
+
     <li>Figure 4. Project Landing</li>
+
     <li>Figure 5. Logout Screen</li>
-    <li>Figure 6. New Projects</li> 
-    <li>Figure 7. Tool Selection</li> 
+
+    <li>Figure 6. New Projects</li>
+
+    <li>Figure 7. Tool Selection</li>
+
     <li>Figure 8. Capabilities and Requirements Tool Dashboard</li>
+
     <li>Figure 9. Program Risk Analysis Tool Dashboard</li>
+
     <li>Figure 10. Questions List Drop Down</li>
-    </ul>
-    
-    <footer></footer>
 
-    <h2 id='1'>1. GETTING STARTED </h2>
-    
-    <h3>Welcome to the Human Systems Integration Risk Management Tool (HSI-RMT).  This software suite consists of two sub-tools designed to guide Human Systems Integration (HSI) Analysts/Practitioners, Program Managers (PMs), and Chief Engineers, etc. through the process of accomplishing HSI best practices throughout system development.  The first, the HSI Capabilities and Requirements Tool (HSI-CART) is designed to assist MAJCOM HSI Cells with the appropriate developmental planning and pre-Joint Capabilities Integration Development System (JCIDS) activities, such as Concept Development and Analysis of Alternatives.  The second, the Program Risk Assessment Tool is designed to assist the system program office (SPO) with integrating HSI throughout the JCIDS process and acquisition life cycle, from Material Solution Analysis to Disposal planning.  In this first section, we will introduce HSI and cover the basics of creating an account, logging in to your account, and basic navigation through the tool. 
-    </h3>
+  </ul>
 
-    <h2 id="1.1">1.1 Introduction to Human Systems Integration</h2>
-    
-    <p>AFI 63-1201, Life Cycle Systems Engineering defines Human Systems Integration as “a disciplined, unified, and interactive systems engineering approach to integrate human considerations into the system development, design, and life cycle management to improve total system performance and reduce total costs of ownership.”  Those human considerations span nine U.S. Air Force recognized HSI domains: 
-    </p>
-    
-    <ol>
-        <li>Human Factors Engineering – Design characteristics for human capabilities and limitations 
-        </li>
-    
-        <li>Manpower – Assessment of the human capital requirements (manning mix) necessary to operate, maintain, and support the system. 
-        </li>
-    
-        <li>Personnel – Assessment of the attributes (knowledge, skills, and abilities) required to operate, maintain, and support the system. 
-        </li>
-    
-        <li>Training – design and development of instruction, resources, and support required to impart system end users with the required knowledge, skills, and abilities necessary to operate, maintain, and support the system. 
-        </li>
-    
-        <li>Environment – Assessment of those operational environmental factors and how they impact system design, as well as how the design impacts the operational environment. 
-        </li>
-    
-        <li>Safety – Assessment of system design characteristics and associated procedures that serve to minimize mishap potential. 
-        </li>
-        <li>Occupational Health – Assessment of system design features that serve to minimize the risks for injury, illness, or disability, and enhance job performance. 
-        </li>
-    
-        <li>Survivability – Consideration of system design features which reduce the likelihood for death or serious injury, to include consideration for hostile environments, fratricide, and emergency egress. 
-        </li>
-    
-        <li>Habitability – Integrated considerations of the system and associated facilities’ impact social interactions, morale, quality of life, safety and comfort, etc. to sustain maximum performance. 
-        </li>
-    </ol>
-    
-    <p>Human Systems Integration is a unique discipline in that is it both a technical and managerial philosophy.  Per Department of Defense Instruction 5000.02, program managers are required to plan for and implement HSI through the product lifecycle.  The earlier HSI is introduced, the more likely it is to reap the long-term benefits of risk mitigation, reduced redesign and rework, mishap reduction, etc. and achieve the desired life cycle cost savings.  If properly included in system development, Analysts and Practitioners integrate and examine the risks and tradeoffs amongst the nine domains balance against life cycle cost considerations to provide consultation and decision making support to the Program Manager, ensuring that human considerations are adequately accounted for.  In this manner, developers are able to drive total system performance and minimize total life cycle cost. 
-    </p>
-    
-    <p>HSI is not just another name for Human Factors or just “good Systems Engineering”.  Rather, Human Factors is just one of the disciplines that Analysts integrates – HSI includes so much more.  In fact, a primary role of the Analyst/Practitioner is to integrate each of their own domains as well as those from other functional leads to advise their Program Managers and Systems Engineers on the integrated tradeoffs. 
-    </p>
-    
-    <!--<footer></footer>-->
-    <hr>
-    
-    <h2 id="1.2">1.2 Launch the Application</h2>
-    
-    <p>When you launch the tool, you will first see the sign-in page (shown below). 
-        If you have already created an account, enter your credentials and press the submit button to sign-in.  
-        If you need to create an account, go to the next step: 
-    </p>
-    
-    <img src="/assets/screenshots/ss-1-sign-in.png">
-    
-    <p class='figure-label'>Figure 2. HSI-RMT Sign-In Page </p>
-    
-    
-    <h2 id="1.3">1.3 Create an Account</h2>
-    
-    <p>The "Create an account" link on the sign-in page will take you to the sign-up form (shown below). 
-        Enter the requested information, confirm your password, then click the submit button.  
-        Note that the submit button will not work until you have entered all requested information. 
-        If you successfully created an account, you will be returned to the sign in form (Figure 2). 
-        Enter your credentials there to sign-in.
-    </p>
-    
-    <img src="/assets/screenshots/ss-sign-up-crop.png">
-    <p class='figure-label'>Figure 3. Create an Account Page</p>
-    
-    <p>Note: Once signed in you will have the option of editing your contact information (name and email). You will 
-        also be able to enter additional contact information (office title/symbol and phone numbers).
-    </p>  
-    
-    <!--<h3 id="1.2.2">1.2.2 ENTER THE FOLLOWING INFORMATION IN THE FORM AND CLICK “SUBMIT” AT THE BOTTOM OF THE PAGE. </h3>-->
-    
-    <!--<ul class='with-bullets'>-->
-    <!--    <li>First Name</li>-->
-        
-    <!--    <li>Last Name</li>-->
-        
-    <!--    <li>Email Address</li>-->
-        
-    <!--    <li>Create a password and re-enter to confirm</li>-->
-        
-    <!--</ul>-->
-    
-    <!--<p>Once you have completed the account registration, you will return to the sign in screen (see Figure 2). </p>-->
 
-    <h2 id="1.4">1.4 Sign-in to the HSI-Risk Management Tool</h2>
-    <p>If you have not yet created an account, please refer to section 1.3 Creating an Account.
-       If you have already created one, you must sign-in in order to create and access projects.  
-       Enter your email address and password in the appropriate boxes and then click the 
-       “Submit” button to log in.
-    </p>
-    
-        <img src="/assets/screenshots/ss-sign-in-with-user.png">
-   
-        <p class='figure-label'>Figure 3. HSI-RMT - Sign-In Page </p>
-        
-    <h2 id="1.5">1.5 Add a Project</h2>
-    
-    <p>Once you have successfully logged in, you will be taken to the HSI-RMT Project Landing Page.  
-        This page allows you to create, select, and modify projects. If you have not yet created a
-        project, you will see the message shown below. 
-        
-        <img src="/assets/screenshots/ss-initial-project-page.png">
-        <p class='figure-label'>Figure 4. HSI-RMT - Initial Project Landing Page </p>
-        
 
-    <p>Click the green plus button
-        <img class='inline-img-small' src="/assets/screenshots/ss-plus-button.png">
-        on the lower right side of the screen to create your first project.
-    </p>
-    
-        <img src="/assets/screenshots/ss-add-project-dialog.png">
-        <p class='figure-label'>Figure 4. Add Project Dialog </p>  
-        
-    <p>Enter the name of the project and a short description into the Add a Project dialog, 
-        then click Save.    
-    </p>    
-    
-        <img src="/assets/screenshots/ss-add-project-with-data.png">
-        <p class='figure-label'>Figure 4. Add Project Dialog </p>          
+  <footer></footer>
 
-    <h2 id="1.6">1.6 Select a Tool and Questionnaire</h2>
-        
-    <p>After saving your project, you will be taken to the Tools selection page (shown below). Here you can choose one of 
-        the two main tools, CART or PRAT, as described above in Getting Started. Your new project name now appears in the heading.  
-        Also notice that there are three new menu items: Tools, CART, and PRAT.
-    </p>    
 
-        <img src="/assets/screenshots/ss-tools-landing-full.png">
-        <p class='figure-label'>Figure 4. Tools Selection Page </p> 
-        
-    <p>Click one of the two tool buttons or menu items labeled HSI-CART or HSI-PRAT, and you will be taken a list 
-        of questionnaires required for that tool.
-    </p>
-    
-    <p>There are three questionnaires for HSI-CART: </p>
-    <ul class="with-bullets">
-        <li>Concept Development (CD)</li>
-        <li>Capabilities-Based Assessment (CBA)</li>
-        <li>Analysis of Alternatives (AoA)</li>
-    </ul>
-        <img src="/assets/screenshots/ss-cart-selector-full.png">
-        <p class='figure-label'>Figure 4. HSI-CART Selector Page </p>
-        
-    <p>There are five questionnaires for HSI-PRAT: </p>
-    <ul class="with-bullets">
-        <li>Material Solution Analysis (MSA)</li>
-        <li>Technology Maturation & Risk Reduction (TMRR)</li>
-        <li>Engineering & Manufacturing Development Integrated System Design (EMD)</li>
-        <li>Production & Deployment (PD)</li>
-        <li>Operations & Support (OS)</li>
-    </ul>        
-        <img src="/assets/screenshots/ss-prat-selector-full.png">
-        <p class='figure-label'>Figure 4. HSI-PRAT Selector Page </p>
-        
-    <p>Select any one of these eight options, and you will see the opening page for
-        that questionnaire. Here is an example the Concept Development questionnaire shown below.
-    </p>
-        
-        <img src="/assets/screenshots/ss-questions-full-no-glossary.png">
-        <p class='figure-label'>Figure 4. Concept Development Questionnaire - initial page</p>        
-        
-        
-        
 
-  
+  <br>
+
+  <h2 id='1'>1. GETTING STARTED </h2>
+
+
+
+  <h3>Welcome to the Human Systems Integration Risk Management Tool (HSI-RMT).  This software suite consists of two
+
+    sub-tools designed to guide Human Systems Integration (HSI) Analysts/Practitioners, Program Managers (PMs), and
+
+    Chief Engineers, etc. through the process of accomplishing HSI best practices throughout system development.</h3>
+
+  <br>
+
+  <h3>The first, the HSI Capabilities and Requirements Tool (HSI-CART) is designed to assist MAJCOM HSI Cells with the
+
+    appropriate developmental planning and pre-Joint Capabilities Integration Development System (JCIDS) activities,
+
+    such as Concept Development and Analysis of Alternatives.</h3>
+
+  <br>
+
+  <h3>The second, the Program Risk Assessment Tool is designed to assist the system program office (SPO) with
+
+    integrating HSI throughout the JCIDS process and acquisition life cycle, from Material Solution Analysis to Disposal
+
+    planning.</h3>
+
+  <br>
+
+  <h3>In this first section, we will introduce HSI and cover the basics of creating an account, logging in to your
+
+    account, and basic navigation through the tool.</h3>
+
+
+
+  <br>
+
+  <h2 id="1.1">1.1 Introduction to Human Systems Integration</h2>
+
+
+
+  <p>AFI 63-1201, Life Cycle Systems Engineering defines Human Systems Integration as “a disciplined, unified, and
+
+    interactive systems engineering approach to integrate human considerations into the system development, design, and
+
+    life cycle management to improve total system performance and reduce total costs of ownership.”  Those human
+
+    considerations span nine U.S. Air Force recognized HSI domains:
+
+  </p>
+
+
+
+  <ol>
+
+    <li>Human Factors Engineering – Design characteristics for human capabilities and limitations.
+
+    </li>
+
+
+
+    <li>Manpower – Assessment of the human capital requirements (manning mix) necessary to operate, maintain, and
+
+      support the system.
+
+    </li>
+
+
+
+    <li>Personnel – Assessment of the attributes (knowledge, skills, and abilities) required to operate, maintain, and
+
+      support the system.
+
+    </li>
+
+
+
+    <li>Training – design and development of instruction, resources, and support required to impart system end users
+
+      with the required knowledge, skills, and abilities necessary to operate, maintain, and support the system.
+
+    </li>
+
+
+
+    <li>Environment – Assessment of those operational environmental factors and how they impact system design, as well
+
+      as how the design impacts the operational environment.
+
+    </li>
+
+
+
+    <li>Safety – Assessment of system design characteristics and associated procedures that serve to minimize mishap
+
+      potential.
+
+    </li>
+
+    <li>Occupational Health – Assessment of system design features that serve to minimize the risks for injury, illness,
+
+      or disability, and enhance job performance.
+
+    </li>
+
+
+
+    <li>Survivability – Consideration of system design features which reduce the likelihood for death or serious injury,
+
+      to include consideration for hostile environments, fratricide, and emergency egress.
+
+    </li>
+
+
+
+    <li>Habitability – Integrated considerations of the system and associated facilities’ impact social interactions,
+
+      morale, quality of life, safety and comfort, etc. to sustain maximum performance.
+
+    </li>
+
+  </ol>
+
+
+
+  <p>Human Systems Integration is a unique discipline in that is it both a technical and managerial philosophy.  Per
+
+    Department of Defense Instruction 5000.02, program managers are required to plan for and implement HSI through the
+
+    product lifecycle.  The earlier HSI is introduced, the more likely it is to reap the long-term benefits of risk
+
+    mitigation, reduced redesign and rework, mishap reduction, etc. and achieve the desired life cycle cost savings.
+
+    If properly included in system development, Analysts and Practitioners integrate and examine the risks and tradeoffs
+
+    amongst the nine domains balance against life cycle cost considerations to provide consultation and decision making
+
+    support to the Program Manager, ensuring that human considerations are adequately accounted for.  In this manner,
+
+    developers are able to drive total system performance and minimize total life cycle cost.
+
+  </p>
+
+
+
+  <p>HSI is not just another name for Human Factors or just “good Systems Engineering”.  Rather, Human Factors is just
+
+    one of the disciplines that Analysts integrates – HSI includes so much more.  In fact, a primary role of the
+
+    Analyst/Practitioner is to integrate each of their own domains as well as those from other functional leads to
+
+    advise their Program Managers and Systems Engineers on the integrated tradeoffs.
+
+  </p>
+
+
+
+  <!--<footer></footer>-->
+
+  <hr>
+
+
+
+  <br>
+
+  <h2 id="1.2">1.2 Launch the Application</h2>
+
+
+
+  <p>When you launch the tool, you will first see the sign-in page (shown below).
+
+    If you have already created an account, enter your credentials and press the submit button to sign-in.
+
+    If you need to create an account, go to the next step:
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-1-sign-in.png">
+
+
+
+  <p class='figure-label'>Figure 2. HSI-RMT Sign-In Page </p>
+
+
+
+  <br>
+
+  <h2 id="1.3">1.3 Create an Account</h2>
+
+
+
+  <p>The "Create an account" link on the sign-in page will take you to the sign-up form (shown below).
+
+    Enter the requested information, confirm your password, then click the submit button.
+
+    Note that the submit button will not work until you have entered all requested information.
+
+    If you successfully created an account, you will be returned to the sign in form (Figure 2).
+
+    Enter your credentials there to sign-in.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-sign-up-crop.png">
+
+  <p class='figure-label'>Figure 3. Create an Account Page</p>
+
+
+
+  <p>Note: Once signed in you will have the option of editing your contact information (name and email). You will
+
+    also be able to enter additional contact information (office title/symbol and phone numbers).
+
+  </p>
+
+
+
+  <!--<h3 id="1.2.2">1.2.2 ENTER THE FOLLOWING INFORMATION IN THE FORM AND CLICK “SUBMIT” AT THE BOTTOM OF THE PAGE. </h3>-->
+
+
+
+  <!--<ul class='with-bullets'>-->
+
+  <!--    <li>First Name</li>-->
+
+
+
+  <!--    <li>Last Name</li>-->
+
+
+
+  <!--    <li>Email Address</li>-->
+
+
+
+  <!--    <li>Create a password and re-enter to confirm</li>-->
+
+
+
+  <!--</ul>-->
+
+
+
+  <!--<p>Once you have completed the account registration, you will return to the sign in screen (see Figure 2). </p>-->
+
+
+
+  <br>
+
+  <h2 id="1.4">1.4 Sign-in to the HSI-Risk Management Tool</h2>
+
+  <p>If you have not yet created an account, please refer to section 1.3 Creating an Account.
+
+    If you have already created one, you must sign-in in order to create and access projects.
+
+    Enter your email address and password in the appropriate boxes and then click the
+
+    “Submit” button to log in.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-sign-in-with-user.png">
+
+
+
+  <p class='figure-label'>Figure 3. HSI-RMT - Sign-In Page </p>
+
+
+
+  <br>
+
+  <h2 id="1.5">1.5 Add a Project</h2>
+
+
+
+  <p>Once you have successfully logged in, you will be taken to the HSI-RMT Project Landing Page.
+
+    This page allows you to create, select, and modify projects. If you have not yet created a
+
+    project, you will see the message shown below.
+
+
+
+    <img src="/assets/screenshots/ss-initial-project-page.png">
+
+  <p class='figure-label'>Figure 4. HSI-RMT - Initial Project Landing Page </p>
+
+
+
+
+
+  <p>Click the green plus button
+
+    <img class='inline-img-small' src="/assets/screenshots/ss-plus-button.png">
+
+    on the lower right side of the screen to create your first project.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-add-project-dialog.png">
+
+  <p class='figure-label'>Figure 4. Add Project Dialog </p>
+
+
+
+  <p>Enter the name of the project and a short description into the Add a Project dialog,
+
+    then click Save.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-add-project-with-data.png">
+
+  <p class='figure-label'>Figure 4. Add Project Dialog </p>
+
+
+
+  <br>
+
+  <h2 id="1.6">1.6 Select a Tool and Questionnaire</h2>
+
+
+
+  <p>After saving your project, you will be taken to the Tools selection page (shown below). Here you can choose one of
+
+    the two main tools, CART or PRAT, as described above in Getting Started. Your new project name now appears in the
+
+    heading. Also notice that there are three new menu items: Tools, CART, and PRAT.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-tools-landing-full.png">
+
+  <p class='figure-label'>Figure 4. Tools Selection Page </p>
+
+
+
+  <p>Click one of the two tool buttons or menu items labeled HSI-CART or HSI-PRAT, and you will be taken a list
+
+    of questionnaires required for that tool.
+
+  </p>
+
+
+
+  <p>There are three questionnaires for HSI-CART: </p>
+
+  <ul class="with-bullets">
+
+    <li>Concept Development (CD)</li>
+
+    <li>Capabilities-Based Assessment (CBA)</li>
+
+    <li>Analysis of Alternatives (AoA)</li>
+
+  </ul>
+
+  <img src="/assets/screenshots/ss-cart-selector-full.png">
+
+  <p class='figure-label'>Figure 4. HSI-CART Selector Page </p>
+
+
+
+  <p>There are five questionnaires for HSI-PRAT: </p>
+
+  <ul class="with-bullets">
+
+    <li>Material Solution Analysis (MSA)</li>
+
+    <li>Technology Maturation & Risk Reduction (TMRR)</li>
+
+    <li>Engineering & Manufacturing Development Integrated System Design (EMD)</li>
+
+    <li>Production & Deployment (PD)</li>
+
+    <li>Operations & Support (OS)</li>
+
+  </ul>
+
+  <img src="/assets/screenshots/ss-prat-selector-full.png">
+
+  <p class='figure-label'>Figure 4. HSI-PRAT Selector Page </p>
+
+
+
+  <p>Select any one of these eight options, and you will see the opening page for
+
+    that questionnaire. Here is an example the Concept Development questionnaire shown below.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-questions-full-no-glossary.png">
+
+  <p class='figure-label'>Figure 4. Concept Development Questionnaire - initial page</p>
+
+
+
+
+
+
+
+
+
+
+
   <!--SECTION 2-->
-  
-    <h2 id='2'>2. USING THE HSI RISK MANAGEMENT TOOL</h2>
-    
-    <h2 id="2.1">2.1 Editing Projects</h2>
 
-    <p>Click the "Project" menu item at the top of the screen to return to the Projects page.
-        Your projects will be listed here. The list is sorted by the time projects were last 
-        modified. You won't have to search for the project you are currently working on, because 
-        it will be at the top of the list. Shown below is the one project entered in this
-        tutorial. 
-    </p>
-        
-    <p>There are four actions you can take to work on a project:  return to the last edited
-        questionnaire, switch questionnaires, edit the project title and description, or archive a project.
-    </p>
-    
-    <img src="/assets/screenshots/ss-project-initial-listing.png">
-    <p class='figure-label'>Figure 4. Add Project Dialog </p>
-    
-    
-    <h3 id="2.1.1">2.1.1 Return to the last edited questionnaire</h3>
-    <p>Click the project title, and you will be returned to the last question you were answering 
-        (in the most recently accessed questionnaire).
+
+
+  <br>
+
+  <h2 id='2'>2. USING THE HSI RISK MANAGEMENT TOOL</h2>
+
+
+
+  <br>
+
+  <h2 id="2.1">2.1 Editing Projects</h2>
+
+
+
+  <p>Click the "Project" menu item at the top of the screen to return to the Projects page.
+
+    Your projects will be listed here. The list is sorted by the time projects were last
+
+    modified. You won't have to search for the project you are currently working on, because
+
+    it will be at the top of the list. Shown below is the one project entered in this
+
+    tutorial.
+
+  </p>
+
+
+
+  <p>There are four actions you can take to work on a project:  return to the last edited
+
+    questionnaire, switch questionnaires, edit the project title and description, or archive a project.
+
+  </p>
+
+
+
+  <img src="/assets/screenshots/ss-project-initial-listing.png">
+
+  <p class='figure-label'>Figure 4. Add Project Dialog </p>
+
+
+
+  <br>
+
+  <h3 id="2.1.1">2.1.1 Return to the last edited questionnaire</h3>
+
+  <p>Click the project title, and you will be returned to the last question you were answering
+
+    (in the most recently accessed questionnaire).
+
+  </p>
+
+
+
+  <br>
+
+  <h3 id="2.1.2">2.1.2 Switch questionnaires</h3>
+
+  <p>There are several links you can click to change questionnaires. You can access the Tools page
+
+    by clicking either the "Tools" button or menu item, pick a tool (CART or PRAT), then choose
+
+    a new questionnaire from the eight options shown on those two pages. You can, of course,
+
+    click either the "CART" or "PRAT" menu items to got directly to those two pages, then choose a
+
+    new questionnaire.
+
+  </p>
+
+  <p>When you switch, you will be returned to the last question you were editing in that questionnaire.
+
+  </p>
+
+
+
+  <br>
+
+  <h3 id="2.1.3">2.1.3 Edit the project title and description</h3>
+
+  <p>Click the Edit button to bring up the "Edit project details" dialog (as shown below). The title
+
+    and description will already be entered.
+
+  </p>
+
+  <img src="/assets/screenshots/ss-edit-project.png">
+
+  <p class='figure-label'>Figure 4. Edit Project Details Dialog </p>
+
+
+
+  <br>
+
+  <p>Make your changes and click save. You can also clear all the content and start over, but only
+
+    the description is optional. You must enter a title. Alternatively, you can discard all changes
+
+    by clicking the red minus button
+
+    <img class='inline-img-small' src="/assets/screenshots/ss-minus-button.png">
+
+    at in the lower right corner of the page.
+
+  </p>
+
+  <img src="/assets/screenshots/ss-edit-project-changed.png">
+
+  <p class='figure-label'>Figure 4. Edit Project Details Dialog with changes </p>
+
+
+
+  <p>Changes are saved to disk and shown immediately in the list.
+
+  </p>
+
+  <img src="/assets/screenshots/ss-project-new-title.png">
+
+  <p class='figure-label'>Figure 4. Revised project list </p>
+
+
+
+  <br>
+
+  <h3 id="2.1.4">2.1.4 Archive a project</h3>
+
+  <p>TBD</p>
+
+
+
+  <br>
+
+  <h2 id="2.2">2.2 Answering Questions</h2>
+
+  <p>Once you have selected a questionnaire, you will return to the last question you were working on in
+
+    that questionnaire. If you have not answered any questions, you will be shown the first question of
+
+    the General domain (as shown below)
+
+  </p>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Question Page</p>
+
+  <h4>NOTE: there is no "Save" button for your inputs.  Changes are automatically saved.</h4>
+
+
+
+  <br>
+
+  <h3 id="2.2.1">2.2.1 Answering a question Yes</h3>
+
+  <p>When you click the "Yes" button, the "Rationale" text box will open up across the screen. Writing a rationale is
+
+    OPTIONAL.
+
+  </p>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Selecting YES to a question</p>
+
+
+
+  <br>
+
+  <h3 id="2.2.2">2.2.2 Answering a question No</h3>
+
+  <p>When you click the "No" button, a "Risk Matrix" and a "Description of Risks" text box appears on the screen.</p>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Selecting NO to a question</p>
+
+
+
+
+
+  <br>
+
+  <h4 id="2.2.2.1">2.2.2.1 Selecting a risk level</h4>
+
+  <p>When you click on "Green" or "Low" risk box in the "Risk Matrix", two things occur: </p>
+
+  <ul class="with-bullets">
+
+    <li>A number is automatically assigned to that level of risk</li>
+
+    <li>The "Description of Risks" widens across the screen</li>
+
+  </ul>
+
+  <br>
+
+  <p>When you click on "Yellow/Red" or "Moderate/High" risk box in the "Risk Matrix", three things occur:</p>
+
+  <ul class="with-bullets">
+
+    <li>A number is automatically assigned to that level of risk</li>
+
+    <li>The "Description of Risks" widens across the screen</li>
+
+    <li>A "Risk Planning" label with a down arrow appears</li>
+
+  </ul>
+
+  <p>Within the "Description or Risks", you will be prompted to identify and prioritize risks associated with that HSI
+
+    question. The selected risk level should correspond to the most important risk. As the project progresses, you can
+
+    update the status of risks and the risk matrix, as necessary.</p>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Selected "Red/High" Risk Level to a question</p>
+
+  <br>
+
+  <p>When you click the Risk Planning, a set of risk planning questions appear.</p>
+
+
+
+
+
+  <br>
+
+  <h4 id="2.2.2.2">2.2.2.2 Risk Planning</h4>
+
+  <p>The first question that appears determines how you plan to handle the risk. If you select "Accept" or "Transfer",
+
+    then you
+
+  continue to answer the questions regarding:</p>
+
+  <ul class="with-bullets">
+
+    <li>Risk impact affecting primarily cost, schedule, and performance</li>
+
+    <li>Whether or not appropriate stakeholders were informed</li>
+
+    <li>Whether or not the mitigation strategy and plan been documented and presented at all relevant decision points</li>
+
+  </ul>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. "Accept" or "Transfer" Risk Planning</p>
+
+
+
+
+
+  <br>t
+
+  <p>If you select "Avoid" or "Control", an additional wo questions with text boxes appear. These questions address the
+
+    following: </p>
+
+  <ul class="with-bullets">
+
+    <li>Specifying the risk mitigation plan</li>
+
+    <li>Monitoring and tracking the mitigation plan</li>
+
+  </ul>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. "Avoid" or "Control" Risk Planning</p>
+
+
+
+
+
+  <br>
+
+  <h3 id="2.2.3">2.2.3 Navigating the questionnaire</h3>
+
+
+
+  <br>
+
+  <h4>Next and Previous Questions</h4>
+
+    <p>There are two ways to navigate between questions. First, you can click the "Left Arrow" button to move to the
+
+      previous question and the "Right Arrow" button to move to the next question. Second, you can use keyboard
+
+      shortcuts. Click the corresponding left/right arrow buttons on your keyboard to navigate between pages.
+
     </p>
 
-    <h3 id="2.1.2">2.1.2 Switch questionnaires</h3>
-    <p>There are several links you can click to change questionnaires. You can access the Tools page
-        by clicking either the "Tools" button or menu item, pick a tool (CART or PRAT), then choose
-        a new questionnaire from the eight options shown on those two pages. You can, of course,
-        click either the "CART" or "PRAT" menu items to got directly to those two pages, then choose a 
-        new questionnaire.
-    </p>
-    <p>When you switch, you will be returned to the last question you were editing in that questionnaire.
+
+
+  <br>
+
+  <h4>Question Menu</h4>
+
+    <p>The Question Menu displays a list of questions for each corresponding domain. The Question Menu provides quick
+
+      access for viewing and jumping to questions.</p>
+
+  <br>
+
+    <p>There are two ways to initiate the Question Menu. First, you can click the corresponding "Down Arrow" located
+
+      next to the title of the selected Domain Tab. Second, you can click the corresponding down arrow button on your
+
+      keyboard to initiate the Question Menu.
+
     </p>
 
-    <h3 id="2.1.3">2.1.3 Edit the project title and description</h3>
-    <p>Click the Edit button to bring up the "Edit project details" dialog (as shown below). The title
-        and description will already be entered.
-    </p>
-    <img src="/assets/screenshots/ss-edit-project.png">
-    <p class='figure-label'>Figure 4. Edit Project Details Dialog </p>
-    
-    <p>Make your changes and click save. You can also clear all the content and start over, but only
-        the description is optional. You must enter a title. Alternatively, you can discard all changes
-        by clicking the red minus button 
-        <img class='inline-img-small' src="/assets/screenshots/ss-minus-button.png">
-        at in the lower right corner of the page.
-    </p>
-    <img src="/assets/screenshots/ss-edit-project-changed.png">
-    <p class='figure-label'>Figure 4. Edit Project Details Dialog with changes </p>
-    
-    <p>Changes are saved to disk and shown immediately in the list.
-    </p>
-    <img src="/assets/screenshots/ss-project-new-title.png">
-    <p class='figure-label'>Figure 4. Revised project list </p>
-    
-    <h3 id="2.1.4">2.1.4 Archive a project</h3>
-    <p>TBD</p>
-    
-    
-    <h2 id="2.2">2.2 Answering Questions</h2>
-    <p>Once you have selected a questionnaire, you will return to the last question you were working on in
-        that questionnaire. If you have not answered any questions, you will be shwon the first question of
-        the General domain (as shown below)
-    </p>
-    <p>NOTE: there is no save button for your inputs.  Changes are automatically saved.</p>
-   
-    <h3 id="2.2.1">2.2.1 Answering a question Yes</h3>
-    
-    <h3 id="2.2.2">2.2.2 Answering a question No</h3>
-    
-        <h4 id="2.2.2.1">2.2.2.1 Selecting a risk level</h4>
-        
-        <h4 id="2.2.2.2">2.2.2.2 Adding risk details</h4>
-    
-    <h3 id="2.2.3">2.2.3 Navigating the questionnaire</h3>
-    
-        <p>Next and Previous Questions
-            clicking buttons/shortcuts
-        </p>
-        
-        <p>Question Menu
-            clicking/shortcuts
-        </p>
-        
-        <p>Domain Tabs
-            clicking/shortcut/with question menu open
-        </p>
-    
-    <h3 id="2.2.4">2.2.4 Changing an answer to NA</h3>
-    
-    
-    <h2 id="2.3">2.3 Creating And Editing Integration Evaluations</h2>
-       <h3>Add an evaluation (First page - no evals message - create)</h3>
-       <h3>Select tradeoff domains</h3>
-       <h3>Enter tradeoff details</h3>
 
-    <h2 id="2.4">2.4 Reviewing and Printing Reports</h2>
-        <h3>General - list three sort orders</h3>
-        <h3>Sorted by Risk</h3>
-        <h3>Sorted by Domain, then Risk</h3>
-        <h3>Sorted by Domain, All Questions</h3>
-        <h3>Printing</h3>
 
-    
-    <h2 id="2.5">2.5 Editing Your Profile</h2>
-        <h3>General Details - changin email, changes login</h3>
-        <p>Cannot change password</p>
-    
-    <h2 id="2.6">2.6 Logging Out</h2>
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Question Menu</p>
+
+  <br>
+
+    <p>There are a few ways to navigate the Question Menu: </p>
+
+      <ul class="with-bullets">
+
+        <li>Selecting a question with your mouse/trackpad</li>
+
+        <li>Clicking on the "Up/Left" and "Down/Right" arrows on your keyboard</li>
+
+      </ul>
+
+
+
+  <br>
+
+  <h4>Domain Tabs</h4>
+
+    <p>The Domain Tabs allow you to jump between domain questions. You can navigate between Domain tabs in two ways:
+
+    </p>
+
+    <ul class="with-bullets">
+
+      <li>Selecting a Domain Tab with your mouse/trackpad</li>
+
+      <li>Clicking the keyboard "Control" + "Left/Right" buttons</li>
+
+    </ul>
+
+
+
+  <br>
+
+  <p>NOTE: If the Question Menu is open, you can navigate through the Domain Tabs using the same Domain Tabs
+
+    navigational methods.
+
+  </p>
+
+
+
+  <br>
+
+  <h3 id="2.2.4">2.2.4 Changing an answer to NA</h3>
+
+    <p>Unanswered questions will be recorded as NA (Not Applicable). If you accidentally answer a question that does
+
+      not apply, you can reset the answer by clicking the keyboard "Control" + "Backspace/Delete" buttons.</p>
+
+
+
+  <br>
+
+  <h2 id="2.3">2.3 Creating And Editing Integration Evaluations</h2>
+
+
+
+  <br>
+
+  <h3>Add an Integration Trade-Off Evaluation</h3>
+
+  <p>Once you click the "Integrations" Tab in the top Navigation Bar, you will be taken to the Integration Trade-Off List
+
+    page. This page allows you to create, select, modify, and archive Integration Trade-Offs. If you have not yet
+
+    created a project, you will see the message shown below.
+
+
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Integration Trade-Offs Page</p>
+
+
+
+  <br>
+
+  <p>Click the green plus button
+
+    <img class='inline-img-small' src="/assets/screenshots/ss-plus-button.png">
+
+    on the lower right side of the screen to create your first Integration Trade-off.
+
+  </p>
+
+
+
+  <br>
+
+  <h3>Select tradeoff domains</h3>
+
+    <p>Once you have clicked the green plus button
+
+      <img class='inline-img-small' src="/assets/screenshots/ss-plus-button.png">, you will be taken to a page that will
+
+      allow you to choose specific integrations for trade-offs. You can select any combination of Domains for evaluation.
+
+      There are two shortcut buttons: "MPT" and "ESOH". The "MPT" button automatically populates the Manpower, Personnel,
+
+      and Training domains, while the "ESOH" buttons populates the Environment, Safety, and Occupational Health domains.
+
+    </p>
+
+
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Integration Trade-Offs: Create an evaluation</p>
+
+
+
+  <br>
+
+  <p>Once you have selected your domains for evaluation click the "Save" button. If you wish to clear the selected
+
+    domains, click the "Clear" button. If you wish to go back to the Integration Trade-Off List page, then click the red
+
+    minus button <img class='inline-img-small' src="/assets/screenshots/ss-minus-button.png">
+
+    at in the lower right corner of the page.</p>
+
+
+
+  <br>
+
+  <h3>Enter Integration-Tradeoffs details</h3>
+
+    <p>Once you select the domains for evaluation and click the "Save" button, you can begin evaluating the
+
+    trade-offs for the domains by identifying the risks, issues, and concerns followed by risk mitigation strategy
+
+    </p>
+
+
+
+    <br>
+
+    <img src="/assets/screenshots/">
+
+    <p class='figure-label'>Figure 4. Integration Trade-Offs: Evaluation Page based on Domains</p>
+
+
+
+    <br>
+
+    <p>Click the gray list button
+
+      <img class='inline-img-small' src="/assets/screenshots/ss-list-button.png">
+
+      on the lower right side of the screen to go back to the Integration Trade-Off list. Clicking the list button
+
+      automatically saves your progress.
+
+    </p>
+
+
+
+  <br>
+
+  <h2 id="2.4">2.4 Reviewing and Printing Reports</h2>
+
+
+
+  <br>
+
+  <h3>General - list three sort orders</h3>
+
+    <p>Once you click the Review Tab in the top Navigation Bar, it will take you to the Review page. The Review Page
+
+    displays all of your input from the questionnaire. It separates out "Questions and Answers" and the "Trade-Off
+
+    Analysis". The page can be sorted in three ways: </p>
+
+    <ul class="with-bullets">
+
+      <li>By risk only</li>
+
+      <li>By domain, then risk</li>
+
+      <li>By domain - all questions</li>
+
+    </ul>
+
+
+
+  <br>
+
+  <h3>Sorted "By risk only"</h3>
+
+    <p>The "By risk only" sort order displays all risks from highest risk level and ranking number regardless of domain.
+
+      This is also the default sort setting. If there are multiple risks with the same ranking number, then it goes in
+
+      chronological order.</p>
+
+
+
+  <br>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Review: By risk only</p>
+
+
+
+  <br>
+
+  <h3>Sorted "By Domain, then risk"</h3>
+
+    <p>The "By Domain, then risk" sort order displays risks first by domain, then from highest risk level and ranking
+
+      number. If there are multiple risks with the same ranking number, then it goes in chronological order.</p>
+
+  <br>
+
+  <h3>Sorted "By Domain - all questions"</h3>
+
+    <p>The "By Domain - all questions" sort order displays all risks in chronological order and unfiltered.</p>
+
+
+
+  <br>
+
+  <h3>Printing</h3>
+
+    <p>Click the green printer button
+
+      <img class='inline-img-small' src="/assets/screenshots/ss-print-button.png"> to print a PDF output of the your
+
+      review.</p>
+
+
+
+  <br>
+
+  <h2 id="2.5">2.5 Editing Your Profile</h2>
+
+  <h3>General Details - changin email, changes login</h3>
+
+    <p>Once you click the Profile icon on the top Navigation Bar, you can edit the following features in your profile: </p>
+
+    <ul class="with-bullets">
+
+      <li>First Name</li>
+
+      <li>Last Name</li>
+
+      <li>Email</li>
+
+      <li>Phone</li>
+
+      <li>Office</li>
+
+    </ul>
+
+  <p>Once you click hit the "Submit" button, your profile has been updated.</p>
+
+
+
+  <br>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Profile page</p>
+
+  <br>
+
+  <p>Note that you can NOT change your password.</p>
+
+
+
+
+
+  <br>
+
+  <h2 id="2.6">2.6 Logging Out</h2>
+
+    <p>Once you click the "Power" button <img class='inline-img-small' src="/assets/screenshots/ss-power-button.png">,
+
+    it will take you to a page that confirm your logout.</p>
+
+
+
+  <br>
+
+  <img src="/assets/screenshots/">
+
+  <p class='figure-label'>Figure 4. Logout page</p>
+
+
 
 </div>
-
-

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Project } from "./proj.model";
 import { ProjectService } from './proj.service';
 import { Router } from '@angular/router';
@@ -10,13 +10,16 @@ import "rxjs/add/operator/takeWhile";
     styleUrls: ['./proj-list.component.css']
 })
 export class ProjListComponent implements OnInit {
+    @Input() showForm;
     projects: Project[] = [];
     private alive:boolean = true;
     private isInitialized:boolean = false;
     public activeProjectTotal=0;
+    public archiveProjectTotal=0;
     public showArchives=false;
     public showMessage = false;
-    public message = "You have not entered a project. Please click the green plus button below to create one:"
+    public message = "You have not entered a project. Click the green plus button below to create one."
+    public archivesMessage = "You have no active projects. Click the green plus button below to create one. Or click the 'Show archives' link to restore an archived project"
     
       constructor(private projectService: ProjectService, private router: Router) {}
       
@@ -27,6 +30,8 @@ export class ProjListComponent implements OnInit {
       ngOnInit(){
         
         this.projects = this.projectService.sortProjectList();
+        console.log('this.projects')
+        console.log(this.projects)
 
         this.projectService.getProjects()
           .takeWhile(() => this.alive)
@@ -74,13 +79,20 @@ export class ProjListComponent implements OnInit {
       
       countActiveProjects(projects){
         this.activeProjectTotal = 0;
+        this.archiveProjectTotal = 0;
         for (var i = 0; i < projects.length; i++) {
           if (!projects[i].archived) {
             this.activeProjectTotal += 1;
+          } else {
+            this.archiveProjectTotal += 1;
           }
         }
         console.log('this.activeProjectTotal')
         console.log(this.activeProjectTotal)
+        
+        if (this.archiveProjectTotal==0) {
+          this.showArchives=false;
+        }
       }
       
 

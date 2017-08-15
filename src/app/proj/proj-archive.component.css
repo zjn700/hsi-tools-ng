@@ -1,0 +1,13 @@
+h2 {
+    color: #444;
+}
+
+.p-desc, .p-date{
+    font-size:1.4em; 
+    color:#444;
+}
+
+.p-date {
+    margin-top: 8px;
+    float:right;
+}

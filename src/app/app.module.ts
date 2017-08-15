@@ -73,6 +73,7 @@ import { DomainEditorComponent } from './admin-tools/domain-editor/domain-editor
 import { QuestionEditorComponent } from './admin-tools/question-editor/question-editor.component';
 import { HelpComponent } from './help/help.component';
 import { ProjArchiveComponent } from './proj/proj-archive.component';
+import { IntgrnArchiveComponent } from './intgrn/intgrn-archive/intgrn-archive.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { ProjArchiveComponent } from './proj/proj-archive.component';
     ProfileComponent,
     HelpComponent,
     ProjArchiveComponent,
+    IntgrnArchiveComponent,
   ],
   imports: [
     BrowserModule,
