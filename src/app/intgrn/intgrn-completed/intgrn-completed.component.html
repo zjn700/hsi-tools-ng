@@ -3,49 +3,61 @@
 </div>
 
 <div *ngIf="isInitialized"  class="disable-text-selection hsi-intgrn-form">
-<h2 *ngIf='integrations.length>0'>Select an evaluation:</h2>
-<h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:</h2>
-    <div row col-md-8 col-md-offset-2>
+    <!--<h2 *ngIf='integrations.length>0'>Select an evaluation:-->
+    <!--</h2>-->
+    <!--<h2 *ngIf='integrations.length==0'>Click the plus button below to create an evaluation:-->
+    <!--</h2>-->
+    
+    <div class="row col-md-10">
+        
         {{activeEvaluationTotal}}
         {{archiveEvaluationTotal}}
         
-        <div *ngIf="archiveEvaluationTotal>0">
-            <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
-            <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active evaluations</span> 
-        </div>
-        <br>
-        
-        <div *ngFor="let integration  of integrations" 
-              id={{integration.id}}
-              class="hsi-intgrn-complete"
-              #evaluation>
-            <a  title="Resume work on this in this evaluation"
-                (click)="onResumeEvaluation(evaluation)" >
-                {{integration.title}}
-            </a>
-            <div class='row hsi-btn-row'>
-                <button *ngIf="1!=0" 
-                        title="Resume work on this in this evaluation"
-                        id={{integration.id}}
-                        type="button" 
-                        class="btn btn-info" 
-                        (click)="onResumeEvaluation(evaluation)">
-                    Resume
-                </button>                        
-                <button type="button"
-                        title="Add or remove domiains in this evaluation"
-                        class="btn btn-default hsi-btn-default" 
-                        (click)="onEdit(evaluation)">
-                    Edit Title
-                </button>
-                <button type="button" 
-                        title="Archive this evaluation"
-                        class="btn btn-default hsi-btn-default"
-                        (click)="onArchive(integration)">
-                    Archive
-                </button>
+        <div class="title-row'"
+             *ngIf="archiveEvaluationTotal>0">
+            <div class='direction'>Select an Evaluation:
+                <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
+                <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active evaluations</span> 
             </div>
         </div>
+
+        <app-intgrn-archive *ngIf="showArchives">
+            
+        </app-intgrn-archive>
+        
+        <span *ngIf="!showArchives">
+            <div *ngFor="let integration  of integrations" 
+                  id={{integration.id}}
+                  class="hsi-intgrn-complete"
+                  #evaluation>
+                <a  title="Resume work on this in this evaluation"
+                    (click)="onResumeEvaluation(evaluation)" >
+                    {{integration.title}}
+                </a>
+                <div class='row hsi-btn-row'>
+                    <button *ngIf="1!=0" 
+                            title="Resume work on this in this evaluation"
+                            id={{integration.id}}
+                            type="button" 
+                            class="btn btn-info" 
+                            (click)="onResumeEvaluation(evaluation)">
+                        Resume
+                    </button>                        
+                    <button type="button"
+                            title="Add or remove domiains in this evaluation"
+                            class="btn btn-default hsi-btn-default" 
+                            (click)="onEdit(evaluation)">
+                        Edit Title
+                    </button>
+                    <button type="button" 
+                            title="Archive this evaluation"
+                            class="btn btn-default hsi-btn-default"
+                            (click)="onArchive(integration)">
+                        Archive
+                    </button>
+                </div>
+            </div>
+        </span>
         
         <!--div class="hsi-intgrn-complete">Environment vs. Safety vs. Occupational Health (ESOH)</div>
         <div class="hsi-intgrn-complete">Manpower vs. Human Factors </div>

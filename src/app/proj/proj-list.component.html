@@ -9,8 +9,8 @@
     <div *ngIf="projects.length > 0"
          class='title-row'>
         <div class='direction'>Select a Project:
-            <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
-            <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active projects</span> 
+            <span (click)="toggleArchivedProjects()" *ngIf="!showArchives" class="archives">Show archives</span> 
+            <span (click)="toggleArchivedProjects()" *ngIf="showArchives" class="archives">Show active projects</span> 
         </div>    
     </div>
     <span *ngIf="showArchives">
