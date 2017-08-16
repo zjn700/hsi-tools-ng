@@ -10,51 +10,64 @@
     
     <div class="row col-md-10">
         
-        {{activeEvaluationTotal}}
-        {{archiveEvaluationTotal}}
+        <!--{{activeEvaluationTotal}}-->
+        <!--{{archiveEvaluationTotal}}-->
         
-        <div class="title-row'"
-             *ngIf="archiveEvaluationTotal>0">
+        <div class="title-row'">
             <div class='direction'>Select an Evaluation:
-                <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
-                <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active evaluations</span> 
+                <span *ngIf="archiveEvaluationTotal>0">
+                    <span (click)="toggleArchivedEvals()" *ngIf="!showArchives" class="archives">Show archives</span> 
+                    <span (click)="toggleArchivedEvals()" *ngIf="showArchives" class="archives">Show active evaluations</span> 
+                </span>
             </div>
         </div>
 
-        <app-intgrn-archive *ngIf="showArchives">
+        <div *ngIf="!showArchives && activeEvaluationTotal == 0" class='title-row message' >
+            <h1 *ngIf="archiveEvaluationTotal > 0 ">{{archivesMessage}}</h1>
+            <h1 *ngIf="archiveEvaluationTotal == 0 ">{{message}}</h1>
+        </div>
+
+        <app-intgrn-archive *ngIf="showArchives"
+                            [integrations] ="integrations"
+                            [showArchives] = "showArchives">
             
         </app-intgrn-archive>
         
-        <span *ngIf="!showArchives">
+        <span *ngIf="!showArchives && activeEvaluationTotal > 0">
             <div *ngFor="let integration  of integrations" 
                   id={{integration.id}}
-                  class="hsi-intgrn-complete"
+                  
                   #evaluation>
-                <a  title="Resume work on this in this evaluation"
-                    (click)="onResumeEvaluation(evaluation)" >
-                    {{integration.title}}
-                </a>
-                <div class='row hsi-btn-row'>
-                    <button *ngIf="1!=0" 
-                            title="Resume work on this in this evaluation"
-                            id={{integration.id}}
-                            type="button" 
-                            class="btn btn-info" 
-                            (click)="onResumeEvaluation(evaluation)">
-                        Resume
-                    </button>                        
-                    <button type="button"
-                            title="Add or remove domiains in this evaluation"
-                            class="btn btn-default hsi-btn-default" 
-                            (click)="onEdit(evaluation)">
-                        Edit Title
-                    </button>
-                    <button type="button" 
-                            title="Archive this evaluation"
-                            class="btn btn-default hsi-btn-default"
-                            (click)="onArchive(integration)">
-                        Archive
-                    </button>
+                <div *ngIf="!integration.archived"
+                      class="hsi-intgrn-complete">
+                    <h2>
+                        <a  title="Resume work on this in this evaluation"
+                            (click)="onResumeEvaluation(evaluation)" >
+                            {{integration.title}}
+                        </a>
+                    </h2>
+                    <div class='row hsi-btn-row'>
+                        <button *ngIf="1!=0" 
+                                title="Resume work on this in this evaluation"
+                                id={{integration.id}}
+                                type="button" 
+                                class="btn btn-info" 
+                                (click)="onResumeEvaluation(evaluation)">
+                            Resume
+                        </button>                        
+                        <button type="button"
+                                title="Add or remove domiains in this evaluation"
+                                class="btn btn-default hsi-btn-default" 
+                                (click)="onEdit(evaluation)">
+                            Edit Title
+                        </button>
+                        <button type="button" 
+                                title="Archive this evaluation"
+                                class="btn btn-default hsi-btn-default"
+                                (click)="onArchive(integration)">
+                            Archive
+                        </button>
+                    </div>
                 </div>
             </div>
         </span>

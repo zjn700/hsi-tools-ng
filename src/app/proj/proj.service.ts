@@ -237,6 +237,11 @@ export class ProjectService {
                     .map((response: Response) => {
                         response.json();
                         this.projectIsUpdated.emit(true);
+                        if (project.id == localStorage.getItem('pid')) {
+                            localStorage.removeItem('qnnId')
+                            localStorage.removeItem('pid')
+                        }
+            
                         //this.projects = this.sortProjectList();
                         
                     })

@@ -1,3 +1,38 @@
-<p>
-  intgrn-archive works!
-</p>
+<span *ngIf="showArchives">
+    <div *ngFor="let integration  of integrations" 
+          id={{integration.id}}
+          #evaluation>
+        
+        <div *ngIf="integration.archived"
+               class="hsi-intgrn-complete">
+            <!--<a  title="Resume work on this in this evaluation"-->
+            <!--    (click)="onResumeEvaluation(evaluation)" >-->
+            <!--    {{integration.title}}-->
+            <!--</a>-->
+            <h2>{{integration.title}}</h2>
+
+            <div class='row hsi-btn-row'>
+                <button *ngIf="1!=0" 
+                        title="Return this evaluation to the active evaluations list"
+                        id={{integration.id}}
+                        type="button" 
+                        class="btn btn-info" 
+                        (click)="onRestore(integration)">
+                    Restore
+                </button>                        
+                <!--<button type="button"-->
+                <!--        title="Add or remove domiains in this evaluation"-->
+                <!--        class="btn btn-default hsi-btn-default" -->
+                <!--        (click)="onEdit(evaluation)">-->
+                <!--    Edit Title-->
+                <!--</button>-->
+                <!--<button type="button" -->
+                <!--        title="Archive this evaluation"-->
+                <!--        class="btn btn-default hsi-btn-default"-->
+                <!--        (click)="onArchive(integration)">-->
+                <!--    Archive-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+</span>

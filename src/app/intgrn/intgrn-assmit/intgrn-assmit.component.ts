@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import "rxjs/add/operator/takeWhile";
 
 import { IntegrationService } from '../intgrn.service';
@@ -24,7 +26,7 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
 
-  constructor(private integrationService: IntegrationService) { }
+  constructor(private integrationService: IntegrationService, private router:Router) { }
 
   ngOnInit() {
     console.log('this.activeEvaluation');
@@ -67,4 +69,17 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   onHideMe() {
     this.showCompleted=false;
   }
+  
+  onRestore(evaluation){
+    evaluation.archived = false;
+    this.integrationService.archiveThisEvaluation(evaluation)
+
+  }
+  
+  onCancel() {
+     this.hideMe.emit(true)
+
+
+  }
+
 }

@@ -229,6 +229,9 @@ export class IntgrnComponent implements OnInit, OnDestroy {
             this.showDupeErrorMessage = true;
           } else {
             this.evaluationTitle = this.buildEvaluationTitle()
+            // if (this.activeEvaluation.archived) {
+            //   this.activeEvaluation.archived = false
+            // }
             this.integrationService.updateIntegration(index, this.domainList, this.evaluationTitle);
             
             this.showHeuristics=false;

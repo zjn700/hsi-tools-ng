@@ -1,0 +1,79 @@
+.hsi-intgrn-complete {
+    width: 100%;
+    cursor: pointer;
+    min-width: 1000px;
+    font-size: 1.8em;
+    color: rgba(0, 0, 0, .75);
+    text-align: left;
+    padding: 15px 25px;
+    padding-bottom: 6px;
+    margin-bottom: 1px;
+    border-bottom: 4px solid #eee;
+    background: rgba(255, 255, 255, 1);
+}
+
+
+h1 {
+    width:70%;
+    text-align: center;
+    margin: 15%;
+}
+
+.title-row{
+    width:95%;
+}
+
+.direction{
+    width: 100%;
+    font-size:30px;
+}
+
+.archives {
+    cursor: pointer;
+    font-size: 20px;
+    padding-top: 10px;
+    color: white;
+    float: right;
+}
+
+.archives:hover {
+    color: peachpuff;
+}
+
+/*/////////from intgrn-completed///////////*/
+
+
+.hsi-btn-row {
+    margin-left:5px;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .25);
+    border-color: rgba(0,0,0,.0001);
+    font-size:2em;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .5);
+    border-color: rgba(0,0,0,.0001);
+
+}
+
+.btn {
+    font-size: .8em;
+    float: left;
+    margin-right: 8px;
+    margin-top: 8px;    
+}
+
+.btn:hover {
+    background-color: rgba(0, 0, 0, .15);
+    color:#222;
+}
+
+.btn-info:hover {
+    background:#53acc7; /*#6edeff;*/
+    color:white;
+}

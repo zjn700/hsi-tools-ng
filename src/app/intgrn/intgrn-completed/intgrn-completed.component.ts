@@ -20,6 +20,10 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   private integrations: Integration[] = [];
   private alive: boolean = true;
   private isInitialized = false;
+  
+  public message = "You have not created an valuation. Click the green plus button below to create one."
+  public archivesMessage = "You have no active evaluations. Click the green plus button below to create one. Or click the 'Show archives' link to restore an archived evaluation"
+    
 
   constructor(private integrationService: IntegrationService) { }
 

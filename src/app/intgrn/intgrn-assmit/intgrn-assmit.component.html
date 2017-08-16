@@ -1,7 +1,33 @@
 <div
   *ngIf='!showCompleted'
    class="container disable-text-selection">
-  <form [formGroup]='myForm'>
+  
+  <div class="centered-message" *ngIf="activeEvaluation?.archived">
+    <h2 class='message'>Warning: the evaluation you selected has been archived. Click the
+        button below to restore it to the active list, and edit it.
+    </h2>  
+    <div class="hsi-intgrn-complete">
+      <h2>{{activeEvaluation.title}}</h2>
+      <button *ngIf="1!=0" 
+              title="Return this evaluation to the active evaluations list"
+              id={{activeEvaluation.id}}
+              type="button" 
+              class="btn btn-info" 
+              (click)="onRestore(activeEvaluation)">
+          Restore
+      </button> 
+      <button type="button"
+              title="Cancel and return to the list of evaluations"
+              class="btn btn-default hsi-btn-default" 
+              (click)="onCancel()">
+          Cancel
+      </button>      
+    </div>
+  </div>
+ 
+ 
+  <form [formGroup]='myForm'
+        *ngIf="!activeEvaluation?.archived">
 
     <div class="row">
       <div class="col-md-10">
