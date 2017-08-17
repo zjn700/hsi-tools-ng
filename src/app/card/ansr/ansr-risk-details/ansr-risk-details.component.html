@@ -75,10 +75,10 @@
             
             <div *ngIf='showCheckboxes' class="checkbox-box risk-detail-row bool"><div class='risk-detail-title'><h3>Have the mitigation strategy and plan been documented and presented at all relevant decision points?</h3></div>
                 <div class='checkbox-row'>
-                    <div id='yeD' *ngIf="!this.a_details.riskDetails[0]?.documented" (click)='updateRadioDocumented(yeD)' class='checkbox-div yes-no' #yeD><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
-                    <div id='yeD' *ngIf="this.a_details.riskDetails[0]?.documented"  (click)='updateRadioDocumented(yeD)' class='selected checkbox-div yes-no' #yeD><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
-                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.documented || this.a_details.riskDetails[0]?.documented==null" (click)='updateRadioDocumented(noD)' class='checkbox-div yes-no' #noD><span class="glyphicon glyphicon-unchecked"></span>No</div>
-                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.documented==false"  (click)='updateRadioDocumented(noD)' class='selected checkbox-div yes-no' #noD><span  class="selected glyphicon glyphicon-check" ></span>No</div>
+                    <div id='yeD' *ngIf="!this.a_details.riskDetails[0]?.strategyDocumented" (click)='updateRadioDocumented(yeD)' class='checkbox-div yes-no' #yeD><span class="glyphicon glyphicon-unchecked"></span>Yes</div>
+                    <div id='yeD' *ngIf="this.a_details.riskDetails[0]?.strategyDocumented"  (click)='updateRadioDocumented(yeD)' class='selected checkbox-div yes-no' #yeD><span  class="selected glyphicon glyphicon-check" ></span>Yes</div>
+                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.strategyDocumented || this.a_details.riskDetails[0]?.strategyDocumented==null" (click)='updateRadioDocumented(noD)' class='checkbox-div yes-no' #noD><span class="glyphicon glyphicon-unchecked"></span>No</div>
+                    <div id='noD' *ngIf="this.a_details.riskDetails[0]?.strategyDocumented==false"  (click)='updateRadioDocumented(noD)' class='selected checkbox-div yes-no' #noD><span  class="selected glyphicon glyphicon-check" ></span>No</div>
                 </div>            
             </div>            
         </div>

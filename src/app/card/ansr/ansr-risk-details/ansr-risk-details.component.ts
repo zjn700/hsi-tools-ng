@@ -182,7 +182,7 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
     if (item.id=='yeD') {
       t_val = true
     }
-    this.a_details.riskDetails[0].documented = t_val; 
+    this.a_details.riskDetails[0].strategyDocumented = t_val; 
     this.updateAnswer();
 
     // switch(item.id) {

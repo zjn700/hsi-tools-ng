@@ -2,6 +2,7 @@
     <form [formGroup]='myForm'>
         <div class='rationalBox'></div>
         <textarea *ngIf="a_details?.value"
+                  placeholder="This is OPTIONAL"
                   [ngModel]='a_details?.rationale' 
                   (focus)='setStart($event)' 
                   (focusout)="updateAnswer($event)" 
