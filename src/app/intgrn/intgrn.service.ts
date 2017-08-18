@@ -42,6 +42,7 @@ export class IntegrationService {
        console.log(this.integrations)
         return this.http.get('/integrations/dummy')  // returns nothing, but creates the required observable
             .map((response:Response)=> {
+                console.log('none')
                 return this.integrations  // pass back the current integration array
             })
     } else {
@@ -51,6 +52,8 @@ export class IntegrationService {
         const queryString = '?projectId=' + localStorage.getItem('pid') + '&qnnId=' + localStorage.getItem('qnnId')
         return this.http.get('/integrations' + queryString)      
             .map((response: Response) => {
+                console.log('intgrn response')
+                console.log(response)
                 if (response.json().obj.length == 0) {
                     this.integrations = response.json().obj;
                     console.log('response.json()')

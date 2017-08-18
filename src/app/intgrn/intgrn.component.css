@@ -110,11 +110,11 @@ button:focus {
 }
 
 .hsi-intgrn-instruction{
-  width:1000px;
+  /*min-width: 1000px;*/
 }
 
 .checkbox-box {
-  min-width: 1000px
+  /*min-width: 1000px;*/
 }
 
 .checkbox-divx {
@@ -174,7 +174,7 @@ button:focus {
 
 .hsi-intgrn-btn-row {
   width:100%;
-  min-width: 1000px;
+  /*min-width: 1000px;*/
 }
 
 .hsi-btn-default-alt {

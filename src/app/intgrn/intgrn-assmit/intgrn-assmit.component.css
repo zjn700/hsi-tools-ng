@@ -11,7 +11,7 @@
     width: 100%;
     height:150px; /* mod from other hsi-intgrn-complete classes */
     cursor: pointer;
-    min-width: 1000px;
+    /*min-width: 1000px;*/
     font-size: 1.8em;
     color: rgba(0, 0, 0, .75);
     text-align: left;

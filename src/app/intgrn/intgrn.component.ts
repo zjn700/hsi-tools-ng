@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+
 import "rxjs/add/operator/takeWhile";
 
 import { IntegrationService } from './intgrn.service';
 import { Integration } from './intgrn.model';
 import { DomainService } from '../domn/domn.service';
 import { ProjectService } from '../proj/proj.service';
+import { TopMenuService } from '../shared/top-menu.service';
 
 @Component({
   selector: 'app-intgrn',
@@ -43,7 +46,9 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   
   constructor(private domnService: DomainService, 
               private projectService: ProjectService,
-              private integrationService: IntegrationService) { }
+              private integrationService: IntegrationService,
+              private router: Router,
+              private topMenuService: TopMenuService) { }
 
   ngOnDestroy() {
     this.alive = false;
@@ -114,6 +119,14 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     console.log('checkDomainListForDuplicates')
     let total = 0
     let t_integrations = this.integrationService.getIntegrations();
+    
+    // if (t_integrations.length==0) {
+    //           this.router.navigate(['/project']);
+    //           this.topMenuService.updateTopMenu('/project')
+              
+    //           return null
+    //     }
+    
     // this.integrationService.getIntegrationsFromDb()
     //   .subscribe((integrations:Integration[])=>{
     //     let total = 0;
@@ -159,6 +172,9 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     this.integrationService.getIntegrationsFromDb()
       .subscribe((integrations:Integration[])=>{
         let total = 0;
+        console.log("integrations")
+        console.log(integrations)
+        
         let t_integrations = integrations;
         for (var i=0; i < t_integrations.length; i++) {
           for (var j=0; j < t_integrations[i].domainList.length; j++) {

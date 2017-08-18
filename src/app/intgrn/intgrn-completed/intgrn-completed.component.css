@@ -25,7 +25,7 @@
 .hsi-intgrn-complete {
     width: 100%;
     cursor: pointer;
-    min-width: 1000px;
+    /*min-width: 1000px;*/
     font-size: 1.8em;
     color: rgba(0, 0, 0, .75);
     text-align: left;
