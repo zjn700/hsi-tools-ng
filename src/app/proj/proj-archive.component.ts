@@ -22,6 +22,7 @@ export class ProjArchiveComponent implements OnInit {
 
   onRestoreProject(){
     this.project.archived = false;
+    this.project.state.dateModified = new Date();
     this.projectService.archiveProject(this.project)
         .subscribe(
             result => console.log(result))

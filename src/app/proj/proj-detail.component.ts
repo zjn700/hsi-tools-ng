@@ -30,6 +30,7 @@ export class ProjDetailComponent {
 
     onArchive(){
         this.project.archived = true;
+        this.project.state.dateModified = new Date();
         this.projectService.archiveProject(this.project)
             .subscribe(
                 result => console.log(result))

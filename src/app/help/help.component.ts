@@ -12,7 +12,7 @@ export class HelpComponent implements OnInit {
 
   @HostListener('mouseover') onMouseOver() {
     console.log('mouseover')
-    this.showReturnToTopButton = document.body.scrollTop > 1000
+    this.showReturnToTopButton = document.body.scrollTop > 500
     // this.glossaryOn = true;
     // setTimeout(()=>this.glossaryOn = false, 2000)
   }

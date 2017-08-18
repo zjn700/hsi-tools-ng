@@ -34,11 +34,18 @@ export class OutputComponent implements OnInit {
   }
   
   printPage() {
-    this.printing=true;
+    //this.printing=true;
+    window.scrollTo(0, 0);
+    setTimeout(()=>{
+      this.printing=true
+      setTimeout(()=>{window.print();}, 200)
+    }, 300)
+
     // document.body.style.webkitTransform =         // Chrome, Opera, Safari
     // //document.body.style.msTransform =           // IE 9
     // document.body.style.transform = 'scale(.95)';
-    setTimeout(function(){ window.print(); }, 200);
+    
+    // setTimeout(function(){ this.printing=true; window.print(); }, 500);
     
   }
   
