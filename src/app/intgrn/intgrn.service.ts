@@ -42,7 +42,7 @@ export class IntegrationService {
        console.log(this.integrations)
         return this.http.get('/integrations/dummy')  // returns nothing, but creates the required observable
             .map((response:Response)=> {
-                console.log('none')
+                // console.log('none')
                 return this.integrations  // pass back the current integration array
             })
     } else {
@@ -54,8 +54,15 @@ export class IntegrationService {
             .map((response: Response) => {
                 console.log('intgrn response')
                 console.log(response)
-                if (response.json().obj.length == 0) {
-                    this.integrations = response.json().obj;
+                    console.log('response.json()')
+                    console.log(response.json())   
+                    console.log(response)
+                    // if (response.json().obj.length == 0) {
+                    //     return this.projects = response.json().obj;
+                    // } 
+                // if (response.json().obj.length == 0) {
+                if (response.status == 204) {
+                    this.integrations = [] ///response.json().obj;
                     console.log('response.json()')
                     console.log(response.json())
                     this.lastActiveProject=localStorage.getItem('pid')       
