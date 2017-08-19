@@ -7,14 +7,14 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
   public showReturnToTopButton=false;
+  public printing = false;
   
   constructor() { }
 
   @HostListener('mouseover') onMouseOver() {
     console.log('mouseover')
-    this.showReturnToTopButton = document.body.scrollTop > 500
-    // this.glossaryOn = true;
-    // setTimeout(()=>this.glossaryOn = false, 2000)
+    this.showReturnToTopButton = document.body.scrollTop > 500;
+    // this.printing =  document.body.scrollTop < 500;
   }
   
   ngOnInit() {
@@ -26,6 +26,7 @@ export class HelpComponent implements OnInit {
     console.log(document.body.scrollTop)
     let element = document.getElementById(elementId);
     if (element) {
+      this.showReturnToTopButton = true;
       element.scrollIntoView(true);
       document.body.scrollTop -= 60;
       console.log(document.body.scrollTop)
@@ -35,11 +36,26 @@ export class HelpComponent implements OnInit {
   
   returnToTop(){
     window.scrollTo(0, 0);
+    this.showReturnToTopButton = false;
+    
   }
   
   scrollTo(hash) {
     console.log('scrollTo ' + hash)
     location.hash = "#" + hash;
+  }
+  
+  printPage() {
+    window.scrollTo(0, 0);
+    setTimeout(()=>{
+      this.printing=true
+      setTimeout(()=>{
+        window.print();
+        setTimeout(()=>{
+          this.printing=false;
+        },400)
+      }, 200)
+    }, 300)
   }
 
 }

@@ -1,10 +1,19 @@
 <div class="row col-md-8 col-md-offset-2">
+
   <div *ngIf="showReturnToTopButton">
-        <button (click)="returnToTop()" 
-          title='Return to top.' 
-          class='btn glyphicon glyphicon-triangle-top  floating'>
-         </button>
+    <button (click)="returnToTop()" 
+      title='Return to top.' 
+      class='btn glyphicon glyphicon-triangle-top  floating'>
+     </button>
   </div>
+  
+  <div *ngIf="!showReturnToTopButton && !printing">
+    <button (click)="printPage()" 
+          title='Print the user manual.' 
+          class='btn glyphicon glyphicon-print  floating floating-green'>
+    </button>
+  </div>
+
   
   <h1 class='manual-title'>User Tutorial and Manual</h1>
 </div>
