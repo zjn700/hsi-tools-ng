@@ -35,8 +35,8 @@ export class StandardOutputComponent implements OnInit {
     
     // this.subscription = this.activatedRoute.params.subscribe(
     //   (param:any) => {
-    //     console.log('param')
-    //     console.log(param)
+    //     // console.log('param')
+    //     // console.log(param)
     //     //this.id = param['id']
     //   });
   }
@@ -90,7 +90,7 @@ export class StandardOutputComponent implements OnInit {
         
   //       }
   //   }
-  //   console.log(t_domains)
+  //   // console.log(t_domains)
   //   this.domainText = t_domains;
   // }
 }

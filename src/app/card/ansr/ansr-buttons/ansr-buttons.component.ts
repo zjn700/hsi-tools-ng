@@ -31,11 +31,11 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
     this.cardService.escapePressed
       .takeWhile(() => this.alive)
       .subscribe((data:boolean)=>{
-        console.log('escapePressed')
+        // console.log('escapePressed')
         
         let menuItemList = document.getElementsByClassName("selected-btn"); 
-        console.log('menuItemList')
-        console.log(menuItemList)
+        // console.log('menuItemList')
+        // console.log(menuItemList)
         if (menuItemList.length>0) {
           let noButton = <HTMLElement>menuItemList[0]
           noButton.focus();
@@ -51,13 +51,13 @@ export class AnsrButtonsComponent implements OnInit, OnDestroy {
         value=null;
       }
     }
-    console.log('emitAnswerSelected ' + value)
+    // console.log('emitAnswerSelected ' + value)
     if (this.a_value != value) {
       this.cardService.emitAnswerSelected(value)
       this.a_details.value = value; 
       this.cardService.emitUpdateThisAnswer(this.a_details);
       if (value) {   // value
-        console.log('yes-focus on text')
+        // console.log('yes-focus on text')
         this.cardService.emitFocusOnText();
       } else {
         this.cardService.emitFocusOnRisk();

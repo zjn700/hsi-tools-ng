@@ -23,14 +23,14 @@ export class QnnEditorComponent implements OnInit, OnDestroy {
     this.adminToolsService.getQnns()
       .takeWhile(() => this.alive)
       .subscribe((qnns)=>{
-        console.log('here in qnn subscription')
+        // console.log('here in qnn subscription')
         this.qnns = qnns;
         this.isInitialized = true;
       })      
   }
   
   selectThisQnn(qnn){
-    console.log(qnn)
+    // console.log(qnn)
     //this.currentQnn = qnn;
     if (this.adminToolsService.domains) {
       this.adminToolsService.domains = [];

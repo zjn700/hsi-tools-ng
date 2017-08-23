@@ -29,8 +29,8 @@ export class AuthService  {
         return this.http.post('/users', body, {headers: headers})
             .map((response : Response) =>  {
                 response.json();
-                console.log('response.json()');
-                console.log(response.json());
+                // console.log('response.json()');
+                // console.log(response.json());
                 return response.json()
             })
             //.catch((error: Response) => Observable.throw(error));
@@ -64,7 +64,7 @@ export class AuthService  {
             return this.http.patch('/users' + token, body, {headers: headers})
                 .map((response: Response) => {
                     response.json();
-                    console.log(response)
+                    // console.log(response)
                     //this.projectIsUpdated.emit(true);
                     //this.projects = this.sortProjectList();
                     return response.json()
@@ -90,17 +90,17 @@ export class AuthService  {
                 
             })
             .subscribe((response) => {
-                console.log('response');
-                console.log(response)
+                // console.log('response');
+                // console.log(response)
                 this.signedInUser=response;
-                console.log('this.signedInUser')
-                console.log(this.signedInUser)
+                // console.log('this.signedInUser')
+                // console.log(this.signedInUser)
             })
     }
     
     isTokenExpired(){
         var payloadBytes = localStorage.getItem('token').split('.')[1];
-        //console.log(JSON.parse(atob(payloadBytes)).exp)
+        //// console.log(JSON.parse(atob(payloadBytes)).exp)
         let t_date = new Date().valueOf()/1000 
         let exp_date = JSON.parse(atob(payloadBytes)).exp
         if ( exp_date - 35 < t_date) {
@@ -108,20 +108,20 @@ export class AuthService  {
             setTimeout(this.showWarning.emit(true), 5000)
             return true
         }
-        // console.log(exp_date -10 < t_date)
-        // console.log(exp_date -1  > t_date)
+        // // console.log(exp_date -10 < t_date)
+        // // console.log(exp_date -1  > t_date)
         return false
         
     }
     
     forceLogout(){
-        console.log('forceLogout')
+        // console.log('forceLogout')
         this.logout();
         this.router.navigate(['/signin']);
     }
     
     logout(){
-        console.log('logout')
+        // console.log('logout')
         localStorage.clear();
 
         

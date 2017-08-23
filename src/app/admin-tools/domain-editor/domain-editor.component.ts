@@ -40,9 +40,9 @@ export class DomainEditorComponent implements OnInit, OnDestroy {
     this.adminToolsService.getDomains()
       .takeWhile(() => this.alive)
       .subscribe((domains)=>{
-        console.log('here in domain subscription')
-        console.log('domains')
-        console.log(domains)
+        // console.log('here in domain subscription')
+        // console.log('domains')
+        // console.log(domains)
         this.domains = domains;
         if (domains.length == 0){
           this.addNewMessage = true;
@@ -52,7 +52,7 @@ export class DomainEditorComponent implements OnInit, OnDestroy {
   }
   
   setActiveDomain(domain){
-    console.log(domain)
+    // console.log(domain)
     // if (this.adminToolsService.domains) {     // add questions array latter
     //   this.adminToolsService.domains = [];
     // }
@@ -84,11 +84,11 @@ export class DomainEditorComponent implements OnInit, OnDestroy {
           title,
           index
           )
-          console.log('t_domain')
-          console.log(t_domain)
+          // console.log('t_domain')
+          // console.log(t_domain)
           this.adminToolsService.addDomain(t_domain)
             .subscribe((domain)=>{
-              console.log(domain)
+              // console.log(domain)
               this.domains = this.adminToolsService.getDomainList();
               this.addNewMessage = false;
             })

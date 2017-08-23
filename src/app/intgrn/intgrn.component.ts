@@ -24,14 +24,14 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   private evaluationTitle:string;
   private activeEvaluation:Integration;
   // state:
-  private showHeuristics:boolean = true;  // also output
-  private showForm:boolean = false;
+  public showHeuristics:boolean = true;  // also output
+  public showForm:boolean = false;
   private showErrorMessage:boolean = false;
   private showDupeErrorMessage:boolean = false
   private pauseForDupe:boolean = false
   private isInEditMode:boolean = false;
   private alive:boolean = true;
-  private isInitialized = false;
+  public isInitialized = false;
 
   // checkboxes:
   private mp:boolean=false;
@@ -68,8 +68,8 @@ export class IntgrnComponent implements OnInit, OnDestroy {
     //   );
 
     if (this.projectService.activeProject)  {
-      console.log('this.projectService.activeProject.state.url')
-      console.log(this.projectService.activeProject.state.url)
+      // console.log('this.projectService.activeProject.state.url')
+      // console.log(this.projectService.activeProject.state.url)
       this.projectService.activeProject.state.url = location.pathname;
       this.projectService.activeProject.state.dateModified = new Date();
       this.projectService.projectIsUpdated.emit(true);
@@ -116,7 +116,7 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   }
   
   checkDomainListForDuplicates() {
-    console.log('checkDomainListForDuplicates')
+    // console.log('checkDomainListForDuplicates')
     let total = 0
     let t_integrations = this.integrationService.getIntegrations();
     
@@ -166,14 +166,14 @@ export class IntgrnComponent implements OnInit, OnDestroy {
   
   
   checkDomainListForDuplicatesx() {
-    console.log('checkDomainListForDuplicates')
+    // console.log('checkDomainListForDuplicates')
     //let total = 0
     //let t_integrations = this.integrationService.getIntegrations();
     this.integrationService.getIntegrationsFromDb()
       .subscribe((integrations:Integration[])=>{
         let total = 0;
-        console.log("integrations")
-        console.log(integrations)
+        // console.log("integrations")
+        // console.log(integrations)
         
         let t_integrations = integrations;
         for (var i=0; i < t_integrations.length; i++) {

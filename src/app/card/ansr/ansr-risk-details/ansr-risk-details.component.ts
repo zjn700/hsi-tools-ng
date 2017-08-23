@@ -61,7 +61,7 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
     .subscribe((index: number) => {
         this.showCheckboxes=false;
         this.showTextAreas=false;
-        console.log(this.a_details.riskDetails)
+        // console.log(this.a_details.riskDetails)
         //this.strategy = this.a_details.riskDetails.strategy
         // this.ac = false;
         // this.tr = false;
@@ -69,16 +69,16 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
         // this.co = false;
     })
       
-    console.log('ngOnInit')
+    // console.log('ngOnInit')
     
   }
   
   showCheckBoxes(value) {
     this.showCheckboxes = value;
     if (value) {
-      console.log('this.a_details.riskDetails.strategy')
-      console.log(this.a_details)
-      console.log(this.a_details.riskDetails[0].strategy)
+      // console.log('this.a_details.riskDetails.strategy')
+      // console.log(this.a_details)
+      // console.log(this.a_details.riskDetails[0].strategy)
       if (this.a_details.riskDetails[0].strategy == 'av' || this.a_details.riskDetails[0].strategy == 'co') {
         this.showTextAreas = true;
       } 
@@ -88,8 +88,8 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
   }
   
   updateAnswer(){
-    console.log('this.a_details')
-    console.log(this.a_details)
+    // console.log('this.a_details')
+    // console.log(this.a_details)
     this.cardService.emitUpdateThisAnswer(this.a_details);
   }
   
@@ -154,8 +154,8 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
     this.yeS = false;
     this.noS = false;
     let t_val=false;
-    console.log('item')
-    console.log(item.id)
+    // console.log('item')
+    // console.log(item.id)
     if (item.id=='yeS') {
       t_val = true
     }
@@ -203,7 +203,7 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
   setStartPlan(event){  // (focus)
     this.plan_start_content = this.myForm.value.plan;
     this.cardService.emitTextInputSelected(true);
-    //console.log(event.srcElement.tagName)
+    //// console.log(event.srcElement.tagName)
 
   }
   
@@ -220,7 +220,7 @@ export class AnsrRiskDetailsComponent implements OnInit, OnDestroy {
   setStartTracking(event){  // (focus)
     this.tracking_start_content = this.myForm.value.tracking;
     this.cardService.emitTextInputSelected(true);
-    //console.log(event.srcElement.tagName)
+    //// console.log(event.srcElement.tagName)
 
   }
   

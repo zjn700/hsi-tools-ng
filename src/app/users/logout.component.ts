@@ -14,14 +14,14 @@ export class LogoutComponent implements OnInit {
     ngOnInit(){
         this.authService.logoutNow
             .subscribe((logout: boolean) => {
-                console.log(logout)
-                console.log('logoutNow')
+                // console.log(logout)
+                // console.log('logoutNow')
                 this.onLogout()
             })
     }
     
     onLogout(){
-        console.log('onLogout')
+        // console.log('onLogout')
         this.authService.logout();
         localStorage.clear();
         this.router.navigate(['/signin'])   //(['/auth', 'signin'])

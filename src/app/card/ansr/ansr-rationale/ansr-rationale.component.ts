@@ -16,23 +16,23 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
   @Input() a_value:boolean = null;
   @Input() a_details;
   
-  private myForm: FormGroup;
+  public myForm: FormGroup;
   private start_content:string;
   private alive: boolean = true;
   
   @HostListener('window:keyup', ['$event'])    // && event.ctrlKey or altKey or shiftKey) 
     keyEvent(event: KeyboardEvent) {
-        console.log('event.keyCode');
-        console.log(event.keyCode)
+        // console.log('event.keyCode');
+        // console.log(event.keyCode)
       
       if (event.keyCode === KEY_CODE.ESCAPE_KEY || (event.keyCode === KEY_CODE.BACKSPACE_KEY && event.ctrlKey)) {
-        console.log('escape')
-        //console.log(this.elementRef.nativeElement.previousSibling);
+        // console.log('escape')
+        //// console.log(this.elementRef.nativeElement.previousSibling);
         ///////// let buttonList = document.getElementsByClassName("btn-xl"); 
-        //console.log(buttonList)
-        //console.log(buttonList[0].classList);
-        console.log('event.keyCode');
-        console.log(event.keyCode)
+        //// console.log(buttonList)
+        //// console.log(buttonList[0].classList);
+        // console.log('event.keyCode');
+        // console.log(event.keyCode)
         this.cardService.emitEscapePressed(true);
         //btn btn-primary btn-xl selected-pos
         return;
@@ -49,10 +49,10 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
     this.cardService.focusOnText
       .takeWhile(() => this.alive)
       .subscribe(()=>{
-        console.log('focusontext')
+        // console.log('focusontext')
           let t_textArea = <HTMLElement>document.getElementsByClassName("rationalText")[0];
-          console.log('t_textArea')
-          console.log(t_textArea)
+          // console.log('t_textArea')
+          // console.log(t_textArea)
           if (t_textArea) {
             setTimeout(function(){ t_textArea.focus(); }, 500);
 
@@ -74,7 +74,7 @@ export class AnsrRationaleComponent implements OnInit, OnDestroy {
     this.start_content = this.myForm.value.comment;
     this.cardService.emitTextInputSelected(true);
 
-    console.log(event.srcElement.tagName)
+    // console.log(event.srcElement.tagName)
 
   }
   

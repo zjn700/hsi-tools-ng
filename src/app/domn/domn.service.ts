@@ -27,7 +27,7 @@ export class DomainService {
         const queryString = '/'+ sequence +'?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id
         this.http.get('/answers' + queryString)
             .map((response: Response) => {
-                console.log(response)
+                // console.log(response)
             })
     }
 
@@ -47,7 +47,7 @@ export class DomainService {
     getDomains(){
         this.allQuestionsLoaded = false;
         if (!this.updateRequired()) {
-            console.log('update not Required')
+            // console.log('update not Required')
             return this.http.get('/domain/dummy')  // returns nothing, but creates the required observable
                 .map((response:Response)=> {
                     this.allQuestionsLoaded = true;
@@ -55,14 +55,14 @@ export class DomainService {
                 })
 
         } else {
-            console.log('update Required');
+            // console.log('update Required');
                 this.domains.length = 0;  // empty the current array
 
         }
         return this.http.get('/domain/' + localStorage.getItem('qnnId'))
             .map((response: Response) => {
                 if (response.json().obj.length == 0) {
-                    console.log("response is empty");
+                    // console.log("response is empty");
                     return this.questions = response.json().obj;
                 } 
                 const domains = response.json().obj;
@@ -114,9 +114,9 @@ export class DomainService {
                       null,
                       null,
                       t_RiskDetails));
-                      //console.log(i)
+                      //// console.log(i)
                       //t_Answers[i].riskDetails=t_RiskDetails
-                      //console.log(t_Answers)
+                      //// console.log(t_Answers)
                 }     
                 if (t_Answers.length > 0 ) {  // add answer details stored in the db
                   for (let answer of answers) {
@@ -133,7 +133,7 @@ export class DomainService {
                      t_Answers[i].id = answer._id;
                   }
                 }         
-                //console.log(t_Answers)
+                //// console.log(t_Answers)
                 return t_Answers    
             })
     }

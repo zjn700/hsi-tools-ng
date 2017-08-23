@@ -16,8 +16,8 @@ export class FlattenedComponent implements OnInit {
 
   ngOnInit() {
     this.outputs =  this.outputService.flattenDomainsThenSortAnswersByRisk(this.domainService.domains)
-    console.log('this.outputs')
-    console.log(this.outputs)    
+    // console.log('this.outputs')
+    // console.log(this.outputs)    
     
   }
 

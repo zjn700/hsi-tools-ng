@@ -67,8 +67,8 @@ export class OutputService {
               index++;
           }
        }
-       console.log('t_outputs') 
-       console.log(t_outputs) 
+       // console.log('t_outputs') 
+       // console.log(t_outputs) 
       // this.sortByRiskValue(t_outputs)
        this.sortByRiskValueAndDomainNumber(t_outputs)
        return t_outputs
@@ -83,8 +83,8 @@ export class OutputService {
           let t_domainSequence =domain.sequence;
           let index = 0;
           for (let answer of domain.answers) {
-              console.log('domain.questions[index].sequence')
-              console.log(domain.questions[index].sequence)
+              // console.log('domain.questions[index].sequence')
+              // console.log(domain.questions[index].sequence)
               t_outputs.push(new Output(
                   t_domainSequence,
                   t_domainTitle,
@@ -112,8 +112,8 @@ export class OutputService {
           t_outputDomains.push(t_outputDomain)
           //index++;
        }
-       console.log('t_outputDomains') 
-       console.log(t_outputDomains) 
+       // console.log('t_outputDomains') 
+       // console.log(t_outputDomains) 
        return(t_outputDomains)
     }
    
@@ -129,7 +129,7 @@ export class OutputService {
     transformAnswers(domains){
         this.domains=domains
         
-        console.log(domains)
+        // console.log(domains)
        // this.flattenDomainsThenSortAnswersByRisk(domains);
        // this.sortDomainsByRisk(domains);
         let t_domains: DomainText[] = [];
@@ -180,17 +180,17 @@ export class OutputService {
             
             }
         }
-        console.log(t_domains)
+        // console.log(t_domains)
         this.domainText = t_domains;
         // for (let domain of this.domainText) {
-        //     console.log(domain.riskValue)
-        //     console.log(this.sortByRiskValue(domain.riskValue))
+        //     // console.log(domain.riskValue)
+        //     // console.log(this.sortByRiskValue(domain.riskValue))
         // }
         return this.domainText;
     }    
     
     sortByRiskValue(domain) {  // reverse alpabetical order
-        console.log('sorting...')
+        // console.log('sorting...')
         return  domain.sort(function(a, b){
                 // if ( a.riskValue > b.riskValue) { return -1;}
                 // if ( a.riskValue < b.riskValue ) { return 1;}
@@ -205,7 +205,7 @@ export class OutputService {
     }
 
      sortByRiskValueAndDomainNumber(domain) {  // reverse alpabetical order
-        console.log('sorting...')
+        // console.log('sorting...')
         return  domain.sort(function(a, b){
                 // if ( a.riskValue > b.riskValue) { return -1;};
                 // if ( a.riskValue < b.riskValue ) { return 1;};
@@ -223,7 +223,7 @@ export class OutputService {
     }   
  
     // sortByRiskValueAndDomainNumber(domain) {  // reverse alpabetical order
-    //     console.log('sorting...')
+    //     // console.log('sorting...')
     //     return  domain.sort(function(a, b){
     //             if ( Number(a.riskValue) > Number(b.riskValue)) { return -1;};
     //             if ( Number(a.riskValue) < Number(b.riskValue) ) { return 1;};

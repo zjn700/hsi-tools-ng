@@ -20,8 +20,8 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   @Input() evaluationTitle:string;
   @Input() activeEvaluation:Integration;
   @Output() hideMe:EventEmitter<boolean> = new EventEmitter<boolean>();
-  private myForm: FormGroup;
-  private showCompleted=false;
+  public myForm: FormGroup;
+  public showCompleted=false;
   private integration: Integration;
   private alive: boolean = true;
 
@@ -29,8 +29,8 @@ export class IntgrnAssmitComponent implements OnInit, OnDestroy {
   constructor(private integrationService: IntegrationService, private router:Router) { }
 
   ngOnInit() {
-    console.log('this.activeEvaluation');
-    console.log(this.activeEvaluation);
+    // console.log('this.activeEvaluation');
+    // console.log(this.activeEvaluation);
     
     this.myForm = new FormGroup({
       risks: new FormControl(null),

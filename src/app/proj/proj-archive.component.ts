@@ -16,8 +16,8 @@ export class ProjArchiveComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    console.log('this.project')
-    console.log(this.project)
+    // console.log('this.project')
+    // console.log(this.project)
   }
 
   onRestoreProject(){

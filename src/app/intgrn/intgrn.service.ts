@@ -38,33 +38,33 @@ export class IntegrationService {
   
   getIntegrationsFromDb(){
     if (!this.updateRequired()) {
-       console.log('update not Required')
-       console.log(this.integrations)
+       // console.log('update not Required')
+       // console.log(this.integrations)
         return this.http.get('/integrations/dummy')  // returns nothing, but creates the required observable
             .map((response:Response)=> {
-                // console.log('none')
+                // // console.log('none')
                 return this.integrations  // pass back the current integration array
             })
     } else {
-        console.log('update Required');
+        // console.log('update Required');
         this.integrations.length = 0;
         //const queryString = '/'+ sequence +'?projectId=' + localStorage.getItem('pid') + '&qnnId=' + localStorage.getItem('qnnId')
         const queryString = '?projectId=' + localStorage.getItem('pid') + '&qnnId=' + localStorage.getItem('qnnId')
         return this.http.get('/integrations' + queryString)      
             .map((response: Response) => {
-                console.log('intgrn response')
-                console.log(response)
-                    console.log('response.json()')
-                    console.log(response.json())   
-                    console.log(response)
+                // console.log('intgrn response')
+                // console.log(response)
+                    // console.log('response.json()')
+                    // console.log(response.json())   
+                    // console.log(response)
                     // if (response.json().obj.length == 0) {
                     //     return this.projects = response.json().obj;
                     // } 
                 // if (response.json().obj.length == 0) {
                 if (response.status == 204) {
                     this.integrations = [] ///response.json().obj;
-                    console.log('response.json()')
-                    console.log(response.json())
+                    // console.log('response.json()')
+                    // console.log(response.json())
                     this.lastActiveProject=localStorage.getItem('pid')       
                     this.lastActiveQnn=localStorage.getItem('qnnId')                      
                     return this.integrations;
@@ -104,8 +104,8 @@ export class IntegrationService {
   }
   
   addIntegration(domainList: string[], title: string){
-    console.log('in addIntegration');
-    console.log(domainList)
+    // console.log('in addIntegration');
+    // console.log(domainList)
     let t_domainList = [];
     for (let title of domainList) {
       t_domainList.push(title)
@@ -124,9 +124,9 @@ export class IntegrationService {
     
     this.addIntegrationToDb(t_integration)
       .subscribe((response)=>{
-        console.log('response')
-        console.log(response)
-        console.log(t_integration)
+        // console.log('response')
+        // console.log(response)
+        // console.log(t_integration)
         t_integration.id = response.obj._id
         
         this.integrations.push(t_integration);
@@ -193,18 +193,18 @@ export class IntegrationService {
     this.integrations[index].dateModified = new Date();
     this.setActiveIntegration(this.integrations[index].id)
     this.sortEvalList();
-    console.log('before updateIntegrationInDb')
+    // console.log('before updateIntegrationInDb')
     this.updateIntegrationInDb(this.integrations[index])
       .subscribe(()=>{
-        console.log('return updateIntegrationInDb')
+        // console.log('return updateIntegrationInDb')
         this.updatedIntegrationList.emit(this.integrations)
       })
     //this.updatedIntegrationList.emit(this.integrations)
   }
   
   updateIntegrationInDb(integration: Integration) {
-      console.log('integration')
-      console.log(integration)
+      // console.log('integration')
+      // console.log(integration)
       if (integration) {
           const headers = new Headers({'content-Type': 'application/json'})
           const body = JSON.stringify(integration);
@@ -214,8 +214,8 @@ export class IntegrationService {
           return this.http.patch('/integrations/' + integration.id + token, body, {headers: headers})
                   .map((response: Response) => {
                       response.json();
-                      console.log('response.json()')
-                      console.log(response.json())
+                      // console.log('response.json()')
+                      // console.log(response.json())
                       //this.projectIsUpdated.emit(true);
                       //this.projects = this.sortProjectList();
                       
@@ -226,8 +226,8 @@ export class IntegrationService {
   
   
   archiveEvaluation(integration: Integration) {
-      console.log('integration')
-      console.log(integration)
+      // console.log('integration')
+      // console.log(integration)
       if (integration) {
           const headers = new Headers({'content-Type': 'application/json'})
           const body = JSON.stringify(integration);
@@ -237,8 +237,8 @@ export class IntegrationService {
           return this.http.patch('/integrations/archive/' + integration.id + token, body, {headers: headers})
                   .map((response: Response) => {
                       response.json();
-                      console.log('response.json()')
-                      console.log(response.json())
+                      // console.log('response.json()')
+                      // console.log(response.json())
                       //this.projectIsUpdated.emit(true);
                       //this.projects = this.sortProjectList();
                       
@@ -251,7 +251,7 @@ export class IntegrationService {
   setActiveIntegration(integrationId) {
     for (var i=0; i < this.integrations.length; i++) {
       if (this.integrations[i].id == integrationId ) {
-          console.log(this.integrations[i])
+          // console.log(this.integrations[i])
           this.updateActiveIntegration.emit(this.integrations[i]);
           return;
       }
@@ -262,7 +262,7 @@ export class IntegrationService {
   editThisEvaluationTitle(evaluationId){
      for (var i=0; i < this.integrations.length; i++) {
       if (this.integrations[i].id == evaluationId ) {
-          console.log(this.integrations[i])
+          // console.log(this.integrations[i])
           this.sortEvalList();
           return this.editEvauationTitle.emit(this.integrations[i])
       }
@@ -296,14 +296,14 @@ export class IntegrationService {
           : '';
       return this.http.delete('/integrations/' + evaluation.id + token)
           .map((response: Response) => {
-              console.log(response.json())
+              // console.log(response.json())
           })
           .catch((error: Response) => Observable.throw(error)); 
   } 
  
   
   sortEvalList() {  // reverse chrono order -- newest first
-      console.log('sorting...')
+      // console.log('sorting...')
      return  this.integrations.sort(function(a, b){
               //if ( a.title > b.title ) {
               if ( a.dateModified > b.dateModified) {

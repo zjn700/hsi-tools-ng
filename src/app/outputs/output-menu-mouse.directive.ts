@@ -8,9 +8,9 @@ export class OutputMouseDirective {
   constructor(private el: ElementRef) { }
   
   @HostListener('mouseup') onMouseUp() {
-      console.log('HERE IN MENU')
+      // console.log('HERE IN MENU')
        let menuItems = document.getElementsByClassName("menu-item-link"); 
-       console.log(menuItems)
+       // console.log(menuItems)
        for (let i=0; i < menuItems.length; i++) {
             menuItems[i].classList.remove('active')
        }

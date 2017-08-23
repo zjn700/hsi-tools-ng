@@ -15,18 +15,18 @@ export class SortedByRiskComponent implements OnInit {
 
   ngOnInit() {
     this.domains =  this.outputService.sortDomainsByRisk(this.domainService.domains)
-    console.log('this.domains')
-    console.log(this.domains)
+    // console.log('this.domains')
+    // console.log(this.domains)
     
   }
   
   thereAreRisks(domainOutputs){
     if (!this.totalDomains < domainOutputs.length) {
       this.totalDomains += 1;
-      console.log(domainOutputs)
+      // console.log(domainOutputs)
       for (var i=0;i<domainOutputs.length;i++) {
-        // console.log('domainOutputs[i]')
-        // console.log(domainOutputs[i])
+        // // console.log('domainOutputs[i]')
+        // // console.log(domainOutputs[i])
         if (domainOutputs[i].answerValue==false && domainOutputs[i].riskValue > 20) {
           return true;
         }

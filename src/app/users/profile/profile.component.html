@@ -17,7 +17,7 @@
             <label for="email">Email  </label>
             <input [ngModel]='user?.email' type="text" id="email" class="form-control" formControlName='email'>
             <div class='errorMessage' *ngIf="!profileForm.controls['email'].valid && profileForm.controls['email'].dirty" >You must enter a valid email</div>
-            <div class='errorMessage' *ngIf="emailInUse" >{{emailInUseMessage}}</div>
+            <!--<div class='errorMessage' *ngIf="emailInUse" >{{emailInUseMessage}}</div>-->
         </div>
         <div class="form-group">
             <label for="phone">Phone  </label>

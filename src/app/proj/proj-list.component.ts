@@ -13,7 +13,7 @@ export class ProjListComponent implements OnInit {
     @Input() showForm;
     projects: Project[] = [];
     private alive:boolean = true;
-    private isInitialized:boolean = false;
+    public isInitialized:boolean = false;
     public activeProjectTotal=0;
     public archiveProjectTotal=0;
     public showArchives=false;
@@ -30,8 +30,8 @@ export class ProjListComponent implements OnInit {
       ngOnInit(){
         
         this.projects = this.projectService.sortProjectList();
-        console.log('this.projects')
-        console.log(this.projects)
+        // console.log('this.projects')
+        // console.log(this.projects)
 
         this.projectService.getProjects()
           .takeWhile(() => this.alive)
@@ -56,13 +56,13 @@ export class ProjListComponent implements OnInit {
           .subscribe(
             (isUpdated: boolean) => {
               if (isUpdated) {
-                console.log('list proj updated')
-                console.log(this.projects)
+                // console.log('list proj updated')
+                // console.log(this.projects)
                 this.projects = this.projectService.sortProjectList();
-                console.log(this.projects)
+                // console.log(this.projects)
 
                 this.countActiveProjects(this.projects)
-                console.log(this.activeProjectTotal)
+                // console.log(this.activeProjectTotal)
 
                }
           });
@@ -70,10 +70,10 @@ export class ProjListComponent implements OnInit {
       }
       
       toggleArchivedProjects(){
-        console.log('this.showArchives' )
-        console.log(this.showArchives )
+        // console.log('this.showArchives' )
+        // console.log(this.showArchives )
         this.showArchives = !this.showArchives;
-        console.log(this.showArchives )
+        // console.log(this.showArchives )
 
       }
       
@@ -87,8 +87,8 @@ export class ProjListComponent implements OnInit {
             this.archiveProjectTotal += 1;
           }
         }
-        console.log('this.activeProjectTotal')
-        console.log(this.activeProjectTotal)
+        // console.log('this.activeProjectTotal')
+        // console.log(this.activeProjectTotal)
         
         if (this.archiveProjectTotal==0) {
           this.showArchives=false;

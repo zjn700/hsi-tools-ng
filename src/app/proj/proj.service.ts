@@ -23,12 +23,12 @@ export class ProjectService {
     }
     
     setActiveProject(project: Project){
-        console.log('reset activeProject')
+        // console.log('reset activeProject')
         this.activeProject = project
     }
     
     resetActiveProject(projectId) {
-        console.log(this.projects)
+        // console.log(this.projects)
     }
     
     setStateByQnnId(qnnId): string {
@@ -68,23 +68,23 @@ export class ProjectService {
     isStateUpdateRequired(answer: Answer) {
         if (this.activeProject) {
             if (answer.projectId != this.activeProject.id) {
-                console.log('state update required')
+                // console.log('state update required')
                 return true
             }
             if (localStorage.getItem('qnnId') != this.activeProject.state.qnnId) {
-                console.log('state update required')
+                // console.log('state update required')
                 return true
             }
             if (answer.domainId != this.activeProject.state.domainId) {
-                console.log('state update required')
+                // console.log('state update required')
                 return true
             }
             if (answer.sequence != this.activeProject.state.questionNumber) {
-                    console.log('state update required')
+                    // console.log('state update required')
                     return true
             }
         }
-        console.log("no state update req'd");
+        // console.log("no state update req'd");
         return false
         
     }
@@ -101,7 +101,7 @@ export class ProjectService {
             null,
             new Date()
         ); 
-        console.log(t_state)
+        // console.log(t_state)
         project.state = t_state;
         return project
     }
@@ -138,7 +138,7 @@ export class ProjectService {
     
     getProjects(){
         if (this.dbAccessed) {
-           console.log('update not Required')
+           // console.log('update not Required')
             return this.http.get('/projects/dummy')  // returns nothing, but creates the required observable
                 .map((response:Response)=> {
                     return this.projects  // pass back the current domain array
@@ -146,7 +146,7 @@ export class ProjectService {
         } else {
             return this.http.get('/projects') 
                 .map((response: Response) => {
-                    console.log(response.status)
+                    // console.log(response.status)
                     if (response.status == 204) {
                         return [];
                     }
@@ -166,15 +166,15 @@ export class ProjectService {
                             project.state,
                             project.states,
                             project.archived))
-                            console.log('project.states')
-                            console.log(project.states)
+                            // console.log('project.states')
+                            // console.log(project.states)
                             // convert from iso date format -- for sorting
                             projects[i].state.dateModified = new Date(projects[i].state.dateModified)
                             i++
                     }
                     this.projects = transformedProjects;
-                    console.log('this.projects')
-                    console.log(this.projects)
+                    // console.log('this.projects')
+                    // console.log(this.projects)
                     this.dbAccessed = true;
                     return transformedProjects;
                 })
@@ -223,11 +223,11 @@ export class ProjectService {
     
     
     archiveProject(project: Project) {
-        console.log('archiveProject')
+        // console.log('archiveProject')
 
         if (project) {
-            console.log('project')
-            console.log(project)
+            // console.log('project')
+            // console.log(project)
             const headers = new Headers({'content-Type': 'application/json'})
             const body = JSON.stringify(project);
             const token = localStorage.getItem('token') 
@@ -250,7 +250,7 @@ export class ProjectService {
     }    
     
     sortProjectList() {  // reverse alpabetical order
-        console.log('sorting...')
+        // console.log('sorting...')
        return  this.projects.sort(function(a, b){
                 //if ( a.title > b.title ) {
                 if ( a.state.dateModified > b.state.dateModified) {

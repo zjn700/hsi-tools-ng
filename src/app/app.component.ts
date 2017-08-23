@@ -10,8 +10,8 @@ import { DomainService } from './domn/domn.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  private showWarningMessage:boolean=false
-  private warningMessage:string= ''
+  public showWarningMessage:boolean=false
+  public warningMessage:string= ''
   public isVis = true;
   
   constructor(private authService: AuthService, 
@@ -20,12 +20,12 @@ export class AppComponent implements OnInit, AfterViewInit {
               private domainService: DomainService) { }
               
   ngOnInit(){
-    // localStorage.clear();
+    localStorage.clear();
     
-     this.authService.showWarning
+    this.authService.showWarning
       .subscribe(showMessage =>{
-        // console.log('9999999999999999')
-        // console.log(showMessage)
+        // // console.log('9999999999999999')
+        // // console.log(showMessage)
         this.showWarningMessage = showMessage
         this.warningMessage = 'Your session has expired. Please sign in again.'
 
@@ -34,9 +34,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(){
     let menuItemList = document.getElementsByClassName("unblocked");  
-    console.log(menuItemList.length)
+    // console.log(menuItemList.length)
     if (menuItemList.length > 0) {
-      console.log(location.pathname);
+      // console.log(location.pathname);
       for (let i=0; i < menuItemList.length; i++) {
         menuItemList[i].classList.remove('active')
         if (menuItemList[i].getAttribute('href') == location.pathname) {
@@ -47,13 +47,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   
   // showWarning(event){
-  //   console.log('showWarning')
-  //   console.log(event)
+  //   // console.log('showWarning')
+  //   // console.log(event)
   //   this.showWarningMessage = event;
   //   this.warningMessage = 'yep'
   // }
   onClick(){
-    console.log(this.authService.isTokenExpired())
+    // console.log(this.authService.isTokenExpired())
   }
   
   onButtonClick(){
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }  
   onKeyup(){
-    console.log('app comp keyup')
+    // console.log('app comp keyup')
   }
   
   isLoggedIn() {

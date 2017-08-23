@@ -25,7 +25,7 @@ export class CardComponent implements OnInit, OnDestroy {
   
   private fullScreen:boolean = false;
   private riskValue:number = null;
-  private showMessage=false;
+  public showMessage=false;
   private message=''
   
   private alive:boolean = true;
@@ -102,12 +102,12 @@ export class CardComponent implements OnInit, OnDestroy {
   
   toggleFullScreen() {
     this.fullScreen = !this.fullScreen;
-    console.log(this.riskValue)
+    // console.log(this.riskValue)
   }
 
   // onEscape(event){
-  //   console.log('event')
-  //   console.log(event)
+  //   // console.log('event')
+  //   // console.log(event)
   // }
   
   
@@ -125,8 +125,8 @@ export class CardComponent implements OnInit, OnDestroy {
   onMessageFromChild(message){
     if (this.go) {
       this.childMessage = message;
-      console.log("this.childMessage")
-      console.log(this.childMessage)
+      // console.log("this.childMessage")
+      // console.log(this.childMessage)
       this.middleChildMessage.emit(message)
       this.go = !this.go
 
@@ -135,7 +135,7 @@ export class CardComponent implements OnInit, OnDestroy {
       this.middleChildMessage.emit('')
       this.go = !this.go
     }
-    console.log('go ' + this.go)
+    // console.log('go ' + this.go)
   }
   
 }

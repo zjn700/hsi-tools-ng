@@ -19,7 +19,7 @@ export class TopMenuService {
     updateTopMenu(button) {
         var route;
         if (typeof button == 'string') {
-            console.log('is string');
+            // console.log('is string');
             route = button
         } else {
             route = button.getAttribute('ng-reflect-router-link')

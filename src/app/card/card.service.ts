@@ -79,13 +79,13 @@ export class CardService {
   }
   
   emitFocusOnRisk(){
-      console.log('focusOnRisk')
+      // console.log('focusOnRisk')
       this.focusOnRisk.emit()
   }
   
   addAnswerToDb(answer: Answer){
-      console.log('answer')
-      console.log(answer)
+      // console.log('answer')
+      // console.log(answer)
     answer.dateCreated  = answer.dateModified
     const headers = new Headers({'content-Type': 'application/json'})
     const body = JSON.stringify(answer)
@@ -104,11 +104,11 @@ export class CardService {
   updateAnswerInDb(answer: Answer) {
         const headers = new Headers({'content-Type': 'application/json'})
         const t_RiskDetails = JSON.stringify(answer.riskDetails);
-        console.log(answer.riskDetails[0])
-        console.log(t_RiskDetails)
+        // console.log(answer.riskDetails[0])
+        // console.log(t_RiskDetails)
         //answer.riskDetails = t_RiskDetails
         const body = JSON.stringify(answer);
-        console.log(body)
+        // console.log(body)
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token')
             : '';
@@ -216,7 +216,7 @@ export class CardService {
 
   // getAnswers(domain: Domain){
   //   // use pid
-  //   //console.log('in getAnswers')
+  //   //// console.log('in getAnswers')
   //   // const headers = new Headers({'content-Type': 'application/json'})
   //   //   let query = {
   //   //     projectId: localStorage.getItem('pid'),
@@ -224,14 +224,14 @@ export class CardService {
   //   //   } 
   //     // const body = JSON.stringify(query)
   //     const queryString = '?projectId=' + localStorage.getItem('pid') + '&domainId=' + domain.id;
-  //     //console.log(queryString)
+  //     //// console.log(queryString)
   //     // const token = localStorage.getItem('token') 
   //     //     ? '?token=' + localStorage.getItem('token')
   //     //     : '';
   //     return this.http.get('/answers' + queryString) //, body, {headers: headers})
   //             .map((response: Response) => {
-  //               //console.log('response')
-  //               //console.log(response)
+  //               //// console.log('response')
+  //               //// console.log(response)
        
   //               let answers = response.json().obj;
   //               let t_Answers: Answer[] = [];
@@ -259,7 +259,7 @@ export class CardService {
   
   //               answers = t_Answers;
   //               t_Answers = []
-  //               //console.log(answers);
+  //               //// console.log(answers);
   //               return answers
   //                 //this.domains = this.sortDomainList();
 

@@ -22,7 +22,7 @@ export class ProjDetailComponent {
                 private router: Router) { }
     
     onEdit() {
-        console.log('in onEdit')
+        // console.log('in onEdit')
         //this.editClicked.emit('Batman lives');
         this.projectService.editProject(this.project);
         window.scrollTo(0,0);
@@ -55,8 +55,8 @@ export class ProjDetailComponent {
     }
     
     onResumeProject(){
-      console.log('this.project.state.url')    
-      console.log(this.project.state.url)    
+      // console.log('this.project.state.url')    
+      // console.log(this.project.state.url)    
       localStorage.setItem('resume', 'true')
       localStorage.setItem('pid', this.project.id);
       localStorage.setItem('ptitle', this.project.title.valueOf());

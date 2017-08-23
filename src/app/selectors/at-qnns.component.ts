@@ -18,7 +18,7 @@ export class AtQnnsComponent implements OnInit, OnDestroy {
   projectTitle: string;
   public qnns: Questionnaire[] = [];
   private alive:boolean = true;
-  private isInitialized = false;
+  public isInitialized = false;
 
   constructor(private selectorService: SelectorService, 
               private topMenuService: TopMenuService, 
@@ -77,8 +77,8 @@ export class AtQnnsComponent implements OnInit, OnDestroy {
   }  
   
   onClick(button){
-    console.log('crt button')
-    console.log(button)
+    // console.log('crt button')
+    // console.log(button)
     //this.topMenuService.updateTopMenu(button)
   }
 

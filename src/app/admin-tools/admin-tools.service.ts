@@ -28,10 +28,10 @@ export class AdminToolsService {
         if (this.domains.length == 0) {
             return this.http.get('/admindomains/' + this.currentQnn._id) 
                 .map((response: Response) => {
-                    console.log(response);
-                    //console.log(response.json().obj);
+                    // console.log(response);
+                    //// console.log(response.json().obj);
                     this.domains = response.json().obj
-                    console.log(this.domains);
+                    // console.log(this.domains);
                     this.domainIsInitialized = true;
                     
                     return this.domains
@@ -39,7 +39,7 @@ export class AdminToolsService {
             })
             .catch((error: Response) => {Observable.throw(error); return []});
         }
-        console.log('no fetch')
+        // console.log('no fetch')
         return this.http.get('/domain/dummy')  // returns nothing, but creates the required observable
                 .map((response:Response)=> {
                     //this.allQuestionsLoaded = true;
@@ -51,11 +51,11 @@ export class AdminToolsService {
         if (this.qnns == null) {
             return this.http.get('/adminqnns') 
                 .map((response: Response) => {
-                    console.log(response);
-                    //console.log(response.json().obj);
+                    // console.log(response);
+                    //// console.log(response.json().obj);
                     this.qnns = response.json().obj;
                     this.sortQnns(this.qnns)
-                    console.log(this.qnns)
+                    // console.log(this.qnns)
                     this.qnnListIsReady.emit(true);
                     this.qnnListIsLoaded = true;
                     this.qnnIsInitialized = true;
@@ -105,7 +105,7 @@ export class AdminToolsService {
             return this.http.patch('/admindomains' + token, body, {headers: headers})
                 .map((response: Response) => {
                     response.json();
-                    console.log(response)
+                    // console.log(response)
                     //this.projectIsUpdated.emit(true);
                     //this.projects = this.sortProjectList();
                     return response.json()
@@ -132,13 +132,13 @@ export class AdminToolsService {
     
     setActiveDomain(domain){
         if (!domain.questions)  {
-            console.log('no questions')
+            // console.log('no questions')
             //alert('no questions')
-            console.log(domain.questions)
+            // console.log(domain.questions)
             let t_questions: Question[] = [];
             domain.questions = t_questions;
-            console.log('domain.questions')
-            console.log(domain.questions)
+            // console.log('domain.questions')
+            // console.log(domain.questions)
         }
         this.currentDomain = domain;
     }
@@ -156,8 +156,8 @@ export class AdminToolsService {
     }
     
     getDomainQuestions(){
-        console.log('here in getDomainQuestions')
-        console.log(this.currentDomain.questions)
+        // console.log('here in getDomainQuestions')
+        // console.log(this.currentDomain.questions)
         return this.currentDomain.questions
         // this.sendDomainQuestions.emit(this.currentDomain.questions)
     }
@@ -167,7 +167,7 @@ export class AdminToolsService {
     }
     
     sortQnns(qnnList) {  // reverse alpabetical order
-        console.log('sorting...')
+        // console.log('sorting...')
         return  qnnList.sort(function(a, b){
                 if ( a.category < b.category) { return -1;}
                 if ( a.category > b.category ) { return 1;}
@@ -178,7 +178,7 @@ export class AdminToolsService {
     }
     
     sortBySequenceNumber(thisList) {  // reverse alpabetical order  NEEDS TO CHANGE FOR DOUBLE DIGIT NUMBERS!!!
-        console.log('sorting...')
+        // console.log('sorting...')
         return  thisList.sort(function(a, b){
                 if ( a.sequence < b.sequence) { return -1;};
                 if ( a.sequence > b.sequence ) { return 1;};

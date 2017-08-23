@@ -17,12 +17,12 @@ export class ToolsComponent implements OnInit {
   }
   
   onClick(button){
-    console.log(button)
+    // console.log(button)
     this.topMenuService.updateTopMenu(button)
   }
 }
     
-    // console.log(event.getAttribute('ng-reflect-router-link'))
+    // // console.log(event.getAttribute('ng-reflect-router-link'))
     //       let menuItems = document.getElementsByClassName("topMenuItem"); 
     //   for (let i=0; i < menuItems.length; i++) {
     //         menuItems[i].classList.remove('active')
@@ -31,8 +31,8 @@ export class ToolsComponent implements OnInit {
     //           }
     //   }
     //   // for (let i=0; i < menuItems.length; i++) {
-      //       console.log(menuItems[i].getAttribute('href'))
-      //       console.log(event.getAttribute('href'))
+      //       // console.log(menuItems[i].getAttribute('href'))
+      //       // console.log(event.getAttribute('href'))
       //       // if (menuItems[i].getAttribute('href') == event.getAttribute('ng-reflect-router-link')) {
       //       //   menuItems[i].classList.add('active')
       //       // }

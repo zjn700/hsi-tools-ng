@@ -12,7 +12,7 @@ export class HelpComponent implements OnInit {
   constructor() { }
 
   @HostListener('mouseover') onMouseOver() {
-    console.log('mouseover')
+    // console.log('mouseover')
     this.showReturnToTopButton = document.body.scrollTop > 500;
     // this.printing =  document.body.scrollTop < 500;
   }
@@ -22,14 +22,14 @@ export class HelpComponent implements OnInit {
   
   
   scrollToElement(elementId) {
-    console.log('document.body.scrollTop')
-    console.log(document.body.scrollTop)
+    // console.log('document.body.scrollTop')
+    // console.log(document.body.scrollTop)
     let element = document.getElementById(elementId);
     if (element) {
       this.showReturnToTopButton = true;
       element.scrollIntoView(true);
       document.body.scrollTop -= 60;
-      console.log(document.body.scrollTop)
+      // console.log(document.body.scrollTop)
 
     }
   }  
@@ -41,7 +41,7 @@ export class HelpComponent implements OnInit {
   }
   
   scrollTo(hash) {
-    console.log('scrollTo ' + hash)
+    // console.log('scrollTo ' + hash)
     location.hash = "#" + hash;
   }
   

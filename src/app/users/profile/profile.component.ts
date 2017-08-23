@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public profileForm: FormGroup
   public user: User;
 
-  private showMessage=false;
+  public showMessage=false;
   private message=''
   
   constructor(private authService: AuthService) { }
@@ -29,8 +29,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     this.user = this.authService.getActiveUser();
-    console.log('this.user')
-    console.log(this.user)
+    // console.log('this.user')
+    // console.log(this.user)
     
     this.profileForm = new FormGroup({
         firstName: new FormControl(null, Validators.required),
@@ -59,8 +59,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         localStorage.getItem('userId')
         )
         
-        console.log('new user object')
-        console.log(user)
+        // console.log('new user object')
+        // console.log(user)
     // // if (!this.checkPasswords()) {
     // //     this.passwordMismatch = true;
     // // } else {
@@ -71,19 +71,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe(
             data => {
                 if (!data.error) {
-                  console.log('data')
-                  console.log(data)
+                  // console.log('data')
+                  // console.log(data)
                   this.showThisMessage("Your profile has been updated")
-                  console.log(user)
-                  console.log(this.user)
+                  // console.log(user)
+                  // console.log(this.user)
                   this.authService.resetUser(user)
 
                     //this.profileForm.reset();
                     //this.router.navigate(['/projects'])
                 } else {
-                  console.log('data')
-                  console.log(data)
-                  console.log(user)
+                  // console.log('data')
+                  // console.log(data)
+                  // console.log(user)
                   this.showThisMessage("There was an error updating your profile. Please try again later")
 
                     // this.emailInUse=true;

@@ -32,8 +32,8 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     this.questions = this.adminToolsService.getDomainQuestions();
-    console.log('this.questions')
-    console.log(this.questions)
+    // console.log('this.questions')
+    // console.log(this.questions)
     this.isInitialized = true;
     this.alive = true;
     
@@ -106,8 +106,8 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
       
       this.questions = this.adminToolsService.sortBySequenceNumber(this.adminToolsService.getActiveDomain().questions)
 
-      console.log('this.questions');
-      console.log(this.questions);
+      // console.log('this.questions');
+      // console.log(this.questions);
 
       this.showForm = false
       this.addingQuestion = false;
@@ -119,10 +119,10 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
   }
   
   deleteQuestion(question, index, element) {
-    console.log('in deleteQuestion');
-    console.log(question)
-    console.log(index)
-    console.log(element)
+    // console.log('in deleteQuestion');
+    // console.log(question)
+    // console.log(index)
+    // console.log(element)
     this.questions.splice(index, 1);
     this.updateCurrentDomain();
 
@@ -142,7 +142,7 @@ export class QuestionEditorComponent implements OnInit, OnDestroy {
      this.adminToolsService.updateCurrentDomain()
       .takeWhile(()=> this.alive)
       .subscribe((response)=>{
-        console.log(response)
+        // console.log(response)
         this.isInitialized = true;
       })   
   }

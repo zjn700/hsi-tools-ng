@@ -20,13 +20,13 @@ export class QstnComponent implements OnInit, OnDestroy {
   constructor(private cardService: CardService) { }
   
   @HostListener('mouseover') onMouseOver() {
-    console.log('mouseover')
+    // console.log('mouseover')
     this.glossaryOn = true;
     //setTimeout(()=>this.glossaryOn = false, 2000)
   }
 
   // @HostListener('mouseout') onMouseOut() {
-  //   console.log('mouseout')
+  //   // console.log('mouseout')
   //   // this.glossaryOn = false;
   //   //setTimeout(()=>this.glossaryOn = false, 10000)
   // }
@@ -64,8 +64,8 @@ export class QstnComponent implements OnInit, OnDestroy {
   
   copyOne(){
     var copy_text = document.getElementsByTagName("p")[0];
-    console.log('copy_text')
-    console.log(copy_text)
+    // console.log('copy_text')
+    // console.log(copy_text)
     var range = document.createRange();
     range.selectNode(copy_text);
     window.getSelection().addRange(range);
@@ -73,9 +73,9 @@ export class QstnComponent implements OnInit, OnDestroy {
     try {
       var successful = document.execCommand('copy');
       var msg = successful ? 'successful' : 'unsuccessful';
-      console.log('Copying text command was ' + msg);
+      // console.log('Copying text command was ' + msg);
     } catch (err) {
-      console.log('Oops, unable to copy');
+      // console.log('Oops, unable to copy');
     }
   }
   

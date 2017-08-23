@@ -20,21 +20,21 @@ import {Observable} from 'rxjs/Observable'
 })
 export class ProjectComponent implements OnInit, OnDestroy {
     project: Project;
-    // private myForm: FormGroup
+    // public myForm: FormGroup
     private alive: boolean = true;
-    private inEditMode:boolean = false;
-    private showForm:boolean = false;
-    private isError:boolean =false;
+    public inEditMode:boolean = false;
+    public showForm:boolean = false;
+    public isError:boolean =false;
     private errorMessage:string;
 
   @HostListener('click', ['$event']) 
   onClick(event:Event) {
-    console.log(this.authService.isTokenExpired())
+    // console.log(this.authService.isTokenExpired())
   }
   
   @HostListener('window:keyup', ['$event'])     
   keyEvent(event: KeyboardEvent) {
-    console.log(this.authService.isTokenExpired())    
+    // console.log(this.authService.isTokenExpired())    
   }    
     
     constructor(private projectService: ProjectService, 
@@ -45,7 +45,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
                 
                 
     ngOnInit(){
-        console.log('proj init')  
+        // console.log('proj init')  
         // this.myForm = new FormGroup({
         //     title: new FormControl(null, Validators.required),
         //     description: new FormControl(null)
@@ -57,7 +57,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         // .subscribe(
         //     (number) => {
             
-        //     console.log(number);
+        //     // console.log(number);
         // });
       
       
@@ -95,16 +95,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
                 this.project.title = form.value.title;
                 this.project.description = form.value.desc;
                 var t_date = new Date()
-                console.log('t_date')
-                console.log(t_date)
-                console.log(t_date.toISOString())
+                // console.log('t_date')
+                // console.log(t_date)
+                // console.log(t_date.toISOString())
                 this.project.state.dateModified = new Date(t_date.toISOString());
     
                 this.projectService.updateProject(this.project)
                     .takeWhile(() => this.alive)
                     .subscribe(result => {
-                        //console.log('result-after update');
-                        //console.log(result);
+                        //// console.log('result-after update');
+                        //// console.log(result);
                         //this.projectService.sortProjectList();
                     } ) 
                 this.project = null;
@@ -125,7 +125,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
                     .takeWhile(() => this.alive)
                     .subscribe(
                         project => {
-                            console.log(project); 
+                            // console.log(project); 
                             localStorage.setItem('pid', project.id);
                             localStorage.setItem('ptitle', project.title.valueOf());
                             this.showForm = false;
@@ -157,9 +157,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
     onAddProject(event){
         
         if (event.ctrlKey) {
-            console.log('ctrlKey')
+            // console.log('ctrlKey')
         }
-        console.log(event)
+        // console.log(event)
         this.project = null;
         this.showForm=!this.showForm
         this.inEditMode = false;
@@ -172,7 +172,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     }
     
     onDblclick(){
-        console.log(event)
-        console.log('onDblclick')
+        // console.log(event)
+        // console.log('onDblclick')
     }
 }

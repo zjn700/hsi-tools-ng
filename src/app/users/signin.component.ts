@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit, OnDestroy {
     }
     
     onSubmit(button) {
-        console.log(this.myForm)
+        // console.log(this.myForm)
         const user = new User(
                 this.myForm.value.email,
                 this.myForm.value.password
@@ -46,8 +46,8 @@ export class SigninComponent implements OnInit, OnDestroy {
             .takeWhile(() => this.alive)
             .subscribe(
                 data => {
-                    console.log('data')
-                    console.log(data)
+                    // console.log('data')
+                    // console.log(data)
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
                     this.authService.setUser(data.userId)
@@ -55,7 +55,7 @@ export class SigninComponent implements OnInit, OnDestroy {
                     this.topMenuService.activateThisItem('/project');
                 },
                 error => {
-                    console.log('error'); 
+                    // console.log('error'); 
                     console.log(error);
                     this.showThisMessage("There was an error with your credentials. Please re-enter them. If you don't have an account, please use the link below to create one")
                 })

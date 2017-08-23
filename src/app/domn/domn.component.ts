@@ -55,14 +55,14 @@ export class DomnComponent implements OnInit, OnDestroy {
 
   onMessageFromChild2(message){
     this.childMessage = message;
-    console.log(this.childMessage)
+    // console.log(this.childMessage)
   }
   
   @HostListener('click', ['$event']) onClick(event:Event) {
-    console.log(this.authService.isTokenExpired())
+    // console.log(this.authService.isTokenExpired())
 
     if (this.isInitialized) {
-      console.log('initialized')
+      // console.log('initialized')
       this.inTextInput = this.cardService.isInTextInput(event);
     }
   }
@@ -70,11 +70,11 @@ export class DomnComponent implements OnInit, OnDestroy {
   @HostListener('window:keyup', ['$event'])    //  event.ctrlKey or altKey or shiftKey) 
 
   keyEvent(event: KeyboardEvent) {
-    console.log(this.authService.isTokenExpired())
+    // console.log(this.authService.isTokenExpired())
 
     if (this.inTextInput && this.isInitialized) {
       if (event.keyCode === KEY_CODE.T_KEY) {
-        console.log('t')
+        // console.log('t')
       }
     }
     
@@ -161,7 +161,7 @@ export class DomnComponent implements OnInit, OnDestroy {
               private router:Router) { }
 
   checkAndUpdate(n){   // if user doesn't leave the domain, state isn't updated
-    console.log(n)     // ...so run periodic checks for changes while...
+    // console.log(n)     // ...so run periodic checks for changes while...
     n++                // ...user is still logged in and still in this domain
     if (this.alive) {
       if (!this.authService.isTokenExpired()) {
@@ -169,8 +169,8 @@ export class DomnComponent implements OnInit, OnDestroy {
           this.projectService.updateProject(this.projectService.activeProject)
             .takeWhile(() => this.alive)
             .subscribe(result => {
-                // console.log('result');
-                // console.log(result);
+                // // console.log('result');
+                // // console.log(result);
                 setTimeout(()=>this.checkAndUpdate(n), 15000)
             })     
         } else {
@@ -190,7 +190,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   
          }) } else {
            this.projectService.resetActiveProject(localStorage.getItem('pid'))
-           console.log('no activeProject');
+           // console.log('no activeProject');
            localStorage.removeItem('qnnId')
            localStorage.removeItem('pid');
            this.router.navigate(['/project'])
@@ -218,7 +218,7 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit() {
-    console.log('domn init')    
+    // console.log('domn init')    
     
     // get values from localStorage for use in the html view
     this.projectTitle = localStorage.getItem('ptitle');
@@ -272,8 +272,8 @@ export class DomnComponent implements OnInit, OnDestroy {
         this.projectService.updateProject(this.projectService.activeProject)
         .takeWhile(() => this.alive)
         .subscribe(result => {
-            console.log('showWarning-update-project');
-            console.log(result);
+            // console.log('showWarning-update-project');
+            // console.log(result);
         })
     })    
       
@@ -325,8 +325,8 @@ export class DomnComponent implements OnInit, OnDestroy {
               }
             })
         } else {   // otherwise update the existing answer
-          console.log('answer before upd in db call')
-          console.log(answer)
+          // console.log('answer before upd in db call')
+          // console.log(answer)
           this.cardService.updateAnswerInDb(answer)
             .takeWhile(() => this.alive)
             .subscribe(data => console.log(data))
@@ -341,9 +341,9 @@ export class DomnComponent implements OnInit, OnDestroy {
         this.domain.answers[this.activeQuestionNumber-1].value = selected;
         this.a_value = selected;
         if (this.domain.answers[this.activeQuestionNumber-1].id == null) {
-          console.log('addAnswerToDb() buttons')
+          // console.log('addAnswerToDb() buttons')
         } else {
-          console.log('updateAnswerInDb buttons')
+          // console.log('updateAnswerInDb buttons')
         }
     })
     
@@ -391,14 +391,14 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   getNextQuestion() {
-        console.log('this.activeQuestionNumber')
-        console.log(this.activeQuestionNumber)
+        // console.log('this.activeQuestionNumber')
+        // console.log(this.activeQuestionNumber)
         if (typeof this.activeQuestionNumber === 'string'){
           alert('yep')
         }
        if (this.activeQuestionNumber < this.domain.questions.length) {
           this.activeQuestionNumber = this.activeQuestionNumber + 1;
-          console.log(this.activeQuestionNumber)
+          // console.log(this.activeQuestionNumber)
 
          this.updateContent(this.activeQuestionNumber-1);
        } else {
@@ -430,8 +430,8 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   getThisQuestion(question: Question){
-    console.log('getThisQuestion')
-    console.log(question)
+    // console.log('getThisQuestion')
+    // console.log(question)
 
     this.activeQuestionNumber = question.sequence;
     
@@ -441,10 +441,10 @@ export class DomnComponent implements OnInit, OnDestroy {
   }
   
   updateContent(index) {
-    console.log('this.domain.questions[index].content=====================')
-    console.log('index')
-    console.log(index)
-    console.log(this.domain.questions[index].content)
+    // console.log('this.domain.questions[index].content=====================')
+    // console.log('index')
+    // console.log(index)
+    // console.log(this.domain.questions[index].content)
 
     this.q_content = this.domain.questions[index].content;
     this.a_value = this.domain.answers[index].value;
@@ -469,8 +469,8 @@ export class DomnComponent implements OnInit, OnDestroy {
       ); 
     if (this.projectService.activeProject)  {
       this.projectService.updateState(localStorage.getItem('qnnId'), t_state)
-      console.log('updateState');
-      console.log(this.projectService.activeProject)
+      // console.log('updateState');
+      // console.log(this.projectService.activeProject)
       //this.projectService.activeProject.state = t_state;
     }
   }

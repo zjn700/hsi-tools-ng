@@ -18,19 +18,19 @@ export class TradeOffsComponent implements OnInit {
       this.integrationService.getIntegrationsFromDb()
         .subscribe((integrations)=> {
             if (integrations.length==0){
-              console.log('show error message')
+              // console.log('show error message')
             } else {
               var t_tradeoffs =integrations;
               this.tradeOffs = this.outputService.transFormTradeOffs(integrations)
-              console.log('t_tradeoffs')
-              console.log(t_tradeoffs)
-              console.log('this.tradeOffs')
-              console.log(this.tradeOffs)
+              // console.log('t_tradeoffs')
+              // console.log(t_tradeoffs)
+              // console.log('this.tradeOffs')
+              // console.log(this.tradeOffs)
             }
           })
     //}
-   // console.log('this.tradeOffs')
-   // console.log(this.tradeOffs)  
+   // // console.log('this.tradeOffs')
+   // // console.log(this.tradeOffs)  
   }
 
 

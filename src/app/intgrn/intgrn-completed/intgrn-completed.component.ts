@@ -19,7 +19,7 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
   public showArchives = false;
   private integrations: Integration[] = [];
   private alive: boolean = true;
-  private isInitialized = false;
+  public isInitialized = false;
   
   public message = "You have not created an evaluation. Click the green plus button below to create one."
   public archivesMessage = "You have no active evaluations. Click the green plus button below to create one. Or click the 'Show archives' link to restore an archived evaluation"
@@ -34,7 +34,7 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
     //this.integrations = this.integrationService.getIntegrations()
     this.integrationService.getIntegrationsFromDb()
       .subscribe((integrations: Integration[])=>{
-        console.log('completed')
+        // console.log('completed')
         this.integrations = integrations;
         this.countActiveEvaluations(this.integrations)
         this.isInitialized = true;
@@ -62,8 +62,8 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
  
   onArchive(evaluation){
     evaluation.archived = true;
-    console.log('evaluation')
-    console.log(evaluation)
+    // console.log('evaluation')
+    // console.log(evaluation)
     this.integrationService.archiveThisEvaluation(evaluation)
     
   } 
@@ -82,8 +82,8 @@ export class IntgrnCompletedComponent implements OnInit, OnDestroy {
             this.archiveEvaluationTotal += 1;
           }
         }
-        console.log('this.activeEvaluationTotal')
-        console.log(this.activeEvaluationTotal)
+        // console.log('this.activeEvaluationTotal')
+        // console.log(this.activeEvaluationTotal)
         
         if (this.archiveEvaluationTotal==0) {
           this.showArchives=false;
