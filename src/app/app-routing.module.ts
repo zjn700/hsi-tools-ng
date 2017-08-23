@@ -27,7 +27,7 @@ import { HelpComponent } from './help/help.component';
 const APP_ROUTES: Routes = [
     //{ path: '', redirectTo: '/auth/signin', pathMatch: 'full' },
     // { path: '', redirectTo: '/signin', pathMatch: 'full' },
-    { path: '', component: LogoutComponent },
+    { path: '', component: SigninComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'admin', component: AdminToolsComponent, children: ADMIN_ROUTES },

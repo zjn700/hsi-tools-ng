@@ -20,6 +20,8 @@ export class AppComponent implements OnInit, AfterViewInit {
               private domainService: DomainService) { }
               
   ngOnInit(){
+    // localStorage.clear();
+    
      this.authService.showWarning
       .subscribe(showMessage =>{
         // console.log('9999999999999999')

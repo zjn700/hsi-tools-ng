@@ -28,6 +28,8 @@ export class SigninComponent implements OnInit, OnDestroy {
                 ]),
             password: new FormControl(null, Validators.required),
         }) 
+        
+        localStorage.clear();
     }
     
     ngOnDestroy(){
