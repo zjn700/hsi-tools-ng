@@ -24,7 +24,7 @@ export class OutputComponent implements OnInit {
         // //document.body.style.msTransform =           // IE 9
         // document.body.style.transform = 'scale(1)';  
         
-        this.printing = false;
+        //this.printing = false;
     }
   }
 
@@ -33,7 +33,7 @@ export class OutputComponent implements OnInit {
     this.activeUser=this.authService.getActiveUser();
   }
   
-  printPage() {
+  printPagex() {
     //this.printing=true;
     window.scrollTo(0, 0);
     setTimeout(()=>{
@@ -48,6 +48,21 @@ export class OutputComponent implements OnInit {
     // setTimeout(function(){ this.printing=true; window.print(); }, 500);
     
   }
+  
+  
+  printPage() {
+    window.scrollTo(0, 0);
+    setTimeout(()=>{
+      this.printing=true
+      setTimeout(()=>{
+        window.print();
+        setTimeout(()=>{
+          this.printing=false;
+        },400)
+      }, 200)
+    }, 300)
+  }
+  
   
   setButtonActive(index) {
     this.activeButton = index;
